@@ -1,0 +1,10 @@
+{
+    "language": "English",
+    "@language":{
+        "description": "The current Language"
+    },
+    "signUp": "Sign Up",
+    "@signUp":{
+        "description": "Sign up flag"
+    }
+}
