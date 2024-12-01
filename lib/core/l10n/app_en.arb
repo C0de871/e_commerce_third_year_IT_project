@@ -6,5 +6,21 @@
     "signUp": "Sign Up",
     "@signUp":{
         "description": "Sign up flag"
+    },
+    "registerAccount": "Register Account",
+    "@registerAccount":{
+        "description": "Register Account flag"
+    },
+    "completeYourdetails": "Complete your details or continue \nwith social media",
+    "@completeYourdetails":{
+        "description": "Complete your details or continue \nwith social media"
+    },
+    "email": "Email",
+    "@email":{
+        "description": "Email flag"
+    },
+    "enterYourEmail":"Enter your email",
+    "@enterYourEmail":{
+        "description": "enter your email flag"
     }
 }
