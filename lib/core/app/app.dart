@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       title: 'E-Commerce',
       theme: AppTheme.lightTheme,
       themeMode: _themeManager.themeMode,
-      initialRoute: AppRoutes.signUpGeneralInfoRoute,
+      initialRoute: AppRoutes.signUpauthRoute,
       onGenerateRoute: AppRouter.generateRoute,
     );
   }

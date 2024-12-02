@@ -1,93 +1,133 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+//! current seed color: FF803C
+//! cool seed color:DD9D00, 00B1F4, E5C583
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
     colorScheme: lightScheme(),
     scaffoldBackgroundColor: Colors.white,
-    textTheme: TextTheme(
+    textTheme: appTextTheme(),
+    textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+      alignment: Alignment.center,
+      backgroundColor: lightScheme().inversePrimary,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+    )),
+    // textButtonTheme: TextButtonThemeData(style: ),
+    inputDecorationTheme: inputDecorationTheme(),
+  );
+
+  static TextTheme appTextTheme() {
+    return TextTheme(
+      labelLarge: ThemeData.light().textTheme.labelLarge!.copyWith(
+            color: lightScheme().onSurfaceVariant,
+          ),
       headlineMedium: ThemeData.light().textTheme.headlineMedium!.copyWith(
             fontWeight: FontWeight.bold,
             height: 1.5,
             fontFamily: GoogleFonts.cairo().fontFamily,
+            leadingDistribution: TextLeadingDistribution.even,
           ),
-    ),
-    inputDecorationTheme: inputDecorationTheme(),
-  );
+      titleMedium: ThemeData.light().textTheme.titleMedium!.copyWith(color: lightScheme().primary),
+    );
+  }
 }
 
 InputDecorationTheme inputDecorationTheme() {
-  var outlineInputBorder = OutlineInputBorder(
+  var outlineEnableInputBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(28),
-    // borderSide: const BorderSide(color: kTextColor),
+    borderSide: BorderSide(color: lightScheme().outline),
+    gapPadding: 10,
+  );
+  var outlineFocusInputBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(28),
+    borderSide: BorderSide(
+      color: lightScheme().primary,
+      width: 2,
+    ),
+    gapPadding: 10,
+  );
+  var outlineErrorInputBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(28),
+    borderSide: BorderSide(color: lightScheme().error),
+    gapPadding: 10,
+  );
+  var outlineFocusErrorInputBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(28),
+    borderSide: BorderSide(
+      color: lightScheme().error,
+      width: 2,
+    ),
     gapPadding: 10,
   );
   return InputDecorationTheme(
-    // labelStyle: const TextStyle(color: Colors.black),
-    // floatingLabelStyle: WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
-    //   if (states.contains(WidgetState.focused)) return TextStyle();
-    //   return const TextStyle();
-    // }),
-
-    floatingLabelBehavior: FloatingLabelBehavior.always,
-    contentPadding: const EdgeInsets.symmetric(
-      horizontal: 42,
-      vertical: 20,
-    ),
-    enabledBorder: outlineInputBorder,
-    focusedBorder: outlineInputBorder,
-    border: outlineInputBorder,
-  );
+      // labelStyle: const TextStyle(color: Colors.black),
+      // floatingLabelStyle: WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+      //   if (states.contains(WidgetState.focused)) return TextStyle();
+      //   return const TextStyle();
+      // }),
+      errorMaxLines: 5,
+      floatingLabelBehavior: FloatingLabelBehavior.always,
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: 42,
+        vertical: 10,
+      ),
+      enabledBorder: outlineEnableInputBorder,
+      focusedBorder: outlineFocusInputBorder,
+      errorBorder: outlineErrorInputBorder,
+      focusedErrorBorder: outlineFocusErrorInputBorder);
 }
 
 ColorScheme lightScheme() {
   return const ColorScheme(
     brightness: Brightness.light,
-    primary: Color(0xffa04100),
-    surfaceTint: Color(0xffa04100),
+    primary: Color(0xff8d4d2d),
+    surfaceTint: Color(0xff8d4d2d),
     onPrimary: Color(0xffffffff),
-    primaryContainer: Color(0xffff803c),
-    onPrimaryContainer: Color(0xff300e00),
-    secondary: Color(0xff96481e),
+    primaryContainer: Color(0xffffdbcc),
+    onPrimaryContainer: Color(0xff351000),
+    secondary: Color(0xff765749),
     onSecondary: Color(0xffffffff),
-    secondaryContainer: Color(0xffffa77d),
-    onSecondaryContainer: Color(0xff541e00),
-    tertiary: Color(0xff695f00),
+    secondaryContainer: Color(0xffffdbcc),
+    onSecondaryContainer: Color(0xff2c160b),
+    tertiary: Color(0xff665f31),
     onTertiary: Color(0xffffffff),
-    tertiaryContainer: Color(0xffb6a717),
-    onTertiaryContainer: Color(0xff1e1b00),
+    tertiaryContainer: Color(0xffede4a9),
+    onTertiaryContainer: Color(0xff201c00),
     error: Color(0xffba1a1a),
     onError: Color(0xffffffff),
     errorContainer: Color(0xffffdad6),
     onErrorContainer: Color(0xff410002),
-    surface: Color(0xfffcf8f8),
-    onSurface: Color(0xff1c1b1b),
-    onSurfaceVariant: Color(0xff5a4136),
-    outline: Color(0xff8e7164),
-    outlineVariant: Color(0xffe2bfb0),
+    surface: Color(0xfffff8f6),
+    onSurface: Color(0xff221a16),
+    onSurfaceVariant: Color(0xff52443d),
+    outline: Color(0xff85736c),
+    outlineVariant: Color(0xffd7c2ba),
     shadow: Color(0xff000000),
     scrim: Color(0xff000000),
-    inverseSurface: Color(0xff313030),
-    inversePrimary: Color(0xffffb693),
+    inverseSurface: Color(0xff382e2a),
+    inversePrimary: Color(0xffffb694),
     primaryFixed: Color(0xffffdbcc),
     onPrimaryFixed: Color(0xff351000),
-    primaryFixedDim: Color(0xffffb693),
-    onPrimaryFixedVariant: Color(0xff7a3000),
+    primaryFixedDim: Color(0xffffb694),
+    onPrimaryFixedVariant: Color(0xff703718),
     secondaryFixed: Color(0xffffdbcc),
-    onSecondaryFixed: Color(0xff351000),
-    secondaryFixedDim: Color(0xffffb693),
-    onSecondaryFixedVariant: Color(0xff783207),
-    tertiaryFixed: Color(0xfff6e556),
-    onTertiaryFixed: Color(0xff1f1c00),
-    tertiaryFixedDim: Color(0xffd9c93c),
-    onTertiaryFixedVariant: Color(0xff4f4800),
-    surfaceDim: Color(0xffddd9d9),
-    surfaceBright: Color(0xfffcf8f8),
+    onSecondaryFixed: Color(0xff2c160b),
+    secondaryFixedDim: Color(0xffe6beac),
+    onSecondaryFixedVariant: Color(0xff5c4033),
+    tertiaryFixed: Color(0xffede4a9),
+    onTertiaryFixed: Color(0xff201c00),
+    tertiaryFixedDim: Color(0xffd1c88f),
+    onTertiaryFixedVariant: Color(0xff4d481c),
+    surfaceDim: Color(0xffe8d6d0),
+    surfaceBright: Color(0xfffff8f6),
     surfaceContainerLowest: Color(0xffffffff),
-    surfaceContainerLow: Color(0xfff6f3f2),
-    surfaceContainer: Color(0xfff1edec),
-    surfaceContainerHigh: Color(0xffebe7e7),
-    surfaceContainerHighest: Color(0xffe5e2e1),
+    surfaceContainerLow: Color(0xfffff1eb),
+    surfaceContainer: Color(0xfffceae3),
+    surfaceContainerHigh: Color(0xfff6e5de),
+    surfaceContainerHighest: Color(0xfff0dfd8),
   );
 }
