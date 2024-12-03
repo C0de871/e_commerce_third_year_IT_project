@@ -3,10 +3,6 @@
     "@language": {
       "description": "The language currently selected in the application"
     },
-    "signUp": "Sign Up",
-    "@signUp":{
-        "description": "Sign up flag"
-    },
     "appName": "Grablt",
     "@appName":{
         "description": "app Name"
@@ -14,8 +10,8 @@
     "welcome":"welcome",
     "@welcome":{
         "description": "welcome line"
-    }
-}
+    },
+    "signUp":"Buttin text for signing up a new user",
     "@signUp": {
       "description": "Button text for signing up a new user"
     },
@@ -166,5 +162,5 @@
     "@resendIn": {
         "description": "Label before the countdown timer showing when the user can resend the code"
     }
-  }
+  } 
   
