@@ -1,4 +1,4 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -7,9 +7,12 @@ class AppTheme {
     colorScheme: lightScheme(),
     scaffoldBackgroundColor: Colors.white,
     textTheme: TextTheme(
+      displaySmall:ThemeData.light().textTheme.displaySmall!.copyWith(
+        fontWeight: FontWeight.bold
+      ) ,
       headlineMedium: ThemeData.light().textTheme.headlineMedium!.copyWith(
-            fontWeight: FontWeight.bold,
             height: 1.5,
+            fontWeight: FontWeight.bold,
             fontFamily: GoogleFonts.cairo().fontFamily,
           ),
     ),

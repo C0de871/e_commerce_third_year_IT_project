@@ -1,12 +1,14 @@
 import 'package:e_commerce/core/constants/app_routes.dart';
+import 'package:e_commerce/features/user/presentation/splash%20screen/splash_screen.dart';
 import 'package:flutter/material.dart';
-import '../../features/user/presentation/sign up general info screen/sign_up_general_info_screen.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case AppRoutes.signUpGeneralInfoRoute:
-        return MaterialPageRoute(builder: (_) => const SignUpGeneralInfoScreen());
+      case AppRoutes.splashScreen :
+      return MaterialPageRoute(builder: (_)=> SplashScreen());
+      // case AppRoutes.signUpGeneralInfoRoute:
+      //   return MaterialPageRoute(builder: (_) => const SignUpGeneralInfoScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

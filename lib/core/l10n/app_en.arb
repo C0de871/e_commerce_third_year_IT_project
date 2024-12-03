@@ -6,5 +6,13 @@
     "signUp": "Sign Up",
     "@signUp":{
         "description": "Sign up flag"
+    },
+    "appName": "Grablt",
+    "@appName":{
+        "description": "app Name"
+    },
+    "welcome":"welcome",
+    "@welcome":{
+        "description": "welcome line"
     }
 }

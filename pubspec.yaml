@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cupertino_icons: ^1.0.8
+  dartz: ^0.10.1
   data_connection_checker_tv: ^0.3.5-nullsafety
   dio: ^5.7.0
   flutter:
@@ -37,6 +38,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   get_it: ^8.0.2
+  google_fonts: ^6.2.1
   intl: ^0.19.0
   shared_preferences: ^2.3.3
   svg_flutter: ^0.0.1
@@ -56,7 +58,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
-  assets:
+  # assets:
     - assets/images/
     - assets/icons/
   # An image iconscan refer to one or more resolution-specific "variants", see
