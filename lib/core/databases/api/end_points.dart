@@ -1,5 +1,6 @@
 class EndPoints {
-  static const String baserUrl = "https://jsonplaceholder.typicode.com/";
+  static const String baserUrl = "http://localhost:8000/api/";
+  static const String login="login";
   static const String template = "template/";
   static const String user = "users/";
   static const String post = "posts/";
@@ -23,4 +24,8 @@ class ApiKey {
   static String company = "company";
   static String catchPhrase = "catchPhrase";
   static String bs = "bs";
+  static String accessToken = "access_token";
+  static String refreshToken = "refresh_token";
+  static String user = "user";
+  static String password="password";
 }
