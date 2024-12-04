@@ -5,7 +5,7 @@ class ThemeManager {
 
   get themeMode => _themeMode;
 
-  toggleTheme(bool isDark){
+  toggleTheme(bool isDark) {
     _themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
   }
 }

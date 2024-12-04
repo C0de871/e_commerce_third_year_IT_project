@@ -1,13 +1,13 @@
 import 'package:collection/collection.dart';
 
-import 'user.dart';
+import 'sub_user_entity.dart';
 
 class UserEntity {
   String? accessToken;
   String? refreshToken;
-  User? user;
+  SubUserEntity? subUserEntity;
 
-  UserEntity({this.accessToken, this.refreshToken, this.user});
+  UserEntity({this.accessToken, this.refreshToken, this.subUserEntity});
 
 //   factory UserEntities.fromJson(Map<String, dynamic> json) => UserEntities(
 //         accessToken: json['access_token'] as String?,
@@ -34,5 +34,5 @@ class UserEntity {
 //   @override
 //   int get hashCode =>
 //       accessToken.hashCode ^ refreshToken.hashCode ^ user.hashCode;
-// 
+//
 }

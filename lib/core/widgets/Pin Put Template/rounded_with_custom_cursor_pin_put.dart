@@ -7,7 +7,8 @@ class RoundedWithCustomCursor extends StatefulWidget {
   const RoundedWithCustomCursor({super.key});
 
   @override
-  State<RoundedWithCustomCursor> createState() => _RoundedWithCustomCursorState();
+  State<RoundedWithCustomCursor> createState() =>
+      _RoundedWithCustomCursorState();
 
   @override
   String toStringShort() => 'Rounded With Cursor';

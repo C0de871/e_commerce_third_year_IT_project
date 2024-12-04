@@ -25,8 +25,8 @@ class AppRouter {
           ),
         );
 
-      case AppRoutes.splashScreen :
-      return MaterialPageRoute(builder: (_)=> SplashScreen());
+      case AppRoutes.splashScreen:
+        return MaterialPageRoute(builder: (_) => SplashScreen());
       // case AppRoutes.signUpGeneralInfoRoute:
       //   return MaterialPageRoute(builder: (_) => const SignUpGeneralInfoScreen());
       default:

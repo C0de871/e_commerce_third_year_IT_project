@@ -9,17 +9,17 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  List<Map<String,String>>splashData[
-    {
+   // List<Map<String,String>>splashData[
+  //   {
 
-    },
-    {
+  //   },
+  //   {
 
-    },
-    {
+  //   },
+  //   {
 
-    }
-  ];
+  //   }
+  // ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

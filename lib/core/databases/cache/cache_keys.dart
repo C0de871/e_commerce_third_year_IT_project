@@ -1,3 +1,3 @@
 class CacheKeys {
-  static String userKey= "CachedUser";
+  static String userKey = "CachedUser";
 }

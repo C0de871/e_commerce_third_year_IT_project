@@ -10,7 +10,8 @@ class CompleteYourProfileForm extends StatefulWidget {
   const CompleteYourProfileForm({super.key, required this.email});
   final String email;
   @override
-  State<CompleteYourProfileForm> createState() => _CompleteYourProfileFormState();
+  State<CompleteYourProfileForm> createState() =>
+      _CompleteYourProfileFormState();
 }
 
 class _CompleteYourProfileFormState extends State<CompleteYourProfileForm> {

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -26,16 +25,20 @@ class AppTheme {
       labelLarge: ThemeData.light().textTheme.labelLarge!.copyWith(
             color: lightScheme().onSurfaceVariant,
           ),
-      displaySmall:ThemeData.light().textTheme.displaySmall!.copyWith(
-        fontWeight: FontWeight.bold
-      ) ,
+      displaySmall: ThemeData.light()
+          .textTheme
+          .displaySmall!
+          .copyWith(fontWeight: FontWeight.bold),
       headlineMedium: ThemeData.light().textTheme.headlineMedium!.copyWith(
             height: 1.5,
             fontWeight: FontWeight.bold,
             fontFamily: GoogleFonts.cairo().fontFamily,
             leadingDistribution: TextLeadingDistribution.even,
           ),
-      titleMedium: ThemeData.light().textTheme.titleMedium!.copyWith(color: lightScheme().primary),
+      titleMedium: ThemeData.light()
+          .textTheme
+          .titleMedium!
+          .copyWith(color: lightScheme().primary),
     );
   }
 }

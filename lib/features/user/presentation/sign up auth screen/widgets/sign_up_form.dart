@@ -16,7 +16,8 @@ class SignUpForm extends StatefulWidget {
 class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   final emailController = TextEditingController();
 
 // String password;
@@ -85,7 +86,8 @@ class _SignUpFormState extends State<SignUpForm> {
   }
 }
 
-String? _validateConfirmPassword(BuildContext context, String? password, String? confirmPassword) {
+String? _validateConfirmPassword(
+    BuildContext context, String? password, String? confirmPassword) {
   if (confirmPassword == null || confirmPassword.trim().isEmpty) {
     return AppLocalizations.of(context)!.thisFieldCannotBeEmpty;
   }
@@ -114,7 +116,8 @@ String? _validatePassword(BuildContext context, String? value) {
   if (value.length < 8) {
     return AppLocalizations.of(context)!.passwordMustBeAtLeast8Characters;
   }
-  if (!RegExp(r'(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)|(?=.*[@$!%*?&])').hasMatch(value)) {
+  if (!RegExp(r'(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)|(?=.*[@$!%*?&])')
+      .hasMatch(value)) {
     return AppLocalizations.of(context)!.passwordComplexityRequirement;
   }
   return null;
