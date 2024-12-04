@@ -6,18 +6,18 @@ import 'sub_models/sub_user_model.dart';
 
 class UserModel  extends UserEntity {
   
-  UserModel({required super.accessToken, super.refreshToken, super.user});
+  UserModel({required super.accessToken, super.refreshToken, super.subUserEntity});
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         accessToken: json[ApiKey.accessToken],
         refreshToken: json[ApiKey.refreshToken],
-        user: SubUserModel.fromJson(json[ApiKey.user])
+        subUserEntity: SubUserModel.fromJson(json[ApiKey.user])
       );
 
   Map<String, dynamic> toJson() => {
         ApiKey.accessToken: accessToken,
         ApiKey.refreshToken: refreshToken,
-        ApiKey.user: user
+        ApiKey.user: subUserEntity
       };
 
   // @override

@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:e_commerce/core/databases/api/end_points.dart';
-import 'package:e_commerce/features/user/domain/entites/user_entities/user.dart';
+import 'package:e_commerce/features/user/domain/entites/user_entities/sub_user_entity.dart';
 
 class SubUserModel extends SubUserEntity {
 
