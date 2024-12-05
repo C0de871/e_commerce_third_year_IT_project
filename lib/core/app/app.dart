@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       supportedLocales: L10n.all,
-      locale: const Locale('en'),
+      locale: const Locale('ar'),
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       title: 'E-Commerce',
       theme: AppTheme.lightTheme,
       themeMode: _themeManager.themeMode,
-      initialRoute: AppRoutes.splashScreen,
+      initialRoute: AppRoutes.loginRoute,
       onGenerateRoute: AppRouter.generateRoute,
     );
   }
