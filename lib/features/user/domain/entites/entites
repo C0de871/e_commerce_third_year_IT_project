@@ -1,9 +1,0 @@
-{
-    "access_token": "eyJhbGciOiJIUzI1NiIsInR...",
-    "refresh_token": "dGhpc2lzYXJlZnJlc2h0b2...",
-    "user": {
-      "id": 1,
-      "name": "John Doe",
-      "email": "user@example.com"
-    }
-}
