@@ -9,22 +9,25 @@ part 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
   LoginUser loginUser;
-  UserCubit() : loginUser=getIt<LoginUser>(),
-  super(UserInitial());
+  UserCubit()
+      : loginUser = getIt<LoginUser>(),
+        super(UserInitial());
 
-
-  eitherFailureOrUser(String email,String password)async{
-    Map<String,dynamic> bodyjson={ ApiKey.email :email,
-    ApiKey.password : password};
-
+  eitherFailureOrUser(String email, String password) async {
+    Map<String, dynamic> bodyjson = {
+      ApiKey.email: email,
+      ApiKey.password: password
+    };
+    emit(LoginUserLoading());
+    final failureOrUser = await loginUser.call(bodyjson: bodyjson);
+    failureOrUser.fold(
+        (failure) => emit(LoginUserFailure(errMessage: failure.errMessage)),
+        (user) => emit(LoginUserSuccessfully(user: user)));
+  }
+  @override
+  void onChange(Change<UserState> change) {
     
-emit(LoginUserLoading());
-final failureOrUser=await loginUser.call(bodyjson:bodyjson );
-;
-failureOrUser.fold(
-  (failure) =>emit(LoginUserFailure(errMessage: failure.errMessage)),
-  (user)=>emit(LoginUserSuccessfully(user: user))
-  );
-
+    super.onChange(change);
+    print(change);
   }
 }
