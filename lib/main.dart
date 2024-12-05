@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'core/app/app.dart';
 
 void main() async{
-  WidgetsFlutterBinding.ensureInitialized;
+  WidgetsFlutterBinding.ensureInitialized();
   setupServicesLocator();
   await getIt<CacheHelper>().init();
   runApp(const MyApp());
