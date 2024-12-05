@@ -1,3 +1,5 @@
+import 'package:e_commerce/core/databases/api/end_points.dart';
+
 class ErrorModel {
   final int status;
   final String errorMessage;
@@ -5,8 +7,8 @@ class ErrorModel {
   ErrorModel({required this.status, required this.errorMessage});
   factory ErrorModel.fromJson(Map jsonData) {
     return ErrorModel(
-      errorMessage: jsonData["Message"],
-      status: jsonData["status"],
+      errorMessage: jsonData[ApiKey.message],
+      status: jsonData[ApiKey.statusCode],
     );
   }
 }

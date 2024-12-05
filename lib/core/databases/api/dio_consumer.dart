@@ -8,6 +8,14 @@ class DioConsumer extends ApiConsumer {
 
   DioConsumer({required this.dio}) {
     dio.options.baseUrl = EndPoints.baserUrl;
+    dio.interceptors.add(LogInterceptor(
+      request: true,
+      requestHeader: true,
+      requestBody: true,
+      responseBody: true,
+      responseHeader: true,
+      error: true,
+    ));
   }
 
 //!POST
@@ -17,11 +25,15 @@ class DioConsumer extends ApiConsumer {
       Map<String, dynamic>? queryParameters,
       bool isFormData = false}) async {
     try {
-      dio.post(
+      var res =await dio.post(
+        //todo: edit this
+        options: Options(headers: {"Device-ID": 1}),
         path,
         data: isFormData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
       );
+      print(res.statusCode);
+      return res.data;
     } on DioException catch (e) {
       handleDioException(e);
     }
