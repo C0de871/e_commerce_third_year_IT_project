@@ -9,35 +9,59 @@ import '../../features/user/presentation/complete_profile_screen/complete_profil
 import '../../features/user/presentation/sign up auth screen/sign_up_auth_screen.dart';
 
 class AppRouter {
-  static Route<dynamic> generateRoute(RouteSettings settings) {
+  UserCubit? _userCubit;
+
+  UserCubit get userCubit {
+    if (_userCubit == null || _userCubit!.isClosed) {
+      _userCubit = UserCubit();
+    }
+    _userCubit?.stream.listen((_) {}, onDone: () {
+      _userCubit = null; // Nullify the reference when closed
+    });
+    return _userCubit!;
+  }
+
+  Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      //!sign up auth route:
       case AppRoutes.signUpauthRoute:
-        return MaterialPageRoute(builder: (_) => const SignUpAuthScreen());
-      case AppRoutes.signUpCompleteProfileRoute:
-        String email = settings.arguments as String;
         return MaterialPageRoute(
-            builder: (_) => CompleteProfileScreen(
-                  email: email,
-                ));
-      case AppRoutes.otpRoute:
-        //todo final email = settings.arguments as String;
-        String email = settings.arguments as String;
-        return MaterialPageRoute(
-          builder: (_) => OtpScreen(
-            email: email,
+          builder: (_) => BlocProvider.value(
+            value: userCubit,
+            child: const SignUpAuthScreen(),
           ),
         );
 
+      //!sign up complete profile route:
+      case AppRoutes.signUpCompleteProfileRoute:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: userCubit,
+            child: const CompleteProfileScreen(),
+          ),
+        );
+
+      //!otp route:
+      case AppRoutes.otpRoute:
+        final email = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => OtpScreen(email),
+        );
+
+      //!splash route:
       case AppRoutes.splashRoute:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
+
+      //!login route:
       case AppRoutes.loginRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => UserCubit(),
+            create: (context) => userCubit,
             child: const LoginScreen(),
           ),
         );
 
+      //!default route:
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
