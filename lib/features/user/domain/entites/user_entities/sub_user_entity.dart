@@ -1,8 +1,11 @@
-
 class SubUserEntity {
   int? id;
   String? name;
   String? email;
 
-  SubUserEntity({this.id, this.name, this.email});
+  SubUserEntity({
+    required this.id,
+    required this.name,
+    required this.email,
+  });
 }
