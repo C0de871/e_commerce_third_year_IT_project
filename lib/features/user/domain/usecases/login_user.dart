@@ -7,7 +7,9 @@ class LoginUser {
   final UserRepository userRepository;
 
   LoginUser({required this.userRepository});
-  Future<Either<Failure, UserEntity>> call({required Map<String, dynamic> bodyjson}) {
+  Future<Either<Failure, UserEntity>> call({
+    required Map<String, dynamic> bodyjson,
+  }) {
     return userRepository.loginUser(bodyjson: bodyjson);
   }
 }
