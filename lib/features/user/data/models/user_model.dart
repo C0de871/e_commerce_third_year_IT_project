@@ -3,31 +3,22 @@ import 'package:e_commerce/features/user/domain/entites/user_entities/user_entit
 
 import 'sub_models/sub_user_model.dart';
 
-class UserModel  extends UserEntity {
-  
-  UserModel({required super.accessToken, super.refreshToken, super.subUserEntity});
+class UserModel extends UserEntity {
+  UserModel({
+    required super.accessToken,
+    required super.refreshToken,
+    required super.subUserEntity,
+  });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         accessToken: json[ApiKey.accessToken],
         refreshToken: json[ApiKey.refreshToken],
-        subUserEntity: SubUserModel.fromJson(json[ApiKey.user])
+        subUserEntity: SubUserModel.fromJson(json[ApiKey.user]),
       );
 
   Map<String, dynamic> toJson() => {
         ApiKey.accessToken: accessToken,
         ApiKey.refreshToken: refreshToken,
-        ApiKey.user: subUserEntity
+        ApiKey.user: subUserEntity,
       };
-
-  // @override
-  // bool operator ==(Object other) {
-  //   if (identical(other, this)) return true;
-  //   if (other is! UserModel) return false;
-  //   final mapEquals = const DeepCollectionEquality().equals;
-  //   return mapEquals(other.toJson(), toJson());
-  // }
-
-  // @override
-  // int get hashCode =>
-  //     accessToken.hashCode ^ refreshToken.hashCode ^ user.hashCode;
 }
