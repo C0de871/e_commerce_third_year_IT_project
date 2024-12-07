@@ -19,9 +19,17 @@
   "@dontHaveAccount": {
     "description": "Prompt for users without an account"
   },
-  "welcome": "welcome",
+  "welcome": "welcome to Grablt, let's shop!",
   "@welcome": {
     "description": "welcome line"
+  },
+  "splash2word":"we help people conect wiyth store ",
+  "@splash2word":{
+    "description": "second word appear when we swap in splash screen"
+  },
+  "splash3word":"we show the easy way to shop \njust stay at home wuth us ",
+  "@splash3word":{
+    "description": "third word appear when we swap in splash screen"
   },
   "signUp": "Sign Up",
   "@signUp": {
@@ -177,5 +185,13 @@
   "login": "Login",
   "@login": {
     "description": "word login to appBar"
+  },
+  "continueSplash": "Continue",
+  "@continueSplash": {
+    "description": "Text for the button that continues the next splash page process"
+  },
+  "successScreen": "Login Success",
+  "@continueSplash": {
+    "description": "Text for the button that continues the next splash page process"
   }
 }
