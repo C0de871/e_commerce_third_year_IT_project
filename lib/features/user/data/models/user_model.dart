@@ -10,11 +10,14 @@ class UserModel extends UserEntity {
     required super.subUserEntity,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-        accessToken: json[ApiKey.accessToken],
-        refreshToken: json[ApiKey.refreshToken],
-        subUserEntity: SubUserModel.fromJson(json[ApiKey.user]),
-      );
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    Map<String, dynamic> data = json['data'];
+    return UserModel(
+      accessToken: data[ApiKey.accessToken],
+      refreshToken: data[ApiKey.refreshToken],
+      subUserEntity: SubUserModel.fromJson(data[ApiKey.user]),
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         ApiKey.accessToken: accessToken,

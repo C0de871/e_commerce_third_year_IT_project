@@ -10,7 +10,7 @@ class UserRemoteDataSource {
 
   Future<UserModel> loginUser(Map<String, dynamic> jsonbody) async {
     Map<String, dynamic> headers = {
-      ApiKey.deviceId: 1,
+      ApiKey.deviceId: 4,
     };
     final response = await api.post(
       EndPoints.login,
@@ -21,7 +21,16 @@ class UserRemoteDataSource {
   }
 
   Future<SignUpModel> signUpUser(Map<String, dynamic> jsonbody) async {
-    final response = await api.post(EndPoints.signUp, data: jsonbody);
+    Map<String, dynamic> headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Cookie': 'just_go_deliver_app_session=ZVV1HxCQriLIQRYZZzHqh7Xw3wT2YeW1iQiIpb9q',
+    };
+    final response = await api.post(
+      EndPoints.signUp,
+      data: jsonbody,
+      headers: headers,
+    );
     return SignUpModel.fromJson(response);
   }
 }
