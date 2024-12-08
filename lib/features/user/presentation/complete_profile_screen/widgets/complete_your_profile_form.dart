@@ -21,6 +21,7 @@ class _CompleteYourProfileFormState extends State<CompleteYourProfileForm> {
 
   @override
   Widget build(BuildContext context) {
+    final userCubit = context.read<UserCubit>();
     return Form(
       key: _formKey,
       child: Column(
@@ -68,16 +69,36 @@ class _CompleteYourProfileFormState extends State<CompleteYourProfileForm> {
           SizedBox(
             height: padding4 * 9,
           ),
-          DefaultButton(
-            text: AppLocalizations.of(context)!.continueSignUp,
-            press: () {
-              if (_formKey.currentState!.validate()) {
-                Navigator.pushNamed(
+          BlocConsumer<UserCubit, UserState>(
+            listener: (context, state) {
+              if (state is SignUpUserFailure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.errMessage)),
+                );
+              }
+              if (state is SignUpUserSuccessfully) {
+                Navigator.pushNamedAndRemoveUntil(
                   context,
                   AppRoutes.otpRoute,
+                  (Route<dynamic> route) => false,
                   arguments: context.read<UserCubit>().signUpEmailController.text,
                 );
               }
+            },
+            builder: (context, state) {
+              if (state is SignUpUserLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              return DefaultButton(
+                text: AppLocalizations.of(context)!.continueSignUp,
+                press: () {
+                  if (_formKey.currentState!.validate()) {
+                    userCubit.signUpUserTrigger();
+                  }
+                },
+              );
             },
           )
         ],

@@ -10,7 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
-
   //!iniialize the usecases:
   LoginUser loginUser;
   SignUpUser signUpUser;
@@ -50,6 +49,8 @@ class UserCubit extends Cubit<UserState> {
 
   //!Sign up trigger:
   dynamic signUpUserTrigger() async {
+    print(signUpEmailController.text);
+    print(signUpPasswordController.text);
     Map<String, dynamic> bodyjson = {
       ApiKey.email: signUpEmailController.text,
       ApiKey.password: signUpPasswordController.text,
