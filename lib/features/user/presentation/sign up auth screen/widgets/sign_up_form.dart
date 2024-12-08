@@ -55,7 +55,7 @@ class _SignUpFormState extends State<SignUpForm> {
             controller: context.read<UserCubit>().signUpConfirmPasswordController,
             validator: (value) => _validateConfirmPassword(
               context,
-              context.read<UserCubit>().signUpConfirmPasswordController.text,
+              context.read<UserCubit>().signUpPasswordController.text,
               value,
             ),
             isObsure: true,
