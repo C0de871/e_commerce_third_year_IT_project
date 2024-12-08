@@ -29,6 +29,7 @@ class DioConsumer extends ApiConsumer {
   }) async {
     try {
       var res = await dio.post(
+        options: Options(headers: headers),
         path,
         data: isFormData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
@@ -48,7 +49,12 @@ class DioConsumer extends ApiConsumer {
     Map<String, dynamic>? queryParameters,
   }) async {
     try {
-      var res = await dio.get(path, data: data, queryParameters: queryParameters);
+      var res = await dio.get(
+        options: Options(headers: headers),
+        path,
+        data: data,
+        queryParameters: queryParameters,
+      );
       return res.data;
     } on DioException catch (e) {
       handleDioException(e);
@@ -65,6 +71,7 @@ class DioConsumer extends ApiConsumer {
   }) async {
     try {
       var res = await dio.delete(
+        options: Options(headers: headers),
         path,
         data: data,
         queryParameters: queryParameters,
@@ -86,6 +93,7 @@ class DioConsumer extends ApiConsumer {
   }) async {
     try {
       var res = await dio.patch(
+        options: Options(headers: headers),
         path,
         data: isFormData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
