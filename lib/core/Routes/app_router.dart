@@ -2,6 +2,7 @@ import 'package:e_commerce/core/constants/app_routes.dart';
 import 'package:e_commerce/features/user/presentation/OTP/otp_screen.dart';
 import 'package:e_commerce/features/user/presentation/cubit/user_cubit.dart';
 import 'package:e_commerce/features/user/presentation/login_screen/logInScreen.dart';
+import 'package:e_commerce/features/user/presentation/login_success_screen/login_success_screen.dart';
 import 'package:e_commerce/features/user/presentation/splash%20screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,6 +31,8 @@ class AppRouter {
 
       case AppRoutes.splashRoute:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
+      case AppRoutes.loginSuccessRoute:
+        return MaterialPageRoute(builder: (_) => const LoginSuccessScreen());
       case AppRoutes.loginRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
