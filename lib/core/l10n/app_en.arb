@@ -191,7 +191,15 @@
     "description": "Text for the button that continues the next splash page process"
   },
   "successScreen": "Login Success",
-  "@continueSplash": {
-    "description": "Text for the button that continues the next splash page process"
+  "@successScreen": {
+    "description": "the login process is done by right way in  appbar"
+  },
+  "successLogin": "Login successfully",
+  "@successLogin": {
+    "description": "the login process is done by right way"
+  },
+  "backToHome" :  "Bach to home",
+  "@backToHome": {
+    "description": "button in success login back you to home "
   }
 }

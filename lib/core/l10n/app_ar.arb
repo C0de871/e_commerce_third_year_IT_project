@@ -45,5 +45,9 @@
     "resendOtp": "إعادة إرسال رمز التحقق",
     "resendIn": "يمكنك إعادة إرسال الرمز في",
     "login": "تسجيل الدخول",
-    "continueSplash": "متابعة"
+    "continueSplash": "متابعة",
+    "successScreen":"دخول ناجح",
+    "successLogin":"تم الدخول بنجاح ",
+    "backToHome": "العودة الى الرئيسية"
+    
 }
