@@ -25,10 +25,15 @@ class AppTheme {
       labelLarge: ThemeData.light().textTheme.labelLarge!.copyWith(
             color: lightScheme().onSurfaceVariant,
           ),
-      displaySmall: ThemeData.light()
-          .textTheme
-          .displaySmall!
-          .copyWith(fontWeight: FontWeight.bold),
+      displaySmall: ThemeData.light().textTheme.displaySmall!.copyWith(
+            fontWeight: FontWeight.bold,
+            fontFamily: GoogleFonts.notoNastaliqUrdu().fontFamily,
+            
+          ),
+        displayMedium: ThemeData.light().textTheme.displayMedium!.copyWith(
+            fontWeight: FontWeight.bold,
+            fontFamily: GoogleFonts.notoNastaliqUrdu().fontFamily,
+        ),   
       headlineMedium: ThemeData.light().textTheme.headlineMedium!.copyWith(
             height: 1.5,
             fontWeight: FontWeight.bold,

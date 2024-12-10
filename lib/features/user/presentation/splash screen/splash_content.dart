@@ -1,5 +1,6 @@
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SplashContent extends StatefulWidget {
   const SplashContent({
@@ -24,11 +25,12 @@ class _SplashContentState extends State<SplashContent> {
         ),
         Text(
           AppLocalizations.of(context)!.appName,
-          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+          style: Theme.of(context).textTheme.displayMedium!.copyWith(
                 color: Theme.of(context).colorScheme.inversePrimary,
               ),
           textAlign: TextAlign.center,
         ),
+        const Spacer(),
         Text(
           textAlign: TextAlign.center,
           widget.text,
