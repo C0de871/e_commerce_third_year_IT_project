@@ -7,7 +7,6 @@ import 'package:e_commerce/features/user/presentation/cubit/user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -31,8 +30,7 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(
                   height: padding4 * 12,
                 ),
-                Text(AppLocalizations.of(context)!.welcomeBack,
-                    style: Theme.of(context).textTheme.headlineMedium),
+                Text(AppLocalizations.of(context)!.welcomeBack, style: Theme.of(context).textTheme.headlineMedium),
                 Text(
                   AppLocalizations.of(context)!.signInMessage,
                   textAlign: TextAlign.center,
@@ -49,8 +47,7 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     Text(
                       AppLocalizations.of(context)!.dontHaveAccount,
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: Theme.of(context).colorScheme.outline),
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).colorScheme.outline),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -58,15 +55,10 @@ class LoginScreen extends StatelessWidget {
                       },
                       child: Text(
                         AppLocalizations.of(context)!.signUp,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .copyWith(
+                        style: Theme.of(context).textTheme.titleMedium!.copyWith(
                               decoration: TextDecoration.underline,
-                              decorationColor:
-                                  Theme.of(context).colorScheme.inversePrimary,
-                              color:
-                                  Theme.of(context).colorScheme.inversePrimary,
+                              decorationColor: Theme.of(context).colorScheme.inversePrimary,
+                              color: Theme.of(context).colorScheme.inversePrimary,
                             ),
                       ),
                     )
@@ -88,8 +80,6 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -97,7 +87,7 @@ class _LoginFormState extends State<LoginForm> {
       child: Column(
         children: [
           AuthTextField(
-            controller: emailController,
+            controller: context.read<UserCubit>().loginEmailController,
             label: AppLocalizations.of(context)!.email,
             hint: AppLocalizations.of(context)!.enterYourEmail,
             svgIconPath: AppStrings.emailIconPath,
@@ -109,7 +99,7 @@ class _LoginFormState extends State<LoginForm> {
             height: padding4 * 8,
           ),
           AuthTextField(
-            controller: passwordController,
+            controller: context.read<UserCubit>().loginPasswordController,
             label: AppLocalizations.of(context)!.password,
             hint: AppLocalizations.of(context)!.enterYourPassword,
             svgIconPath: AppStrings.passwordIconPath,
@@ -139,9 +129,7 @@ class _LoginFormState extends State<LoginForm> {
                 text: AppLocalizations.of(context)!.login,
                 press: () {
                   if (_formKey.currentState!.validate()) {
-                    print("object");
-                    context.read<UserCubit>().eitherFailureOrUser(
-                        emailController.text, passwordController.text);
+                    context.read<UserCubit>().loginUserTrigger();
                   }
                 },
               );

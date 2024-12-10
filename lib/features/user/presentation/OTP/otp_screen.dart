@@ -5,8 +5,7 @@ import 'package:flutter/material.dart'; // Add the localization package
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({super.key, required this.email});
-
+  const OtpScreen(this.email, {super.key});
   final String email;
 
   @override
@@ -19,8 +18,7 @@ class _OtpScreenState extends State<OtpScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          AppLocalizations.of(context)!
-              .otpVerification, // Use localized text here
+          AppLocalizations.of(context)!.otpVerification, // Use localized text here
           style: TextStyle(
             color: Theme.of(context).colorScheme.secondary,
           ),
@@ -36,8 +34,7 @@ class _OtpScreenState extends State<OtpScreen> {
           child: Column(children: [
             SizedBox(height: padding4 * 12),
             Text(
-              AppLocalizations.of(context)!
-                  .otpVerification, // Use localized text here
+              AppLocalizations.of(context)!.otpVerification, // Use localized text here
               style: Theme.of(context).textTheme.headlineMedium,
               textAlign: TextAlign.center,
             ),
@@ -45,8 +42,7 @@ class _OtpScreenState extends State<OtpScreen> {
               height: padding4 * 2,
             ),
             Text(
-              AppLocalizations.of(context)!.verificationCodeSent(
-                  widget.email), // Use localized text with parameter
+              AppLocalizations.of(context)!.verificationCodeSent(widget.email), // Use localized text with parameter
               textAlign: TextAlign.center,
             ),
             buildTimer(),
@@ -56,8 +52,7 @@ class _OtpScreenState extends State<OtpScreen> {
               height: padding4 * 12,
             ),
             DefaultButton(
-              text: AppLocalizations.of(context)!
-                  .continueText, // Use localized text here
+              text: AppLocalizations.of(context)!.continueText, // Use localized text here
               press: () {},
             ),
             SizedBox(height: padding4 * 6),
@@ -66,8 +61,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 //todo: resend OTP code!
               },
               child: Text(
-                AppLocalizations.of(context)!
-                    .resendOtp, // Use localized text here
+                AppLocalizations.of(context)!.resendOtp, // Use localized text here
                 style: TextStyle(decoration: TextDecoration.underline),
               ),
             ),
@@ -92,8 +86,7 @@ class _OtpScreenState extends State<OtpScreen> {
             int remainingMinutes = remainingTimeInSeconds ~/ 60;
             int remainingSeconds = remainingTimeInSeconds % 60;
 
-            String formattedTime =
-                '${remainingMinutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
+            String formattedTime = '${remainingMinutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
 
             return Text(
               formattedTime,
