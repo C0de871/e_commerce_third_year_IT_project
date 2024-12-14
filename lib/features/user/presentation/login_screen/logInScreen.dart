@@ -22,24 +22,27 @@ class LoginScreen extends StatelessWidget {
           centerTitle: true,
         ),
         body: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: padding4 * 5),
+          padding: const EdgeInsets.symmetric(horizontal: padding4 * 5),
           child: SizedBox(
             width: double.infinity,
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: padding4 * 12,
                 ),
-                Text(AppLocalizations.of(context)!.welcomeBack, style: Theme.of(context).textTheme.headlineMedium),
+                Text(
+                  AppLocalizations.of(context)!.welcomeBack,
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
                 Text(
                   AppLocalizations.of(context)!.signInMessage,
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: padding4 * 12,
                 ),
                 const LoginForm(),
-                SizedBox(
+                const SizedBox(
                   height: padding4 * 5,
                 ),
                 Row(
@@ -95,7 +98,7 @@ class _LoginFormState extends State<LoginForm> {
               return _validateEmail(context, value);
             },
           ),
-          SizedBox(
+          const SizedBox(
             height: padding4 * 8,
           ),
           AuthTextField(
@@ -108,7 +111,7 @@ class _LoginFormState extends State<LoginForm> {
               return _validatePassword(context, value);
             },
           ),
-          SizedBox(
+          const SizedBox(
             height: padding4 * 12,
           ),
           BlocConsumer<UserCubit, UserState>(

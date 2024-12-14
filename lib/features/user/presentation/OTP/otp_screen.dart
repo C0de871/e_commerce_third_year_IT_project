@@ -32,13 +32,13 @@ class _OtpScreenState extends State<OtpScreen> {
         child: SizedBox(
           width: double.infinity,
           child: Column(children: [
-            SizedBox(height: padding4 * 12),
+            const SizedBox(height: padding4 * 12),
             Text(
               AppLocalizations.of(context)!.otpVerification, // Use localized text here
               style: Theme.of(context).textTheme.headlineMedium,
               textAlign: TextAlign.center,
             ),
-            SizedBox(
+            const SizedBox(
               height: padding4 * 2,
             ),
             Text(
@@ -46,23 +46,23 @@ class _OtpScreenState extends State<OtpScreen> {
               textAlign: TextAlign.center,
             ),
             buildTimer(),
-            SizedBox(height: padding4 * 12),
+            const SizedBox(height: padding4 * 12),
             const OnlyBottomCursor(),
-            SizedBox(
+            const SizedBox(
               height: padding4 * 12,
             ),
             DefaultButton(
               text: AppLocalizations.of(context)!.continueText, // Use localized text here
               press: () {},
             ),
-            SizedBox(height: padding4 * 6),
+            const SizedBox(height: padding4 * 6),
             GestureDetector(
               onTap: () {
                 //todo: resend OTP code!
               },
               child: Text(
                 AppLocalizations.of(context)!.resendOtp, // Use localized text here
-                style: TextStyle(decoration: TextDecoration.underline),
+                style: const TextStyle(decoration: TextDecoration.underline),
               ),
             ),
           ]),
