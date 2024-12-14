@@ -7,14 +7,10 @@ import 'package:e_commerce/core/theme/app_theme.dart';
 import '../Routes/app_router.dart';
 import '../constants/app_routes.dart';
 import '../l10n/l10n.dart';
-import '../theme/theme_manager.dart';
-
-ThemeManager _themeManager = ThemeManager();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,13 +20,14 @@ class MyApp extends StatelessWidget {
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate
+        GlobalCupertinoLocalizations.delegate,
       ],
       debugShowCheckedModeBanner: false,
       title: 'E-Commerce',
-      theme: AppTheme.lightTheme,
-      themeMode: _themeManager.themeMode,
-      initialRoute: AppRoutes.loginRoute,
+      theme: AppTheme().theme(
+        defaultLightScheme(),
+      ),
+      initialRoute: AppRoutes.homeRoute,
       onGenerateRoute: AppRouter().generateRoute,
     );
   }
