@@ -1,1 +1,1 @@
-double padding4 = 4;
+const double padding4 = 4;
