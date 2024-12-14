@@ -42,5 +42,14 @@
     "continueText": "متابعة",
     "resendOtp": "إعادة إرسال رمز التحقق",
     "resendIn": "يمكنك إعادة إرسال الرمز في",
-    "login": "تسجيل الدخول"
+    "login": "تسجيل الدخول",
+    "specialForYou": "المتاجر",
+    "popularProduct": "اشهر المنتجات",
+    "seeMore": "عرض المزيد",
+    "from": "من: ",
+    "searchProduct": "ابحث عن المنتج",
+    "@searchProduct": {
+        "description": "نص العنصر النصي لحقل البحث"
+    },
+    "expressShopping": "تسوق سريع"
 }

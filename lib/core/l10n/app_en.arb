@@ -177,5 +177,29 @@
   "login": "Login",
   "@login": {
     "description": "word login to appBar"
+  },
+  "specialForYou": "Stores",
+  "@specialForYou": {
+    "description": "Section title for special offers"
+  },
+  "popularProduct": "Popular Product",
+  "@popularProduct": {
+    "description": "Section title for popular products"
+  },
+  "seeMore": "See More",
+  "@seeMore": {
+    "description": "Text for expanding additional content"
+  },
+  "from": "From: ",
+  "@from": {
+    "description": "Text prefix for showing the origin or source"
+  },
+  "searchProduct": "Search Product",
+  "@searchProduct": {
+    "description": "Placeholder text for the search input field"
+  },
+  "expressShopping": "Express Shopping",
+  "@expressShopping": {
+    "description": "Subtitle text below the app name"
   }
 }
