@@ -1,4 +1,5 @@
 import 'package:e_commerce/core/constants/app_routes.dart';
+import 'package:e_commerce/features/Home%20Screen/presentation/Home%20Screen/home_screen.dart';
 import 'package:e_commerce/features/user/presentation/OTP/otp_screen.dart';
 import 'package:e_commerce/features/user/presentation/cubit/user_cubit.dart';
 import 'package:e_commerce/features/user/presentation/login_screen/logInScreen.dart';
@@ -60,6 +61,10 @@ class AppRouter {
             child: const LoginScreen(),
           ),
         );
+      case AppRoutes.homeRoute:
+        return MaterialPageRoute(
+          builder: (_) => const HomeScreen(),
+        );
 
       //!default route:
       default:
@@ -67,6 +72,7 @@ class AppRouter {
           builder: (_) => Scaffold(
             body: Center(
               child: Text("No route defined for ${settings.name}"),
+              
             ),
           ),
         );
