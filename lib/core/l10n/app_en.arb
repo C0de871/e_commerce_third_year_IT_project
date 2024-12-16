@@ -201,5 +201,13 @@
   "backToHome" :  "Bach to home",
   "@backToHome": {
     "description": "button in success login back you to home "
+  },
+  "yourCart" :  "Your Cart",
+  "@yourCart": {
+    "description": "label in app bar of cart screen "
+  },
+  "numberOfItem" :  "4 items",
+  "@numberOfItem": {
+    "description": "number of item in cart "
   }
 }

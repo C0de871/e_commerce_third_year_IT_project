@@ -48,6 +48,8 @@
     "continueSplash": "متابعة",
     "successScreen":"دخول ناجح",
     "successLogin":"تم الدخول بنجاح ",
-    "backToHome": "العودة الى الرئيسية"
+    "backToHome": "العودة الى الرئيسية",
+    "yourCart": "السلة الخاصة بك ",
+    "numberOfItem" :  "4 أغراض"
     
 }
