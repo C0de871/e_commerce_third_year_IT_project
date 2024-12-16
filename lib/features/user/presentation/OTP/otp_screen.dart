@@ -1,12 +1,14 @@
 import 'package:e_commerce/core/constants/app_numbers.dart';
+import 'package:e_commerce/core/constants/app_routes.dart';
 import 'package:e_commerce/core/widgets/Pin%20Put%20Template/only_bottom_cursor_pin_put.dart';
 import 'package:e_commerce/core/widgets/defualt_button.dart';
+import 'package:e_commerce/features/user/presentation/cubit/user_cubit.dart';
 import 'package:flutter/material.dart'; // Add the localization package
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen(this.email, {super.key});
-  final String email;
+  const OtpScreen({super.key});
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -15,10 +17,14 @@ class OtpScreen extends StatefulWidget {
 class _OtpScreenState extends State<OtpScreen> {
   @override
   Widget build(BuildContext context) {
+    final userCubit = context.read<UserCubit>();
+    final email = userCubit.signUpEmailController.text;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          AppLocalizations.of(context)!.otpVerification, // Use localized text here
+          AppLocalizations.of(context)!
+              .otpVerification, // Use localized text here
           style: TextStyle(
             color: Theme.of(context).colorScheme.secondary,
           ),
@@ -31,41 +37,73 @@ class _OtpScreenState extends State<OtpScreen> {
         ),
         child: SizedBox(
           width: double.infinity,
-          child: Column(children: [
-            SizedBox(height: padding4 * 12),
-            Text(
-              AppLocalizations.of(context)!.otpVerification, // Use localized text here
-              style: Theme.of(context).textTheme.headlineMedium,
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(
-              height: padding4 * 2,
-            ),
-            Text(
-              AppLocalizations.of(context)!.verificationCodeSent(widget.email), // Use localized text with parameter
-              textAlign: TextAlign.center,
-            ),
-            buildTimer(),
-            SizedBox(height: padding4 * 12),
-            const OnlyBottomCursor(),
-            SizedBox(
-              height: padding4 * 12,
-            ),
-            DefaultButton(
-              text: AppLocalizations.of(context)!.continueText, // Use localized text here
-              press: () {},
-            ),
-            SizedBox(height: padding4 * 6),
-            GestureDetector(
-              onTap: () {
-                //todo: resend OTP code!
-              },
-              child: Text(
-                AppLocalizations.of(context)!.resendOtp, // Use localized text here
-                style: TextStyle(decoration: TextDecoration.underline),
+          child: Column(
+            children: [
+              SizedBox(height: padding4 * 12),
+              Text(
+                AppLocalizations.of(context)!
+                    .otpVerification, // Use localized text here
+                style: Theme.of(context).textTheme.headlineMedium,
+                textAlign: TextAlign.center,
               ),
-            ),
-          ]),
+              SizedBox(
+                height: padding4 * 2,
+              ),
+              Text(
+                AppLocalizations.of(context)!.verificationCodeSent(
+                  email,
+                ), // Use localized text with parameter
+                textAlign: TextAlign.center,
+              ),
+              buildTimer(),
+              SizedBox(height: padding4 * 12),
+              const OnlyBottomCursor(),
+              SizedBox(
+                height: padding4 * 12,
+              ),
+              BlocConsumer<UserCubit, UserState>(
+                listener: (context, state) {
+                  if (state is OtpUserFailure) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(state.errMessage)),
+                    );
+                  }else if(state is OtpUserSuccessfully){
+                    Navigator.popUntil(context, (route)=>route.settings.name==AppRoutes.loginRoute);
+                  }
+                },
+                builder: (context, state) {
+                  if (state is OtpUserLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  return Column(
+                    children: [
+                      DefaultButton(
+                        text: AppLocalizations.of(context)!
+                            .continueText, // Use localized text here
+                        press: () {
+                          context.read<UserCubit>().postOtpTrigger();
+                        },
+                      ),
+                      SizedBox(height: padding4 * 6),
+                      GestureDetector(
+                        onTap: () {
+                          context.read<UserCubit>().resendOtpTrigger();
+                        },
+                        child: Text(
+                          AppLocalizations.of(context)!
+                              .resendOtp, // Use localized text here
+                          style: const TextStyle(
+                              decoration: TextDecoration.underline),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -86,7 +124,8 @@ class _OtpScreenState extends State<OtpScreen> {
             int remainingMinutes = remainingTimeInSeconds ~/ 60;
             int remainingSeconds = remainingTimeInSeconds % 60;
 
-            String formattedTime = '${remainingMinutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
+            String formattedTime =
+                '${remainingMinutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
 
             return Text(
               formattedTime,
