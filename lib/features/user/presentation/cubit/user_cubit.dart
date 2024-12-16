@@ -1,8 +1,11 @@
 import 'package:e_commerce/core/databases/api/end_points.dart';
 import 'package:e_commerce/core/services/service_locator.dart';
 import 'package:e_commerce/features/user/domain/entites/Sign%20up%20entities/sign_up_entity.dart';
+import 'package:e_commerce/features/user/domain/entites/otp_entities/otp_entity.dart';
 import 'package:e_commerce/features/user/domain/entites/user_entities/user_entities.dart';
 import 'package:e_commerce/features/user/domain/usecases/login_user.dart';
+import 'package:e_commerce/features/user/domain/usecases/post_otp.dart';
+import 'package:e_commerce/features/user/domain/usecases/resend_otp.dart';
 import 'package:e_commerce/features/user/domain/usecases/sign_up_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,9 +16,14 @@ class UserCubit extends Cubit<UserState> {
   //!iniialize the usecases:
   LoginUser loginUser;
   SignUpUser signUpUser;
+  ResendOtp resendOtp;
+  PostOtp postOtp;
+
   UserCubit()
       : loginUser = getIt<LoginUser>(),
         signUpUser = getIt<SignUpUser>(),
+        resendOtp = getIt<ResendOtp>(),
+        postOtp = getIt<PostOtp>(),
         super(UserInitial());
 
   //!login ui textfield controllers:
@@ -45,12 +53,11 @@ class UserCubit extends Cubit<UserState> {
   TextEditingController signUpLastNameController = TextEditingController();
   TextEditingController signUpPhoneNumberController = TextEditingController();
   TextEditingController signUpAddressController = TextEditingController();
-  TextEditingController signUpConfirmPasswordController = TextEditingController();
+  TextEditingController signUpConfirmPasswordController =
+      TextEditingController();
 
   //!Sign up trigger:
   dynamic signUpUserTrigger() async {
-    print(signUpEmailController.text);
-    print(signUpPasswordController.text);
     Map<String, dynamic> bodyjson = {
       ApiKey.email: signUpEmailController.text,
       ApiKey.password: signUpPasswordController.text,
@@ -65,6 +72,39 @@ class UserCubit extends Cubit<UserState> {
       (failure) => emit(SignUpUserFailure(errMessage: failure.errMessage)),
       (signUpEntity) => emit(
         SignUpUserSuccessfully(signUpEntity: signUpEntity),
+      ),
+    );
+  }
+
+  //! otp textField controller:
+  TextEditingController otpController = TextEditingController();
+
+  //! Otp triger:
+  dynamic resendOtpTrigger() async {
+    Map<String, dynamic> bodyjson = {
+      ApiKey.email: signUpEmailController.text,
+    };
+    emit(OtpUserLoading());
+    final failureOrResendOtpEntity = await resendOtp.call(bodyjson: bodyjson);
+    failureOrResendOtpEntity.fold(
+      (failure) => emit(OtpUserFailure(errMessage: failure.errMessage)),
+      (otpEntity) => emit(
+        OtpUserSuccessfully(otpEntity: otpEntity),
+      ),
+    );
+  }
+
+  dynamic postOtpTrigger() async {
+    Map<String, dynamic> bodyjson = {
+      ApiKey.email: signUpEmailController.text,
+      ApiKey.otp: otpController.text,
+    };
+    emit(OtpUserLoading());
+    final failureOrResendOtpEntity = await postOtp.call(bodyjson: bodyjson);
+    failureOrResendOtpEntity.fold(
+      (failure) => emit(OtpUserFailure(errMessage: failure.errMessage)),
+      (otpEntity) => emit(
+        OtpUserSuccessfully(otpEntity: otpEntity),
       ),
     );
   }
