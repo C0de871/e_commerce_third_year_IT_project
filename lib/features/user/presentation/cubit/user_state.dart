@@ -5,7 +5,6 @@ sealed class UserState {}
 
 final class UserInitial extends UserState {}
 
-
 //! login states:
 final class LoginUserSuccessfully extends UserState {
   final UserEntity user;
@@ -32,3 +31,17 @@ final class SignUpUserFailure extends UserState {
 }
 
 final class SignUpUserLoading extends UserState {}
+
+//! OTP state:
+final class OtpUserFailure extends UserState{
+  final String errMessage;
+  OtpUserFailure({required this.errMessage});
+}
+
+final class OtpUserLoading extends UserState{}
+
+final class OtpUserSuccessfully extends UserState {
+  final OtpEntity otpEntity;
+
+  OtpUserSuccessfully({required this.otpEntity});
+}
