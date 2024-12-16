@@ -1,5 +1,6 @@
 import 'package:e_commerce/core/constants/app_routes.dart';
 import 'package:e_commerce/features/user/presentation/OTP/otp_screen.dart';
+import 'package:e_commerce/features/user/presentation/cart_screen/cart_screen.dart';
 import 'package:e_commerce/features/user/presentation/cubit/user_cubit.dart';
 import 'package:e_commerce/features/user/presentation/login_screen/logInScreen.dart';
 import 'package:e_commerce/features/user/presentation/login_success_screen/login_success_screen.dart';
@@ -24,6 +25,14 @@ class AppRouter {
 
   Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case AppRoutes.cartScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: userCubit,
+            child: const CartScreen(),
+          ),
+        );
+
       //!sign up auth route:
       case AppRoutes.signUpauthRoute:
         return MaterialPageRoute(
@@ -44,14 +53,18 @@ class AppRouter {
 
       //!otp route:
       case AppRoutes.otpRoute:
-        final email = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (_) => OtpScreen(email),
+          builder: (_) => BlocProvider.value(
+            value: userCubit,
+            child: const OtpScreen(),
+          ),
         );
 
       //!splash route:
       case AppRoutes.splashRoute:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
+
+      //!login success route:
       case AppRoutes.loginSuccessRoute:
         return MaterialPageRoute(builder: (_) => const LoginSuccessScreen());
 
