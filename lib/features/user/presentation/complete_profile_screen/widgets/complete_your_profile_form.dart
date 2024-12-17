@@ -13,7 +13,8 @@ class CompleteYourProfileForm extends StatefulWidget {
     super.key,
   });
   @override
-  State<CompleteYourProfileForm> createState() => _CompleteYourProfileFormState();
+  State<CompleteYourProfileForm> createState() =>
+      _CompleteYourProfileFormState();
 }
 
 class _CompleteYourProfileFormState extends State<CompleteYourProfileForm> {
@@ -77,11 +78,9 @@ class _CompleteYourProfileFormState extends State<CompleteYourProfileForm> {
                 );
               }
               if (state is SignUpUserSuccessfully) {
-                Navigator.pushNamedAndRemoveUntil(
+                Navigator.pushNamed(
                   context,
                   AppRoutes.otpRoute,
-                  (Route<dynamic> route) => false,
-                  arguments: context.read<UserCubit>().signUpEmailController.text,
                 );
               }
             },

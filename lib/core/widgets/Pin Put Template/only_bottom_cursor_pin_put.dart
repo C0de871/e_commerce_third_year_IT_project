@@ -1,4 +1,7 @@
+import 'package:e_commerce/features/user/presentation/OTP/otp_screen.dart';
+import 'package:e_commerce/features/user/presentation/cubit/user_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
@@ -16,6 +19,7 @@ class OnlyBottomCursor extends StatefulWidget {
 
 class _OnlyBottomCursorState extends State<OnlyBottomCursor> {
   //todo VerificationCodeController verificationCodeController = Get.put(VerificationCodeController(), permanent: false);
+
   final focusNode = FocusNode();
 
   @override
@@ -89,7 +93,7 @@ class _OnlyBottomCursorState extends State<OnlyBottomCursor> {
       autofocus: true,
       length: 6,
       pinAnimationType: PinAnimationType.slide,
-      //todo controller: verificationCodeController.codeController,
+      controller: context.read<UserCubit>().otpController,
       focusNode: focusNode,
       defaultPinTheme: defaultPinTheme,
       showCursor: true,

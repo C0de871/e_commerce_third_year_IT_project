@@ -74,9 +74,20 @@ class AppTheme {
       displaySmall: colorScheme.brightness == Brightness.dark
           ? ThemeData.dark().textTheme.displaySmall!.copyWith(
                 fontWeight: FontWeight.bold,
+                fontFamily: GoogleFonts.notoNastaliqUrdu().fontFamily,
               )
           : ThemeData.light().textTheme.displaySmall!.copyWith(
                 fontWeight: FontWeight.bold,
+                fontFamily: GoogleFonts.notoNastaliqUrdu().fontFamily,
+              ),
+      displayMedium: colorScheme.brightness == Brightness.dark
+          ? ThemeData.dark().textTheme.displayMedium!.copyWith(
+                fontWeight: FontWeight.bold,
+                fontFamily: GoogleFonts.notoNastaliqUrdu().fontFamily,
+              )
+          : ThemeData.light().textTheme.displayMedium!.copyWith(
+                fontWeight: FontWeight.bold,
+                fontFamily: GoogleFonts.notoNastaliqUrdu().fontFamily,
               ),
       headlineMedium: colorScheme.brightness == Brightness.dark
           ? ThemeData.dark().textTheme.headlineMedium!.copyWith(
@@ -116,7 +127,7 @@ class AppTheme {
 //   seedColor: Colors.green,
 // );
 
-ColorScheme defaultLightScheme() { 
+ColorScheme defaultLightScheme() {
   return const ColorScheme(
     brightness: Brightness.light,
     primary: Color(0xff8d4d2d),

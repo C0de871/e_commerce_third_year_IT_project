@@ -3,9 +3,12 @@ class EndPoints {
   static const String login = "login";
   static const String signUp = "register";
   static const String template = "template/";
+  static const String otpResend = "resend-otp";
+  static const String otpValidate = "validate-otp";
 }
 
 class ApiKey {
+  static String otp="otp";
   static String id = "id";
   static String message = "message";
   static String statusCode = "status_code";

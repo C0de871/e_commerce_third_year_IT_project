@@ -19,9 +19,17 @@
   "@dontHaveAccount": {
     "description": "Prompt for users without an account"
   },
-  "welcome": "welcome",
+  "welcome": "welcome to Grablt, let's shop!",
   "@welcome": {
     "description": "welcome line"
+  },
+  "splash2word":"we help people conect wiyth store ",
+  "@splash2word":{
+    "description": "second word appear when we swap in splash screen"
+  },
+  "splash3word":"we show the easy way to shop \njust stay at home wuth us ",
+  "@splash3word":{
+    "description": "third word appear when we swap in splash screen"
   },
   "signUp": "Sign Up",
   "@signUp": {
@@ -201,5 +209,29 @@
   "expressShopping": "Express Shopping",
   "@expressShopping": {
     "description": "Subtitle text below the app name"
+  },
+  "continueSplash": "Continue",
+  "@continueSplash": {
+    "description": "Text for the button that continues the next splash page process"
+  },
+  "successScreen": "Login Success",
+  "@successScreen": {
+    "description": "the login process is done by right way in  appbar"
+  },
+  "successLogin": "Login successfully",
+  "@successLogin": {
+    "description": "the login process is done by right way"
+  },
+  "backToHome" :  "Bach to home",
+  "@backToHome": {
+    "description": "button in success login back you to home "
+  },
+  "yourCart" :  "Your Cart",
+  "@yourCart": {
+    "description": "label in app bar of cart screen "
+  },
+  "numberOfItem" :  "4 items",
+  "@numberOfItem": {
+    "description": "number of item in cart "
   }
 }
