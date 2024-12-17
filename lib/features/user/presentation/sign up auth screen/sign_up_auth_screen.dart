@@ -17,10 +17,10 @@ class SignUpAuthScreen extends StatelessWidget {
       body: SizedBox(
         width: double.infinity,
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: padding4 * 5),
+          padding: const EdgeInsets.symmetric(horizontal: padding4 * 5),
           child: Column(
             children: [
-              SizedBox(height: padding4 * 12),
+              const SizedBox(height: padding4 * 12),
               Text(
                 AppLocalizations.of(context)!.registerAccount,
                 style: Theme.of(context).textTheme.headlineMedium,
@@ -29,9 +29,9 @@ class SignUpAuthScreen extends StatelessWidget {
                 AppLocalizations.of(context)!.completeYourdetails,
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: padding4 * 12),
+              const SizedBox(height: padding4 * 12),
               const SignUpForm(),
-              SizedBox(
+              const SizedBox(
                 height: padding4 * 4,
               ),
               Text(
