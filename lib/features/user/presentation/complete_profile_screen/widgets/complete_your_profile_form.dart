@@ -33,7 +33,7 @@ class _CompleteYourProfileFormState extends State<CompleteYourProfileForm> {
             svgIconPath: AppStrings.emailIconPath,
             validator: (value) => _validateFirstName(context, value),
           ),
-          SizedBox(
+          const SizedBox(
             height: padding4 * 8,
           ),
           AuthTextField(
@@ -43,7 +43,7 @@ class _CompleteYourProfileFormState extends State<CompleteYourProfileForm> {
             svgIconPath: AppStrings.passwordIconPath,
             validator: (value) => _validateLastName(context, value),
           ),
-          SizedBox(
+          const SizedBox(
             height: padding4 * 8,
           ),
           AuthTextField(
@@ -53,7 +53,7 @@ class _CompleteYourProfileFormState extends State<CompleteYourProfileForm> {
             svgIconPath: AppStrings.passwordIconPath,
             validator: (value) => _validateAddress(context, value),
           ),
-          SizedBox(
+          const SizedBox(
             height: padding4 * 8,
           ),
           AuthTextField(
@@ -63,10 +63,10 @@ class _CompleteYourProfileFormState extends State<CompleteYourProfileForm> {
             svgIconPath: AppStrings.passwordIconPath,
             validator: (value) => _validatePhoneNumber(context, value),
           ),
-          SizedBox(
+          const SizedBox(
             height: padding4 * 8,
           ),
-          SizedBox(
+          const SizedBox(
             height: padding4 * 9,
           ),
           BlocConsumer<UserCubit, UserState>(

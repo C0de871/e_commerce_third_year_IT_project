@@ -32,3 +32,6 @@ final class SignUpUserFailure extends UserState {
 }
 
 final class SignUpUserLoading extends UserState {}
+
+//! upload profile picture state:
+final class UploadProfilePic extends UserState{}

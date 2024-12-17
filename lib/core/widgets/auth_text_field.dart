@@ -1,8 +1,8 @@
 import 'package:e_commerce/core/widgets/custom_surfix_icon.dart';
 import 'package:flutter/material.dart';
 
-class AuthTextField extends StatelessWidget {
-  AuthTextField({
+class AuthTextField extends StatefulWidget {
+  const AuthTextField({
     super.key,
     required this.label,
     required this.hint,
@@ -13,16 +13,20 @@ class AuthTextField extends StatelessWidget {
   });
   final String label, hint, svgIconPath;
   final String? Function(String?)? validator;
-  bool isObsure;
   final TextEditingController? controller;
+  final bool isObsure;
+  @override
+  State<AuthTextField> createState() => _AuthTextFieldState();
+}
 
+class _AuthTextFieldState extends State<AuthTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
+      controller: widget.controller,
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      validator: validator,
-      obscureText: isObsure,
+      validator: widget.validator,
+      obscureText: widget.isObsure,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         suffixIconConstraints: const BoxConstraints(
@@ -31,10 +35,10 @@ class AuthTextField extends StatelessWidget {
           maxWidth: 68,
           minWidth: 68,
         ),
-        labelText: label,
+        labelText: widget.label,
         hintStyle: Theme.of(context).textTheme.labelLarge,
-        hintText: hint,
-        suffixIcon: CustomSuffixIcon(svgIcon: svgIconPath),
+        hintText: widget.hint,
+        suffixIcon: CustomSuffixIcon(svgIcon: widget.svgIconPath),
       ),
     );
   }
