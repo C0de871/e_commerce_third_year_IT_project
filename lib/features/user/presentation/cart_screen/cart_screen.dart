@@ -20,27 +20,27 @@ class CartScreen extends StatelessWidget {
                   child: AspectRatio(
                     aspectRatio: 0.88,
                   child: Container(
-                    padding: EdgeInsets.all(padding4*2),
+                    padding: const EdgeInsets.all(padding4*2),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(padding4*4),
-                      //ToDo COLOR....
+                      //TODO COLOR....
                     ),
                     child: Image.asset(AppImages.successImage),
-                    //TodO demoCarts[0].product.image[0]
+                    //TODO demoCarts[0].product.image[0]
                   ),),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: padding4*5,
-                ),Column(
+                ),const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text("title of product",
+                    Text("title of product",
                     maxLines: 2, 
                     //TODO style of product
                     ),
                     SizedBox(height: padding4*2,),
-                    const Text.rich(TextSpan(text:"price")
-                    //ToDo Style + demoCart[0].product.price
+                    Text.rich(TextSpan(text:"price")
+                    //TODO Style + demoCart[0].product.price
                     )
                     
                   ],

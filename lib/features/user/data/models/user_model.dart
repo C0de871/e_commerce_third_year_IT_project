@@ -11,7 +11,7 @@ class UserModel extends UserEntity {
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
-    Map<String, dynamic> data = json['data'];
+    Map<String, dynamic> data = json[ApiKey.data];
     return UserModel(
       accessToken: data[ApiKey.accessToken],
       refreshToken: data[ApiKey.refreshToken],
