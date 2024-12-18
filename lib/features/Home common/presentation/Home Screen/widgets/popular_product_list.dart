@@ -1,5 +1,5 @@
 import 'package:e_commerce/core/constants/app_numbers.dart';
-import 'package:e_commerce/features/Home%20Screen/presentation/Home%20Screen/widgets/product_card.dart';
+import 'package:e_commerce/features/Home%20common/presentation/Home%20Screen/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 
 class PopularProductList extends StatelessWidget {

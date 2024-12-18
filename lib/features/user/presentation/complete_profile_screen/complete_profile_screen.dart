@@ -6,7 +6,6 @@ import 'package:e_commerce/features/user/presentation/cubit/user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/functions/app_functions.dart';
 
