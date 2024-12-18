@@ -30,6 +30,17 @@ class ApiKey {
   static String createdAt = "created_at";
   static String updatedAt = "updated_at";
   static String data = "data";
+
+  static String storeId = "store_id";
+  static String storeName = "store_name";
+  static String productId = "product_id";
+  static String productName = "product_name";
+  static String price = "price";
+  static String quantity = "quantity";
+  static String description = "description";
+  static String mainImageUrl = "main_image";
+
+
 }
 
 class CacheKey {
