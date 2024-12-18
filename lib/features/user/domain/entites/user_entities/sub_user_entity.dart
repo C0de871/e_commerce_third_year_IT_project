@@ -1,11 +1,21 @@
 class SubUserEntity {
   int? id;
-  String? name;
+  String? firstName;
+  String? lastName;
   String? email;
+  String? location;
+  String? phoneNumber;
+  String? imageUrl;
+  String? fcmToken;
 
   SubUserEntity({
     required this.id,
-    required this.name,
+    required this.firstName,
     required this.email,
+    required this.lastName,
+    required this.location,
+    required this.phoneNumber,
+    required this.imageUrl,
+    required this.fcmToken,
   });
 }
