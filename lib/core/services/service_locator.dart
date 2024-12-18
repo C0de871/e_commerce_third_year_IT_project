@@ -21,16 +21,13 @@ void setupServicesLocator() {
   // Core
   getIt.registerLazySingleton<Dio>(() => Dio());
   getIt.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: getIt()));
-  getIt.registerLazySingleton<DataConnectionChecker>(
-      () => DataConnectionChecker());
+  getIt.registerLazySingleton<DataConnectionChecker>(() => DataConnectionChecker());
   getIt.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(getIt()));
   getIt.registerLazySingleton<CacheHelper>(() => CacheHelper());
 
   // Data Sources
-  getIt.registerLazySingleton<UserRemoteDataSource>(
-      () => UserRemoteDataSource(api: getIt()));
-  getIt.registerLazySingleton<UserLocalDataSource>(
-      () => UserLocalDataSource(cache: getIt()));
+  getIt.registerLazySingleton<UserRemoteDataSource>(() => UserRemoteDataSource(api: getIt(),cacheHelper: getIt()));
+  getIt.registerLazySingleton<UserLocalDataSource>(() => UserLocalDataSource(cache: getIt()));
 
   // Repository
   getIt.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(
@@ -40,12 +37,9 @@ void setupServicesLocator() {
       ));
 
   // Use Cases
-  getIt.registerLazySingleton<LoginUser>(
-      () => LoginUser(userRepository: getIt()));
-  getIt.registerLazySingleton<SignUpUser>(
-      () => SignUpUser(userRepository: getIt()));
-  getIt.registerLazySingleton<ResendOtp>(
-      () => ResendOtp(userRepository: getIt()));
+  getIt.registerLazySingleton<LoginUser>(() => LoginUser(userRepository: getIt()));
+  getIt.registerLazySingleton<SignUpUser>(() => SignUpUser(userRepository: getIt()));
+  getIt.registerLazySingleton<ResendOtp>(() => ResendOtp(userRepository: getIt()));
   getIt.registerLazySingleton<PostOtp>(
     () => PostOtp(userRepository: getIt()),
   );
