@@ -69,7 +69,7 @@ class UserCubit extends Cubit<UserState> {
       ApiKey.phoneNumber: signUpPhoneNumberController.text,
       ApiKey.firstName: signUpFirstNameController.text,
       ApiKey.lastName: signUpLastNameController.text,
-      ApiKey.image: await uploadImageToApi(profilePic),
+      ApiKey.imageUrl: await uploadImageToApi(profilePic),
     };
     emit(SignUpUserLoading());
     final failureOrSignUpEntity = await signUpUser.call(jsonBody: bodyjson);

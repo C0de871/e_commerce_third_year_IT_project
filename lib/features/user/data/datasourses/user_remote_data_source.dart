@@ -1,12 +1,9 @@
-import 'package:dartz/dartz.dart';
+
 import 'package:e_commerce/core/databases/api/api_consumer.dart';
 import 'package:e_commerce/core/databases/api/end_points.dart';
-import 'package:e_commerce/core/errors/failure.dart';
 import 'package:e_commerce/features/user/data/models/otp_model.dart';
 import 'package:e_commerce/features/user/data/models/sign_up_model.dart';
 import 'package:e_commerce/features/user/data/models/user_model.dart';
-import 'package:e_commerce/features/user/domain/entites/otp_entities/otp_entity.dart';
-import 'package:e_commerce/features/user/domain/usecases/resend_otp.dart';
 
 class UserRemoteDataSource {
   final ApiConsumer api;

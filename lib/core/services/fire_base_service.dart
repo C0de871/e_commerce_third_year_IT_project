@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
 
+import 'package:e_commerce/core/databases/api/end_points.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
@@ -15,8 +16,6 @@ class FireBaseService {
 
   final CacheHelper cache;
   FireBaseService() : cache = getIt();
-
-  final String fcmTokenCacheKey = "fcmToken";
 
   //initialize app for firebase:
   static Future<void> initializeApp() async {
@@ -34,7 +33,7 @@ class FireBaseService {
     String fcmToken = await getFCMToken();
 
     _firebaseMessaging.onTokenRefresh.listen((newToken) {
-      cache.saveData(key: fcmTokenCacheKey, value: newToken);
+      cache.saveData(key: CacheKey.fcmToken, value: newToken);
       fcmToken = newToken;
       log("token is refreshed: $newToken");
     });
@@ -44,13 +43,13 @@ class FireBaseService {
   }
 
   Future<String> getFCMToken() async {
-    if (cache.getData(key: fcmTokenCacheKey) == null) {
+    if (cache.getData(key: CacheKey.fcmToken) == null) {
       final fcmToken = await _firebaseMessaging.getToken();
-      await cache.saveData(key: fcmTokenCacheKey, value: fcmToken);
+      await cache.saveData(key: CacheKey.fcmToken, value: fcmToken);
       log('token is saved');
       return fcmToken!;
     }
     log('token is retrieve from cache');
-    return cache.getData(key: fcmTokenCacheKey);
+    return cache.getData(key: CacheKey.fcmToken);
   }
 }
