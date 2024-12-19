@@ -1,9 +1,9 @@
 import 'package:e_commerce/core/databases/api/api_consumer.dart';
 import 'package:e_commerce/core/databases/api/end_points.dart';
 import 'package:e_commerce/core/databases/cache/cache_helper.dart';
-import 'package:e_commerce/features/Home%20common/products%20feature/data/model/product_model.dart';
+import 'package:e_commerce/features/products/data/model/product_model.dart';
 
-import '../../../../../core/params/params.dart';
+import '../../../../core/params/params.dart';
 
 class ProductRemoteDataSource {
   final ApiConsumer apiConsumer;

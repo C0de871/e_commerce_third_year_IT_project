@@ -1,6 +1,6 @@
 import 'package:e_commerce/core/constants/app_numbers.dart';
 import 'package:e_commerce/core/functions/app_functions.dart';
-import 'package:e_commerce/features/Home%20common/presentation/Home%20Screen/widgets/popular_product_list.dart';
+import 'package:e_commerce/features/home/presentation/Home%20Screen/widgets/popular_product_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

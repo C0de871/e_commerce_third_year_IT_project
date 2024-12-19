@@ -1,5 +1,5 @@
 import 'package:e_commerce/core/constants/app_routes.dart';
-import 'package:e_commerce/features/Home%20common/presentation/Home%20Screen/home_screen.dart';
+import 'package:e_commerce/features/home/presentation/Home%20Screen/home_screen.dart';
 import 'package:e_commerce/features/user/presentation/OTP/otp_screen.dart';
 import 'package:e_commerce/features/user/presentation/cart_screen/cart_screen.dart';
 import 'package:e_commerce/features/user/presentation/cubit/user_cubit.dart';

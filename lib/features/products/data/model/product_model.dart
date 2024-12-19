@@ -1,5 +1,5 @@
 import 'package:e_commerce/core/databases/api/end_points.dart';
-import 'package:e_commerce/features/Home%20common/products%20feature/domain/entities/product_enitty.dart';
+import 'package:e_commerce/features/products/domain/entities/product_enitty.dart';
 
 class ProductModel extends ProductEntity {
   ProductModel({
