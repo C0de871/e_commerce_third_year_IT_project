@@ -93,7 +93,7 @@ class _LoginFormState extends State<LoginForm> {
             controller: context.read<UserCubit>().loginEmailController,
             label: AppLocalizations.of(context)!.email,
             hint: AppLocalizations.of(context)!.enterYourEmail,
-            svgIconPath: AppStrings.emailIconPath,
+            svgIconPath: AppImages.emailIconPath,
             validator: (value) {
               return _validateEmail(context, value);
             },
@@ -105,7 +105,7 @@ class _LoginFormState extends State<LoginForm> {
             controller: context.read<UserCubit>().loginPasswordController,
             label: AppLocalizations.of(context)!.password,
             hint: AppLocalizations.of(context)!.enterYourPassword,
-            svgIconPath: AppStrings.passwordIconPath,
+            svgIconPath: AppImages.passwordIconPath,
             isObsure: true,
             validator: (value) {
               return _validatePassword(context, value);

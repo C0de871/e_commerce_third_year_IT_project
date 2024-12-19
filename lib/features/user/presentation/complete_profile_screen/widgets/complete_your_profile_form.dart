@@ -13,8 +13,7 @@ class CompleteYourProfileForm extends StatefulWidget {
     super.key,
   });
   @override
-  State<CompleteYourProfileForm> createState() =>
-      _CompleteYourProfileFormState();
+  State<CompleteYourProfileForm> createState() => _CompleteYourProfileFormState();
 }
 
 class _CompleteYourProfileFormState extends State<CompleteYourProfileForm> {
@@ -31,7 +30,7 @@ class _CompleteYourProfileFormState extends State<CompleteYourProfileForm> {
             controller: context.read<UserCubit>().signUpFirstNameController,
             label: AppLocalizations.of(context)!.firstName,
             hint: AppLocalizations.of(context)!.enterFirstName,
-            svgIconPath: AppStrings.emailIconPath,
+            svgIconPath: AppImages.emailIconPath,
             validator: (value) => _validateFirstName(context, value),
           ),
           const SizedBox(
@@ -41,7 +40,7 @@ class _CompleteYourProfileFormState extends State<CompleteYourProfileForm> {
             controller: context.read<UserCubit>().signUpLastNameController,
             label: AppLocalizations.of(context)!.lastName,
             hint: AppLocalizations.of(context)!.enterLastName,
-            svgIconPath: AppStrings.passwordIconPath,
+            svgIconPath: AppImages.passwordIconPath,
             validator: (value) => _validateLastName(context, value),
           ),
           const SizedBox(
@@ -51,7 +50,7 @@ class _CompleteYourProfileFormState extends State<CompleteYourProfileForm> {
             controller: context.read<UserCubit>().signUpAddressController,
             label: AppLocalizations.of(context)!.address,
             hint: AppLocalizations.of(context)!.enterAddress,
-            svgIconPath: AppStrings.passwordIconPath,
+            svgIconPath: AppImages.passwordIconPath,
             validator: (value) => _validateAddress(context, value),
           ),
           const SizedBox(
@@ -61,7 +60,7 @@ class _CompleteYourProfileFormState extends State<CompleteYourProfileForm> {
             controller: context.read<UserCubit>().signUpPhoneNumberController,
             label: AppLocalizations.of(context)!.phoneNumber,
             hint: AppLocalizations.of(context)!.enterPhoneNumber,
-            svgIconPath: AppStrings.passwordIconPath,
+            svgIconPath: AppImages.passwordIconPath,
             validator: (value) => _validatePhoneNumber(context, value),
           ),
           const SizedBox(

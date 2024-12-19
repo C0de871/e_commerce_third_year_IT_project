@@ -31,7 +31,7 @@ class _SignUpFormState extends State<SignUpForm> {
             controller: context.read<UserCubit>().signUpEmailController,
             label: AppLocalizations.of(context)!.email,
             hint: AppLocalizations.of(context)!.enterYourEmail,
-            svgIconPath: AppStrings.emailIconPath,
+            svgIconPath: AppImages.emailIconPath,
             validator: (value) => _validateEmail(context, value),
           ),
           SizedBox(
@@ -41,7 +41,7 @@ class _SignUpFormState extends State<SignUpForm> {
             controller: context.read<UserCubit>().signUpPasswordController,
             label: AppLocalizations.of(context)!.password,
             hint: AppLocalizations.of(context)!.enterYourPassword,
-            svgIconPath: AppStrings.passwordIconPath,
+            svgIconPath: AppImages.passwordIconPath,
             validator: (value) => _validatePassword(context, value),
             isObsure: true,
           ),
@@ -51,7 +51,7 @@ class _SignUpFormState extends State<SignUpForm> {
           AuthTextField(
             label: AppLocalizations.of(context)!.confirmPassword,
             hint: AppLocalizations.of(context)!.reEnterYourPassword,
-            svgIconPath: AppStrings.passwordIconPath,
+            svgIconPath: AppImages.passwordIconPath,
             controller: context.read<UserCubit>().signUpConfirmPasswordController,
             validator: (value) => _validateConfirmPassword(
               context,

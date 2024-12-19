@@ -24,7 +24,7 @@ class DiscountBanner extends StatelessWidget {
         image: DecorationImage(
           fit: BoxFit.cover,
           image: AssetImage(
-            AppStrings.discountBanner,
+            AppImages.discountBanner,
           ),
         ),
       ),
