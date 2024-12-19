@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       supportedLocales: L10n.all,
-      locale: const Locale('ar'),
+      locale: const Locale('en'),
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme().theme(
         defaultLightScheme(),
       ),
-      initialRoute: AppRoutes.loginRoute,
+      initialRoute: AppRoutes.loginSuccessRoute,
       onGenerateRoute: AppRouter().generateRoute,
     );
   }
