@@ -1,23 +1,33 @@
 import 'package:e_commerce/core/constants/app_numbers.dart';
 import 'package:e_commerce/core/functions/app_functions.dart';
 import 'package:e_commerce/features/home/presentation/Home%20Screen/widgets/popular_product_list.dart';
+import 'package:e_commerce/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'widgets/discount_banner.dart';
 import 'widgets/home_app_bar.dart';
-import 'widgets/product_card.dart';
 import 'widgets/section_title.dart';
 import 'widgets/popular_stores.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static String routeName = '/home';
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    BlocProvider.of<HomeCubit>(context).getHomeData();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    //todo: remove every fetchingproduct state:
-    FetchProductState fetchingProductState = FetchProductState.SUCCESS;
     final currentBrightness = Theme.of(context).brightness;
     final systemUiOverlayStyle = getSystemUiOverlayStyle(currentBrightness, context);
     return Scaffold(
@@ -44,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                         press: () {},
                       ),
                       const SizedBox(height: padding4 * 5),
-                      PopularProductList(fetchingProductState: fetchingProductState),
+                      const PopularProductList(),
                       // const SizedBox(height: 30),
                     ],
                   ),

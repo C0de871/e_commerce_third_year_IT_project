@@ -1,4 +1,7 @@
+import 'package:e_commerce/features/products/domain/entities/product_enitty.dart';
+import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -8,13 +11,12 @@ import '../../../../../core/constants/app_numbers.dart';
 class ProductCard extends StatelessWidget {
   const ProductCard({
     super.key,
-    required this.fetchProductState,
+    this.product,
   });
-  final FetchProductState fetchProductState;
 
+  final ProductEntity? product;
   @override
   Widget build(BuildContext context) {
-    String fromText = AppLocalizations.of(context)!.from;
     return Container(
       constraints: BoxConstraints(
         maxWidth: (MediaQuery.sizeOf(context).width - padding4 * 8) / 2,
@@ -37,34 +39,64 @@ class ProductCard extends StatelessWidget {
             onTap: () {},
             child: Padding(
               padding: const EdgeInsets.all(padding4 * 4),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Stack(
-                    children: [
-                      ProductImage(fetchProductState: fetchProductState),
-                      Faviourt(fetchProductState: fetchProductState),
-                    ],
-                  ),
-                  const SizedBox(height: padding4 * 3),
-                  ProductName(
-                    fetchProductState: fetchProductState,
-                    constraints: constraints,
-                  ),
-                  const SizedBox(height: padding4 * 1),
-                  ProductPrice(
-                    fetchProductState: fetchProductState,
-                    constraints: constraints,
-                  ),
-                  const SizedBox(
-                    height: padding4 * 1,
-                  ),
-                  ProductStore(
-                    fetchProductState: fetchProductState,
-                    fromText: fromText,
-                    constraints: constraints,
-                  ),
-                ],
+              child: BlocBuilder<ProductCubit, ProductState>(
+                builder: (context, state) {
+                  return state is GetAllProductsLoading
+                      ? Column(
+                          children: [
+                            Stack(
+                              children: [
+                                LoadingProductImage(
+                                  constraints: constraints,
+                                ),
+                                LoadingFaviourt(
+                                  constraints: constraints,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: padding4 * 3),
+                            LoadingProductName(
+                              constraints: constraints,
+                            ),
+                            const SizedBox(height: padding4 * 1),
+                            LoadingProductPrice(
+                              constraints: constraints,
+                            ),
+                            const SizedBox(
+                              height: padding4 * 1,
+                            ),
+                          ],
+                        )
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Stack(
+                              children: [
+                                ProductImage(
+                                  mainImageUrl: product!.mainImageUrl,
+                                ),
+                                Faviourt(
+                                  isFav: product!.isFavorite,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: padding4 * 3),
+                            ProductName(
+                              productName: product!.productName,
+                            ),
+                            const SizedBox(height: padding4 * 1),
+                            ProductPrice(
+                              productPrice: product!.price,
+                            ),
+                            const SizedBox(
+                              height: padding4 * 1,
+                            ),
+                            ProductStore(
+                              storeName: product!.storeName,
+                            ),
+                          ],
+                        );
+                },
               ),
             ),
           ),
@@ -77,44 +109,32 @@ class ProductCard extends StatelessWidget {
 class ProductStore extends StatelessWidget {
   const ProductStore({
     super.key,
-    required this.fetchProductState,
-    required this.fromText,
-    required this.constraints,
+    required this.storeName,
   });
 
-  final FetchProductState fetchProductState;
-  final String fromText;
-  final BoxConstraints constraints;
+  final String storeName;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: skeletonBuilder(
-        fetchProductState: fetchProductState,
-        child: Text.rich(
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          TextSpan(
-            text: fromText, // "From" part
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            ),
-            children: const <TextSpan>[
-              TextSpan(
-                text: 'Free Syria', // "Free Syria" part
-                style: TextStyle(
-                  fontWeight: FontWeight.normal, // Regular weight for "Free Syria"
-                  fontSize: 14,
-                ),
-              ),
-            ],
-          ),
+    String fromText = AppLocalizations.of(context)!.from;
+    return Text.rich(
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
+      TextSpan(
+        text: fromText, // "From" part
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
         ),
-        width: constraints.maxWidth * 0.45,
-        height: 30,
-        radius: 0,
-        margin: const EdgeInsets.only(top: 5),
+        children: <TextSpan>[
+          TextSpan(
+            text: storeName, // "Free Syria" part
+            style: const TextStyle(
+              fontWeight: FontWeight.normal, // Regular weight for "Free Syria"
+              fontSize: 14,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -123,25 +143,33 @@ class ProductStore extends StatelessWidget {
 class ProductPrice extends StatelessWidget {
   const ProductPrice({
     super.key,
-    required this.fetchProductState,
-    required this.constraints,
+    required this.productPrice,
   });
 
-  final FetchProductState fetchProductState;
-  final BoxConstraints constraints;
+  final String productPrice;
 
   @override
   Widget build(BuildContext context) {
-    return skeletonBuilder(
-      fetchProductState: fetchProductState,
-      child: const Text(
-        '\$96.00',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 20,
-          // color: Colors.black,
-        ),
+    return Text(
+      '\$$productPrice',
+      style: const TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 20,
+        // color: Colors.black,
       ),
+    );
+  }
+}
+
+class LoadingProductPrice extends StatelessWidget {
+  const LoadingProductPrice({
+    super.key,
+    required this.constraints,
+  });
+  final BoxConstraints constraints;
+  @override
+  Widget build(BuildContext context) {
+    return Skeleton(
       width: constraints.maxWidth * 0.45,
       height: 30,
       radius: 0,
@@ -153,26 +181,36 @@ class ProductPrice extends StatelessWidget {
 class ProductName extends StatelessWidget {
   const ProductName({
     super.key,
-    required this.fetchProductState,
+    required this.productName,
+  });
+
+  final String productName;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      productName,
+      overflow: TextOverflow.ellipsis,
+      maxLines: 2,
+      style: TextStyle(
+        fontWeight: FontWeight.w400,
+        fontSize: 16,
+        // color: Color(0xFF5D6062),
+        color: Theme.of(context).colorScheme.primary,
+      ),
+    );
+  }
+}
+
+class LoadingProductName extends StatelessWidget {
+  const LoadingProductName({
+    super.key,
     required this.constraints,
   });
-  final FetchProductState fetchProductState;
   final BoxConstraints constraints;
   @override
   Widget build(BuildContext context) {
-    return skeletonBuilder(
-      fetchProductState: fetchProductState,
-      child: Text(
-        'Excellent T-shirt',
-        overflow: TextOverflow.ellipsis,
-        maxLines: 2,
-        style: TextStyle(
-          fontWeight: FontWeight.w400,
-          fontSize: 16,
-          // color: Color(0xFF5D6062),
-          color: Theme.of(context).colorScheme.primary,
-        ),
-      ),
+    return Skeleton(
       width: constraints.maxWidth * 0.75,
       height: 25,
       radius: 0,
@@ -184,38 +222,68 @@ class ProductName extends StatelessWidget {
 class Faviourt extends StatelessWidget {
   const Faviourt({
     super.key,
-    required this.fetchProductState,
+    required this.isFav,
   });
 
-  final FetchProductState fetchProductState;
+  final int isFav;
+
   @override
   Widget build(BuildContext context) {
-    return skeletonBuilder(
-      fetchProductState: fetchProductState,
-      child: InkWell(
-        onTap: () {},
-        borderRadius: BorderRadius.circular(20),
-        child: const Favorite(),
+    return InkWell(
+      onTap: () {},
+      borderRadius: BorderRadius.circular(20),
+      child: Icon(
+        isFav == 1 ? Icons.favorite : Icons.favorite_border,
+        size: 28,
+        color: AppColors.favouriteColor,
       ),
+    );
+  }
+}
+
+class LoadingFaviourt extends StatelessWidget {
+  const LoadingFaviourt({
+    super.key,
+    required this.constraints,
+  });
+  final BoxConstraints constraints;
+  @override
+  Widget build(BuildContext context) {
+    return const Skeleton(
       width: 42,
       height: 42,
       radius: 42,
-      margin: const EdgeInsets.only(bottom: 5),
+      margin: EdgeInsets.only(bottom: 5),
     );
   }
 }
 
 class ProductImage extends StatelessWidget {
-  const ProductImage({super.key, required this.fetchProductState});
-  final FetchProductState fetchProductState;
+  const ProductImage({
+    super.key,
+    required this.mainImageUrl,
+  });
+
+  final String mainImageUrl;
 
   @override
   Widget build(BuildContext context) {
-    return skeletonBuilder(
-      fetchProductState: fetchProductState,
-      child: Image.asset(
-        'assets/images/tshirt.png',
-      ),
+    return Image.network(
+      mainImageUrl,
+    );
+  }
+}
+
+class LoadingProductImage extends StatelessWidget {
+  const LoadingProductImage({
+    super.key,
+    required this.constraints,
+  });
+  final BoxConstraints constraints;
+  @override
+  Widget build(BuildContext context) {
+    return const Skeleton(
+      width: double.infinity,
       height: 210,
       radius: 0,
       margin: EdgeInsets.zero,
@@ -269,20 +337,20 @@ class Rate extends StatelessWidget {
   }
 }
 
-class Favorite extends StatelessWidget {
-  const Favorite({
-    super.key,
-  });
+// class Favorite extends StatelessWidget {
+//   const Favorite({
+//     super.key,
+//   });
 
-  @override
-  Widget build(BuildContext context) {
-    return const Icon(
-      Icons.favorite,
-      size: 28,
-      color: AppColors.favouriteColor,
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return const Icon(
+//       Icons.favorite,
+//       size: 28,
+//       color: AppColors.favouriteColor,
+//     );
+//   }
+// }
 
 class Skeleton extends StatelessWidget {
   const Skeleton({
@@ -310,24 +378,4 @@ class Skeleton extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget skeletonBuilder({required FetchProductState fetchProductState, required Widget child, double? width, double? height, required double radius, EdgeInsets? margin}) {
-  if (fetchProductState == FetchProductState.LOADING) {
-    return Skeleton(
-      margin: margin,
-      width: width,
-      height: height,
-      radius: radius,
-    );
-  } else {
-    return child;
-  }
-}
-
-//todo:
-enum FetchProductState {
-  LOADING,
-  SUCCESS,
-  ERROR,
 }
