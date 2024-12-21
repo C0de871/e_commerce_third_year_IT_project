@@ -1,5 +1,9 @@
 import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:dio/dio.dart';
+import 'package:e_commerce/features/products/data/dataSources/product_remote_data_source.dart';
+import 'package:e_commerce/features/products/data/repository/product_repository_impl.dart';
+import 'package:e_commerce/features/products/domain/repository/product_repository.dart';
+import 'package:e_commerce/features/products/domain/use%20cases/get_all_products.dart';
 import 'package:e_commerce/features/user/data/datasourses/user_local_data_source.dart';
 import 'package:e_commerce/features/user/data/datasourses/user_remote_data_source.dart';
 import 'package:e_commerce/features/user/data/repositiries/user_repository_impl.dart';
@@ -18,29 +22,33 @@ import '../databases/cache/cache_helper.dart';
 final getIt = GetIt.instance; // Singleton instance of GetIt
 
 void setupServicesLocator() {
-  // Core
+  //! Core
   getIt.registerLazySingleton<Dio>(() => Dio());
   getIt.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: getIt()));
   getIt.registerLazySingleton<DataConnectionChecker>(() => DataConnectionChecker());
   getIt.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(getIt()));
   getIt.registerLazySingleton<CacheHelper>(() => CacheHelper());
 
-  // Data Sources
-  getIt.registerLazySingleton<UserRemoteDataSource>(() => UserRemoteDataSource(api: getIt(),cacheHelper: getIt()));
+  //! Data Sources
+  getIt.registerLazySingleton<UserRemoteDataSource>(() => UserRemoteDataSource(api: getIt(), cacheHelper: getIt()));
   getIt.registerLazySingleton<UserLocalDataSource>(() => UserLocalDataSource(cache: getIt()));
+  getIt.registerLazySingleton<ProductRemoteDataSource>(() => ProductRemoteDataSource(apiConsumer: getIt(), cacheHelper: getIt()));
 
-  // Repository
+  //! Repository
   getIt.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(
         networkInfo: getIt(),
         remoteDataSource: getIt(),
         localDataSource: getIt(),
       ));
+  getIt.registerLazySingleton<ProductRepository>(() => ProductRepositoryImpl(
+        productRemoteDataSource: getIt(),
+        networkInfo: getIt(),
+      ));
 
-  // Use Cases
+  //! Use Cases
   getIt.registerLazySingleton<LoginUser>(() => LoginUser(userRepository: getIt()));
   getIt.registerLazySingleton<SignUpUser>(() => SignUpUser(userRepository: getIt()));
   getIt.registerLazySingleton<ResendOtp>(() => ResendOtp(userRepository: getIt()));
-  getIt.registerLazySingleton<PostOtp>(
-    () => PostOtp(userRepository: getIt()),
-  );
+  getIt.registerLazySingleton<PostOtp>(() => PostOtp(userRepository: getIt()));
+  getIt.registerLazySingleton<GetAllProducts>(() => GetAllProducts(productRepository: getIt()));
 }
