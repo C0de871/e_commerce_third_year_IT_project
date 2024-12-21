@@ -1,5 +1,7 @@
 import 'package:e_commerce/core/constants/app_routes.dart';
 import 'package:e_commerce/features/home/presentation/Home%20Screen/home_screen.dart';
+import 'package:e_commerce/features/home/presentation/cubit/home_cubit.dart';
+import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
 import 'package:e_commerce/features/user/presentation/OTP/otp_screen.dart';
 import 'package:e_commerce/features/user/presentation/cart_screen/cart_screen.dart';
 import 'package:e_commerce/features/user/presentation/cubit/user_cubit.dart';
@@ -13,15 +15,37 @@ import '../../features/user/presentation/sign up auth screen/sign_up_auth_screen
 
 class AppRouter {
   UserCubit? _userCubit;
+  HomeCubit? _homeCubit;
+  ProductCubit? _productCubit;
 
   UserCubit get userCubit {
     if (_userCubit == null || _userCubit!.isClosed) {
       _userCubit = UserCubit();
     }
-    _userCubit?.stream.listen((_) {}, onDone: () {
+    _userCubit!.stream.listen((_) {}, onDone: () {
       _userCubit = null; // Nullify the reference when closed
     });
     return _userCubit!;
+  }
+
+  ProductCubit get productCubit {
+    if (_productCubit == null || _productCubit!.isClosed) {
+      _productCubit = ProductCubit();
+    }
+    _productCubit!.stream.listen((_) {}, onDone: () {
+      _productCubit = null;
+    });
+    return _productCubit!;
+  }
+
+  HomeCubit get homeCubit {
+    if (_homeCubit == null || _homeCubit!.isClosed) {
+      _homeCubit = HomeCubit(productCubit: productCubit);
+    }
+    _homeCubit!.stream.listen((_) {}, onDone: () {
+      _homeCubit = null;
+    });
+    return _homeCubit!;
   }
 
   Route<dynamic> generateRoute(RouteSettings settings) {
@@ -77,9 +101,21 @@ class AppRouter {
             child: const LoginScreen(),
           ),
         );
+
+      //! home route:
       case AppRoutes.homeRoute:
         return MaterialPageRoute(
-          builder: (_) => const HomeScreen(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => homeCubit,
+              ),
+              BlocProvider(
+                create: (context) => productCubit,
+              ),
+            ],
+            child: const HomeScreen(),
+          ),
         );
 
       //!default route:
@@ -88,7 +124,6 @@ class AppRouter {
           builder: (_) => Scaffold(
             body: Center(
               child: Text("No route defined for ${settings.name}"),
-              
             ),
           ),
         );
