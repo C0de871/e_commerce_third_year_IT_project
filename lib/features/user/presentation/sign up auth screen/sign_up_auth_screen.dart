@@ -2,7 +2,7 @@ import 'package:e_commerce/features/user/presentation/sign%20up%20auth%20screen/
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../core/constants/app_numbers.dart';
+import '../../../../core/utils/constants/app_numbers.dart';
 
 class SignUpAuthScreen extends StatelessWidget {
   const SignUpAuthScreen({super.key});

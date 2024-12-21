@@ -1,6 +1,6 @@
 import 'package:e_commerce/core/databases/cache/cache_helper.dart';
-import 'package:e_commerce/core/services/fire_base_service.dart';
-import 'package:e_commerce/core/services/service_locator.dart';
+import 'package:e_commerce/core/utils/services/fire_base_service.dart';
+import 'package:e_commerce/core/utils/services/service_locator.dart';
 import 'package:flutter/material.dart';
 
 import 'core/app/app.dart';

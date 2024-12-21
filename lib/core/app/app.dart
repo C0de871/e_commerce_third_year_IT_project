@@ -5,8 +5,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:e_commerce/core/theme/app_theme.dart';
 
 import '../Routes/app_router.dart';
-import '../constants/app_routes.dart';
-import '../l10n/l10n.dart';
+import '../Routes/app_routes.dart';
+import '../translations/l10n.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

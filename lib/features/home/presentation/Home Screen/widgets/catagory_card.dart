@@ -1,8 +1,8 @@
-import 'package:e_commerce/core/constants/app_numbers.dart';
+import 'package:e_commerce/core/utils/constants/app_numbers.dart';
 import 'package:flutter/material.dart';
 import 'package:svg_flutter/svg.dart';
 
-import '../../../../../core/widgets/tool_tip.dart';
+import '../../../../../core/shared/widgets/tool_tip.dart';
 
 class CatagoryCard extends StatelessWidget {
   const CatagoryCard({

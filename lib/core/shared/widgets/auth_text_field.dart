@@ -1,4 +1,4 @@
-import 'package:e_commerce/core/widgets/custom_surfix_icon.dart';
+import 'package:e_commerce/core/shared/widgets/custom_surfix_icon.dart';
 import 'package:flutter/material.dart';
 
 class AuthTextField extends StatefulWidget {

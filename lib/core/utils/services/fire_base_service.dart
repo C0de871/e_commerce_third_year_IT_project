@@ -7,7 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:e_commerce/firebase_options.dart';
 
-import '../databases/cache/cache_helper.dart';
+import '../../databases/cache/cache_helper.dart';
 import 'service_locator.dart';
 
 class FireBaseService {

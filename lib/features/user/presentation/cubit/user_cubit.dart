@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:e_commerce/core/databases/api/end_points.dart';
-import 'package:e_commerce/core/functions/app_functions.dart';
-import 'package:e_commerce/core/services/service_locator.dart';
+import 'package:e_commerce/core/helper/app_functions.dart';
+import 'package:e_commerce/core/utils/services/service_locator.dart';
 import 'package:e_commerce/features/user/domain/entites/Sign%20up%20entities/sign_up_entity.dart';
 import 'package:e_commerce/features/user/domain/entites/otp_entities/otp_entity.dart';
 import 'package:e_commerce/features/user/domain/entites/user_entities/user_entities.dart';

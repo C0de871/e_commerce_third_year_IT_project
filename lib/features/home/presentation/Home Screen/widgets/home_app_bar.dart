@@ -1,6 +1,6 @@
-import 'package:e_commerce/core/constants/app_numbers.dart';
+import 'package:e_commerce/core/utils/constants/app_numbers.dart';
 import 'package:flutter/material.dart';
-import '../../../../../core/widgets/icon_btn_with_counter.dart';
+import '../../../../../core/shared/widgets/icon_btn_with_counter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeAppBar extends StatelessWidget {

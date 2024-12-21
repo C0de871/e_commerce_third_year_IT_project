@@ -1,7 +1,7 @@
-import 'package:e_commerce/core/constants/app_colors.dart';
+import 'package:e_commerce/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/constants/app_numbers.dart';
+import '../../../../../core/utils/constants/app_numbers.dart';
 
 class StoreCard extends StatelessWidget {
   const StoreCard({

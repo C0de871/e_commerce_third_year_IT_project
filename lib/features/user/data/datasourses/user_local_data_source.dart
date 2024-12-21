@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:e_commerce/core/databases/api/end_points.dart';
 import 'package:e_commerce/core/databases/cache/cache_helper.dart';
-import 'package:e_commerce/core/errors/expentions.dart';
+import 'package:e_commerce/core/databases/errors/expentions.dart';
 import 'package:e_commerce/features/user/data/models/user_model.dart';
 
 class UserLocalDataSource {

@@ -1,8 +1,8 @@
-import 'package:e_commerce/core/constants/app_numbers.dart';
-import 'package:e_commerce/core/constants/app_routes.dart';
-import 'package:e_commerce/core/constants/app_strings.dart';
-import 'package:e_commerce/core/widgets/auth_text_field.dart';
-import 'package:e_commerce/core/widgets/defualt_button.dart';
+import 'package:e_commerce/core/utils/constants/app_numbers.dart';
+import 'package:e_commerce/core/Routes/app_routes.dart';
+import 'package:e_commerce/core/utils/constants/app_strings.dart';
+import 'package:e_commerce/core/shared/widgets/auth_text_field.dart';
+import 'package:e_commerce/core/shared/widgets/defualt_button.dart';
 import 'package:e_commerce/features/user/presentation/cubit/user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

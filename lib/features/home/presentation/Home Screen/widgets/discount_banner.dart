@@ -1,4 +1,4 @@
-import 'package:e_commerce/core/constants/app_strings.dart';
+import 'package:e_commerce/core/utils/constants/app_strings.dart';
 import 'package:flutter/material.dart';
 
 class DiscountBanner extends StatelessWidget {

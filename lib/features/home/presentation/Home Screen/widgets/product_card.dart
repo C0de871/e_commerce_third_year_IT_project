@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../../core/constants/app_colors.dart';
-import '../../../../../core/constants/app_numbers.dart';
+import '../../../../../core/theme/app_colors.dart';
+import '../../../../../core/utils/constants/app_numbers.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({

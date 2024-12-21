@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dartz/dartz.dart';
 
-import 'package:e_commerce/core/connection/network_info.dart';
-import 'package:e_commerce/core/errors/expentions.dart';
-import 'package:e_commerce/core/errors/failure.dart';
-import 'package:e_commerce/core/params/params.dart';
+import 'package:e_commerce/core/databases/connection/network_info.dart';
+import 'package:e_commerce/core/databases/errors/expentions.dart';
+import 'package:e_commerce/core/databases/errors/failure.dart';
+import 'package:e_commerce/core/databases/params/params.dart';
 import 'package:e_commerce/features/products/data/dataSources/product_remote_data_source.dart';
 import 'package:e_commerce/features/products/data/model/product_model.dart';
 import 'package:e_commerce/features/products/domain/entities/product_enitty.dart';

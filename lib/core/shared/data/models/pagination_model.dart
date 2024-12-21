@@ -1,5 +1,5 @@
 import 'package:e_commerce/core/databases/api/end_points.dart';
-import 'package:e_commerce/features/stores/domain/entities/pagination_entity.dart';
+import 'package:e_commerce/core/shared/domain/entities/pagination_entity.dart';
 
 class PaginationModel extends PaginationEntity {
   PaginationModel({

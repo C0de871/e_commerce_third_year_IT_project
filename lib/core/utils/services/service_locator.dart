@@ -14,10 +14,10 @@ import 'package:e_commerce/features/user/domain/usecases/resend_otp.dart';
 import 'package:e_commerce/features/user/domain/usecases/sign_up_user.dart';
 import 'package:get_it/get_it.dart';
 
-import '../connection/network_info.dart';
-import '../databases/api/api_consumer.dart';
-import '../databases/api/dio_consumer.dart';
-import '../databases/cache/cache_helper.dart';
+import '../../databases/connection/network_info.dart';
+import '../../databases/api/api_consumer.dart';
+import '../../databases/api/dio_consumer.dart';
+import '../../databases/cache/cache_helper.dart';
 
 final getIt = GetIt.instance; // Singleton instance of GetIt
 

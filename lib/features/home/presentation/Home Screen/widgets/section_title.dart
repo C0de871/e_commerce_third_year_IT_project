@@ -1,4 +1,4 @@
-import 'package:e_commerce/core/constants/app_numbers.dart';
+import 'package:e_commerce/core/utils/constants/app_numbers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import the generated localization class
 

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:e_commerce/core/params/params.dart';
-import 'package:e_commerce/core/services/service_locator.dart';
+import 'package:e_commerce/core/databases/params/params.dart';
+import 'package:e_commerce/core/utils/services/service_locator.dart';
 import 'package:e_commerce/features/products/domain/use%20cases/get_all_products.dart';
 import 'package:meta/meta.dart';
 

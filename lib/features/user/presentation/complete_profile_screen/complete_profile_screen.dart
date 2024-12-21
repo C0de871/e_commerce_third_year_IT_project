@@ -1,13 +1,13 @@
 import 'dart:io';
 
-import 'package:e_commerce/core/constants/app_numbers.dart';
+import 'package:e_commerce/core/utils/constants/app_numbers.dart';
 import 'package:e_commerce/features/user/presentation/complete_profile_screen/widgets/complete_your_profile_form.dart';
 import 'package:e_commerce/features/user/presentation/cubit/user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../core/functions/app_functions.dart';
+import '../../../../core/helper/app_functions.dart';
 
 class CompleteProfileScreen extends StatelessWidget {
   const CompleteProfileScreen({
