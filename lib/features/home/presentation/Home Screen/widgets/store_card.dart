@@ -1,10 +1,11 @@
+import 'package:e_commerce/core/shared/widgets/skeleton.dart';
 import 'package:e_commerce/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/constants/app_numbers.dart';
 
-class StoreCard extends StatelessWidget {
-  const StoreCard({
+class StoreCardLoaded extends StatelessWidget {
+  const StoreCardLoaded({
     super.key,
     required this.storeName,
     required this.image,
@@ -34,6 +35,38 @@ class StoreCard extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class StoreCardLoading extends StatelessWidget {
+  const StoreCardLoading({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Skeleton(
+      width: 242,
+      height: 100,
+      radius: 20,
+      margin: null,
+    );
+    // return SizedBox(
+    //   width: 242,
+    //   height: 100,
+    //   child: ClipRRect(
+    //     borderRadius: BorderRadius.circular(20),
+    //     child: Stack(
+    //       children: [
+    //         Image.asset(image, fit: BoxFit.cover),
+    //         StorePreview(
+    //           storeName: storeName,
+    //           discreption: discreption,
+    //         ),
+    //       ],
+    //     ),
+    //   ),
+    // );
   }
 }
 

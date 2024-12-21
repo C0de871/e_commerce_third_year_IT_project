@@ -1,3 +1,4 @@
+import 'package:e_commerce/core/shared/widgets/skeleton.dart';
 import 'package:e_commerce/features/products/domain/entities/product_enitty.dart';
 import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
 import 'package:flutter/material.dart';
@@ -332,49 +333,6 @@ class Rate extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-// class Favorite extends StatelessWidget {
-//   const Favorite({
-//     super.key,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Icon(
-//       Icons.favorite,
-//       size: 28,
-//       color: AppColors.favouriteColor,
-//     );
-//   }
-// }
-
-class Skeleton extends StatelessWidget {
-  const Skeleton({
-    super.key,
-    required this.width,
-    required this.height,
-    required this.radius,
-    required this.margin,
-  });
-  final EdgeInsets? margin;
-  final double? width, height, radius;
-  @override
-  Widget build(BuildContext context) {
-    return Shimmer.fromColors(
-      baseColor: Colors.grey[200]!,
-      highlightColor: Colors.grey[400]!,
-      child: Container(
-        margin: margin,
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(radius!),
-          color: Colors.white,
-        ),
       ),
     );
   }

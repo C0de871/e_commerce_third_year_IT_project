@@ -21,7 +21,7 @@ class PopularStores extends StatelessWidget {
             //todo: this will be fetch from the api
             child: Row(
               children: [
-                StoreCard(
+                StoreCardLoaded(
                   press: () {},
                   image: 'assets/images/Image Banner 2.png',
                   storeName: 'SmartPhone',
@@ -30,7 +30,7 @@ class PopularStores extends StatelessWidget {
                 const SizedBox(
                   width: 20,
                 ),
-                StoreCard(
+                StoreCardLoaded(
                   press: () {},
                   image: 'assets/images/Image Banner 3.png',
                   storeName: 'Fashion',
