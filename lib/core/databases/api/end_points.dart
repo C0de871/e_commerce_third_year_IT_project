@@ -1,11 +1,12 @@
 class EndPoints {
-  static const String baserUrl = "http://192.168.1.7:8000/api/";
+  static const String baserUrl = "http://192.168.1.8:8000/api/";
   static const String login = "login";
   static const String signUp = "register";
   static const String template = "template";
   static const String otpResend = "resend-otp";
   static const String otpValidate = "validate-otp";
   static const String getAllProducts = "products";
+  static const String getAllStores = "stores";
 }
 
 class ApiKey {
@@ -23,7 +24,7 @@ class ApiKey {
   static String lastName = "last_name";
   static String phoneNumber = "phone_number";
   static String address = "location";
-  static String imageUrl = "image";
+  static String image = "image";
   static String emailVerfiedAt = "email_verified_at";
   static String location = "location";
   static String fcmToken = "fcm_token";
@@ -42,9 +43,17 @@ class ApiKey {
   static String mainImageUrl = "main_image";
   static String isFavorite = "is_favorite";
   static String page = "page";
+  static String manager = "manager";
+  static String name = "name";
+  static String imageUrl = "image_url";
 
   static String authorization = "Authorization";
   static String products = "products";
+
+  static String pagination = "pagination";
+  static String currentPage = "currentPage";
+  static String totalPages = "totalPages";
+  static String hasMorePage = "hasMorePage";
 }
 
 class CacheKey {
