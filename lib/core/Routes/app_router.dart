@@ -2,6 +2,7 @@ import 'package:e_commerce/core/Routes/app_routes.dart';
 import 'package:e_commerce/features/home/presentation/Home%20Screen/home_screen.dart';
 import 'package:e_commerce/features/home/presentation/cubit/home_cubit.dart';
 import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
+import 'package:e_commerce/features/stores/presentation/cubit/store_cubit.dart';
 import 'package:e_commerce/features/user/presentation/OTP/otp_screen.dart';
 import 'package:e_commerce/features/user/presentation/cart_screen/cart_screen.dart';
 import 'package:e_commerce/features/user/presentation/cubit/user_cubit.dart';
@@ -16,6 +17,7 @@ import '../../features/user/presentation/sign up auth screen/sign_up_auth_screen
 class AppRouter {
   UserCubit? _userCubit;
   HomeCubit? _homeCubit;
+  StoreCubit? _storeCubit;
   ProductCubit? _productCubit;
 
   UserCubit get userCubit {
@@ -38,9 +40,22 @@ class AppRouter {
     return _productCubit!;
   }
 
+  StoreCubit get storeCubit {
+    if (_storeCubit == null || _storeCubit!.isClosed) {
+      _storeCubit = StoreCubit();
+    }
+    _storeCubit!.stream.listen((_) {}, onDone: () {
+      _storeCubit = StoreCubit();
+    });
+    return _storeCubit!;
+  }
+
   HomeCubit get homeCubit {
     if (_homeCubit == null || _homeCubit!.isClosed) {
-      _homeCubit = HomeCubit(productCubit: productCubit);
+      _homeCubit = HomeCubit(
+        productCubit: productCubit,
+        storeCubit: storeCubit,
+      );
     }
     _homeCubit!.stream.listen((_) {}, onDone: () {
       _homeCubit = null;
