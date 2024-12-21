@@ -15,3 +15,14 @@ class ProductParams {
     };
   }
 }
+
+class StoreParams {
+  int page = 1;
+  StoreParams({required this.page});
+
+  Map<String, dynamic> toJson() {
+    return {
+      ApiKey.page: page,
+    };
+  }
+}
