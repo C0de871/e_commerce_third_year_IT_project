@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme().theme(
         defaultLightScheme(),
       ),
-      initialRoute: AppRoutes.loginSuccessRoute,
+      initialRoute: AppRoutes.homeRoute,
       onGenerateRoute: AppRouter().generateRoute,
     );
   }
