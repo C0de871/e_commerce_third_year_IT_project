@@ -57,8 +57,7 @@ class UserCubit extends Cubit<UserState> {
   TextEditingController signUpLastNameController = TextEditingController();
   TextEditingController signUpPhoneNumberController = TextEditingController();
   TextEditingController signUpAddressController = TextEditingController();
-  TextEditingController signUpConfirmPasswordController =
-      TextEditingController();
+  TextEditingController signUpConfirmPasswordController = TextEditingController();
 
   //!Sign up trigger:
   dynamic signUpUserTrigger() async {
@@ -69,7 +68,7 @@ class UserCubit extends Cubit<UserState> {
       ApiKey.phoneNumber: signUpPhoneNumberController.text,
       ApiKey.firstName: signUpFirstNameController.text,
       ApiKey.lastName: signUpLastNameController.text,
-      ApiKey.imageUrl: await uploadImageToApi(profilePic),
+      ApiKey.image: await uploadImageToApi(profilePic),
     };
     emit(SignUpUserLoading());
     final failureOrSignUpEntity = await signUpUser.call(jsonBody: bodyjson);

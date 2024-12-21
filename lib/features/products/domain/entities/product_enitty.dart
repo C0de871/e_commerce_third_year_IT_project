@@ -7,7 +7,7 @@ class ProductEntity {
   int quantity;
   String? description;
   String mainImageUrl;
-  bool isFavorite;
+  int isFavorite;
 
   ProductEntity({
     required this.storeId,

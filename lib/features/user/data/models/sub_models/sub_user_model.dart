@@ -20,7 +20,7 @@ class SubUserModel extends SubUserEntity {
         email: json[ApiKey.email],
         location: json[ApiKey.location],
         phoneNumber: json[ApiKey.phoneNumber],
-        imageUrl: json[ApiKey.imageUrl],
+        imageUrl: json[ApiKey.image],
         fcmToken: json[ApiKey.fcmToken],
       );
 
@@ -31,7 +31,7 @@ class SubUserModel extends SubUserEntity {
         ApiKey.email: email,
         ApiKey.location: location,
         ApiKey.phoneNumber: phoneNumber,
-        ApiKey.imageUrl: imageUrl,
+        ApiKey.image: imageUrl,
         ApiKey.fcmToken: fcmToken,
       };
 }
