@@ -5,5 +5,5 @@ import 'package:e_commerce/features/stores/domain/entities/store_entity.dart';
 import '../../../../core/databases/errors/failure.dart';
 
 abstract class StoreRepository {
-  Future<Either<Failure, StoreEntity>> getAllStores({required StoreParams params});
+  Future<Either<Failure, List<StoreEntity>>> getAllStores({required StoreParams params});
 }

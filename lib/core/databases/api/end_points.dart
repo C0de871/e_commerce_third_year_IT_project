@@ -34,6 +34,7 @@ class ApiKey {
   static String data = "data";
 
   static String storeId = "store_id";
+  static String stores = "stores";
   static String storeName = "store_name";
   static String productId = "product_id";
   static String productName = "product_name";

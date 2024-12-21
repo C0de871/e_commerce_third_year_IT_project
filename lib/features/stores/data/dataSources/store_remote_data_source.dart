@@ -7,8 +7,10 @@ class StoreRemoteDataSource {
   final ApiConsumer api;
 
   StoreRemoteDataSource({required this.api});
-  Future<StoreModel> getAllStores({required StoreParams params}) async {
+  Future<List<StoreModel>> getAllStores({required StoreParams params}) async {
     final response = await api.get(EndPoints.getAllStores, queryParameters: params.toJson());
-    return StoreModel.fromJson(response[ApiKey.data]);
+    final List storesListJson = response[ApiKey.data][ApiKey.stores];
+    final List<StoreModel> storesModelList = storesListJson.map((storeJson) => StoreModel.fromJson(storeJson)).toList();
+    return storesModelList;
   }
 }

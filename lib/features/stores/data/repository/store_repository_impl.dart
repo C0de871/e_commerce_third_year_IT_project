@@ -13,7 +13,7 @@ class StoreRepositoryImpl extends StoreRepository {
 
   StoreRepositoryImpl({required this.network, required this.remoteDataSource});
   @override
-  Future<Either<Failure, StoreEntity>> getAllStores({required StoreParams params}) async {
+  Future<Either<Failure, List<StoreEntity>>> getAllStores({required StoreParams params}) async {
     if (await network.isConnected!) {
       try {
         final remoteStores = await remoteDataSource.getAllStores(params: params);
