@@ -1,21 +1,17 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:e_commerce/core/shared/domain/entities/pagination_entity.dart';
-
 class StoreEntity {
-  int id;
-  String managerName;
-  String storeName;
-  String imageUrl;
-  String location;
-  String description;
-  PaginationEntity pagination;
+  final int id;
+  final String manager;
+  final String name;
+  final String imageUrl;
+  final String location;
+  final String description;
+
   StoreEntity({
     required this.id,
-    required this.managerName,
-    required this.storeName,
+    required this.manager,
+    required this.name,
     required this.imageUrl,
     required this.location,
     required this.description,
-    required this.pagination,
   });
 }

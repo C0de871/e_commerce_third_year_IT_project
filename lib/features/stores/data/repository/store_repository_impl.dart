@@ -4,7 +4,7 @@ import 'package:e_commerce/core/databases/errors/expentions.dart';
 import 'package:e_commerce/core/databases/errors/failure.dart';
 import 'package:e_commerce/core/databases/params/params.dart';
 import 'package:e_commerce/features/stores/data/dataSources/store_remote_data_source.dart';
-import 'package:e_commerce/features/stores/domain/entities/store_entity.dart';
+import 'package:e_commerce/features/stores/domain/entities/git_stores_entity.dart';
 import 'package:e_commerce/features/stores/domain/repository/store_repository.dart';
 
 class StoreRepositoryImpl extends StoreRepository {
@@ -13,7 +13,7 @@ class StoreRepositoryImpl extends StoreRepository {
 
   StoreRepositoryImpl({required this.network, required this.remoteDataSource});
   @override
-  Future<Either<Failure, List<StoreEntity>>> getAllStores({required StoreParams params}) async {
+  Future<Either<Failure, GetStoresEntity>> getAllStores({required StoreParams params}) async {
     if (await network.isConnected!) {
       try {
         final remoteStores = await remoteDataSource.getAllStores(params: params);

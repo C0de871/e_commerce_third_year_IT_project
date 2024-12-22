@@ -6,7 +6,7 @@ sealed class StoreState {}
 final class StoreInitial extends StoreState {}
 
 final class GetAllStoresSuccess extends StoreState {
-  final List<StoreEntity> storesList;
+  final GetStoresEntity storesList;
   GetAllStoresSuccess({required this.storesList});
 }
 

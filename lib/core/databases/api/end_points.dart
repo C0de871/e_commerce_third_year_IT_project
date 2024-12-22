@@ -10,6 +10,7 @@ class EndPoints {
 }
 
 class ApiKey {
+  static String successful = "successful";
   static String otp = "otp";
   static String id = "id";
   static String message = "message";

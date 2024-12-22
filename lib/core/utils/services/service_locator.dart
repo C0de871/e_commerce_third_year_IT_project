@@ -4,6 +4,9 @@ import 'package:e_commerce/features/products/data/dataSources/product_remote_dat
 import 'package:e_commerce/features/products/data/repository/product_repository_impl.dart';
 import 'package:e_commerce/features/products/domain/repository/product_repository.dart';
 import 'package:e_commerce/features/products/domain/use%20cases/get_all_products.dart';
+import 'package:e_commerce/features/stores/data/dataSources/store_remote_data_source.dart';
+import 'package:e_commerce/features/stores/domain/repository/store_repository.dart';
+import 'package:e_commerce/features/stores/domain/use%20cases/get_all_stores.dart';
 import 'package:e_commerce/features/user/data/datasourses/user_local_data_source.dart';
 import 'package:e_commerce/features/user/data/datasourses/user_remote_data_source.dart';
 import 'package:e_commerce/features/user/data/repositiries/user_repository_impl.dart';
@@ -14,6 +17,7 @@ import 'package:e_commerce/features/user/domain/usecases/resend_otp.dart';
 import 'package:e_commerce/features/user/domain/usecases/sign_up_user.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../features/stores/data/repository/store_repository_impl.dart';
 import '../../databases/connection/network_info.dart';
 import '../../databases/api/api_consumer.dart';
 import '../../databases/api/dio_consumer.dart';
@@ -33,6 +37,7 @@ void setupServicesLocator() {
   getIt.registerLazySingleton<UserRemoteDataSource>(() => UserRemoteDataSource(api: getIt(), cacheHelper: getIt()));
   getIt.registerLazySingleton<UserLocalDataSource>(() => UserLocalDataSource(cache: getIt()));
   getIt.registerLazySingleton<ProductRemoteDataSource>(() => ProductRemoteDataSource(apiConsumer: getIt(), cacheHelper: getIt()));
+  getIt.registerLazySingleton<StoreRemoteDataSource>(() => StoreRemoteDataSource(api: getIt()));
 
   //! Repository
   getIt.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(
@@ -45,10 +50,16 @@ void setupServicesLocator() {
         networkInfo: getIt(),
       ));
 
+  getIt.registerLazySingleton<StoreRepository>(() => StoreRepositoryImpl(
+        network: getIt(),
+        remoteDataSource: getIt(),
+      ));
+
   //! Use Cases
   getIt.registerLazySingleton<LoginUser>(() => LoginUser(userRepository: getIt()));
   getIt.registerLazySingleton<SignUpUser>(() => SignUpUser(userRepository: getIt()));
   getIt.registerLazySingleton<ResendOtp>(() => ResendOtp(userRepository: getIt()));
   getIt.registerLazySingleton<PostOtp>(() => PostOtp(userRepository: getIt()));
   getIt.registerLazySingleton<GetAllProducts>(() => GetAllProducts(productRepository: getIt()));
+  getIt.registerLazySingleton<GetAllStores>(() => GetAllStores(storeRepository: getIt()));
 }
