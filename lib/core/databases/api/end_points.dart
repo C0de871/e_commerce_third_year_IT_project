@@ -7,9 +7,11 @@ class EndPoints {
   static const String otpValidate = "validate-otp";
   static const String getAllProducts = "products";
   static const String getAllStores = "stores";
+  static const String refreshToken = "refresh";
 }
 
 class ApiKey {
+  static String refreshTokenHeader = "Refresh-Token";
   static String requiredAuth = "requiresAuth";
   static String successful = "successful";
   static String otp = "otp";
