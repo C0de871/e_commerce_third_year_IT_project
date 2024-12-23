@@ -18,12 +18,12 @@ class StoreCubit extends Cubit<StoreState> {
 
   dynamic getAllStores({int page = 1}) async {
     emit(GetAllStoresLoading());
-    final response = await getAllStoresUseCase.call(params: StoreParams(page: 1));
+    final response =
+        await getAllStoresUseCase.call(params: StoreParams(page: 1));
     response.fold(
-      (failure) => emit(
-        GetAllStoresFailed(errMes: failure.errMessage),
-      ),
-      (storesList)=>emit(GetAllStoresSuccess(storesList: storesList))
-    );
+        (failure) => emit(
+              GetAllStoresFailed(errMes: failure.errMessage),
+            ),
+        (storesList) => emit(GetAllStoresSuccess(storesList: storesList)));
   }
 }

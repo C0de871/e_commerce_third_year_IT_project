@@ -29,7 +29,10 @@ class CatagoryCard extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   // color: const Color(0xffffecdf),
-                  color: Theme.of(context).colorScheme.inversePrimary.withOpacity(0.2),
+                  color: Theme.of(context)
+                      .colorScheme
+                      .inversePrimary
+                      .withOpacity(0.2),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(

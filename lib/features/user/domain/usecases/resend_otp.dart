@@ -9,7 +9,7 @@ class ResendOtp {
   ResendOtp({required this.userRepository});
 
   Future<Either<Failure, OtpEntity>> call({
-  required Map<String, dynamic> bodyjson,
+    required Map<String, dynamic> bodyjson,
   }) {
     return userRepository.resendOtp(bodyjson: bodyjson);
   }

@@ -57,7 +57,8 @@ class UserCubit extends Cubit<UserState> {
   TextEditingController signUpLastNameController = TextEditingController();
   TextEditingController signUpPhoneNumberController = TextEditingController();
   TextEditingController signUpAddressController = TextEditingController();
-  TextEditingController signUpConfirmPasswordController = TextEditingController();
+  TextEditingController signUpConfirmPasswordController =
+      TextEditingController();
 
   //!Sign up trigger:
   dynamic signUpUserTrigger() async {

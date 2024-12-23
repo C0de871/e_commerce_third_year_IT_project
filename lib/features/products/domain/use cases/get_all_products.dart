@@ -9,7 +9,8 @@ class GetAllProducts {
   final ProductRepository productRepository;
   GetAllProducts({required this.productRepository});
 
-  Future<Either<Failure, List<ProductEntity>>> call({required ProductParams params}) {
+  Future<Either<Failure, List<ProductEntity>>> call(
+      {required ProductParams params}) {
     return productRepository.getAllProducts(params: params);
   }
 }

@@ -39,7 +39,7 @@ class _SplashContentState extends State<SplashContent> {
         ),
         // if (widget.image.contains('.png'))
         Expanded(
-          flex:7 ,
+          flex: 7,
           child: Image.asset(
             widget.image,
             // fit: BoxFit.,

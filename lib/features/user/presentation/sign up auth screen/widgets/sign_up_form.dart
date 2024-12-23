@@ -52,7 +52,8 @@ class _SignUpFormState extends State<SignUpForm> {
             label: AppLocalizations.of(context)!.confirmPassword,
             hint: AppLocalizations.of(context)!.reEnterYourPassword,
             svgIconPath: AppImages.passwordIconPath,
-            controller: context.read<UserCubit>().signUpConfirmPasswordController,
+            controller:
+                context.read<UserCubit>().signUpConfirmPasswordController,
             validator: (value) => _validateConfirmPassword(
               context,
               context.read<UserCubit>().signUpPasswordController.text,
@@ -83,7 +84,8 @@ class _SignUpFormState extends State<SignUpForm> {
   }
 }
 
-String? _validateConfirmPassword(BuildContext context, String? password, String? confirmPassword) {
+String? _validateConfirmPassword(
+    BuildContext context, String? password, String? confirmPassword) {
   if (confirmPassword == null || confirmPassword.trim().isEmpty) {
     return AppLocalizations.of(context)!.thisFieldCannotBeEmpty;
   }
@@ -112,7 +114,8 @@ String? _validatePassword(BuildContext context, String? value) {
   if (value.length < 8) {
     return AppLocalizations.of(context)!.passwordMustBeAtLeast8Characters;
   }
-  if (!RegExp(r'(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)|(?=.*[@$!%*?&])').hasMatch(value)) {
+  if (!RegExp(r'(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)|(?=.*[@$!%*?&])')
+      .hasMatch(value)) {
     return AppLocalizations.of(context)!.passwordComplexityRequirement;
   }
   return null;

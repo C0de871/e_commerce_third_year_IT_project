@@ -12,7 +12,7 @@ class StoreModel extends StoreEntity {
   });
 
   factory StoreModel.fromMap(Map<String, dynamic> data) => StoreModel(
-        id: data[ApiKey.id] ,
+        id: data[ApiKey.id],
         manager: data[ApiKey.manager],
         name: data[ApiKey.name],
         imageUrl: data[ApiKey.imageUrl],

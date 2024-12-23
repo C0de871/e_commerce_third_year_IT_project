@@ -13,7 +13,8 @@ class CompleteYourProfileForm extends StatefulWidget {
     super.key,
   });
   @override
-  State<CompleteYourProfileForm> createState() => _CompleteYourProfileFormState();
+  State<CompleteYourProfileForm> createState() =>
+      _CompleteYourProfileFormState();
 }
 
 class _CompleteYourProfileFormState extends State<CompleteYourProfileForm> {

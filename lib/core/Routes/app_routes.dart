@@ -7,5 +7,4 @@ class AppRoutes {
   static const String homeRoute = "/home screen";
   static const String loginSuccessRoute = "/success screen";
   static const String cartScreen = "/cart screen";
-  
 }

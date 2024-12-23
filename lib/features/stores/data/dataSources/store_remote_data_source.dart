@@ -8,7 +8,8 @@ class StoreRemoteDataSource {
 
   StoreRemoteDataSource({required this.api});
   Future<GetStoresModel> getAllStores({required StoreParams params}) async {
-    final response = await api.get(EndPoints.getAllStores, queryParameters: params.toJson());
+    final response =
+        await api.get(EndPoints.getAllStores, queryParameters: params.toJson());
     return GetStoresModel.fromMap(response);
   }
 }

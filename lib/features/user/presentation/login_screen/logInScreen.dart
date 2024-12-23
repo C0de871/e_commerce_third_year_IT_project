@@ -50,7 +50,8 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     Text(
                       AppLocalizations.of(context)!.dontHaveAccount,
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).colorScheme.outline),
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.outline),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -58,10 +59,15 @@ class LoginScreen extends StatelessWidget {
                       },
                       child: Text(
                         AppLocalizations.of(context)!.signUp,
-                        style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(
                               decoration: TextDecoration.underline,
-                              decorationColor: Theme.of(context).colorScheme.inversePrimary,
-                              color: Theme.of(context).colorScheme.inversePrimary,
+                              decorationColor:
+                                  Theme.of(context).colorScheme.inversePrimary,
+                              color:
+                                  Theme.of(context).colorScheme.inversePrimary,
                             ),
                       ),
                     )

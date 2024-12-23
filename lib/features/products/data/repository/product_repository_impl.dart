@@ -19,10 +19,12 @@ class ProductRepositoryImpl extends ProductRepository {
   });
 
   @override
-  Future<Either<Failure, List<ProductEntity>>> getAllProducts({required ProductParams params}) async {
+  Future<Either<Failure, List<ProductEntity>>> getAllProducts(
+      {required ProductParams params}) async {
     if (await networkInfo.isConnected!) {
       try {
-        final List<ProductModel> productsList = await productRemoteDataSource.getAllProducts(params: params);
+        final List<ProductModel> productsList =
+            await productRemoteDataSource.getAllProducts(params: params);
         return Right(productsList);
       } on ServerException catch (e) {
         return Left(Failure(errMessage: e.errorModel.errorMessage));

@@ -113,7 +113,9 @@ class AppTheme {
 
     return ThemeData(
       colorScheme: colorScheme,
-      scaffoldBackgroundColor: colorScheme.brightness == Brightness.dark ? defaultDarkScheme().surface : Colors.white,
+      scaffoldBackgroundColor: colorScheme.brightness == Brightness.dark
+          ? defaultDarkScheme().surface
+          : Colors.white,
       // scaffoldBackgroundColor: darkScheme().su,
       textTheme: appTextTheme,
       textButtonTheme: textButtonStyle,

@@ -9,7 +9,9 @@ class StoresDataModel extends StoresDataEntity {
   });
 
   factory StoresDataModel.fromMap(Map<String, dynamic> data) => StoresDataModel(
-        stores: (data[ApiKey.stores] as List).map((e) => StoreModel.fromMap(e)).toList(),
+        stores: (data[ApiKey.stores] as List)
+            .map((e) => StoreModel.fromMap(e))
+            .toList(),
       );
 
   Map<String, dynamic> toMap() => {

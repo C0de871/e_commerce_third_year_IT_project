@@ -19,30 +19,34 @@ class CartScreen extends StatelessWidget {
                   width: padding4 * 22,
                   child: AspectRatio(
                     aspectRatio: 0.88,
-                  child: Container(
-                    padding: const EdgeInsets.all(padding4*2),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(padding4*4),
-                      //TODO COLOR....
+                    child: Container(
+                      padding: const EdgeInsets.all(padding4 * 2),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(padding4 * 4),
+                        //TODO COLOR....
+                      ),
+                      child: Image.asset(AppImages.successImage),
+                      //TODO demoCarts[0].product.image[0]
                     ),
-                    child: Image.asset(AppImages.successImage),
-                    //TODO demoCarts[0].product.image[0]
-                  ),),
+                  ),
                 ),
                 const SizedBox(
-                  width: padding4*5,
-                ),const Column(
+                  width: padding4 * 5,
+                ),
+                const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("title of product",
-                    maxLines: 2, 
-                    //TODO style of product
+                    Text(
+                      "title of product",
+                      maxLines: 2,
+                      //TODO style of product
                     ),
-                    SizedBox(height: padding4*2,),
-                    Text.rich(TextSpan(text:"price")
-                    //TODO Style + demoCart[0].product.price
-                    )
-                    
+                    SizedBox(
+                      height: padding4 * 2,
+                    ),
+                    Text.rich(TextSpan(text: "price")
+                        //TODO Style + demoCart[0].product.price
+                        )
                   ],
                 )
               ],

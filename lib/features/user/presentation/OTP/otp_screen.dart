@@ -67,8 +67,9 @@ class _OtpScreenState extends State<OtpScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(state.errMessage)),
                     );
-                  }else if(state is OtpUserSuccessfully){
-                    Navigator.popUntil(context, (route)=>route.settings.name==AppRoutes.loginRoute);
+                  } else if (state is OtpUserSuccessfully) {
+                    Navigator.popUntil(context,
+                        (route) => route.settings.name == AppRoutes.loginRoute);
                   }
                 },
                 builder: (context, state) {
