@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:e_commerce/core/databases/api/end_points.dart';
 
-import 'data.dart';
+import 'refresh_token_model_data.dart';
 
 class RefreshTokenModel {
   bool? successful;
