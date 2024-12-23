@@ -6,6 +6,7 @@ import 'package:e_commerce/features/user/data/datasourses/user_local_data_source
 import 'package:e_commerce/features/user/data/datasourses/user_remote_data_source.dart';
 import 'package:e_commerce/features/user/domain/entites/Sign%20up%20entities/sign_up_entity.dart';
 import 'package:e_commerce/features/user/domain/entites/otp_entities/otp_entity.dart';
+import 'package:e_commerce/features/user/domain/entites/refresh_token/refresh_token_entity.dart';
 import 'package:e_commerce/features/user/domain/entites/user_entities/user_entities.dart';
 import 'package:e_commerce/features/user/domain/repository/user_repository.dart';
 
@@ -25,7 +26,7 @@ class UserRepositoryImpl extends UserRepository {
     if (await networkInfo.isConnected!) {
       try {
         final remoteUser = await remoteDataSource.loginUser(bodyjson);
-        localDataSource.cacheUser(remoteUser);
+        await localDataSource.cacheUser(remoteUser);
         return Right(remoteUser);
       } on ServerException catch (e) {
         return Left(Failure(errMessage: e.errorModel.errorMessage));
@@ -97,5 +98,11 @@ class UserRepositoryImpl extends UserRepository {
         ),
       );
     }
+  }
+
+  @override
+  Future<Either<Failure, RefreshTokenEntity>> refreshToken() {
+    // TODO: implement refreshToken
+    throw UnimplementedError();
   }
 }

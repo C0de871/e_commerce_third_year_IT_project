@@ -1,19 +1,22 @@
+import 'package:dio/dio.dart';
 import 'package:e_commerce/core/databases/api/api_consumer.dart';
 import 'package:e_commerce/core/databases/api/end_points.dart';
-import 'package:e_commerce/core/databases/cache/cache_helper.dart';
+import 'package:e_commerce/core/databases/cache/secure_storage_helper.dart';
 import 'package:e_commerce/features/user/data/models/otp_model.dart';
+import 'package:e_commerce/features/user/data/models/refresh_token/refresh_token_model.dart';
 import 'package:e_commerce/features/user/data/models/sign_up_model.dart';
 import 'package:e_commerce/features/user/data/models/user_model.dart';
+import 'package:e_commerce/features/user/domain/entites/refresh_token/refresh_token_entity.dart';
 
 class UserRemoteDataSource {
   final ApiConsumer api;
-  final CacheHelper cacheHelper;
+  final SecureStorageHelper cacheHelper;
 
   UserRemoteDataSource({required this.api, required this.cacheHelper});
 
   Future<UserModel> loginUser(Map<String, dynamic> jsonbody) async {
     Map<String, dynamic> headers = {
-      ApiKey.deviceId: cacheHelper.getData(key: CacheKey.fcmToken),
+      ApiKey.deviceId: await cacheHelper.getData(key: CacheKey.fcmToken),
     };
     final response = await api.post(
       EndPoints.login,
@@ -51,5 +54,14 @@ class UserRemoteDataSource {
       data: jsonbody,
     );
     return OtpModel.fromJson(response);
+  }
+
+  Future<RefreshTokenModel> refreshToken() async {
+    Map<String, dynamic> headers = {
+      ApiKey.deviceId: await cacheHelper.getData(key: CacheKey.fcmToken),
+      ApiKey.refreshTokenHeader: await cacheHelper.getData(key: CacheKey.refreshToken),
+    };
+    final response = await api.post(EndPoints.refreshToken, headers: headers);
+    return RefreshTokenModel.fromMap(response);
   }
 }
