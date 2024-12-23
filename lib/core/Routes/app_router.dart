@@ -128,6 +128,9 @@ class AppRouter {
               BlocProvider(
                 create: (context) => productCubit,
               ),
+              BlocProvider(
+                create: (context) => storeCubit,
+              ),
             ],
             child: const HomeScreen(),
           ),
