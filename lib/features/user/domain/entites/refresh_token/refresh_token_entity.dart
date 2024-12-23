@@ -1,6 +1,6 @@
 class RefreshTokenEntity {
   final String accessToken;
-  final String expireIn;
+  final String expiresIn;
 
-  RefreshTokenEntity({required this.accessToken, required this.expireIn});
+  RefreshTokenEntity({required this.accessToken, required this.expiresIn});
 }
