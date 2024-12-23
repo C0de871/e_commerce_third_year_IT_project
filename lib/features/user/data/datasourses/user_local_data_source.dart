@@ -11,12 +11,17 @@ class UserLocalDataSource {
   UserLocalDataSource({required this.cache});
   cacheUser(UserModel? userToCache) async {
     if (userToCache != null) {
-      await cache.saveData(
-          key: CacheKey.user, value: json.encode(userToCache.toJson()));
-      await cache.saveData(
-          key: CacheKey.accessToken, value: userToCache.accessToken);
-      await cache.saveData(
-          key: CacheKey.refreshToken, value: userToCache.refreshToken);
+      await cache.saveData(key: CacheKey.user, value: json.encode(userToCache.toJson()));
+      await cache.saveData(key: CacheKey.accessToken, value: userToCache.accessToken);
+      await cache.saveData(key: CacheKey.refreshToken, value: userToCache.refreshToken);
+    } else {
+      throw CacheExeption(errorMessage: "NO internet connection");
+    }
+  }
+
+  cacheAccessToken(String? accessToken) async {
+    if (accessToken != null) {
+      await cache.saveData(key: CacheKey.accessToken, value: accessToken);
     } else {
       throw CacheExeption(errorMessage: "NO internet connection");
     }
