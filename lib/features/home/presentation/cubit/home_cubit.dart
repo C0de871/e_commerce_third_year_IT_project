@@ -17,7 +17,9 @@ class HomeCubit extends Cubit<HomeState> {
   }) : super(HomeInitial());
 
   dynamic getHomeData({int productPage = 1, int storePage = 1}) async {
-    await productCubit.getAllProducts(page: productPage);
-    await storeCubit.getAllStores(page: storePage);
+    Future.wait<dynamic>([
+      productCubit.getAllProducts(page: productPage),
+      storeCubit.getAllStores(page: storePage),
+    ]);
   }
 }
