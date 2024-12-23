@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:e_commerce/core/databases/api/end_points.dart';
-import 'package:e_commerce/features/user/domain/entites/refresh_token/refresh_token_entity.dart';
+import 'package:e_commerce/features/user/domain/entites/refresh_token/refresh_token_data_entity.dart';
 
-class RefreshTokenModelData extends RefreshTokenEntity {
+class RefreshTokenModelData extends RefreshTokenDataEntity {
   RefreshTokenModelData({
     required super.accessToken,
     required super.expiresIn,
