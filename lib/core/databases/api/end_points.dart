@@ -10,6 +10,7 @@ class EndPoints {
 }
 
 class ApiKey {
+  static String requiredAuth = "requiresAuth";
   static String successful = "successful";
   static String otp = "otp";
   static String id = "id";
@@ -33,6 +34,7 @@ class ApiKey {
   static String createdAt = "created_at";
   static String updatedAt = "updated_at";
   static String data = "data";
+  static String expiresIn = "expires_in";
 
   static String storeId = "store_id";
   static String stores = "stores";
