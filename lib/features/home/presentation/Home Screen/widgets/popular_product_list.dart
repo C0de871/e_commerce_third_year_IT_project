@@ -32,9 +32,15 @@ class PopularProductList extends StatelessWidget {
             if (state is GetAllProductsSuccess) {
               return Row(
                 children: [
-                  ...List.generate(4, (index) {
-                    return ProductCard(
-                      product: state.productsList[index],
+                  ...List.generate(state.productsList.length, (index) {
+                    return Row(
+                      children: [
+                        ProductCard(
+                          product: state.productsList[index],
+                        ),
+                        if (index != (state.productsList.length - 1))
+                          const SizedBox(width: padding4 * 4),
+                      ],
                     );
                   })
                 ],

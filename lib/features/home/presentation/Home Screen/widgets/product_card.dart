@@ -1,4 +1,5 @@
 import 'package:e_commerce/core/shared/widgets/skeleton.dart';
+import 'package:e_commerce/core/utils/constants/app_images.dart';
 import 'package:e_commerce/features/products/domain/entities/product_enitty.dart';
 import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,8 @@ class ProductCard extends StatelessWidget {
         ],
       ),
       // width: MediaQuery.sizeOf(context).width / 2,
-      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+      child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
         return Material(
           color: Colors.transparent,
           child: InkWell(
@@ -71,30 +73,40 @@ class ProductCard extends StatelessWidget {
                       : Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Stack(
+                            Align(
+                              alignment: Alignment.topCenter,
+                              child: ProductImage(
+                                mainImageUrl: product!.mainImageUrl,
+                                constraints: constraints,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: padding4 * 4,
+                            ),
+                            ProductName(
+                              productName: product!.productName,
+                            ),
+                            ProductStore(
+                              storeName: product!.storeName,
+                            ),
+                            const SizedBox(height: padding4 * 4),
+                            Row(
+                              // crossAxisAlignment: CrossAxisAlignment.sta,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                ProductImage(
-                                  mainImageUrl: product!.mainImageUrl,
+                                ProductPrice(
+                                  productPrice: product!.price,
                                 ),
                                 Faviourt(
                                   isFav: product!.isFavorite,
                                 ),
                               ],
                             ),
-                            const SizedBox(height: padding4 * 3),
-                            ProductName(
-                              productName: product!.productName,
-                            ),
-                            const SizedBox(height: padding4 * 1),
-                            ProductPrice(
-                              productPrice: product!.price,
-                            ),
-                            const SizedBox(
-                              height: padding4 * 1,
-                            ),
-                            ProductStore(
-                              storeName: product!.storeName,
-                            ),
+                            // const SizedBox(height: padding4 * 3),
+                            // const SizedBox(height: padding4 * 1),
+                            // const SizedBox(
+                            //   height: padding4 * 1,
+                            // ),
                           ],
                         );
                 },
@@ -122,17 +134,13 @@ class ProductStore extends StatelessWidget {
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       TextSpan(
-        text: fromText, // "From" part
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 18,
-        ),
         children: <TextSpan>[
           TextSpan(
             text: storeName, // "Free Syria" part
             style: const TextStyle(
               fontWeight: FontWeight.normal, // Regular weight for "Free Syria"
-              fontSize: 14,
+              color: AppColors.grayColor,
+              fontSize: 12,
             ),
           ),
         ],
@@ -153,9 +161,10 @@ class ProductPrice extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       '\$$productPrice',
-      style: const TextStyle(
+      style: TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: 20,
+        color: Theme.of(context).colorScheme.inversePrimary,
+        fontSize: 16,
         // color: Colors.black,
       ),
     );
@@ -193,11 +202,9 @@ class ProductName extends StatelessWidget {
       productName,
       overflow: TextOverflow.ellipsis,
       maxLines: 2,
-      style: TextStyle(
-        fontWeight: FontWeight.w400,
+      style: const TextStyle(
         fontSize: 16,
-        // color: Color(0xFF5D6062),
-        color: Theme.of(context).colorScheme.primary,
+        color: AppColors.black,
       ),
     );
   }
@@ -230,13 +237,22 @@ class Faviourt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      borderRadius: BorderRadius.circular(20),
-      child: Icon(
-        isFav == 1 ? Icons.favorite : Icons.favorite_border,
-        size: 28,
-        color: AppColors.favouriteColor,
+    return Container(
+      padding: const EdgeInsets.all(padding4 * 1.5),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: isFav == 1
+            ? const Color.fromARGB(255, 251, 207, 204)
+            : AppColors.disableFavContainer,
+      ),
+      child: InkWell(
+        onTap: () {},
+        borderRadius: BorderRadius.circular(20),
+        child: Icon(
+          Icons.favorite,
+          size: 20,
+          color: isFav == 1 ? Colors.red : AppColors.disableFav,
+        ),
       ),
     );
   }
@@ -260,17 +276,26 @@ class LoadingFaviourt extends StatelessWidget {
 }
 
 class ProductImage extends StatelessWidget {
-  const ProductImage({
-    super.key,
-    required this.mainImageUrl,
-  });
+  const ProductImage(
+      {super.key, required this.mainImageUrl, required this.constraints});
 
   final String mainImageUrl;
-
+  final BoxConstraints constraints;
   @override
   Widget build(BuildContext context) {
-    return Image.network(
-      mainImageUrl,
+    return Container(
+      padding: const EdgeInsets.all(
+        padding4 * 4,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.imageBackground,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      //TODO: uncomment to get the image from the api:
+      // child: Image.network(
+      //   mainImageUrl,
+      // ),
+      child: Image.asset(AppImages.tShirt),
     );
   }
 }

@@ -36,7 +36,7 @@ class SectionTitle extends StatelessWidget {
             child: Text(
               seeMoreText, // Use the localized "See More" text
               style: TextStyle(
-                color: Theme.of(context).colorScheme.onSurface,
+                color: Theme.of(context).colorScheme.inversePrimary,
               ),
             ),
           ),

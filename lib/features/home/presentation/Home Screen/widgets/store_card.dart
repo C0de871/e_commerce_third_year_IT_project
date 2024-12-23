@@ -1,21 +1,52 @@
 import 'package:e_commerce/core/shared/widgets/skeleton.dart';
 import 'package:e_commerce/core/theme/app_colors.dart';
+import 'package:e_commerce/core/utils/constants/app_images.dart';
+import 'package:e_commerce/features/stores/domain/entities/store_entity.dart';
+import 'package:e_commerce/features/stores/presentation/cubit/store_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/utils/constants/app_numbers.dart';
+
+class StoreCard extends StatelessWidget {
+  const StoreCard({
+    super.key,
+    this.storeEntity,
+  });
+
+  final StoreEntity? storeEntity;
+  // final GestureTapCallback press;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<StoreCubit, StoreState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        return state is GetAllStoresLoading
+            ? const StoreCardLoading()
+            : StoreCardLoaded(
+                image: storeEntity!.imageUrl,
+                storeName: storeEntity!.name,
+                discreption: storeEntity!.description,
+              );
+      },
+    );
+  }
+}
 
 class StoreCardLoaded extends StatelessWidget {
   const StoreCardLoaded({
     super.key,
-    required this.storeName,
     required this.image,
+    required this.storeName,
     required this.discreption,
-    required this.press,
   });
 
-  final String storeName, image;
+  final String image;
+  final String storeName;
   final String discreption;
-  final GestureTapCallback press;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +57,8 @@ class StoreCardLoaded extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         child: Stack(
           children: [
-            Image.asset(image, fit: BoxFit.cover),
+            //TODO: replace with the image from the api:
+            Image.asset(AppImages.storeImagePlaceHolder, fit: BoxFit.cover),
             StorePreview(
               storeName: storeName,
               discreption: discreption,
