@@ -25,11 +25,15 @@ class DioConsumer extends ApiConsumer {
     dynamic data,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? extra,
     bool isFormData = false,
   }) async {
     try {
       var res = await dio.post(
-        options: Options(headers: headers),
+        options: Options(
+          headers: headers,
+          extra: extra,
+        ),
         path,
         data: isFormData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
@@ -47,10 +51,14 @@ class DioConsumer extends ApiConsumer {
     Object? data,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? extra,
   }) async {
     try {
       var res = await dio.get(
-        options: Options(headers: headers),
+        options: Options(
+          headers: headers,
+          extra: extra,
+        ),
         path,
         data: data,
         queryParameters: queryParameters,
@@ -68,10 +76,14 @@ class DioConsumer extends ApiConsumer {
     Object? data,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? extra,
   }) async {
     try {
       var res = await dio.delete(
-        options: Options(headers: headers),
+        options: Options(
+          headers: headers,
+          extra: extra,
+        ),
         path,
         data: data,
         queryParameters: queryParameters,
@@ -90,10 +102,14 @@ class DioConsumer extends ApiConsumer {
     Map<String, dynamic>? headers,
     Map<String, dynamic>? queryParameters,
     bool isFormData = false,
+    Map<String, dynamic>? extra,
   }) async {
     try {
       var res = await dio.patch(
-        options: Options(headers: headers),
+        options: Options(
+          headers: headers,
+          extra: extra,
+        ),
         path,
         data: isFormData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
