@@ -30,18 +30,18 @@ final getIt = GetIt.instance; // Singleton instance of GetIt
 
 void setupServicesLocator() {
   //! Core
+  getIt.registerLazySingleton<SharedPrefsHelper>(() => SharedPrefsHelper());
+  getIt.registerLazySingleton<SecureStorageHelper>(() => SecureStorageHelper());
   getIt.registerLazySingleton<Dio>(() => Dio());
   getIt.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: getIt()));
   getIt.registerLazySingleton<DataConnectionChecker>(() => DataConnectionChecker());
   getIt.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(getIt()));
-  getIt.registerLazySingleton<SharedPrefsHelper>(() => SharedPrefsHelper());
-  getIt.registerLazySingleton<SecureStorageHelper>(() => SecureStorageHelper());
 
   //! Data Sources
   getIt.registerLazySingleton<UserRemoteDataSource>(() => UserRemoteDataSource(api: getIt(), cacheHelper: getIt()));
   getIt.registerLazySingleton<UserLocalDataSource>(() => UserLocalDataSource(cache: getIt()));
   getIt.registerLazySingleton<ProductRemoteDataSource>(() => ProductRemoteDataSource(apiConsumer: getIt(), cacheHelper: getIt()));
-  getIt.registerLazySingleton<StoreRemoteDataSource>(() => StoreRemoteDataSource(api: getIt()));
+  getIt.registerLazySingleton<StoreRemoteDataSource>(() => StoreRemoteDataSource(api: getIt(), cacheHelper: getIt()));
 
   //! Repository
   getIt.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(

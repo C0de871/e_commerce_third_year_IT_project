@@ -1,3 +1,4 @@
+import 'package:e_commerce/core/databases/api/end_points.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -6,6 +7,7 @@ import 'package:e_commerce/core/theme/app_theme.dart';
 
 import '../Routes/app_router.dart';
 import '../Routes/app_routes.dart';
+import '../helper/app_functions.dart';
 import '../translations/l10n.dart';
 
 class MyApp extends StatelessWidget {
@@ -15,6 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       supportedLocales: L10n.all,
+      navigatorObservers: [RouteObserverService()],
       locale: const Locale('en'),
       localizationsDelegates: const [
         AppLocalizations.delegate,
