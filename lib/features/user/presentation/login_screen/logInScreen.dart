@@ -15,6 +15,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading: SizedBox(),
           title: Text(
             AppLocalizations.of(context)!.login,
             style: TextStyle(color: Theme.of(context).colorScheme.secondary),
@@ -50,8 +51,7 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     Text(
                       AppLocalizations.of(context)!.dontHaveAccount,
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: Theme.of(context).colorScheme.outline),
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).colorScheme.outline),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -59,15 +59,10 @@ class LoginScreen extends StatelessWidget {
                       },
                       child: Text(
                         AppLocalizations.of(context)!.signUp,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .copyWith(
+                        style: Theme.of(context).textTheme.titleMedium!.copyWith(
                               decoration: TextDecoration.underline,
-                              decorationColor:
-                                  Theme.of(context).colorScheme.inversePrimary,
-                              color:
-                                  Theme.of(context).colorScheme.inversePrimary,
+                              decorationColor: Theme.of(context).colorScheme.inversePrimary,
+                              color: Theme.of(context).colorScheme.inversePrimary,
                             ),
                       ),
                     )
@@ -125,6 +120,11 @@ class _LoginFormState extends State<LoginForm> {
               if (state is LoginUserFailure) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(state.errMessage)),
+                );
+              } else if (state is LoginUserSuccessfully) {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  AppRoutes.loginSuccessRoute,
+                  (route) => false,
                 );
               }
             },
