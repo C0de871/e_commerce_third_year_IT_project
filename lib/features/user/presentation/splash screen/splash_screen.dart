@@ -1,3 +1,4 @@
+import 'package:e_commerce/core/Routes/app_routes.dart';
 import 'package:e_commerce/core/utils/constants/app_numbers.dart';
 import 'package:e_commerce/core/shared/widgets/defualt_button.dart';
 import 'package:e_commerce/features/user/presentation/splash%20screen/splash_content.dart';
@@ -70,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 DefaultButton(
                     text: AppLocalizations.of(context)!.continueSplash,
                     press: () {
-                      //Todo Navigator the next page
+                      Navigator.of(context).pushReplacementNamed(AppRoutes.loginRoute);
                     }),
                 const Spacer(
                   flex: 2,
@@ -90,9 +91,7 @@ class _SplashScreenState extends State<SplashScreen> {
       height: padding4,
       width: currentPage == index ? padding4 * 5 : padding4,
       decoration: BoxDecoration(
-        color: currentPage == index
-            ? Theme.of(context).colorScheme.inversePrimary
-            : Theme.of(context).colorScheme.surfaceContainer,
+        color: currentPage == index ? Theme.of(context).colorScheme.inversePrimary : Theme.of(context).colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(padding4),
       ),
     );
