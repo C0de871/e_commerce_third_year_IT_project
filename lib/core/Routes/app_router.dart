@@ -67,6 +67,7 @@ class AppRouter {
     switch (settings.name) {
       case AppRoutes.cartScreen:
         return MaterialPageRoute(
+          settings: settings,
           builder: (_) => BlocProvider.value(
             value: userCubit,
             child: const CartScreen(),
@@ -76,6 +77,7 @@ class AppRouter {
       //!sign up auth route:
       case AppRoutes.signUpauthRoute:
         return MaterialPageRoute(
+          settings: settings,
           builder: (_) => BlocProvider.value(
             value: userCubit,
             child: const SignUpAuthScreen(),
@@ -85,6 +87,7 @@ class AppRouter {
       //!sign up complete profile route:
       case AppRoutes.signUpCompleteProfileRoute:
         return MaterialPageRoute(
+          settings: settings,
           builder: (_) => BlocProvider.value(
             value: userCubit,
             child: const CompleteProfileScreen(),
@@ -94,6 +97,7 @@ class AppRouter {
       //!otp route:
       case AppRoutes.otpRoute:
         return MaterialPageRoute(
+          settings: settings,
           builder: (_) => BlocProvider.value(
             value: userCubit,
             child: const OtpScreen(),
@@ -111,6 +115,7 @@ class AppRouter {
       //!login route:
       case AppRoutes.loginRoute:
         return MaterialPageRoute(
+          settings: settings,
           builder: (_) => BlocProvider(
             create: (context) => userCubit,
             child: const LoginScreen(),
@@ -120,6 +125,7 @@ class AppRouter {
       //! home route:
       case AppRoutes.homeRoute:
         return MaterialPageRoute(
+          settings: settings,
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider(
@@ -139,6 +145,7 @@ class AppRouter {
       //!default route:
       default:
         return MaterialPageRoute(
+          settings: settings,
           builder: (_) => Scaffold(
             body: Center(
               child: Text("No route defined for ${settings.name}"),
