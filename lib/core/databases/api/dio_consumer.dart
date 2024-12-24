@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:e_commerce/core/databases/api/auth_interceptor.dart';
 import '../errors/expentions.dart';
 import 'api_consumer.dart';
 import 'end_points.dart';
@@ -16,6 +17,7 @@ class DioConsumer extends ApiConsumer {
       responseHeader: true,
       error: true,
     ));
+    dio.interceptors.add(AuthInterceptor(dioConsumer:this));
   }
 
 //!POST
