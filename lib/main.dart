@@ -10,7 +10,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupServicesLocator();
   await getIt<SharedPrefsHelper>().init();
-  await getIt<SecureStorageHelper>().init();
   await FireBaseService.initializeApp();
   await FireBaseService().initNotifications();
   runApp(const MyApp());

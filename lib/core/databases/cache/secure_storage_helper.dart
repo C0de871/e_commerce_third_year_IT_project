@@ -2,12 +2,10 @@ import 'package:e_commerce/core/databases/cache/storage_helper.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorageHelper extends StorageHelper {
-  static late final FlutterSecureStorage _secureStorage;
+  static const FlutterSecureStorage _secureStorage = FlutterSecureStorage();
 
   @override
-  Future<void> init() async {
-    _secureStorage = const FlutterSecureStorage();
-  }
+  Future<void> init() async {}
 
   @override
   Future<bool> saveData({required String key, required dynamic value}) async {
