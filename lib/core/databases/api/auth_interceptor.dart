@@ -33,7 +33,6 @@ class AuthInterceptor extends Interceptor {
       try {
         final success = await refreshToken(dioConsumer);
         cacheAccessToken(success.refreshTokenDataEntity.accessToken);
-        print("----------------------------------${success.refreshTokenDataEntity.accessToken}");
         options.headers[ApiKey.authorization] = "Bearer ${success.refreshTokenDataEntity.accessToken}";
         _retryRequest(options, handler, dioConsumer);
       } on DioException catch (e) {

@@ -14,7 +14,7 @@ class CustomSuffixIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         left: padding4 * 5,
         right: padding4 * 5,
         top: padding4 * 4,

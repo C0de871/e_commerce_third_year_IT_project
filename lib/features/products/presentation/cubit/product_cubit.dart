@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:bloc/bloc.dart';
 import 'package:e_commerce/core/databases/params/params.dart';
 import 'package:e_commerce/core/utils/services/service_locator.dart';

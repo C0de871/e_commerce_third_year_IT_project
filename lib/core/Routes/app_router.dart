@@ -6,7 +6,7 @@ import 'package:e_commerce/features/stores/presentation/cubit/store_cubit.dart';
 import 'package:e_commerce/features/user/presentation/OTP/otp_screen.dart';
 import 'package:e_commerce/features/user/presentation/cart_screen/cart_screen.dart';
 import 'package:e_commerce/features/user/presentation/cubit/user_cubit.dart';
-import 'package:e_commerce/features/user/presentation/login_screen/logInScreen.dart';
+import 'package:e_commerce/features/user/presentation/login_screen/log_in_screen.dart';
 import 'package:e_commerce/features/user/presentation/login_success_screen/login_success_screen.dart';
 import 'package:e_commerce/features/user/presentation/splash%20screen/splash_screen.dart';
 import 'package:flutter/material.dart';

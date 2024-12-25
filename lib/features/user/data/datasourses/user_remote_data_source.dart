@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+
 import 'package:e_commerce/core/databases/api/api_consumer.dart';
 import 'package:e_commerce/core/databases/api/end_points.dart';
 import 'package:e_commerce/core/databases/cache/secure_storage_helper.dart';
@@ -6,7 +6,6 @@ import 'package:e_commerce/features/user/data/models/otp_model.dart';
 import 'package:e_commerce/features/user/data/models/refresh_token/refresh_token_model.dart';
 import 'package:e_commerce/features/user/data/models/sign_up_model.dart';
 import 'package:e_commerce/features/user/data/models/user_model.dart';
-import 'package:e_commerce/features/user/domain/entites/refresh_token/refresh_token_data_entity.dart';
 
 class UserRemoteDataSource {
   final ApiConsumer api;

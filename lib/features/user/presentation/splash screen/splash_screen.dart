@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: padding4 * 2,
           ),
           Expanded(
@@ -87,7 +87,7 @@ class _SplashScreenState extends State<SplashScreen> {
   AnimatedContainer buildDot({index}) {
     return AnimatedContainer(
       duration: kThemeAnimationDuration,
-      margin: EdgeInsets.only(right: padding4),
+      margin: const EdgeInsets.only(right: padding4),
       height: padding4,
       width: currentPage == index ? padding4 * 5 : padding4,
       decoration: BoxDecoration(

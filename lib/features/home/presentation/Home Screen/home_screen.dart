@@ -1,9 +1,7 @@
 import 'package:e_commerce/core/utils/constants/app_numbers.dart';
 import 'package:e_commerce/core/helper/app_functions.dart';
 import 'package:e_commerce/features/home/presentation/Home%20Screen/widgets/popular_product_list.dart';
-import 'package:e_commerce/features/home/presentation/Home%20Screen/widgets/product_card.dart';
 import 'package:e_commerce/features/home/presentation/cubit/home_cubit.dart';
-import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final systemUiOverlayStyle =
         getSystemUiOverlayStyle(currentBrightness, context);
     return Scaffold(
+      // bottomNavigationBar: ,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: systemUiOverlayStyle,
         child: SafeArea(

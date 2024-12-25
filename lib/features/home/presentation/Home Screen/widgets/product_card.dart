@@ -4,8 +4,6 @@ import 'package:e_commerce/features/products/domain/entities/product_enitty.dart
 import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/constants/app_numbers.dart';
@@ -129,7 +127,6 @@ class ProductStore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String fromText = AppLocalizations.of(context)!.from;
     return Text.rich(
       maxLines: 1,
       overflow: TextOverflow.ellipsis,

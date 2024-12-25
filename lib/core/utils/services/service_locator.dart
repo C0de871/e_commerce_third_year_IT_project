@@ -1,6 +1,5 @@
 import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:dio/dio.dart';
-import 'package:e_commerce/core/databases/cache/storage_helper.dart';
 import 'package:e_commerce/features/products/data/dataSources/product_remote_data_source.dart';
 import 'package:e_commerce/features/products/data/repository/product_repository_impl.dart';
 import 'package:e_commerce/features/products/domain/repository/product_repository.dart';

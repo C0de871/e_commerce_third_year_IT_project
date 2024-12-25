@@ -6,7 +6,6 @@ import 'package:e_commerce/features/user/data/datasourses/user_local_data_source
 import 'package:e_commerce/features/user/data/datasourses/user_remote_data_source.dart';
 import 'package:e_commerce/features/user/domain/entites/Sign%20up%20entities/sign_up_entity.dart';
 import 'package:e_commerce/features/user/domain/entites/otp_entities/otp_entity.dart';
-import 'package:e_commerce/features/user/domain/entites/refresh_token/refresh_token_data_entity.dart';
 import 'package:e_commerce/features/user/domain/entites/user_entities/user_entities.dart';
 import 'package:e_commerce/features/user/domain/repository/user_repository.dart';
 

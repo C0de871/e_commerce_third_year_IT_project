@@ -31,6 +31,7 @@ class IconBtnWithCounter extends StatelessWidget {
             ),
             child: Center(
               child: SvgPicture.asset(
+                // ignore: deprecated_member_use
                 color: Theme.of(context).colorScheme.onInverseSurface,
                 svgSrc,
                 height: 24,

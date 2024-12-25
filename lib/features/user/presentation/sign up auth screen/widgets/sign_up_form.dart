@@ -34,7 +34,7 @@ class _SignUpFormState extends State<SignUpForm> {
             svgIconPath: AppImages.emailIconPath,
             validator: (value) => _validateEmail(context, value),
           ),
-          SizedBox(
+          const SizedBox(
             height: padding4 * 8,
           ),
           AuthTextField(
@@ -45,7 +45,7 @@ class _SignUpFormState extends State<SignUpForm> {
             validator: (value) => _validatePassword(context, value),
             isObsure: true,
           ),
-          SizedBox(
+          const SizedBox(
             height: padding4 * 8,
           ),
           AuthTextField(
@@ -61,10 +61,10 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
             isObsure: true,
           ),
-          SizedBox(
+          const SizedBox(
             height: padding4 * 8,
           ),
-          SizedBox(
+          const SizedBox(
             height: padding4 * 9,
           ),
           DefaultButton(
