@@ -8,10 +8,14 @@ import 'package:image_picker/image_picker.dart';
 SystemUiOverlayStyle getSystemUiOverlayStyle(Brightness currentBrightness, BuildContext context) {
   return currentBrightness == Brightness.light
       ? SystemUiOverlayStyle.light.copyWith(
+          systemNavigationBarColor: Theme.of(context).colorScheme.surface,
+          systemNavigationBarIconBrightness: Brightness.dark,
           statusBarColor: Theme.of(context).colorScheme.inversePrimary,
         )
       : SystemUiOverlayStyle.dark.copyWith(
           statusBarColor: Theme.of(context).colorScheme.inversePrimary,
+          systemNavigationBarColor: Theme.of(context).colorScheme.surface,
+          systemNavigationBarIconBrightness: Brightness.light,
         );
 }
 
