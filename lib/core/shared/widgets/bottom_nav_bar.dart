@@ -1,5 +1,7 @@
 import 'package:e_commerce/core/theme/app_colors.dart';
+import 'package:e_commerce/features/home/presentation/Navigation%20cubit/navigation_bar_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rive/rive.dart';
 
 import '../../utils/constants/app_numbers.dart';
@@ -13,6 +15,9 @@ class CustomNavigationBar extends StatefulWidget {
 }
 
 class _CustomNavigationBarState extends State<CustomNavigationBar> {
+  List<SMIBool> riveIconInput = [];
+  List<StateMachineController?> controllers = [];
+
   @override
   void dispose() {
     for (var controller in controllers) {
@@ -21,9 +26,10 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
     super.dispose();
   }
 
-  List<SMIBool> riveIconInput = [];
-  List<StateMachineController?> controllers = [];
-  int selectedNavIndex = 2;
+  @override
+  void initState() {
+    super.initState();
+  }
 
   void animateIcon(int index) {
     riveIconInput[index].change(true);
@@ -72,39 +78,41 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
             bottomNavItems.length,
             (index) {
               final riveIcon = bottomNavItems[index].rive;
-              return GestureDetector(
-                onTap: () {
-                  animateIcon(index);
-                  setState(() {
-                    selectedNavIndex = index;
-                  });
-                },
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    AnimatedBar(
-                      isActive: selectedNavIndex == index,
-                    ),
-                    SizedBox(
-                      height: 36,
-                      width: 36,
-                      child: AnimatedOpacity(
-                        duration: Duration(milliseconds: 200),
-                        opacity: selectedNavIndex == index ? 1 : 0.5,
-                        child: RiveAnimation.asset(
-                          riveIcon.src,
-                          artboard: riveIcon.artboard,
-                          onInit: (artboard) {
-                            riveOnInit(
-                              artboard,
-                              stateMachineName: riveIcon.stateMachineName,
-                            );
-                          },
+              return BlocBuilder<NavigationBarCubit, int>(
+                builder: (context, state) {
+                  return GestureDetector(
+                    onTap: () {
+                      animateIcon(index);
+                      context.read<NavigationBarCubit>().choosePage(index);
+                    },
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        AnimatedBar(
+                          isActive: state == index,
                         ),
-                      ),
+                        SizedBox(
+                          height: 36,
+                          width: 36,
+                          child: AnimatedOpacity(
+                            duration: Duration(milliseconds: 200),
+                            opacity: state == index ? 1 : 0.5,
+                            child: RiveAnimation.asset(
+                              riveIcon.src,
+                              artboard: riveIcon.artboard,
+                              onInit: (artboard) {
+                                riveOnInit(
+                                  artboard,
+                                  stateMachineName: riveIcon.stateMachineName,
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  );
+                },
               );
             },
           ),

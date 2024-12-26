@@ -1,10 +1,12 @@
+import 'package:e_commerce/core/shared/rive_model/rive_model.dart';
 import 'package:e_commerce/core/shared/widgets/skeleton.dart';
 import 'package:e_commerce/core/utils/constants/app_images.dart';
 import 'package:e_commerce/features/products/domain/entities/product_enitty.dart';
 import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:rive/rive.dart';
+import 'package:flutter/src/widgets/image.dart' as FlutterImage;
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/constants/app_numbers.dart';
 
@@ -32,8 +34,7 @@ class ProductCard extends StatelessWidget {
         ],
       ),
       // width: MediaQuery.sizeOf(context).width / 2,
-      child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
+      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
         return Material(
           color: Colors.transparent,
           child: InkWell(
@@ -224,7 +225,7 @@ class LoadingProductName extends StatelessWidget {
   }
 }
 
-class Faviourt extends StatelessWidget {
+class Faviourt extends StatefulWidget {
   const Faviourt({
     super.key,
     required this.isFav,
@@ -233,22 +234,56 @@ class Faviourt extends StatelessWidget {
   final int isFav;
 
   @override
+  State<Faviourt> createState() => _FaviourtState();
+}
+
+class _FaviourtState extends State<Faviourt> {
+  final RiveModel heart = RiveModel(
+    artboard: "favoriteArtboard",
+    src: "assets/rive/favorite_button_animation.riv",
+    stateMachineName: "favoritingStateMachine",
+  );
+
+  StateMachineController? controller;
+  SMIBool? heartInput;
+  bool iss = true;
+
+  void riveOnInit(Artboard artboard, {required String stateMachineName}) {
+    controller = StateMachineController.fromArtboard(
+      artboard,
+      stateMachineName,
+    );
+    artboard.addController(controller!);
+    heartInput = controller?.findInput<bool>("switch") as SMIBool;
+    heartInput!.change(iss);
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(padding4 * 1.5),
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: isFav == 1
-            ? const Color.fromARGB(255, 251, 207, 204)
-            : AppColors.disableFavContainer,
-      ),
-      child: InkWell(
-        onTap: () {},
-        borderRadius: BorderRadius.circular(20),
-        child: Icon(
-          Icons.favorite,
-          size: 20,
-          color: isFav == 1 ? Colors.red : AppColors.disableFav,
+    return GestureDetector(
+      onTap: () {
+        iss = !iss;
+        heartInput?.change(iss);
+      },
+      // borderRadius: BorderRadius.circular(20),
+      child: SizedBox(
+        width: 28,
+        height: 28,
+        child: RiveAnimation.asset(
+          heart.src,
+          artboard: heart.artboard,
+          onInit: (artboard) {
+            riveOnInit(
+              artboard,
+              stateMachineName: heart.stateMachineName,
+            );
+          },
         ),
       ),
     );
@@ -273,8 +308,7 @@ class LoadingFaviourt extends StatelessWidget {
 }
 
 class ProductImage extends StatelessWidget {
-  const ProductImage(
-      {super.key, required this.mainImageUrl, required this.constraints});
+  const ProductImage({super.key, required this.mainImageUrl, required this.constraints});
 
   final String mainImageUrl;
   final BoxConstraints constraints;
@@ -292,7 +326,7 @@ class ProductImage extends StatelessWidget {
       // child: Image.network(
       //   mainImageUrl,
       // ),
-      child: Image.asset(AppImages.tShirt),
+      child: FlutterImage.Image.asset(AppImages.tShirt),
     );
   }
 }

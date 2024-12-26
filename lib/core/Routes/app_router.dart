@@ -1,6 +1,7 @@
 import 'package:e_commerce/core/Routes/app_routes.dart';
-import 'package:e_commerce/features/home/presentation/Home%20Screen/home_screen.dart';
-import 'package:e_commerce/features/home/presentation/cubit/home_cubit.dart';
+import 'package:e_commerce/core/shared/screens/page_view_screen.dart';
+import 'package:e_commerce/features/home/presentation/HomeCubit/home_cubit.dart';
+import 'package:e_commerce/features/home/presentation/Navigation%20cubit/navigation_bar_cubit.dart';
 import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
 import 'package:e_commerce/features/stores/presentation/cubit/store_cubit.dart';
 import 'package:e_commerce/features/user/presentation/OTP/otp_screen.dart';
@@ -19,6 +20,7 @@ class AppRouter {
   HomeCubit? _homeCubit;
   StoreCubit? _storeCubit;
   ProductCubit? _productCubit;
+  NavigationBarCubit? _navBarCubit;
 
   UserCubit get userCubit {
     if (_userCubit == null || _userCubit!.isClosed) {
@@ -28,6 +30,16 @@ class AppRouter {
       _userCubit = null; // Nullify the reference when closed
     });
     return _userCubit!;
+  }
+
+  NavigationBarCubit get navBarCubit {
+    if (_navBarCubit == null || _navBarCubit!.isClosed) {
+      _navBarCubit = NavigationBarCubit();
+    }
+    _navBarCubit!.stream.listen((_) {}, onDone: () {
+      _navBarCubit = null; // Nullify the reference when closed
+    });
+    return _navBarCubit!;
   }
 
   ProductCubit get productCubit {
@@ -137,8 +149,11 @@ class AppRouter {
               BlocProvider(
                 create: (context) => storeCubit,
               ),
+              BlocProvider(
+                create: (context) => navBarCubit,
+              ),
             ],
-            child: const HomeScreen(),
+            child: const PageViewScreen(),
           ),
         );
 

@@ -11,6 +11,7 @@ class HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      leading: SizedBox(),
       forceElevated: true,
       shadowColor: Theme.of(context).colorScheme.primary,
       // elevation: ,

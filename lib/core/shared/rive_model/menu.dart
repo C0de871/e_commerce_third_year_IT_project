@@ -7,6 +7,8 @@ class Menu {
   Menu({required this.title, required this.rive});
 }
 
+
+
 List<Menu> sidebarMenus = [
   Menu(
     title: "Home",
@@ -69,12 +71,20 @@ List<Menu> bottomNavItems = [
       stateMachineName: "TIMER_Interactivity",
     ),
   ),
+  // Menu(
+  //   title: "Notification",
+  //   rive: RiveModel(
+  //     src: "assets/rive/bottom_navigation_animatied_icons.riv",
+  //     artboard: "BELL",
+  //     stateMachineName: "BELL_Interactivity",
+  //   ),
+  // ),
   Menu(
-    title: "Notification",
+    title: "Settings",
     rive: RiveModel(
       src: "assets/rive/bottom_navigation_animatied_icons.riv",
-      artboard: "BELL",
-      stateMachineName: "BELL_Interactivity",
+      artboard: "SETTINGS",
+      stateMachineName: "SETTINGS_Interactivity",
     ),
   ),
   Menu(
