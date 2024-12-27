@@ -15,8 +15,10 @@ class ProductRemoteDataSource {
     required this.cacheHelper,
   });
 
-  Future<List<ProductModel>> getAllProducts({required ProductParams params}) async {
+  Future<List<ProductModel>> getAllProducts(
+      {required ProductParams params}) async {
     String? accessToken = await cacheHelper.getData(key: CacheKey.accessToken);
+
     Map<String, dynamic> headers = {
       ApiKey.authorization: accessToken,
     };

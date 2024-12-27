@@ -1,4 +1,3 @@
-
 import 'package:e_commerce/core/databases/api/api_consumer.dart';
 import 'package:e_commerce/core/databases/api/end_points.dart';
 import 'package:e_commerce/core/databases/cache/secure_storage_helper.dart';
@@ -58,7 +57,8 @@ class UserRemoteDataSource {
   Future<RefreshTokenModel> refreshToken() async {
     Map<String, dynamic> headers = {
       ApiKey.deviceId: await cacheHelper.getData(key: CacheKey.fcmToken),
-      ApiKey.refreshTokenHeader: await cacheHelper.getData(key: CacheKey.refreshToken),
+      ApiKey.refreshTokenHeader:
+          await cacheHelper.getData(key: CacheKey.refreshToken),
     };
     final response = await api.post(EndPoints.refreshToken, headers: headers);
     return RefreshTokenModel.fromMap(response);

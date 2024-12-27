@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 
-//Filled template
+//Filled
 class FilledPinPut extends StatefulWidget {
   const FilledPinPut({super.key});
 

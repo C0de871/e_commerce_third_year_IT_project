@@ -1,5 +1,5 @@
 import 'package:e_commerce/core/theme/app_colors.dart';
-import 'package:e_commerce/features/home/presentation/Navigation%20cubit/navigation_bar_cubit.dart';
+import 'package:e_commerce/core/shared/screens/Navigation_cubit/navigation_bar_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rive/rive.dart';

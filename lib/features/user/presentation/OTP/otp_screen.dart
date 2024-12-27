@@ -2,10 +2,10 @@ import 'dart:developer';
 
 import 'package:e_commerce/core/utils/constants/app_numbers.dart';
 import 'package:e_commerce/core/Routes/app_routes.dart';
-import 'package:e_commerce/core/shared/widgets/Pin%20Put%20Template/only_bottom_cursor_pin_put.dart';
+import 'package:e_commerce/core/shared/widgets/Pin_Put/only_bottom_cursor_pin_put.dart';
 import 'package:e_commerce/core/shared/widgets/defualt_button.dart';
 import 'package:e_commerce/features/user/presentation/cubit/user_cubit.dart';
-import 'package:flutter/material.dart'; // Add the localization package
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -25,7 +25,8 @@ class _OtpScreenState extends State<OtpScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          AppLocalizations.of(context)!.otpVerification, // Use localized text here
+          AppLocalizations.of(context)!
+              .otpVerification, // Use localized text here
           style: TextStyle(
             color: Theme.of(context).colorScheme.secondary,
           ),
@@ -42,7 +43,8 @@ class _OtpScreenState extends State<OtpScreen> {
             children: [
               const SizedBox(height: padding4 * 12),
               Text(
-                AppLocalizations.of(context)!.otpVerification, // Use localized text here
+                AppLocalizations.of(context)!
+                    .otpVerification, // Use localized text here
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
@@ -83,7 +85,8 @@ class _OtpScreenState extends State<OtpScreen> {
                   return Column(
                     children: [
                       DefaultButton(
-                        text: AppLocalizations.of(context)!.continueText, // Use localized text here
+                        text: AppLocalizations.of(context)!
+                            .continueText, // Use localized text here
                         press: () {
                           context.read<UserCubit>().postOtpTrigger();
                         },
@@ -94,8 +97,10 @@ class _OtpScreenState extends State<OtpScreen> {
                           context.read<UserCubit>().resendOtpTrigger();
                         },
                         child: Text(
-                          AppLocalizations.of(context)!.resendOtp, // Use localized text here
-                          style: const TextStyle(decoration: TextDecoration.underline),
+                          AppLocalizations.of(context)!
+                              .resendOtp, // Use localized text here
+                          style: const TextStyle(
+                              decoration: TextDecoration.underline),
                         ),
                       ),
                     ],
@@ -124,7 +129,8 @@ class _OtpScreenState extends State<OtpScreen> {
             int remainingMinutes = remainingTimeInSeconds ~/ 60;
             int remainingSeconds = remainingTimeInSeconds % 60;
 
-            String formattedTime = '${remainingMinutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
+            String formattedTime =
+                '${remainingMinutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
 
             return Text(
               formattedTime,

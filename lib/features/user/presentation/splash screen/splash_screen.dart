@@ -71,7 +71,8 @@ class _SplashScreenState extends State<SplashScreen> {
                 DefaultButton(
                     text: AppLocalizations.of(context)!.continueSplash,
                     press: () {
-                      Navigator.of(context).pushReplacementNamed(AppRoutes.loginRoute);
+                      Navigator.of(context)
+                          .pushReplacementNamed(AppRoutes.loginRoute);
                     }),
                 const Spacer(
                   flex: 2,
@@ -91,7 +92,9 @@ class _SplashScreenState extends State<SplashScreen> {
       height: padding4,
       width: currentPage == index ? padding4 * 5 : padding4,
       decoration: BoxDecoration(
-        color: currentPage == index ? Theme.of(context).colorScheme.inversePrimary : Theme.of(context).colorScheme.surfaceContainer,
+        color: currentPage == index
+            ? Theme.of(context).colorScheme.inversePrimary
+            : Theme.of(context).colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(padding4),
       ),
     );

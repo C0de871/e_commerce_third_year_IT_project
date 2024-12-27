@@ -16,7 +16,10 @@ class UserRepositoryImpl extends UserRepository {
   final UserRemoteDataSource remoteDataSource;
   final UserLocalDataSource localDataSource;
 
-  UserRepositoryImpl({required this.remoteDataSource, required this.localDataSource, required this.networkInfo});
+  UserRepositoryImpl(
+      {required this.remoteDataSource,
+      required this.localDataSource,
+      required this.networkInfo});
   @override
   Future<Either<Failure, UserEntity>> loginUser({
     required Map<String, dynamic> bodyjson,
@@ -40,7 +43,8 @@ class UserRepositoryImpl extends UserRepository {
   }
 
   @override
-  Future<Either<Failure, SignUpEntity>> signUpUser({required Map<String, dynamic> jsonBody}) async {
+  Future<Either<Failure, SignUpEntity>> signUpUser(
+      {required Map<String, dynamic> jsonBody}) async {
     if (await networkInfo.isConnected!) {
       try {
         final remoteSignUpModel = await remoteDataSource.signUpUser(jsonBody);
@@ -102,7 +106,8 @@ class UserRepositoryImpl extends UserRepository {
     if (await networkInfo.isConnected!) {
       try {
         final remoteRefreshing = await remoteDataSource.refreshToken();
-        await localDataSource.cacheAccessToken(remoteRefreshing.refreshTokenDataEntity.accessToken);
+        await localDataSource.cacheAccessToken(
+            remoteRefreshing.refreshTokenDataEntity.accessToken);
         return Right(remoteRefreshing);
       } on ServerException catch (e) {
         return Left(Failure(errMessage: e.errorModel.errorMessage));

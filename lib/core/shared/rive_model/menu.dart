@@ -7,34 +7,50 @@ class Menu {
   Menu({required this.title, required this.rive});
 }
 
-
-
 List<Menu> sidebarMenus = [
   Menu(
     title: "Home",
-    rive: RiveModel(src: "assets/RiveAssets/icons.riv", artboard: "HOME", stateMachineName: "HOME_interactivity"),
+    rive: RiveModel(
+        src: "assets/RiveAssets/icons.riv",
+        artboard: "HOME",
+        stateMachineName: "HOME_interactivity"),
   ),
   Menu(
     title: "Search",
-    rive: RiveModel(src: "assets/RiveAssets/icons.riv", artboard: "SEARCH", stateMachineName: "SEARCH_Interactivity"),
+    rive: RiveModel(
+        src: "assets/RiveAssets/icons.riv",
+        artboard: "SEARCH",
+        stateMachineName: "SEARCH_Interactivity"),
   ),
   Menu(
     title: "Favorites",
-    rive: RiveModel(src: "assets/RiveAssets/icons.riv", artboard: "LIKE/STAR", stateMachineName: "STAR_Interactivity"),
+    rive: RiveModel(
+        src: "assets/RiveAssets/icons.riv",
+        artboard: "LIKE/STAR",
+        stateMachineName: "STAR_Interactivity"),
   ),
   Menu(
     title: "Help",
-    rive: RiveModel(src: "assets/RiveAssets/icons.riv", artboard: "CHAT", stateMachineName: "CHAT_Interactivity"),
+    rive: RiveModel(
+        src: "assets/RiveAssets/icons.riv",
+        artboard: "CHAT",
+        stateMachineName: "CHAT_Interactivity"),
   ),
 ];
 List<Menu> sidebarMenus2 = [
   Menu(
     title: "History",
-    rive: RiveModel(src: "assets/RiveAssets/icons.riv", artboard: "TIMER", stateMachineName: "TIMER_Interactivity"),
+    rive: RiveModel(
+        src: "assets/RiveAssets/icons.riv",
+        artboard: "TIMER",
+        stateMachineName: "TIMER_Interactivity"),
   ),
   Menu(
     title: "Notifications",
-    rive: RiveModel(src: "assets/RiveAssets/icons.riv", artboard: "BELL", stateMachineName: "BELL_Interactivity"),
+    rive: RiveModel(
+        src: "assets/RiveAssets/icons.riv",
+        artboard: "BELL",
+        stateMachineName: "BELL_Interactivity"),
   ),
 ];
 

@@ -17,7 +17,7 @@ class DioConsumer extends ApiConsumer {
       responseHeader: true,
       error: true,
     ));
-    dio.interceptors.add(AuthInterceptor(dioConsumer:this));
+    dio.interceptors.add(AuthInterceptor(dioConsumer: this));
   }
 
 //!POST

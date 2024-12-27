@@ -36,11 +36,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: padding4 * 3),
                 const DiscountBanner(),
                 const SizedBox(height: padding4 * 7),
-                SectionTitle(text: AppLocalizations.of(context)!.specialForYou, press: () {}),
+                SectionTitle(
+                    text: AppLocalizations.of(context)!.specialForYou,
+                    press: () {}),
                 const SizedBox(height: padding4 * 5),
                 const PopularStores(),
                 const SizedBox(height: padding4 * 7),
-                SectionTitle(text: AppLocalizations.of(context)!.popularProduct, press: () {}),
+                SectionTitle(
+                    text: AppLocalizations.of(context)!.popularProduct,
+                    press: () {}),
                 const SizedBox(height: padding4 * 5),
                 const PopularProductList(),
                 const SizedBox(height: 100),

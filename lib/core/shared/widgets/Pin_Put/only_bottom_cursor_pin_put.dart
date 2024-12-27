@@ -1,4 +1,3 @@
-
 import 'package:e_commerce/features/user/presentation/cubit/user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 
-//onlyBottomCursor Template:
+//onlyBottomCursor :
 class OnlyBottomCursor extends StatefulWidget {
   const OnlyBottomCursor({super.key});
 

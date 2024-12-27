@@ -9,7 +9,8 @@ class RefreshTokenModelData extends RefreshTokenDataEntity {
     required super.expiresIn,
   });
 
-  factory RefreshTokenModelData.fromMap(Map<String, dynamic> data) => RefreshTokenModelData(
+  factory RefreshTokenModelData.fromMap(Map<String, dynamic> data) =>
+      RefreshTokenModelData(
         accessToken: data[ApiKey.accessToken],
         expiresIn: data[ApiKey.expiresIn],
       );
@@ -20,7 +21,8 @@ class RefreshTokenModelData extends RefreshTokenDataEntity {
       };
 
   factory RefreshTokenModelData.fromJson(String data) {
-    return RefreshTokenModelData.fromMap(json.decode(data) as Map<String, dynamic>);
+    return RefreshTokenModelData.fromMap(
+        json.decode(data) as Map<String, dynamic>);
   }
 
   String toJson() => json.encode(toMap());
