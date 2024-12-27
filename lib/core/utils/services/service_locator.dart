@@ -1,5 +1,8 @@
 import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:dio/dio.dart';
+import 'package:e_commerce/features/favorites/data/datasources/favorites_remote_data_source.dart';
+import 'package:e_commerce/features/favorites/data/repositories/favorites_repository_impl.dart';
+import 'package:e_commerce/features/favorites/domain/repositories/favorites_repository.dart';
 import 'package:e_commerce/features/products/data/dataSources/product_remote_data_source.dart';
 import 'package:e_commerce/features/products/data/repository/product_repository_impl.dart';
 import 'package:e_commerce/features/products/domain/repository/product_repository.dart';
@@ -18,6 +21,7 @@ import 'package:e_commerce/features/user/domain/usecases/resend_otp.dart';
 import 'package:e_commerce/features/user/domain/usecases/sign_up_user.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../features/favorites/domain/usecases/toggle_fav_on.dart';
 import '../../../features/stores/data/repository/store_repository_impl.dart';
 import '../../databases/cache/secure_storage_helper.dart';
 import '../../databases/connection/network_info.dart';
@@ -41,6 +45,7 @@ void setupServicesLocator() {
   getIt.registerLazySingleton<UserLocalDataSource>(() => UserLocalDataSource(cache: getIt()));
   getIt.registerLazySingleton<ProductRemoteDataSource>(() => ProductRemoteDataSource(apiConsumer: getIt(), cacheHelper: getIt()));
   getIt.registerLazySingleton<StoreRemoteDataSource>(() => StoreRemoteDataSource(api: getIt(), cacheHelper: getIt()));
+  getIt.registerLazySingleton<FavoritesRemoteDataSource>(() => FavoritesRemoteDataSource(cacheHelper: getIt(), api: getIt()));
 
   //! Repository
   getIt.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(
@@ -57,6 +62,10 @@ void setupServicesLocator() {
         network: getIt(),
         remoteDataSource: getIt(),
       ));
+  getIt.registerLazySingleton<FavoritesRepository>(() => FavoritesRepositoryImpl(
+        remoteDataSource: getIt(),
+        networkInfo: getIt(),
+      ));
 
   //! Use Cases
   getIt.registerLazySingleton<LoginUser>(() => LoginUser(userRepository: getIt()));
@@ -66,4 +75,5 @@ void setupServicesLocator() {
   getIt.registerLazySingleton<GetAllProducts>(() => GetAllProducts(productRepository: getIt()));
   getIt.registerLazySingleton<GetAllStores>(() => GetAllStores(storeRepository: getIt()));
   getIt.registerLazySingleton<RefreshToken>(() => RefreshToken(userRepository: getIt()));
+  getIt.registerLazySingleton<ToggleFavOn>(() => ToggleFavOn(repository: getIt()));
 }

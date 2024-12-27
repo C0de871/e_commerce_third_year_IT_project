@@ -2,7 +2,7 @@ class EndPoints {
   static const String baserUrl = "http://192.168.1.8:8000/api/";
   static const String login = "login";
   static const String signUp = "register";
-  static const String template = "template";
+  static const String toggleFavOn = "ToggleFavOn";
   static const String otpResend = "resend-otp";
   static const String otpValidate = "validate-otp";
   static const String getAllProducts = "products";
@@ -11,6 +11,7 @@ class EndPoints {
 }
 
 class ApiKey {
+  static String success = "success";
   static String refreshTokenHeader = "Refresh-Token";
   static String requiredAuth = "requiresAuth";
   static String successful = "successful";

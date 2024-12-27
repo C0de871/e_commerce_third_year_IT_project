@@ -1,8 +1,8 @@
 import 'package:e_commerce/core/databases/api/end_points.dart';
 
-class TemplateParams {
+class ToggleFavOnParams {
   final String id;
-  TemplateParams({required this.id});
+  ToggleFavOnParams({required this.id});
 }
 
 class ProductParams {
