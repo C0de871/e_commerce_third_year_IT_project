@@ -1,6 +1,7 @@
 import 'package:e_commerce/core/constants/app_routes.dart';
+import 'package:e_commerce/features/product/presentation/cubit/counter_cubit.dart';
 import 'package:e_commerce/features/user/presentation/OTP/otp_screen.dart';
-import 'package:e_commerce/features/user/presentation/cart_screen/cart_screen.dart';
+import 'package:e_commerce/features/product/presentation/cart_screen/cart_screen.dart';
 import 'package:e_commerce/features/user/presentation/cubit/user_cubit.dart';
 import 'package:e_commerce/features/user/presentation/login_screen/logInScreen.dart';
 import 'package:e_commerce/features/user/presentation/login_success_screen/login_success_screen.dart';
@@ -12,6 +13,7 @@ import '../../features/user/presentation/sign up auth screen/sign_up_auth_screen
 
 class AppRouter {
   UserCubit? _userCubit;
+  CounterCubit? _counterCubit;
 
   UserCubit get userCubit {
     if (_userCubit == null || _userCubit!.isClosed) {
@@ -23,17 +25,27 @@ class AppRouter {
     return _userCubit!;
   }
 
+  CounterCubit get counterCubit {
+    if (_counterCubit == null || _counterCubit!.isClosed) {
+      _counterCubit = CounterCubit();
+    }
+    _counterCubit?.stream.listen((_) {}, onDone: () {
+      _counterCubit = null; // Nullify the reference when closed
+    });
+    return _counterCubit!;
+  }
+
   Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case AppRoutes.cartScreen:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider.value(
-            value: userCubit,
-            child: const CartScreen(),
-          ),
-        );
+      // //!cart route
+      // case AppRoutes.cartScreen:
+      //   return MaterialPageRoute(
+      //       builder: (_) => MultiBlocProvider(providers: [
+      //             BlocProvider.value(value: userCubit),
+      //             BlocProvider.value(value: counterCubit),
+      //           ], child: const CartScreen()));
 
-      //!sign up auth route:
+       //!sign up auth route:
       case AppRoutes.signUpauthRoute:
         return MaterialPageRoute(
           builder: (_) => BlocProvider.value(
