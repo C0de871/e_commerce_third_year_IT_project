@@ -5,10 +5,15 @@ class EndPoints {
   static const String template = "template/";
   static const String otpResend = "resend-otp";
   static const String otpValidate = "validate-otp";
+  static const String getCart="carts/products";
+  static const String modifyCart="carts/update-quantities";
+  static const String deleteCart="carts/delete-products";
+  static const String clearCart="carts/delete-all";
+
 }
 
 class ApiKey {
-  static String otp="otp";
+  static String otp = "otp";
   static String id = "id";
   static String message = "message";
   static String statusCode = "status_code";
@@ -23,4 +28,17 @@ class ApiKey {
   static String lastName = "last_name";
   static String phoneNumber = "phone_number";
   static String address = "location";
+  static String totalPrice = "total_price";
+  static String storeId = "store_id";
+  static String storeName = "store_name";
+  static String orderQuantity = "order_quantity";
+  static String storeProductId = "store_product_id";
+  static String quantity = "quantity";
+  static String price = "price";
+  static String description = "description";
+  static String productId = "product_id";
+  static String productName = "product_name";
+  static String mainImage = "main_image";
+  static String data = "data";
+  
 }
