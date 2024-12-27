@@ -2,7 +2,9 @@ import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:dio/dio.dart';
 import 'package:e_commerce/features/favorites/data/datasources/favorites_remote_data_source.dart';
 import 'package:e_commerce/features/favorites/data/repositories/favorites_repository_impl.dart';
+import 'package:e_commerce/features/favorites/data/services/product_favorite_service_impl.dart';
 import 'package:e_commerce/features/favorites/domain/repositories/favorites_repository.dart';
+import 'package:e_commerce/features/favorites/domain/service/product_favorite_service.dart';
 import 'package:e_commerce/features/products/data/dataSources/product_remote_data_source.dart';
 import 'package:e_commerce/features/products/data/repository/product_repository_impl.dart';
 import 'package:e_commerce/features/products/domain/repository/product_repository.dart';
@@ -32,6 +34,10 @@ import '../../databases/cache/shared_prefs_helper.dart';
 final getIt = GetIt.instance; // Singleton instance of GetIt
 
 void setupServicesLocator() {
+
+  //!service:
+   getIt.registerLazySingleton<ProductFavoriteService>(() => ProductFavoriteServiceImpl());
+
   //! Core
   getIt.registerLazySingleton<SharedPrefsHelper>(() => SharedPrefsHelper());
   getIt.registerLazySingleton<SecureStorageHelper>(() => SecureStorageHelper());
