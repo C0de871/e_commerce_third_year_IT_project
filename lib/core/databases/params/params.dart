@@ -1,8 +1,13 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:e_commerce/core/databases/api/end_points.dart';
 
 class ToggleFavOnParams {
-  final String id;
-  ToggleFavOnParams({required this.id});
+  final String productID;
+  final String storeID;
+  ToggleFavOnParams({
+    required this.productID,
+    required this.storeID,
+  });
 }
 
 class ProductParams {

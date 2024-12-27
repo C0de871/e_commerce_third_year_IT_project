@@ -23,7 +23,7 @@ class FavoritesRemoteDataSource {
       ApiKey.requiredAuth: isLoggedIn,
     };
     final response = await api.get(
-      "${EndPoints.toggleFavOn}/${params.id}",
+      "${EndPoints.toggleFavOn}/${params.storeID}/${params.productID}",
       headers: headers,
       extra: extra,
     );
