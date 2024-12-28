@@ -12,6 +12,7 @@ import 'package:e_commerce/features/favorites/presentation/cubit/toggle_fav_cubi
 import 'package:e_commerce/features/products/domain/entities/product_enitty.dart';
 import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
 
+import '../../../../../core/Routes/app_routes.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/constants/app_numbers.dart';
 import '../../../../../core/utils/constants/app_rive.dart';
@@ -45,7 +46,9 @@ class ProductCard extends StatelessWidget {
         return Material(
           color: Colors.transparent,
           child: InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed(AppRoutes.productDetailsScreen);
+            },
             child: Padding(
               padding: const EdgeInsets.all(padding4 * 4),
               child: BlocBuilder<ProductCubit, ProductState>(
