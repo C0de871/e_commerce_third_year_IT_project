@@ -2,7 +2,8 @@ class EndPoints {
   static const String baserUrl = "http://192.168.1.8:8000/api/";
   static const String login = "login";
   static const String signUp = "register";
-  static const String toggleFavOn = "favorites/add";
+  static const String toggleFavOn = "favorites/";
+  static const String toggleFavOff = "favorites/";
   static const String otpResend = "resend-otp";
   static const String otpValidate = "validate-otp";
   static const String getAllProducts = "products";
@@ -68,4 +69,5 @@ class CacheKey {
   static String user = "user";
   static String accessToken = "accessToken";
   static String refreshToken = "refreshToken";
+  static String isFirstTime = "isFirstTime";
 }
