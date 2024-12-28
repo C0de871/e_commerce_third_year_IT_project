@@ -1,12 +1,20 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/src/widgets/image.dart' as FlutterImage;
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rive/rive.dart';
+
 import 'package:e_commerce/core/shared/widgets/skeleton.dart';
 import 'package:e_commerce/core/utils/constants/app_images.dart';
+import 'package:e_commerce/features/favorites/presentation/cubit/toggle_fav_cubit.dart';
 import 'package:e_commerce/features/products/domain/entities/product_enitty.dart';
 import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
 
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/constants/app_numbers.dart';
+import '../../../../../core/utils/constants/app_rive.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -33,8 +41,7 @@ class ProductCard extends StatelessWidget {
         ],
       ),
       // width: MediaQuery.sizeOf(context).width / 2,
-      child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
+      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
         return Material(
           color: Colors.transparent,
           child: InkWell(
@@ -90,14 +97,13 @@ class ProductCard extends StatelessWidget {
                             ),
                             const SizedBox(height: padding4 * 4),
                             Row(
-                              // crossAxisAlignment: CrossAxisAlignment.sta,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 ProductPrice(
                                   productPrice: product!.price,
                                 ),
                                 Faviourt(
-                                  isFav: product!.isFavorite,
+                                  product: product,
                                 ),
                               ],
                             ),
@@ -223,34 +229,88 @@ class LoadingProductName extends StatelessWidget {
 class Faviourt extends StatefulWidget {
   const Faviourt({
     super.key,
-    required this.isFav,
+    required this.product,
   });
 
-  final int isFav;
+  final ProductEntity? product;
 
   @override
   State<Faviourt> createState() => _FaviourtState();
 }
 
 class _FaviourtState extends State<Faviourt> {
+  StateMachineController? controller;
+  Artboard? artboard;
+  SMIBool? isFavoriteSMI;
+
+  @override
+  void initState() {
+    log("init animated  heart  state");
+    rootBundle.load(AppRive.heartIcons).then((value) async {
+      await RiveFile.initialize();
+      final file = RiveFile.import(value);
+      final art = file.artboardByName("favorite ");
+      controller = StateMachineController.fromArtboard(art!, "State Machine 1");
+      if (controller != null) {
+        art.addController(controller!);
+        log("${controller!.inputs}");
+        for (var input in controller!.inputs) {
+          if (input is SMIBool) {
+            log("is SMI bool");
+            isFavoriteSMI = input;
+          } else if (input is SMINumber) {
+            log("is SMI Number");
+          } else if (input is SMITrigger) {
+            log("is SMI Trigger");
+          } else {
+            log("NO input found!");
+          }
+        }
+        setState(() {
+          artboard = art;
+        });
+      }
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(padding4 * 1.5),
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: widget.isFav == 1
-            ? const Color.fromARGB(255, 251, 207, 204)
-            : AppColors.disableFavContainer,
-      ),
-      child: InkWell(
-        onTap: () {},
-        borderRadius: BorderRadius.circular(20),
-        child: Icon(
-          Icons.favorite,
-          size: 20,
-          color: widget.isFav == 1 ? Colors.red : AppColors.disableFav,
+    isFavoriteSMI?.value = widget.product!.isFavorite == 1;
+    return GestureDetector(
+      onTap: () async {
+        if (widget.product?.isFavorite == 0) {
+          await context.read<ToggleFavCubit>().toggleFavOnTrigger(
+                storeID: widget.product!.storeId,
+                productID: widget.product!.productId,
+              );
+        } else {
+          await context.read<ToggleFavCubit>().toggleFavOffTrigger(
+                storeID: widget.product!.storeId,
+                productID: widget.product!.productId,
+              );
+        }
+      },
+      // borderRadius: BorderRadius.circular(20),
+      // child: Icon(
+      //   Icons.favorite,
+      //   size: 20,
+      //   color: widget.product?.isFavorite == 1 ? Colors.red : AppColors.disableFav,
+      // ),
+      child: Container(
+        padding: EdgeInsets.only(top: 1),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: widget.product!.isFavorite == 1 ? const Color.fromARGB(255, 251, 207, 204) : AppColors.disableFavContainer,
         ),
+        child: artboard == null
+            ? SizedBox()
+            : SizedBox(
+                width: 36,
+                height: 36,
+                child: Rive(artboard: (artboard)!),
+              ),
       ),
     );
   }
@@ -274,8 +334,7 @@ class LoadingFaviourt extends StatelessWidget {
 }
 
 class ProductImage extends StatelessWidget {
-  const ProductImage(
-      {super.key, required this.mainImageUrl, required this.constraints});
+  const ProductImage({super.key, required this.mainImageUrl, required this.constraints});
 
   final String mainImageUrl;
   final BoxConstraints constraints;
@@ -289,11 +348,10 @@ class ProductImage extends StatelessWidget {
         color: AppColors.imageBackground,
         borderRadius: BorderRadius.circular(20),
       ),
-      //TODO: uncomment to get the image from the api:
-      // child: Image.network(
-      //   mainImageUrl,
-      // ),
-      child: Image.asset(AppImages.tShirt),
+      child: FlutterImage.Image.network(
+        mainImageUrl,
+      ),
+      // child: FlutterImage.Image.asset(AppImages.tShirt),
     );
   }
 }
