@@ -1,7 +1,7 @@
-class ToggleFavOnEntity {
+class ToggleFavEntity {
   final String message;
   final bool success;
-  ToggleFavOnEntity({
+  ToggleFavEntity({
     required this.message,
     required this.success,
   });

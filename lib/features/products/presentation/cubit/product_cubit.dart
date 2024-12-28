@@ -1,6 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:e_commerce/core/databases/params/params.dart';
@@ -38,10 +39,11 @@ class ProductCubit extends Cubit<ProductState> {
   }
 
   //! listen to favorite update:
-  void _listenToFavoriteUpdates() {
+  void _listenToFavoriteUpdates() {                
     _favoriteSubscription = _favoriteService.favoriteUpdates.listen((update) {
+      log("here is stream ${update.isFavorite}");
       final updateProducts = (state as GetAllProductsSuccess).productsList.map((product) {
-        if (product.storeId.toString() == update.storeID) {
+        if ((product.storeId.toString() == update.storeID) && (product.productId.toString() == update.productId)) {
           return product.copyWith(isFavorite: update.isFavorite);
         }
         return product;

@@ -1,17 +1,15 @@
-import 'dart:convert';
-
 import 'package:e_commerce/core/databases/api/end_points.dart';
-import 'package:e_commerce/features/favorites/domain/entities/toggle_fav_on_entitiy.dart';
+import 'package:e_commerce/features/favorites/domain/entities/toggle_fav_entitiy.dart';
 
-class ToggleFavOnModel extends ToggleFavOnEntity {
-  ToggleFavOnModel({
+class ToggleFavModel extends ToggleFavEntity {
+  ToggleFavModel({
     required super.success,
     required super.message,
   });
 
-  factory ToggleFavOnModel.fromMap(Map<String, dynamic> data) {
-    return ToggleFavOnModel(
-      success: data[ApiKey.success],
+  factory ToggleFavModel.fromMap(Map<String, dynamic> data) {
+    return ToggleFavModel(
+      success: data[ApiKey.successful],
       message: data[ApiKey.message],
     );
   }
@@ -33,11 +31,11 @@ class ToggleFavOnModel extends ToggleFavOnEntity {
   // /// Converts [ToggleFavOnModel] to a JSON string.
   // String toJson() => json.encode(toMap());
 
-  ToggleFavOnModel copyWith({
+  ToggleFavModel copyWith({
     bool? success,
     String? message,
   }) {
-    return ToggleFavOnModel(
+    return ToggleFavModel(
       success: success ?? this.success,
       message: message ?? this.message,
     );

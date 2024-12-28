@@ -23,6 +23,7 @@ import 'package:e_commerce/features/user/domain/usecases/resend_otp.dart';
 import 'package:e_commerce/features/user/domain/usecases/sign_up_user.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../features/favorites/domain/usecases/togge_fav_off.dart';
 import '../../../features/favorites/domain/usecases/toggle_fav_on.dart';
 import '../../../features/stores/data/repository/store_repository_impl.dart';
 import '../../databases/cache/secure_storage_helper.dart';
@@ -34,9 +35,8 @@ import '../../databases/cache/shared_prefs_helper.dart';
 final getIt = GetIt.instance; // Singleton instance of GetIt
 
 void setupServicesLocator() {
-
   //!service:
-   getIt.registerLazySingleton<ProductFavoriteService>(() => ProductFavoriteServiceImpl());
+  getIt.registerLazySingleton<ProductFavoriteService>(() => ProductFavoriteServiceImpl());
 
   //! Core
   getIt.registerLazySingleton<SharedPrefsHelper>(() => SharedPrefsHelper());
@@ -82,4 +82,5 @@ void setupServicesLocator() {
   getIt.registerLazySingleton<GetAllStores>(() => GetAllStores(storeRepository: getIt()));
   getIt.registerLazySingleton<RefreshToken>(() => RefreshToken(userRepository: getIt()));
   getIt.registerLazySingleton<ToggleFavOn>(() => ToggleFavOn(repository: getIt()));
+  getIt.registerLazySingleton<ToggleFavOff>(() => ToggleFavOff(repository: getIt()));
 }
