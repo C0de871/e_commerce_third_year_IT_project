@@ -51,8 +51,7 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     Text(
                       AppLocalizations.of(context)!.dontHaveAccount,
-                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                          color: Theme.of(context).colorScheme.outline),
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).colorScheme.outline),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -60,15 +59,10 @@ class LoginScreen extends StatelessWidget {
                       },
                       child: Text(
                         AppLocalizations.of(context)!.signUp,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .copyWith(
+                        style: Theme.of(context).textTheme.titleMedium!.copyWith(
                               decoration: TextDecoration.underline,
-                              decorationColor:
-                                  Theme.of(context).colorScheme.inversePrimary,
-                              color:
-                                  Theme.of(context).colorScheme.inversePrimary,
+                              decorationColor: Theme.of(context).colorScheme.inversePrimary,
+                              color: Theme.of(context).colorScheme.inversePrimary,
                             ),
                       ),
                     )
@@ -108,12 +102,11 @@ class _LoginFormState extends State<LoginForm> {
           const SizedBox(
             height: padding4 * 8,
           ),
-          AuthTextField(
+          AnimatedPasswordField(
             controller: context.read<UserCubit>().loginPasswordController,
             label: AppLocalizations.of(context)!.password,
             hint: AppLocalizations.of(context)!.enterYourPassword,
             svgIconPath: AppImages.passwordIconPath,
-            isObsure: true,
             validator: (value) {
               return _validatePassword(context, value);
             },
