@@ -1,3 +1,4 @@
+import 'package:e_commerce/core/utils/constants/app_numbers.dart';
 import 'package:flutter/material.dart';
 
 class RoundedIconBtn extends StatelessWidget {
@@ -17,8 +18,10 @@ class RoundedIconBtn extends StatelessWidget {
       width: 40,
       child: TextButton(
         style: TextButton.styleFrom(
-          backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
-          padding: EdgeInsets.zero,
+          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+          padding: EdgeInsets.symmetric(
+            vertical: padding4,
+          ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(50),
           ),
