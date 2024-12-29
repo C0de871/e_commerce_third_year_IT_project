@@ -47,7 +47,10 @@ class ProductCard extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: () {
-              Navigator.of(context).pushNamed(AppRoutes.productDetailsScreen);
+              Navigator.of(context).pushNamed(
+                AppRoutes.productDetailsScreen,
+                arguments: product,
+              );
             },
             child: Padding(
               padding: const EdgeInsets.all(padding4 * 4),
