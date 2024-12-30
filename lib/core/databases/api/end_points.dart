@@ -1,3 +1,5 @@
+import '../params/params.dart';
+
 class EndPoints {
   static const String baserUrl = "http://192.168.1.8:8000/api/";
   static const String login = "login";
@@ -9,9 +11,9 @@ class EndPoints {
   static const String getAllProducts = "products";
   static const String getAllStores = "stores";
   static const String refreshToken = "refresh";
-
-  //template:
-  static const String getProductDetails = "getProductDetails";
+  static String getProductDetails(GetProductDetailsParams params) {
+    return "stores/${params.storeID}/${params.productID}/show";
+  }
 }
 
 class ApiKey {
@@ -67,6 +69,8 @@ class ApiKey {
   static String hasMorePage = "hasMorePage";
 
   static String subImages = "sub_images";
+  static String catagoryID = "category_id";
+  static String catagoryName = "category_name";
 }
 
 class CacheKey {
