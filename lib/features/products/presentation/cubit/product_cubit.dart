@@ -31,7 +31,8 @@ class ProductCubit extends Cubit<ProductState> {
   //! get all products:
   dynamic getAllProducts({int page = 1}) async {
     emit(GetAllProductsLoading());
-    final response = await getAllProductsUseCase.call(params: ProductParams(page: page));
+    final response =
+        await getAllProductsUseCase.call(params: ProductParams(page: page));
     response.fold(
       (failure) => emit(GetAllProductsFailed(errMessage: failure.errMessage)),
       (productsList) => emit(GetAllProductsSuccess(productsList: productsList)),
@@ -39,16 +40,19 @@ class ProductCubit extends Cubit<ProductState> {
   }
 
   //! listen to favorite update:
-  void _listenToFavoriteUpdates() {                
+  void _listenToFavoriteUpdates() {
     _favoriteSubscription = _favoriteService.favoriteUpdates.listen((update) {
       log("here is stream ${update.isFavorite}");
-      final updateProducts = (state as GetAllProductsSuccess).productsList.map((product) {
-        if ((product.storeId.toString() == update.storeID) && (product.productId.toString() == update.productId)) {
+      final updateProducts =
+          (state as GetAllProductsSuccess).productsList.map((product) {
+        if ((product.storeId.toString() == update.storeID) &&
+            (product.productId.toString() == update.productId)) {
           return product.copyWith(isFavorite: update.isFavorite);
         }
         return product;
       }).toList();
-      emit((state as GetAllProductsSuccess).copyWith(productsList: updateProducts));
+      emit((state as GetAllProductsSuccess)
+          .copyWith(productsList: updateProducts));
     });
   }
 

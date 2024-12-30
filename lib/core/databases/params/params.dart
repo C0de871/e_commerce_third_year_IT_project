@@ -10,6 +10,13 @@ class ToggleFavParams {
   });
 }
 
+class GetProductDetailsParams {
+  int id;
+  GetProductDetailsParams({
+    required this.id,
+  });
+}
+
 class ProductParams {
   int page = 1;
   ProductParams({required this.page});

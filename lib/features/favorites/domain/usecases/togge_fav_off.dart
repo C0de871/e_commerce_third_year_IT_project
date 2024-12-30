@@ -10,7 +10,8 @@ class ToggleFavOff {
 
   ToggleFavOff({required this.repository});
 
-  Future<Either<Failure, ToggleFavEntity>> call({required ToggleFavParams params}) {
+  Future<Either<Failure, ToggleFavEntity>> call(
+      {required ToggleFavParams params}) {
     return repository.getToggleFavOff(params: params);
   }
 }

@@ -36,22 +36,29 @@ final getIt = GetIt.instance; // Singleton instance of GetIt
 
 void setupServicesLocator() {
   //!service:
-  getIt.registerLazySingleton<ProductFavoriteService>(() => ProductFavoriteServiceImpl());
+  getIt.registerLazySingleton<ProductFavoriteService>(
+      () => ProductFavoriteServiceImpl());
 
   //! Core
   getIt.registerLazySingleton<SharedPrefsHelper>(() => SharedPrefsHelper());
   getIt.registerLazySingleton<SecureStorageHelper>(() => SecureStorageHelper());
   getIt.registerLazySingleton<Dio>(() => Dio());
   getIt.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: getIt()));
-  getIt.registerLazySingleton<DataConnectionChecker>(() => DataConnectionChecker());
+  getIt.registerLazySingleton<DataConnectionChecker>(
+      () => DataConnectionChecker());
   getIt.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(getIt()));
 
   //! Data Sources
-  getIt.registerLazySingleton<UserRemoteDataSource>(() => UserRemoteDataSource(api: getIt(), cacheHelper: getIt()));
-  getIt.registerLazySingleton<UserLocalDataSource>(() => UserLocalDataSource(cache: getIt()));
-  getIt.registerLazySingleton<ProductRemoteDataSource>(() => ProductRemoteDataSource(apiConsumer: getIt(), cacheHelper: getIt()));
-  getIt.registerLazySingleton<StoreRemoteDataSource>(() => StoreRemoteDataSource(api: getIt(), cacheHelper: getIt()));
-  getIt.registerLazySingleton<FavoritesRemoteDataSource>(() => FavoritesRemoteDataSource(cacheHelper: getIt(), api: getIt()));
+  getIt.registerLazySingleton<UserRemoteDataSource>(
+      () => UserRemoteDataSource(api: getIt(), cacheHelper: getIt()));
+  getIt.registerLazySingleton<UserLocalDataSource>(
+      () => UserLocalDataSource(cache: getIt()));
+  getIt.registerLazySingleton<ProductRemoteDataSource>(() =>
+      ProductRemoteDataSource(apiConsumer: getIt(), cacheHelper: getIt()));
+  getIt.registerLazySingleton<StoreRemoteDataSource>(
+      () => StoreRemoteDataSource(api: getIt(), cacheHelper: getIt()));
+  getIt.registerLazySingleton<FavoritesRemoteDataSource>(
+      () => FavoritesRemoteDataSource(cacheHelper: getIt(), api: getIt()));
 
   //! Repository
   getIt.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(
@@ -68,19 +75,28 @@ void setupServicesLocator() {
         network: getIt(),
         remoteDataSource: getIt(),
       ));
-  getIt.registerLazySingleton<FavoritesRepository>(() => FavoritesRepositoryImpl(
-        remoteDataSource: getIt(),
-        networkInfo: getIt(),
-      ));
+  getIt
+      .registerLazySingleton<FavoritesRepository>(() => FavoritesRepositoryImpl(
+            remoteDataSource: getIt(),
+            networkInfo: getIt(),
+          ));
 
   //! Use Cases
-  getIt.registerLazySingleton<LoginUser>(() => LoginUser(userRepository: getIt()));
-  getIt.registerLazySingleton<SignUpUser>(() => SignUpUser(userRepository: getIt()));
-  getIt.registerLazySingleton<ResendOtp>(() => ResendOtp(userRepository: getIt()));
+  getIt.registerLazySingleton<LoginUser>(
+      () => LoginUser(userRepository: getIt()));
+  getIt.registerLazySingleton<SignUpUser>(
+      () => SignUpUser(userRepository: getIt()));
+  getIt.registerLazySingleton<ResendOtp>(
+      () => ResendOtp(userRepository: getIt()));
   getIt.registerLazySingleton<PostOtp>(() => PostOtp(userRepository: getIt()));
-  getIt.registerLazySingleton<GetAllProducts>(() => GetAllProducts(productRepository: getIt()));
-  getIt.registerLazySingleton<GetAllStores>(() => GetAllStores(storeRepository: getIt()));
-  getIt.registerLazySingleton<RefreshToken>(() => RefreshToken(userRepository: getIt()));
-  getIt.registerLazySingleton<ToggleFavOn>(() => ToggleFavOn(repository: getIt()));
-  getIt.registerLazySingleton<ToggleFavOff>(() => ToggleFavOff(repository: getIt()));
+  getIt.registerLazySingleton<GetAllProducts>(
+      () => GetAllProducts(productRepository: getIt()));
+  getIt.registerLazySingleton<GetAllStores>(
+      () => GetAllStores(storeRepository: getIt()));
+  getIt.registerLazySingleton<RefreshToken>(
+      () => RefreshToken(userRepository: getIt()));
+  getIt.registerLazySingleton<ToggleFavOn>(
+      () => ToggleFavOn(repository: getIt()));
+  getIt.registerLazySingleton<ToggleFavOff>(
+      () => ToggleFavOff(repository: getIt()));
 }

@@ -9,6 +9,9 @@ class EndPoints {
   static const String getAllProducts = "products";
   static const String getAllStores = "stores";
   static const String refreshToken = "refresh";
+
+  //template:
+  static const String getProductDetails = "getProductDetails";
 }
 
 class ApiKey {
@@ -62,6 +65,8 @@ class ApiKey {
   static String currentPage = "currentPage";
   static String totalPages = "totalPages";
   static String hasMorePage = "hasMorePage";
+
+  static String subImages = "sub_images";
 }
 
 class CacheKey {
