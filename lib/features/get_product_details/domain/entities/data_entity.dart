@@ -11,6 +11,9 @@ class DataEntity {
   String? description;
   String? mainImage;
   List<SubImageEntity>? subImages;
+  int? catagoryID;
+  String? catagoryName;
+  bool? isFavorite;
   DataEntity({
     this.storeId,
     this.storeName,
@@ -21,5 +24,8 @@ class DataEntity {
     this.description,
     this.mainImage,
     this.subImages,
+    this.catagoryID,
+    this.catagoryName,
+    this.isFavorite,
   });
 }

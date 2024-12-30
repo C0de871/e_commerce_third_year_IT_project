@@ -1,4 +1,3 @@
-
 import '../../../../core/databases/api/end_points.dart';
 import '../../domain/entities/data_entity.dart';
 import 'sub_image_model.dart';
@@ -14,6 +13,9 @@ class DataModel extends DataEntity {
     super.description,
     super.mainImage,
     super.subImages,
+    super.catagoryID,
+    super.catagoryName,
+    super.isFavorite,
   });
 
   factory DataModel.fromMap(Map<String, dynamic> data) => DataModel(
@@ -26,6 +28,9 @@ class DataModel extends DataEntity {
         description: data[ApiKey.description] as String?,
         mainImage: data[ApiKey.mainImageUrl] as String?,
         subImages: (data[ApiKey.subImages] as List<dynamic>?)?.map((e) => SubImageModel.fromMap(e as Map<String, dynamic>)).toList(),
+        catagoryID: data[ApiKey.catagoryID] as int?,
+        catagoryName: data[ApiKey.catagoryName] as String?,
+        isFavorite: data[ApiKey.isFavorite] as bool?,
       );
 
   Map<String, dynamic> toMap() => {
@@ -38,6 +43,9 @@ class DataModel extends DataEntity {
         ApiKey.description: description,
         ApiKey.mainImageUrl: mainImage,
         ApiKey.subImages: subImages?.map((e) => (e as SubImageModel).toMap()).toList(),
+        ApiKey.catagoryID: catagoryID,
+        ApiKey.catagoryName: catagoryName,
+        ApiKey.isFavorite: isFavorite,
       };
 
   DataModel copyWith({
@@ -50,6 +58,9 @@ class DataModel extends DataEntity {
     String? description,
     String? mainImage,
     List<SubImageModel>? subImages,
+    int? catagoryID,
+    String? catagoryName,
+    bool? isFavorite,
   }) {
     return DataModel(
       storeId: storeId ?? this.storeId,
@@ -61,6 +72,9 @@ class DataModel extends DataEntity {
       description: description ?? this.description,
       mainImage: mainImage ?? this.mainImage,
       subImages: subImages ?? this.subImages,
+      catagoryID: catagoryID ?? this.catagoryID,
+      catagoryName: catagoryName ?? this.catagoryName,
+      isFavorite: isFavorite ?? this.isFavorite,
     );
   }
 }
