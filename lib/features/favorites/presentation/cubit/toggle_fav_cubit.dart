@@ -33,8 +33,7 @@ class ToggleFavCubit extends Cubit<ToggleFavOnState> {
     final response = await toggleFavOnUseCase.call(params: params);
     response.fold(
       (failure) {
-        _favoriteService.updateProductFavoriteStatus(
-            isFavorite: 0, params: params);
+        _favoriteService.updateProductFavoriteStatus(isFavorite: 0, params: params);
         log("failed");
         emit(ToggleFavFailure(msg: failure.errMessage));
       },
@@ -55,8 +54,7 @@ class ToggleFavCubit extends Cubit<ToggleFavOnState> {
     final response = await toggleFavOffUseCase.call(params: params);
     response.fold(
       (failure) {
-        _favoriteService.updateProductFavoriteStatus(
-            isFavorite: 1, params: params);
+        _favoriteService.updateProductFavoriteStatus(isFavorite: 1, params: params);
         log("failed");
         emit(ToggleFavFailure(msg: failure.errMessage));
       },
@@ -64,5 +62,11 @@ class ToggleFavCubit extends Cubit<ToggleFavOnState> {
         emit(ToggleFavSuccess(toggleFavOnEntity: toggleFavOnEntity));
       },
     );
+  }
+
+  @override
+  Future<void> close() {
+    log("the fav cubit is closed");
+    return super.close();
   }
 }

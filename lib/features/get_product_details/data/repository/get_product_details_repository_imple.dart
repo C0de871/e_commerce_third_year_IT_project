@@ -8,10 +8,10 @@ import '../../domain/entities/get_product_details_entity.dart';
 import '../../domain/repository/get_product_details_repository.dart';
 import '../data sources/get_product_details_remote_data_source.dart';
 
-class GetProductDetailsRepositoryImple extends GetProductDetailsRepository {
+class GetProductDetailsRepositoryImpl extends GetProductDetailsRepository {
   final NetworkInfo networkInfo;
   final GetProductDetailsRemoteDataSource remoteDataSource;
-  GetProductDetailsRepositoryImple({required this.remoteDataSource, required this.networkInfo});
+  GetProductDetailsRepositoryImpl({required this.remoteDataSource, required this.networkInfo});
   @override
   Future<Either<Failure, GetProductDetailsEntity>> getProductDetails({required GetProductDetailsParams params}) async {
     if (await networkInfo.isConnected!) {
