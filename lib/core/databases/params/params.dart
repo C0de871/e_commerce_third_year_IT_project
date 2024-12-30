@@ -11,9 +11,10 @@ class ToggleFavParams {
 }
 
 class GetProductDetailsParams {
-  int id;
+  String productID, storeID;
   GetProductDetailsParams({
-    required this.id,
+    required this.productID,
+    required this.storeID,
   });
 }
 
