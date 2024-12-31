@@ -1,13 +1,15 @@
 import 'package:dartz/dartz.dart';
-import 'package:e_commerce/core/connection/network_info.dart';
-import 'package:e_commerce/core/errors/expentions.dart';
-import 'package:e_commerce/core/errors/failure.dart';
+import 'package:e_commerce/core/databases/connection/network_info.dart';
+import 'package:e_commerce/core/databases/errors/expentions.dart';
+import 'package:e_commerce/core/databases/errors/failure.dart';
 import 'package:e_commerce/features/user/data/datasourses/user_local_data_source.dart';
 import 'package:e_commerce/features/user/data/datasourses/user_remote_data_source.dart';
 import 'package:e_commerce/features/user/domain/entites/Sign%20up%20entities/sign_up_entity.dart';
 import 'package:e_commerce/features/user/domain/entites/otp_entities/otp_entity.dart';
 import 'package:e_commerce/features/user/domain/entites/user_entities/user_entities.dart';
 import 'package:e_commerce/features/user/domain/repository/user_repository.dart';
+
+import '../../domain/entites/refresh_token/refresh_token_entity.dart';
 
 class UserRepositoryImpl extends UserRepository {
   final NetworkInfo networkInfo;
@@ -25,7 +27,7 @@ class UserRepositoryImpl extends UserRepository {
     if (await networkInfo.isConnected!) {
       try {
         final remoteUser = await remoteDataSource.loginUser(bodyjson);
-        localDataSource.cacheUser(remoteUser);
+        await localDataSource.cacheUser(remoteUser);
         return Right(remoteUser);
       } on ServerException catch (e) {
         return Left(Failure(errMessage: e.errorModel.errorMessage));
@@ -87,6 +89,26 @@ class UserRepositoryImpl extends UserRepository {
       try {
         final remoteResendOtp = await remoteDataSource.postOtp(bodyjson);
         return Right(remoteResendOtp);
+      } on ServerException catch (e) {
+        return Left(Failure(errMessage: e.errorModel.errorMessage));
+      }
+    } else {
+      return Left(
+        Failure(
+          errMessage: localDataSource.noInternectConnection(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, RefreshTokenEntity>> refreshToken() async {
+    if (await networkInfo.isConnected!) {
+      try {
+        final remoteRefreshing = await remoteDataSource.refreshToken();
+        await localDataSource.cacheAccessToken(
+            remoteRefreshing.refreshTokenDataEntity.accessToken);
+        return Right(remoteRefreshing);
       } on ServerException catch (e) {
         return Left(Failure(errMessage: e.errorModel.errorMessage));
       }

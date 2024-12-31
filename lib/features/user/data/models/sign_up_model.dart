@@ -1,4 +1,3 @@
-
 import 'package:e_commerce/core/databases/api/end_points.dart';
 import 'package:e_commerce/features/user/domain/entites/Sign%20up%20entities/sign_up_entity.dart';
 

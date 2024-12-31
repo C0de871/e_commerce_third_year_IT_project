@@ -1,6 +1,5 @@
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SplashContent extends StatefulWidget {
   const SplashContent({
@@ -40,7 +39,7 @@ class _SplashContentState extends State<SplashContent> {
         ),
         // if (widget.image.contains('.png'))
         Expanded(
-          flex:7 ,
+          flex: 7,
           child: Image.asset(
             widget.image,
             // fit: BoxFit.,

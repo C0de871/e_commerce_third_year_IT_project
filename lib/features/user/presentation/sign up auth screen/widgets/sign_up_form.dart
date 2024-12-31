@@ -1,8 +1,8 @@
-import 'package:e_commerce/core/constants/app_numbers.dart';
-import 'package:e_commerce/core/constants/app_routes.dart';
-import 'package:e_commerce/core/constants/app_strings.dart';
-import 'package:e_commerce/core/widgets/auth_text_field.dart';
-import 'package:e_commerce/core/widgets/defualt_button.dart';
+import 'package:e_commerce/core/utils/constants/app_numbers.dart';
+import 'package:e_commerce/core/Routes/app_routes.dart';
+import 'package:e_commerce/core/utils/constants/app_strings.dart';
+import 'package:e_commerce/core/shared/widgets/auth_text_field.dart';
+import 'package:e_commerce/core/shared/widgets/defualt_button.dart';
 import 'package:e_commerce/features/user/presentation/cubit/user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,28 +31,29 @@ class _SignUpFormState extends State<SignUpForm> {
             controller: context.read<UserCubit>().signUpEmailController,
             label: AppLocalizations.of(context)!.email,
             hint: AppLocalizations.of(context)!.enterYourEmail,
-            svgIconPath: AppStrings.emailIconPath,
+            svgIconPath: AppImages.emailIconPath,
             validator: (value) => _validateEmail(context, value),
           ),
-          SizedBox(
+          const SizedBox(
             height: padding4 * 8,
           ),
           AuthTextField(
             controller: context.read<UserCubit>().signUpPasswordController,
             label: AppLocalizations.of(context)!.password,
             hint: AppLocalizations.of(context)!.enterYourPassword,
-            svgIconPath: AppStrings.passwordIconPath,
+            svgIconPath: AppImages.passwordIconPath,
             validator: (value) => _validatePassword(context, value),
             isObsure: true,
           ),
-          SizedBox(
+          const SizedBox(
             height: padding4 * 8,
           ),
           AuthTextField(
             label: AppLocalizations.of(context)!.confirmPassword,
             hint: AppLocalizations.of(context)!.reEnterYourPassword,
-            svgIconPath: AppStrings.passwordIconPath,
-            controller: context.read<UserCubit>().signUpConfirmPasswordController,
+            svgIconPath: AppImages.passwordIconPath,
+            controller:
+                context.read<UserCubit>().signUpConfirmPasswordController,
             validator: (value) => _validateConfirmPassword(
               context,
               context.read<UserCubit>().signUpPasswordController.text,
@@ -60,10 +61,10 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
             isObsure: true,
           ),
-          SizedBox(
+          const SizedBox(
             height: padding4 * 8,
           ),
-          SizedBox(
+          const SizedBox(
             height: padding4 * 9,
           ),
           DefaultButton(
@@ -83,7 +84,8 @@ class _SignUpFormState extends State<SignUpForm> {
   }
 }
 
-String? _validateConfirmPassword(BuildContext context, String? password, String? confirmPassword) {
+String? _validateConfirmPassword(
+    BuildContext context, String? password, String? confirmPassword) {
   if (confirmPassword == null || confirmPassword.trim().isEmpty) {
     return AppLocalizations.of(context)!.thisFieldCannotBeEmpty;
   }
@@ -112,7 +114,8 @@ String? _validatePassword(BuildContext context, String? value) {
   if (value.length < 8) {
     return AppLocalizations.of(context)!.passwordMustBeAtLeast8Characters;
   }
-  if (!RegExp(r'(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)|(?=.*[@$!%*?&])').hasMatch(value)) {
+  if (!RegExp(r'(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)|(?=.*[@$!%*?&])')
+      .hasMatch(value)) {
     return AppLocalizations.of(context)!.passwordComplexityRequirement;
   }
   return null;

@@ -1,0 +1,58 @@
+import 'package:e_commerce/features/home/presentation/Home%20Screen/widgets/home_app_bar.dart';
+import 'package:flutter/material.dart';
+
+import '../../../../core/utils/constants/app_numbers.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'widgets/discount_banner.dart';
+import 'widgets/popular_product_list.dart';
+import 'widgets/popular_stores.dart';
+import 'widgets/section_title.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({
+    super.key,
+  });
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomScrollView(
+      slivers: [
+        const HomeAppBar(),
+        SliverToBoxAdapter(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: padding4 * 3),
+                const DiscountBanner(),
+                const SizedBox(height: padding4 * 7),
+                SectionTitle(
+                    text: AppLocalizations.of(context)!.specialForYou,
+                    press: () {}),
+                const SizedBox(height: padding4 * 5),
+                const PopularStores(),
+                const SizedBox(height: padding4 * 7),
+                SectionTitle(
+                    text: AppLocalizations.of(context)!.popularProduct,
+                    press: () {}),
+                const SizedBox(height: padding4 * 5),
+                const PopularProductList(),
+                const SizedBox(height: 100),
+              ],
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}

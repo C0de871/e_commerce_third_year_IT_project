@@ -2,7 +2,7 @@ import 'package:e_commerce/features/user/presentation/sign%20up%20auth%20screen/
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../../../core/constants/app_numbers.dart';
+import '../../../../core/utils/constants/app_numbers.dart';
 
 class SignUpAuthScreen extends StatelessWidget {
   const SignUpAuthScreen({super.key});
@@ -17,10 +17,10 @@ class SignUpAuthScreen extends StatelessWidget {
       body: SizedBox(
         width: double.infinity,
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: padding4 * 5),
+          padding: const EdgeInsets.symmetric(horizontal: padding4 * 5),
           child: Column(
             children: [
-              SizedBox(height: padding4 * 12),
+              const SizedBox(height: padding4 * 12),
               Text(
                 AppLocalizations.of(context)!.registerAccount,
                 style: Theme.of(context).textTheme.headlineMedium,
@@ -29,9 +29,9 @@ class SignUpAuthScreen extends StatelessWidget {
                 AppLocalizations.of(context)!.completeYourdetails,
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: padding4 * 12),
+              const SizedBox(height: padding4 * 12),
               const SignUpForm(),
-              SizedBox(
+              const SizedBox(
                 height: padding4 * 4,
               ),
               Text(

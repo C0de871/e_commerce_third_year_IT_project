@@ -32,13 +32,16 @@ final class SignUpUserFailure extends UserState {
 
 final class SignUpUserLoading extends UserState {}
 
+//! upload profile picture state:
+final class UploadProfilePic extends UserState {}
+
 //! OTP state:
-final class OtpUserFailure extends UserState{
+final class OtpUserFailure extends UserState {
   final String errMessage;
   OtpUserFailure({required this.errMessage});
 }
 
-final class OtpUserLoading extends UserState{}
+final class OtpUserLoading extends UserState {}
 
 final class OtpUserSuccessfully extends UserState {
   final OtpEntity otpEntity;

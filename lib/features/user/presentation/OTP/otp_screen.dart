@@ -1,7 +1,9 @@
-import 'package:e_commerce/core/constants/app_numbers.dart';
-import 'package:e_commerce/core/constants/app_routes.dart';
-import 'package:e_commerce/core/widgets/Pin%20Put%20Template/only_bottom_cursor_pin_put.dart';
-import 'package:e_commerce/core/widgets/defualt_button.dart';
+import 'dart:developer';
+
+import 'package:e_commerce/core/utils/constants/app_numbers.dart';
+import 'package:e_commerce/core/Routes/app_routes.dart';
+import 'package:e_commerce/core/shared/widgets/Pin%20Put%20Template/only_bottom_cursor_pin_put.dart';
+import 'package:e_commerce/core/shared/widgets/defualt_button.dart';
 import 'package:e_commerce/features/user/presentation/cubit/user_cubit.dart';
 import 'package:flutter/material.dart'; // Add the localization package
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,14 +41,14 @@ class _OtpScreenState extends State<OtpScreen> {
           width: double.infinity,
           child: Column(
             children: [
-              SizedBox(height: padding4 * 12),
+              const SizedBox(height: padding4 * 12),
               Text(
                 AppLocalizations.of(context)!
                     .otpVerification, // Use localized text here
                 style: Theme.of(context).textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
+              const SizedBox(
                 height: padding4 * 2,
               ),
               Text(
@@ -56,9 +58,9 @@ class _OtpScreenState extends State<OtpScreen> {
                 textAlign: TextAlign.center,
               ),
               buildTimer(),
-              SizedBox(height: padding4 * 12),
+              const SizedBox(height: padding4 * 12),
               const OnlyBottomCursor(),
-              SizedBox(
+              const SizedBox(
                 height: padding4 * 12,
               ),
               BlocConsumer<UserCubit, UserState>(
@@ -67,8 +69,11 @@ class _OtpScreenState extends State<OtpScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(state.errMessage)),
                     );
-                  }else if(state is OtpUserSuccessfully){
-                    Navigator.popUntil(context, (route)=>route.settings.name==AppRoutes.loginRoute);
+                  } else if (state is OtpUserSuccessfully) {
+                    log("pop");
+                    Navigator.of(context).popUntil(
+                      ModalRoute.withName(AppRoutes.loginRoute),
+                    );
                   }
                 },
                 builder: (context, state) {
@@ -86,7 +91,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           context.read<UserCubit>().postOtpTrigger();
                         },
                       ),
-                      SizedBox(height: padding4 * 6),
+                      const SizedBox(height: padding4 * 6),
                       GestureDetector(
                         onTap: () {
                           context.read<UserCubit>().resendOtpTrigger();

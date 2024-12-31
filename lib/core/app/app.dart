@@ -5,32 +5,31 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:e_commerce/core/theme/app_theme.dart';
 
 import '../Routes/app_router.dart';
-import '../constants/app_routes.dart';
-import '../l10n/l10n.dart';
-import '../theme/theme_manager.dart';
-
-ThemeManager _themeManager = ThemeManager();
+import '../Routes/app_routes.dart';
+import '../helper/app_functions.dart';
+import '../translations/l10n.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       supportedLocales: L10n.all,
-      locale: const Locale('ar'),
+      navigatorObservers: [RouteObserverService()],
+      locale: const Locale('en'),
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate
+        GlobalCupertinoLocalizations.delegate,
       ],
       debugShowCheckedModeBanner: false,
       title: 'E-Commerce',
-      theme: AppTheme.lightTheme,
-      themeMode: _themeManager.themeMode,
-      initialRoute: AppRoutes.loginSuccessRoute,
+      theme: AppTheme().theme(
+        defaultLightScheme(),
+      ),
+      initialRoute: AppRoutes.signUpauthRoute,
       onGenerateRoute: AppRouter().generateRoute,
     );
   }

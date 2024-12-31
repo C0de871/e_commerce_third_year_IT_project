@@ -1,6 +1,7 @@
-import 'package:e_commerce/core/constants/app_images.dart';
-import 'package:e_commerce/core/constants/app_numbers.dart';
-import 'package:e_commerce/core/widgets/defualt_button.dart';
+import 'package:e_commerce/core/utils/constants/app_images.dart';
+import 'package:e_commerce/core/utils/constants/app_numbers.dart';
+import 'package:e_commerce/core/Routes/app_routes.dart';
+import 'package:e_commerce/core/shared/widgets/defualt_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,16 +28,22 @@ class LoginSuccessScreen extends StatelessWidget {
                   )),
           const Spacer(
             flex: 3,
-          )
-                , Padding(
-                  padding: EdgeInsets.symmetric(horizontal: padding4*5),
-                  child: DefaultButton(
-                      text: AppLocalizations.of(context)!.backToHome, press: () {}),
-                ),
-                    const Spacer(
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: padding4 * 5),
+            child: DefaultButton(
+                text: AppLocalizations.of(context)!.backToHome,
+                press: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    AppRoutes.homeRoute,
+                    (route) => false,
+                  );
+                }),
+          ),
+          const Spacer(
             flex: 2,
           )
-              
         ],
       ),
     );

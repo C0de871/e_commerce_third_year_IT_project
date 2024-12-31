@@ -1,5 +1,5 @@
-import 'package:e_commerce/core/constants/app_images.dart';
-import 'package:e_commerce/core/constants/app_numbers.dart';
+import 'package:e_commerce/core/utils/constants/app_images.dart';
+import 'package:e_commerce/core/utils/constants/app_numbers.dart';
 import 'package:e_commerce/features/user/data/models/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,30 +19,34 @@ class CartScreen extends StatelessWidget {
                   width: padding4 * 22,
                   child: AspectRatio(
                     aspectRatio: 0.88,
-                  child: Container(
-                    padding: EdgeInsets.all(padding4*2),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(padding4*4),
-                      //ToDo COLOR....
+                    child: Container(
+                      padding: const EdgeInsets.all(padding4 * 2),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(padding4 * 4),
+                        //TODO COLOR....
+                      ),
+                      child: Image.asset(AppImages.successImage),
+                      //TODO demoCarts[0].product.image[0]
                     ),
-                    child: Image.asset(AppImages.successImage),
-                    //TodO demoCarts[0].product.image[0]
-                  ),),
+                  ),
                 ),
-                SizedBox(
-                  width: padding4*5,
-                ),Column(
+                const SizedBox(
+                  width: padding4 * 5,
+                ),
+                const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text("title of product",
-                    maxLines: 2, 
-                    //TODO style of product
+                    Text(
+                      "title of product",
+                      maxLines: 2,
+                      //TODO style of product
                     ),
-                    SizedBox(height: padding4*2,),
-                    const Text.rich(TextSpan(text:"price")
-                    //ToDo Style + demoCart[0].product.price
-                    )
-                    
+                    SizedBox(
+                      height: padding4 * 2,
+                    ),
+                    Text.rich(TextSpan(text: "price")
+                        //TODO Style + demoCart[0].product.price
+                        )
                   ],
                 )
               ],
@@ -58,8 +62,6 @@ class CartScreen extends StatelessWidget {
           AppLocalizations.of(context)!.yourCart,
           style: Theme.of(context).textTheme.displaySmall,
         ),
-        Text(
-            "${demoCarts.length} ${AppLocalizations.of(context)!.numberOfItem}"),
       ]),
     );
   }
