@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:e_commerce/features/temp/entities/product_entity.dart';
+import 'package:e_commerce/features/products/domain/entities/product_entity.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../core/databases/api/end_points.dart';
+import '../../../../core/databases/api/end_points.dart';
 
 class ProductModel extends ProductEntity with EquatableMixin {
   ProductModel({
@@ -17,7 +17,7 @@ class ProductModel extends ProductEntity with EquatableMixin {
     super.quantity,
     super.description,
     super.isFavorite,
-    super.mainImage,
+    super.mainImageUrl,
   });
 
   factory ProductModel.fromMap(Map<String, dynamic> data) => ProductModel(
@@ -31,7 +31,7 @@ class ProductModel extends ProductEntity with EquatableMixin {
         quantity: data[ApiKey.quantity] as int?,
         description: data[ApiKey.description] as String?,
         isFavorite: data[ApiKey.isFavorite] as int?,
-        mainImage: data[ApiKey.mainImageUrl] as String?,
+        mainImageUrl: data[ApiKey.mainImageUrl] as String?,
       );
 
   Map<String, dynamic> toMap() => {
@@ -45,7 +45,7 @@ class ProductModel extends ProductEntity with EquatableMixin {
         ApiKey.quantity: quantity,
         ApiKey.description: description,
         ApiKey.isFavorite: isFavorite,
-        ApiKey.mainImageUrl: mainImage,
+        ApiKey.mainImageUrl: mainImageUrl,
       };
 
   /// `dart:convert`
@@ -84,7 +84,7 @@ class ProductModel extends ProductEntity with EquatableMixin {
       quantity: quantity ?? this.quantity,
       description: description ?? this.description,
       isFavorite: isFavorite ?? this.isFavorite,
-      mainImage: mainImage ?? this.mainImage,
+      mainImageUrl: mainImage ?? this.mainImageUrl,
     );
   }
 
@@ -104,7 +104,7 @@ class ProductModel extends ProductEntity with EquatableMixin {
       quantity,
       description,
       isFavorite,
-      mainImage,
+      mainImageUrl,
     ];
   }
 }

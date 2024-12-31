@@ -6,10 +6,11 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:e_commerce/core/databases/params/params.dart';
 import 'package:e_commerce/core/utils/services/service_locator.dart';
+import 'package:e_commerce/features/products/data/models/product_model.dart';
+import 'package:e_commerce/features/products/domain/entities/get_all_products_entity.dart';
 import 'package:e_commerce/features/products/domain/use%20cases/get_all_products.dart';
 import 'package:meta/meta.dart';
 
-import 'package:e_commerce/features/products/domain/entities/product_enitty.dart';
 
 import '../../../favorites/domain/service/product_favorite_service.dart';
 
@@ -34,21 +35,20 @@ class ProductCubit extends Cubit<ProductState> {
     final response = await getAllProductsUseCase.call(params: ProductParams(page: page));
     response.fold(
       (failure) => emit(GetAllProductsFailed(errMessage: failure.errMessage)),
-      (productsList) => emit(GetAllProductsSuccess(productsList: productsList)),
+      (getAllProductsEntity) => emit(GetAllProductsSuccess(getAllProductsEntity: getAllProductsEntity)),
     );
   }
 
   //! listen to favorite update:
-  void _listenToFavoriteUpdates() {                
+  void _listenToFavoriteUpdates() {
     _favoriteSubscription = _favoriteService.favoriteUpdates.listen((update) {
       log("here is stream ${update.isFavorite}");
-      final updateProducts = (state as GetAllProductsSuccess).productsList.map((product) {
+      for (var product in (state as GetAllProductsSuccess).getAllProductsEntity.data!.products!) {
         if ((product.storeId.toString() == update.storeID) && (product.productId.toString() == update.productId)) {
-          return product.copyWith(isFavorite: update.isFavorite);
+          product = (product as ProductModel).copyWith(isFavorite: update.isFavorite);
         }
-        return product;
-      }).toList();
-      emit((state as GetAllProductsSuccess).copyWith(productsList: updateProducts));
+      }
+      emit((state as GetAllProductsSuccess).copyWith());
     });
   }
 

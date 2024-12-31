@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'product_cubit.dart';
 
 @immutable
@@ -8,14 +9,14 @@ final class ProductInitial extends ProductState {}
 final class GetAllProductsLoading extends ProductState {}
 
 final class GetAllProductsSuccess extends ProductState {
-  final List<ProductEntity> productsList;
-  GetAllProductsSuccess({required this.productsList});
+  final GetAllProductsEntity getAllProductsEntity;
+  GetAllProductsSuccess({required this.getAllProductsEntity});
 
   GetAllProductsSuccess copyWith({
-    List<ProductEntity>? productsList,
+    GetAllProductsEntity? getAllProductsEntity,
   }) {
     return GetAllProductsSuccess(
-      productsList: productsList ?? this.productsList,
+      getAllProductsEntity: getAllProductsEntity ?? this.getAllProductsEntity,
     );
   }
 }

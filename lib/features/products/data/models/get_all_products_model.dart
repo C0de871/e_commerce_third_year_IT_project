@@ -1,19 +1,22 @@
 import 'dart:convert';
 
-import 'package:e_commerce/features/temp/entities/data_entity.dart';
+import 'package:e_commerce/features/products/domain/entities/get_all_products_entity.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../core/databases/api/end_points.dart';
+import '../../../../core/databases/api/end_points.dart';
 import 'data_model.dart';
 import 'pagination_model.dart';
 
 class GetAllProductsModel extends GetAllProductsEntity with EquatableMixin {
+  final bool? successful;
+  final String? message;
+  final int? statusCode;
   GetAllProductsModel({
-    super.successful,
-    super.message,
+    this.successful,
+    this.message,
     super.data,
     super.pagination,
-    super.statusCode,
+    this.statusCode,
   });
 
   factory GetAllProductsModel.fromMap(Map<String, dynamic> data) {
@@ -30,7 +33,7 @@ class GetAllProductsModel extends GetAllProductsEntity with EquatableMixin {
         ApiKey.successful: successful,
         ApiKey.message: message,
         ApiKey.data: (data as DataModel).toMap(),
-        ApiKey.pagination: (pagination as PaginationModel) .toMap(),
+        ApiKey.pagination: (pagination as PaginationModel).toMap(),
         ApiKey.statusCode: statusCode,
       };
 

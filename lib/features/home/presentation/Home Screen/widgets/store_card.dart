@@ -1,6 +1,5 @@
 import 'package:e_commerce/core/shared/widgets/skeleton.dart';
 import 'package:e_commerce/core/theme/app_colors.dart';
-import 'package:e_commerce/core/utils/constants/app_images.dart';
 import 'package:e_commerce/features/stores/domain/entities/store_entity.dart';
 import 'package:e_commerce/features/stores/presentation/cubit/store_cubit.dart';
 import 'package:flutter/material.dart';

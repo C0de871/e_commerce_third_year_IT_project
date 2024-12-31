@@ -4,6 +4,8 @@ import 'package:e_commerce/features/products/presentation/cubit/product_cubit.da
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../products/domain/entities/product_entity.dart';
+
 class PopularProductList extends StatelessWidget {
   const PopularProductList({
     super.key,
@@ -30,16 +32,16 @@ class PopularProductList extends StatelessWidget {
               );
             }
             if (state is GetAllProductsSuccess) {
+              List<ProductEntity>? products = state.getAllProductsEntity.data!.products!;
               return Row(
                 children: [
-                  ...List.generate(state.productsList.length, (index) {
+                  ...List.generate(products.length, (index) {
                     return Row(
                       children: [
                         ProductCard(
-                          product: state.productsList[index],
+                          product: products[index],
                         ),
-                        if (index != (state.productsList.length - 1))
-                          const SizedBox(width: padding4 * 4),
+                        if (index != (products.length - 1)) const SizedBox(width: padding4 * 4),
                       ],
                     );
                   })

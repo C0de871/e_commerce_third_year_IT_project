@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:e_commerce/features/temp/entities/pagination_entity.dart';
+import 'package:e_commerce/features/products/domain/entities/pagination_entity.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../core/databases/api/end_points.dart';
+import '../../../../core/databases/api/end_points.dart';
 
 class PaginationModel extends PaginationEntity with EquatableMixin {
   PaginationModel({

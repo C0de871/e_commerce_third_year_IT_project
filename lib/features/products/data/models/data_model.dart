@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'package:e_commerce/features/temp/entities/data_entity.dart';
+import 'package:e_commerce/features/products/domain/entities/data_entity.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../core/databases/api/end_points.dart';
+import '../../../../core/databases/api/end_points.dart';
 import 'product_model.dart';
 
 class DataModel extends DataEntity with EquatableMixin {

@@ -7,14 +7,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rive/rive.dart';
 
 import 'package:e_commerce/core/shared/widgets/skeleton.dart';
-import 'package:e_commerce/core/utils/constants/app_images.dart';
 import 'package:e_commerce/features/favorites/presentation/cubit/toggle_fav_cubit.dart';
-import 'package:e_commerce/features/products/domain/entities/product_enitty.dart';
 import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
 
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/constants/app_numbers.dart';
 import '../../../../../core/utils/constants/app_rive.dart';
+import '../../../../products/domain/entities/product_entity.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -82,7 +81,7 @@ class ProductCard extends StatelessWidget {
                             Align(
                               alignment: Alignment.topCenter,
                               child: ProductImage(
-                                mainImageUrl: product!.mainImageUrl,
+                                mainImageUrl: product!.mainImageUrl!,
                                 constraints: constraints,
                               ),
                             ),
@@ -90,17 +89,17 @@ class ProductCard extends StatelessWidget {
                               height: padding4 * 4,
                             ),
                             ProductName(
-                              productName: product!.productName,
+                              productName: product!.productName!,
                             ),
                             ProductStore(
-                              storeName: product!.storeName,
+                              storeName: product!.storeName!,
                             ),
                             const SizedBox(height: padding4 * 4),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 ProductPrice(
-                                  productPrice: product!.price,
+                                  productPrice: product!.price!,
                                 ),
                                 Faviourt(
                                   product: product,
@@ -282,13 +281,13 @@ class _FaviourtState extends State<Faviourt> {
       onTap: () async {
         if (widget.product?.isFavorite == 0) {
           await context.read<ToggleFavCubit>().toggleFavOnTrigger(
-                storeID: widget.product!.storeId,
-                productID: widget.product!.productId,
+                storeID: widget.product!.storeId!,
+                productID: widget.product!.productId!,
               );
         } else {
           await context.read<ToggleFavCubit>().toggleFavOffTrigger(
-                storeID: widget.product!.storeId,
-                productID: widget.product!.productId,
+                storeID: widget.product!.storeId!,
+                productID: widget.product!.productId!,
               );
         }
       },

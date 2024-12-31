@@ -9,7 +9,7 @@ class ProductEntity {
   final int? quantity;
   final String? description;
   final int? isFavorite;
-  final String? mainImage;
+  final String? mainImageUrl;
 
   ProductEntity({
     this.storeId,
@@ -22,6 +22,6 @@ class ProductEntity {
     this.quantity,
     this.description,
     this.isFavorite,
-    this.mainImage,
+    this.mainImageUrl,
   });
 }
