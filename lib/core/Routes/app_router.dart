@@ -5,6 +5,7 @@ import 'package:e_commerce/core/shared/screens/page_view_screen.dart';
 import 'package:e_commerce/features/home/presentation/HomeCubit/home_cubit.dart';
 import 'package:e_commerce/core/shared/screens/Navigation_cubit/navigation_bar_cubit.dart';
 import 'package:e_commerce/features/get_product_details/presentation/screens/product_details_screen.dart';
+import 'package:e_commerce/features/products/presentation/all_products/products_list.dart';
 import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
 import 'package:e_commerce/features/stores/presentation/cubit/store_cubit.dart';
 import 'package:e_commerce/features/user/presentation/OTP/otp_screen.dart';
@@ -175,7 +176,6 @@ class AppRouter {
 
       //! product details route:
       case AppRoutes.productDetailsScreen:
-        log("here");
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => MultiBlocProvider(
@@ -191,6 +191,19 @@ class AppRouter {
               ),
             ],
             child: ProductDetailsScreen(),
+          ),
+        );
+
+      case AppRoutes.seeMoreProductsRoute:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider.value(
+                value: productCubit,
+              ),
+            ],
+            child: ProductsList(),
           ),
         );
 
