@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'core/app/app.dart';
 import 'core/helper/app_functions.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupServicesLocator();

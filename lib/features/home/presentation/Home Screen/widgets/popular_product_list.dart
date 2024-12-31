@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:e_commerce/core/utils/constants/app_numbers.dart';
 import 'package:e_commerce/features/home/presentation/Home%20Screen/widgets/product_card.dart';
 import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
@@ -33,6 +35,8 @@ class PopularProductList extends StatelessWidget {
             }
             if (state is GetAllProductsSuccess) {
               List<ProductEntity>? products = state.getAllProductsEntity.data!.products!;
+
+              log("rebuild the whole tree product fav is: ${products[0].isFavorite}");
               return Row(
                 children: [
                   ...List.generate(products.length, (index) {

@@ -43,8 +43,7 @@ class ProductCard extends StatelessWidget {
         ],
       ),
       // width: MediaQuery.sizeOf(context).width / 2,
-      child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
+      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
         return Material(
           color: Colors.transparent,
           child: InkWell(
@@ -265,18 +264,12 @@ class _FaviourtState extends State<Faviourt> {
       controller = StateMachineController.fromArtboard(art!, "State Machine 1");
       if (controller != null) {
         art.addController(controller!);
-        log("${controller!.inputs}");
         for (var input in controller!.inputs) {
           if (input is SMIBool) {
-            log("is SMI bool");
             isFavoriteSMI = input;
           } else if (input is SMINumber) {
-            log("is SMI Number");
           } else if (input is SMITrigger) {
-            log("is SMI Trigger");
-          } else {
-            log("NO input found!");
-          }
+          } else {}
         }
         setState(() {
           artboard = art;
@@ -289,7 +282,10 @@ class _FaviourtState extends State<Faviourt> {
 
   @override
   Widget build(BuildContext context) {
+    log("build animated  heart  state");
+    log("is fav: ${widget.product!.isFavorite}");
     isFavoriteSMI?.value = widget.product!.isFavorite == 1;
+    log("is fav smi: ${isFavoriteSMI?.value}");
     return GestureDetector(
       onTap: () async {
         if (widget.product?.isFavorite == 0) {
@@ -314,9 +310,7 @@ class _FaviourtState extends State<Faviourt> {
         padding: EdgeInsets.only(top: 1),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: widget.product!.isFavorite == 1
-              ? const Color.fromARGB(255, 251, 207, 204)
-              : AppColors.disableFavContainer,
+          color: widget.product!.isFavorite == 1 ? const Color.fromARGB(255, 251, 207, 204) : AppColors.disableFavContainer,
         ),
         child: artboard == null
             ? SizedBox()
@@ -348,8 +342,7 @@ class LoadingFaviourt extends StatelessWidget {
 }
 
 class ProductImage extends StatelessWidget {
-  const ProductImage(
-      {super.key, required this.mainImageUrl, required this.constraints});
+  const ProductImage({super.key, required this.mainImageUrl, required this.constraints});
 
   final String mainImageUrl;
   final BoxConstraints constraints;

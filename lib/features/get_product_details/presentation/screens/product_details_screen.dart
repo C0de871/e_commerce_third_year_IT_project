@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 
 import 'package:e_commerce/core/shared/widgets/rounded_icon.dart';
 import 'package:e_commerce/core/utils/constants/app_numbers.dart';
-import 'package:e_commerce/features/products/domain/entities/product_enitty.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rive/rive.dart';
 import 'package:flutter/src/widgets/image.dart' as FlutterImage;
@@ -16,6 +15,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/constants/app_images.dart';
 import '../../../../core/utils/constants/app_rive.dart';
 import '../../../favorites/presentation/cubit/toggle_fav_cubit.dart';
+import '../../../products/domain/entities/product_entity.dart';
 import '../cubit/get_product_details_cubit.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
@@ -295,7 +295,7 @@ class StoreCard extends StatelessWidget {
           color: Theme.of(context).colorScheme.primary,
           fontSize: 16,
         ),
-        title: Text(productDetails.storeName),
+        title: Text(productDetails.storeName!),
         subtitle: Text(
           "View store",
           style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
@@ -346,7 +346,7 @@ class ProductName extends StatelessWidget {
       child: Align(
         alignment: Alignment.topLeft,
         child: Text(
-          productDetails.productName,
+          productDetails.productName!,
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w500,

@@ -11,7 +11,6 @@ import 'package:e_commerce/features/products/domain/entities/get_all_products_en
 import 'package:e_commerce/features/products/domain/use%20cases/get_all_products.dart';
 import 'package:meta/meta.dart';
 
-
 import '../../../favorites/domain/service/product_favorite_service.dart';
 
 part 'product_state.dart';
@@ -32,8 +31,7 @@ class ProductCubit extends Cubit<ProductState> {
   //! get all products:
   dynamic getAllProducts({int page = 1}) async {
     emit(GetAllProductsLoading());
-    final response =
-        await getAllProductsUseCase.call(params: ProductParams(page: page));
+    final response = await getAllProductsUseCase.call(params: ProductParams(page: page));
     response.fold(
       (failure) => emit(GetAllProductsFailed(errMessage: failure.errMessage)),
       (getAllProductsEntity) => emit(GetAllProductsSuccess(getAllProductsEntity: getAllProductsEntity)),
@@ -42,14 +40,21 @@ class ProductCubit extends Cubit<ProductState> {
 
   //! listen to favorite update:
   void _listenToFavoriteUpdates() {
-  void _listenToFavoriteUpdates() {
     _favoriteSubscription = _favoriteService.favoriteUpdates.listen((update) {
       log("here is stream ${update.isFavorite}");
-      for (var product in (state as GetAllProductsSuccess).getAllProductsEntity.data!.products!) {
-        if ((product.storeId.toString() == update.storeID) && (product.productId.toString() == update.productId)) {
-          product = (product as ProductModel).copyWith(isFavorite: update.isFavorite);
+      final products = (state as GetAllProductsSuccess).getAllProductsEntity.data!.products!;
+      for (var i = 0; i < products.length; i++) {
+        var product = products[i];
+        if (product.storeId.toString() == update.storeID && product.productId.toString() == update.productId) {
+          log("is product fav: ${product.isFavorite}");
+
+          // Directly update the isFavorite property in the product
+          products[i] = (product as ProductModel).copyWith(isFavorite: update.isFavorite);
+
+          log("Updated is product fav: ${products[i].isFavorite}");
         }
       }
+
       emit((state as GetAllProductsSuccess).copyWith());
     });
   }
