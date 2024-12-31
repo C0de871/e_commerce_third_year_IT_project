@@ -59,7 +59,10 @@ class FlexibleSpaceTitle extends StatelessWidget {
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [MenuIconAndAppName(), CartAndNotificationIcons()],
+          children: [
+            MenuIconAndAppName(),
+            CartAndNotificationIcons(),
+          ],
         ),
       ],
     );

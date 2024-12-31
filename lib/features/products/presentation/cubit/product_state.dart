@@ -10,6 +10,14 @@ final class GetAllProductsLoading extends ProductState {}
 final class GetAllProductsSuccess extends ProductState {
   final List<ProductEntity> productsList;
   GetAllProductsSuccess({required this.productsList});
+
+  GetAllProductsSuccess copyWith({
+    List<ProductEntity>? productsList,
+  }) {
+    return GetAllProductsSuccess(
+      productsList: productsList ?? this.productsList,
+    );
+  }
 }
 
 final class GetAllProductsFailed extends ProductState {

@@ -57,8 +57,10 @@ class StoreCardLoaded extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         child: Stack(
           children: [
-            //TODO: replace with the image from the api:
-            Image.asset(AppImages.storeImagePlaceHolder, fit: BoxFit.cover),
+            Image.network(
+              image,
+              fit: BoxFit.cover,
+            ),
             StorePreview(
               storeName: storeName,
               discreption: discreption,

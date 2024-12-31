@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 
-//onlyBottomCursor Template:
+//onlyBottomCursor :
 class OnlyBottomCursor extends StatefulWidget {
   const OnlyBottomCursor({super.key});
 

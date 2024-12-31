@@ -1,3 +1,4 @@
+import 'package:e_commerce/core/Routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -5,7 +6,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:e_commerce/core/theme/app_theme.dart';
 
 import '../Routes/app_router.dart';
-import '../Routes/app_routes.dart';
 import '../helper/app_functions.dart';
 import '../translations/l10n.dart';
 
@@ -29,7 +29,8 @@ class MyApp extends StatelessWidget {
       theme: AppTheme().theme(
         defaultLightScheme(),
       ),
-      initialRoute: AppRoutes.signUpauthRoute,
+      initialRoute: chooseInitialRoute(),
+      // initialRoute: AppRoutes.loginRoute,
       onGenerateRoute: AppRouter().generateRoute,
     );
   }

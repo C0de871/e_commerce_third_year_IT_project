@@ -1,13 +1,19 @@
+import '../params/params.dart';
+
 class EndPoints {
   static const String baserUrl = "http://192.168.192.14:8000/api/";
   static const String login = "login";
   static const String signUp = "register";
-  static const String template = "template";
+  static const String toggleFavOn = "favorites/";
+  static const String toggleFavOff = "favorites/";
   static const String otpResend = "resend-otp";
   static const String otpValidate = "validate-otp";
   static const String getAllProducts = "products";
   static const String getAllStores = "stores";
   static const String refreshToken = "refresh";
+  static String getProductDetails(GetProductDetailsParams params) {
+    return "stores/${params.storeID}/${params.productID}/show";
+  }
   static const String getCart = "carts/products/0";
   static const String modifyCart = "carts/update-quantities";
   static const String deleteCart = "carts/delete-products";
@@ -15,6 +21,7 @@ class EndPoints {
 }
 
 class ApiKey {
+  static String success = "success";
   static String refreshTokenHeader = "Refresh-Token";
   static String requiredAuth = "requiresAuth";
   static String successful = "successful";
@@ -64,6 +71,11 @@ class ApiKey {
   static String currentPage = "currentPage";
   static String totalPages = "totalPages";
   static String hasMorePage = "hasMorePage";
+
+  static String subImages = "sub_images";
+  static String catagoryID = "category_id";
+  static String catagoryName = "category_name";
+  static String quantityInCart = "quantityInCart";
   static String totalPrice = "total_price";
   static String cartAmount = "cart_amount";
 
@@ -74,6 +86,7 @@ class CacheKey {
   static String user = "user";
   static String accessToken = "accessToken";
   static String refreshToken = "refreshToken";
+  static String isFirstTime = "isFirstTime";
   static String totalPrice = "total_price";
   static String storeId = "store_id";
   static String storeName = "store_name";

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 
-//RoundedWithCustomCursor Template:
+//RoundedWithCustomCursor :
 class RoundedWithCustomCursor extends StatefulWidget {
   const RoundedWithCustomCursor({super.key});
 

@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:e_commerce/core/Routes/app_routes.dart';
 import 'package:e_commerce/core/shared/screens/page_view_screen.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/modify_cart_cubit.dart';
 import 'package:e_commerce/features/home/presentation/HomeCubit/home_cubit.dart';
-import 'package:e_commerce/features/home/presentation/Navigation%20cubit/navigation_bar_cubit.dart';
+import 'package:e_commerce/core/shared/screens/Navigation_cubit/navigation_bar_cubit.dart';
+import 'package:e_commerce/features/get_product_details/presentation/screens/product_details_screen.dart';
 import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
 import 'package:e_commerce/features/stores/presentation/cubit/store_cubit.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/counter_cubit.dart';
@@ -15,6 +18,8 @@ import 'package:e_commerce/features/user/presentation/login_success_screen/login
 import 'package:e_commerce/features/user/presentation/splash%20screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../features/favorites/presentation/cubit/toggle_fav_cubit.dart';
+import '../../features/get_product_details/presentation/cubit/get_product_details_cubit.dart';
 import '../../features/user/presentation/complete_profile_screen/complete_profile_screen.dart';
 import '../../features/user/presentation/sign up auth screen/sign_up_auth_screen.dart';
 
@@ -24,6 +29,7 @@ class AppRouter {
   StoreCubit? _storeCubit;
   ProductCubit? _productCubit;
   NavigationBarCubit? _navBarCubit;
+  ToggleFavCubit? _toggleFavOnCubit;
   CartCubit? _cartCubit;
   ModifyCartCubit? _modifyCartCubit;
 
@@ -100,6 +106,16 @@ class AppRouter {
     });
     return _homeCubit!;
   }
+
+  // ToggleFavCubit get toggleFavOnCubit {
+  //   if (_toggleFavOnCubit == null || _toggleFavOnCubit!.isClosed) {
+  //     _toggleFavOnCubit = ToggleFavCubit();
+  //   }
+  //   _toggleFavOnCubit!.stream.listen((_) {}, onDone: () {
+  //     _toggleFavOnCubit = null; // Nullify the reference when closed
+  //   });
+  //   return _toggleFavOnCubit!;
+  // }
 
   Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -195,6 +211,27 @@ class AppRouter {
               )
             ],
             child: const PageViewScreen(),
+          ),
+        );
+
+      //! product details route:
+      case AppRoutes.productDetailsScreen:
+        log("here");
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider.value(
+                value: GetProductDetailsCubit.instance,
+              ),
+              BlocProvider.value(
+                value: ToggleFavCubit.instance,
+              ),
+              BlocProvider.value(
+                value: productCubit,
+              ),
+            ],
+            child: ProductDetailsScreen(),
           ),
         );
 

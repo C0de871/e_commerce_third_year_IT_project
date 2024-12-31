@@ -2,10 +2,10 @@ import 'dart:developer';
 
 import 'package:e_commerce/core/utils/constants/app_numbers.dart';
 import 'package:e_commerce/core/Routes/app_routes.dart';
-import 'package:e_commerce/core/shared/widgets/Pin%20Put%20Template/only_bottom_cursor_pin_put.dart';
+import 'package:e_commerce/core/shared/widgets/Pin_Put/only_bottom_cursor_pin_put.dart';
 import 'package:e_commerce/core/shared/widgets/defualt_button.dart';
 import 'package:e_commerce/features/user/presentation/cubit/user_cubit.dart';
-import 'package:flutter/material.dart'; // Add the localization package
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

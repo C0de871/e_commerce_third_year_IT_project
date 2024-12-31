@@ -37,18 +37,17 @@ class _SignUpFormState extends State<SignUpForm> {
           const SizedBox(
             height: padding4 * 8,
           ),
-          AuthTextField(
+          AnimatedPasswordField(
             controller: context.read<UserCubit>().signUpPasswordController,
             label: AppLocalizations.of(context)!.password,
             hint: AppLocalizations.of(context)!.enterYourPassword,
             svgIconPath: AppImages.passwordIconPath,
             validator: (value) => _validatePassword(context, value),
-            isObsure: true,
           ),
           const SizedBox(
             height: padding4 * 8,
           ),
-          AuthTextField(
+          AnimatedPasswordField(
             label: AppLocalizations.of(context)!.confirmPassword,
             hint: AppLocalizations.of(context)!.reEnterYourPassword,
             svgIconPath: AppImages.passwordIconPath,
@@ -59,7 +58,6 @@ class _SignUpFormState extends State<SignUpForm> {
               context.read<UserCubit>().signUpPasswordController.text,
               value,
             ),
-            isObsure: true,
           ),
           const SizedBox(
             height: padding4 * 8,

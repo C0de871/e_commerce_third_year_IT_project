@@ -17,9 +17,11 @@ class AuthInterceptor extends Interceptor {
   Future<void> onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     log("on request");
-    if (options.extra[ApiKey.requiredAuth] == true) {
+    if (options.extra[ApiKey.requiredAuth] != null &&
+        options.extra[ApiKey.requiredAuth] == true) {
       final accessToken = await getLastAccessToken();
       if (accessToken != null) {
+        log(accessToken);
         options.headers[ApiKey.authorization] = "Bearer $accessToken";
       }
     }
@@ -31,6 +33,7 @@ class AuthInterceptor extends Interceptor {
       DioException err, ErrorInterceptorHandler handler) async {
     log("on error");
     if (err.response!.statusCode == 401 &&
+        err.requestOptions.extra[ApiKey.requiredAuth] != null &&
         err.requestOptions.extra[ApiKey.requiredAuth]) {
       final RequestOptions options = err.requestOptions;
       try {

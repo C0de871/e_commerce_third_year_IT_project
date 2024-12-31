@@ -1,10 +1,12 @@
 import 'package:e_commerce/core/helper/app_functions.dart';
+import 'package:e_commerce/features/favorites/presentation/cubit/toggle_fav_cubit.dart';
+import 'package:e_commerce/features/get_product_details/presentation/cubit/get_product_details_cubit.dart';
 import 'package:e_commerce/features/home/beta/fav_page.dart';
 import 'package:e_commerce/features/home/beta/notification_page.dart';
 import 'package:e_commerce/features/home/beta/profile_page.dart';
 import 'package:e_commerce/features/home/beta/settings_page.dart';
 import 'package:e_commerce/features/home/presentation/HomeCubit/home_cubit.dart';
-import 'package:e_commerce/features/home/presentation/Navigation%20cubit/navigation_bar_cubit.dart';
+import 'package:e_commerce/core/shared/screens/Navigation_cubit/navigation_bar_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,7 +25,17 @@ class _PageViewScreenState extends State<PageViewScreen> {
   List<Widget> screens = [
     HistoryPage(),
     SettingsPage(),
-    HomeScreen(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => GetProductDetailsCubit.instance,
+        ),
+        BlocProvider(
+          create: (context) => ToggleFavCubit.instance,
+        ),
+      ],
+      child: const HomeScreen(),
+    ),
     FavPage(),
     ProfilePage(),
   ];

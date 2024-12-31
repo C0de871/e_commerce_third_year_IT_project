@@ -1,9 +1,17 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:e_commerce/core/helper/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../Routes/app_routes.dart';
+import '../databases/api/end_points.dart';
+import '../databases/cache/secure_storage_helper.dart';
+import '../databases/cache/shared_prefs_helper.dart';
+import '../utils/constants/constant.dart';
+import '../utils/services/service_locator.dart';
 
 SystemUiOverlayStyle getSystemUiOverlayStyle(
     Brightness currentBrightness, BuildContext context) {
@@ -57,5 +65,36 @@ class RouteObserverService extends NavigatorObserver {
     for (var route in routeHistory) {
       log(route);
     }
+  }
+}
+
+checkIfLoggedInUser() async {
+  String? userToken =
+      await SecureStorageHelper().getData(key: CacheKey.accessToken);
+  log(userToken!);
+  if (!userToken.isNullOrEmpty()) {
+    isLoggedInUser = true;
+  } else {
+    isLoggedInUser = false;
+  }
+}
+
+checkIfFirstTime() async {
+  isFristTime =
+      await getIt<SharedPrefsHelper>().getData(key: CacheKey.isFirstTime);
+  if (isFristTime == null) {
+    isFristTime = true;
+    await getIt<SharedPrefsHelper>()
+        .saveData(key: CacheKey.isFirstTime, value: isFristTime);
+  }
+}
+
+String chooseInitialRoute() {
+  if (isFristTime!) {
+    return AppRoutes.splashRoute;
+  } else if (isLoggedInUser) {
+    return AppRoutes.homeRoute;
+  } else {
+    return AppRoutes.loginRoute;
   }
 }

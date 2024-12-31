@@ -10,4 +10,6 @@ class AppColors {
   static const imageBackground = Color.fromARGB(126, 230, 230, 230);
   static const bottomNavBgColor = Color(0xFF394357);
   static const bottomNavSelectedColor = Color(0xFF81B4ff);
+  static const grayBackGroundColor = Color(0xFFF5F6F9);
+  static const darkGray = Color(0xFFAEAFC0);
 }

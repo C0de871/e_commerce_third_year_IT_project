@@ -108,12 +108,11 @@ class _LoginFormState extends State<LoginForm> {
           const SizedBox(
             height: padding4 * 8,
           ),
-          AuthTextField(
+          AnimatedPasswordField(
             controller: context.read<UserCubit>().loginPasswordController,
             label: AppLocalizations.of(context)!.password,
             hint: AppLocalizations.of(context)!.enterYourPassword,
             svgIconPath: AppImages.passwordIconPath,
-            isObsure: true,
             validator: (value) {
               return _validatePassword(context, value);
             },

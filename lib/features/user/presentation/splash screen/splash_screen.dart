@@ -6,6 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:e_commerce/core/utils/constants/app_images.dart';
 
+import '../../../../core/databases/api/end_points.dart';
+import '../../../../core/databases/cache/shared_prefs_helper.dart';
+import '../../../../core/utils/constants/constant.dart';
+import '../../../../core/utils/services/service_locator.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -68,12 +73,19 @@ class _SplashScreenState extends State<SplashScreen> {
                 const Spacer(
                   flex: 3,
                 ),
-                DefaultButton(
-                    text: AppLocalizations.of(context)!.continueSplash,
-                    press: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed(AppRoutes.loginRoute);
-                    }),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: padding4 * 5),
+                  child: DefaultButton(
+                      text: AppLocalizations.of(context)!.continueSplash,
+                      press: () async {
+                        await getIt<SharedPrefsHelper>()
+                            .saveData(key: CacheKey.isFirstTime, value: false);
+                        if (context.mounted) {
+                          Navigator.of(context)
+                              .pushReplacementNamed(AppRoutes.loginRoute);
+                        }
+                      }),
+                ),
                 const Spacer(
                   flex: 2,
                 )
