@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       supportedLocales: L10n.all,
       navigatorObservers: [RouteObserverService()],
-      locale: const Locale('en'),
+      locale: const Locale('ar'),
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

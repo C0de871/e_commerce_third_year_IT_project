@@ -23,12 +23,12 @@
   "@welcome": {
     "description": "welcome line"
   },
-  "splash2word":"we help people conect wiyth store ",
-  "@splash2word":{
+  "splash2word": "we help people conect wiyth store ",
+  "@splash2word": {
     "description": "second word appear when we swap in splash screen"
   },
-  "splash3word":"we show the easy way to shop \njust stay at home wuth us ",
-  "@splash3word":{
+  "splash3word": "we show the easy way to shop \njust stay at home wuth us ",
+  "@splash3word": {
     "description": "third word appear when we swap in splash screen"
   },
   "signUp": "Sign Up",
@@ -222,16 +222,24 @@
   "@successLogin": {
     "description": "the login process is done by right way"
   },
-  "backToHome" :  "Bach to home",
+  "backToHome": "Bach to home",
   "@backToHome": {
     "description": "button in success login back you to home "
   },
-  "yourCart" :  "Your Cart",
+  "yourCart": "Your Cart",
   "@yourCart": {
     "description": "label in app bar of cart screen "
   },
-  "numberOfItem" :  "4 items",
+  "numberOfItem": "4 items",
   "@numberOfItem": {
     "description": "number of item in cart "
+  },
+  "viewStore": "View store",
+  "@viewStore": {
+    "description": "Label for the button to view the store"
+  },
+  "price": "Price",
+  "@price": {
+    "description": "Label for the product price"
   }
 }
