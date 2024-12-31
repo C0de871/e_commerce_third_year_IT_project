@@ -62,6 +62,9 @@ class ApiKey {
   static String currentPage = "currentPage";
   static String totalPages = "totalPages";
   static String hasMorePage = "hasMorePage";
+  static String totalItems = "totalItems";
+
+  static String categoryId = "category_id";
 }
 
 class CacheKey {
