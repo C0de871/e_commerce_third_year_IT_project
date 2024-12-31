@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:e_commerce/features/get_product_details/domain/use_cases/get_product_details_use_case.dart';
+import 'package:e_commerce/features/get_product_details/presentation/cubit/get_product_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/image.dart' as FlutterImage;
@@ -10,6 +12,7 @@ import 'package:e_commerce/core/shared/widgets/skeleton.dart';
 import 'package:e_commerce/features/favorites/presentation/cubit/toggle_fav_cubit.dart';
 import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
 
+import '../../../../../core/Routes/app_routes.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/constants/app_numbers.dart';
 import '../../../../../core/utils/constants/app_rive.dart';
@@ -40,11 +43,21 @@ class ProductCard extends StatelessWidget {
         ],
       ),
       // width: MediaQuery.sizeOf(context).width / 2,
-      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+      child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
         return Material(
           color: Colors.transparent,
           child: InkWell(
-            onTap: () {},
+            onTap: () {
+              context.read<GetProductDetailsCubit>().getProductDetailsTrigger(
+                    productID: product!.productId.toString(),
+                    storeID: product!.storeId.toString(),
+                  );
+              Navigator.of(context).pushNamed(
+                AppRoutes.productDetailsScreen,
+                arguments: product,
+              );
+            },
             child: Padding(
               padding: const EdgeInsets.all(padding4 * 4),
               child: BlocBuilder<ProductCubit, ProductState>(
@@ -301,7 +314,9 @@ class _FaviourtState extends State<Faviourt> {
         padding: EdgeInsets.only(top: 1),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: widget.product!.isFavorite == 1 ? const Color.fromARGB(255, 251, 207, 204) : AppColors.disableFavContainer,
+          color: widget.product!.isFavorite == 1
+              ? const Color.fromARGB(255, 251, 207, 204)
+              : AppColors.disableFavContainer,
         ),
         child: artboard == null
             ? SizedBox()
@@ -333,7 +348,8 @@ class LoadingFaviourt extends StatelessWidget {
 }
 
 class ProductImage extends StatelessWidget {
-  const ProductImage({super.key, required this.mainImageUrl, required this.constraints});
+  const ProductImage(
+      {super.key, required this.mainImageUrl, required this.constraints});
 
   final String mainImageUrl;
   final BoxConstraints constraints;

@@ -4,6 +4,8 @@ import 'package:e_commerce/core/databases/params/params.dart';
 import '../entities/toggle_fav_entitiy.dart';
 
 abstract class FavoritesRepository {
-  Future<Either<Failure, ToggleFavEntity>> getToggleFavOn({required ToggleFavParams params});
-  Future<Either<Failure, ToggleFavEntity>> getToggleFavOff({required ToggleFavParams params});
+  Future<Either<Failure, ToggleFavEntity>> getToggleFavOn(
+      {required ToggleFavParams params});
+  Future<Either<Failure, ToggleFavEntity>> getToggleFavOff(
+      {required ToggleFavParams params});
 }

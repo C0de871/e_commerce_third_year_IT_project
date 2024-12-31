@@ -32,7 +32,8 @@ class ProductCubit extends Cubit<ProductState> {
   //! get all products:
   dynamic getAllProducts({int page = 1}) async {
     emit(GetAllProductsLoading());
-    final response = await getAllProductsUseCase.call(params: ProductParams(page: page));
+    final response =
+        await getAllProductsUseCase.call(params: ProductParams(page: page));
     response.fold(
       (failure) => emit(GetAllProductsFailed(errMessage: failure.errMessage)),
       (getAllProductsEntity) => emit(GetAllProductsSuccess(getAllProductsEntity: getAllProductsEntity)),
@@ -40,6 +41,7 @@ class ProductCubit extends Cubit<ProductState> {
   }
 
   //! listen to favorite update:
+  void _listenToFavoriteUpdates() {
   void _listenToFavoriteUpdates() {
     _favoriteSubscription = _favoriteService.favoriteUpdates.listen((update) {
       log("here is stream ${update.isFavorite}");

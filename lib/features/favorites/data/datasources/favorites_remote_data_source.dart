@@ -14,10 +14,14 @@ class FavoritesRemoteDataSource {
   });
   Future<ToggleFavModel> getToggleFavOn(ToggleFavParams params) async {
     Map<String, dynamic> headers = {
-      ApiKey.authorization: await cacheHelper.getData(key: CacheKey.accessToken),
+      ApiKey.authorization:
+          await cacheHelper.getData(key: CacheKey.accessToken),
     };
 
-    bool isLoggedIn = (await cacheHelper.getData(key: CacheKey.accessToken) != null) ? true : false;
+    bool isLoggedIn =
+        (await cacheHelper.getData(key: CacheKey.accessToken) != null)
+            ? true
+            : false;
 
     Map<String, dynamic> extra = {
       ApiKey.requiredAuth: isLoggedIn,
@@ -32,10 +36,14 @@ class FavoritesRemoteDataSource {
 
   Future<ToggleFavModel> getToggleFavOff(ToggleFavParams params) async {
     Map<String, dynamic> headers = {
-      ApiKey.authorization: await cacheHelper.getData(key: CacheKey.accessToken),
+      ApiKey.authorization:
+          await cacheHelper.getData(key: CacheKey.accessToken),
     };
 
-    bool isLoggedIn = (await cacheHelper.getData(key: CacheKey.accessToken) != null) ? true : false;
+    bool isLoggedIn =
+        (await cacheHelper.getData(key: CacheKey.accessToken) != null)
+            ? true
+            : false;
 
     Map<String, dynamic> extra = {
       ApiKey.requiredAuth: isLoggedIn,

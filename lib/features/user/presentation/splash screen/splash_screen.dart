@@ -77,9 +77,11 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: DefaultButton(
                       text: AppLocalizations.of(context)!.continueSplash,
                       press: () async {
-                        await getIt<SharedPrefsHelper>().saveData(key: CacheKey.isFirstTime, value: false);
+                        await getIt<SharedPrefsHelper>()
+                            .saveData(key: CacheKey.isFirstTime, value: false);
                         if (context.mounted) {
-                          Navigator.of(context).pushReplacementNamed(AppRoutes.loginRoute);
+                          Navigator.of(context)
+                              .pushReplacementNamed(AppRoutes.loginRoute);
                         }
                       }),
                 ),
@@ -101,7 +103,9 @@ class _SplashScreenState extends State<SplashScreen> {
       height: padding4,
       width: currentPage == index ? padding4 * 5 : padding4,
       decoration: BoxDecoration(
-        color: currentPage == index ? Theme.of(context).colorScheme.inversePrimary : Theme.of(context).colorScheme.surfaceContainer,
+        color: currentPage == index
+            ? Theme.of(context).colorScheme.inversePrimary
+            : Theme.of(context).colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(padding4),
       ),
     );

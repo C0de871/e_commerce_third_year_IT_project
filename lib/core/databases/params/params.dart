@@ -10,6 +10,14 @@ class ToggleFavParams {
   });
 }
 
+class GetProductDetailsParams {
+  String productID, storeID;
+  GetProductDetailsParams({
+    required this.productID,
+    required this.storeID,
+  });
+}
+
 class ProductParams {
   int page = 1;
   ProductParams({required this.page});
