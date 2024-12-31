@@ -9,7 +9,6 @@ import 'package:e_commerce/core/shared/screens/Navigation_cubit/navigation_bar_c
 import 'package:e_commerce/features/get_product_details/presentation/screens/product_details_screen.dart';
 import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
 import 'package:e_commerce/features/stores/presentation/cubit/store_cubit.dart';
-import 'package:e_commerce/features/cart/presentation/cubit/counter_cubit.dart';
 import 'package:e_commerce/features/user/presentation/OTP/otp_screen.dart';
 import 'package:e_commerce/features/cart/presentation/cart_screen/cart_screen.dart';
 import 'package:e_commerce/features/user/presentation/cubit/user_cubit.dart';

@@ -5,7 +5,6 @@ import 'package:e_commerce/features/cart/data/models/cart.dart';
 import 'package:e_commerce/features/cart/data/models/sub_cart/sub_cart_model.dart';
 import 'package:e_commerce/features/cart/domain/entites/cart_entity/sub_cart_entity.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/cart_cubit.dart';
-import 'package:e_commerce/features/cart/presentation/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
