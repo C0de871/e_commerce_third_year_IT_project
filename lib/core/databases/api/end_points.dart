@@ -71,6 +71,7 @@ class ApiKey {
   static String subImages = "sub_images";
   static String catagoryID = "category_id";
   static String catagoryName = "category_name";
+  static String quantityInCart = "quantityInCart";
 }
 
 class CacheKey {

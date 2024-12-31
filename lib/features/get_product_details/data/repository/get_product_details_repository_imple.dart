@@ -11,12 +11,15 @@ import '../data sources/get_product_details_remote_data_source.dart';
 class GetProductDetailsRepositoryImpl extends GetProductDetailsRepository {
   final NetworkInfo networkInfo;
   final GetProductDetailsRemoteDataSource remoteDataSource;
-  GetProductDetailsRepositoryImpl({required this.remoteDataSource, required this.networkInfo});
+  GetProductDetailsRepositoryImpl(
+      {required this.remoteDataSource, required this.networkInfo});
   @override
-  Future<Either<Failure, GetProductDetailsEntity>> getProductDetails({required GetProductDetailsParams params}) async {
+  Future<Either<Failure, GetProductDetailsEntity>> getProductDetails(
+      {required GetProductDetailsParams params}) async {
     if (await networkInfo.isConnected!) {
       try {
-        final remoteGetProductDetails = await remoteDataSource.getProductDetails(params);
+        final remoteGetProductDetails =
+            await remoteDataSource.getProductDetails(params);
 
         return Right(remoteGetProductDetails);
       } on ServerException catch (e) {

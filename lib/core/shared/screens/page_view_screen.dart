@@ -28,10 +28,10 @@ class _PageViewScreenState extends State<PageViewScreen> {
     MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => GetProductDetailsCubit(),
+          create: (context) => GetProductDetailsCubit.instance,
         ),
         BlocProvider(
-          create: (context) => ToggleFavCubit(),
+          create: (context) => ToggleFavCubit.instance,
         ),
       ],
       child: const HomeScreen(),

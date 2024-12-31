@@ -16,6 +16,7 @@ class DataModel extends DataEntity {
     super.catagoryID,
     super.catagoryName,
     super.isFavorite,
+    super.quantityInCart,
   });
 
   factory DataModel.fromMap(Map<String, dynamic> data) => DataModel(
@@ -27,10 +28,13 @@ class DataModel extends DataEntity {
         quantity: data[ApiKey.quantity] as int?,
         description: data[ApiKey.description] as String?,
         mainImage: data[ApiKey.mainImageUrl] as String?,
-        subImages: (data[ApiKey.subImages] as List<dynamic>?)?.map((e) => SubImageModel.fromMap(e as Map<String, dynamic>)).toList(),
+        subImages: (data[ApiKey.subImages] as List<dynamic>?)
+            ?.map((e) => SubImageModel.fromMap(e as Map<String, dynamic>))
+            .toList(),
         catagoryID: data[ApiKey.catagoryID] as int?,
         catagoryName: data[ApiKey.catagoryName] as String?,
-        isFavorite: data[ApiKey.isFavorite] as bool?,
+        isFavorite: data[ApiKey.isFavorite] as int?,
+        quantityInCart: data[ApiKey.quantityInCart] as int?,
       );
 
   Map<String, dynamic> toMap() => {
@@ -42,10 +46,12 @@ class DataModel extends DataEntity {
         ApiKey.quantity: quantity,
         ApiKey.description: description,
         ApiKey.mainImageUrl: mainImage,
-        ApiKey.subImages: subImages?.map((e) => (e as SubImageModel).toMap()).toList(),
+        ApiKey.subImages:
+            subImages?.map((e) => (e as SubImageModel).toMap()).toList(),
         ApiKey.catagoryID: catagoryID,
         ApiKey.catagoryName: catagoryName,
         ApiKey.isFavorite: isFavorite,
+        ApiKey.quantityInCart: quantityInCart,
       };
 
   DataModel copyWith({
@@ -60,7 +66,8 @@ class DataModel extends DataEntity {
     List<SubImageModel>? subImages,
     int? catagoryID,
     String? catagoryName,
-    bool? isFavorite,
+    int? isFavorite,
+    int? quantityInCart,
   }) {
     return DataModel(
       storeId: storeId ?? this.storeId,
@@ -75,6 +82,7 @@ class DataModel extends DataEntity {
       catagoryID: catagoryID ?? this.catagoryID,
       catagoryName: catagoryName ?? this.catagoryName,
       isFavorite: isFavorite ?? this.isFavorite,
+      quantityInCart: quantityInCart ?? this.quantityInCart,
     );
   }
 }

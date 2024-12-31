@@ -44,7 +44,8 @@ class ProductCard extends StatelessWidget {
         ],
       ),
       // width: MediaQuery.sizeOf(context).width / 2,
-      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+      child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
         return Material(
           color: Colors.transparent,
           child: InkWell(
@@ -314,7 +315,9 @@ class _FaviourtState extends State<Faviourt> {
         padding: EdgeInsets.only(top: 1),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: widget.product!.isFavorite == 1 ? const Color.fromARGB(255, 251, 207, 204) : AppColors.disableFavContainer,
+          color: widget.product!.isFavorite == 1
+              ? const Color.fromARGB(255, 251, 207, 204)
+              : AppColors.disableFavContainer,
         ),
         child: artboard == null
             ? SizedBox()
@@ -346,7 +349,8 @@ class LoadingFaviourt extends StatelessWidget {
 }
 
 class ProductImage extends StatelessWidget {
-  const ProductImage({super.key, required this.mainImageUrl, required this.constraints});
+  const ProductImage(
+      {super.key, required this.mainImageUrl, required this.constraints});
 
   final String mainImageUrl;
   final BoxConstraints constraints;

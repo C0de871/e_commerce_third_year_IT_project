@@ -18,7 +18,8 @@ class RoundedIconBtn extends StatelessWidget {
       width: 40,
       child: TextButton(
         style: TextButton.styleFrom(
-          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+          // backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
           padding: EdgeInsets.symmetric(
             vertical: padding4,
           ),
@@ -29,6 +30,7 @@ class RoundedIconBtn extends StatelessWidget {
         onPressed: callback,
         child: Icon(
           icon,
+          color: Theme.of(context).colorScheme.onSecondaryContainer,
         ),
       ),
     );

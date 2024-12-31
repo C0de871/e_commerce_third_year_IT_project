@@ -13,7 +13,8 @@ class DataEntity {
   List<SubImageEntity>? subImages;
   int? catagoryID;
   String? catagoryName;
-  bool? isFavorite;
+  int? isFavorite;
+  int? quantityInCart;
   DataEntity({
     this.storeId,
     this.storeName,
@@ -27,5 +28,6 @@ class DataEntity {
     this.catagoryID,
     this.catagoryName,
     this.isFavorite,
+    this.quantityInCart,
   });
 }

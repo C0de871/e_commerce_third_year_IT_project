@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:e_commerce/core/Routes/app_routes.dart';
 import 'package:e_commerce/core/shared/screens/page_view_screen.dart';
 import 'package:e_commerce/features/home/presentation/HomeCubit/home_cubit.dart';
@@ -14,6 +16,7 @@ import 'package:e_commerce/features/user/presentation/splash%20screen/splash_scr
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../features/favorites/presentation/cubit/toggle_fav_cubit.dart';
+import '../../features/get_product_details/presentation/cubit/get_product_details_cubit.dart';
 import '../../features/user/presentation/complete_profile_screen/complete_profile_screen.dart';
 import '../../features/user/presentation/sign up auth screen/sign_up_auth_screen.dart';
 
@@ -78,15 +81,15 @@ class AppRouter {
     return _homeCubit!;
   }
 
-  ToggleFavCubit get toggleFavOnCubit {
-    if (_toggleFavOnCubit == null || _toggleFavOnCubit!.isClosed) {
-      _toggleFavOnCubit = ToggleFavCubit();
-    }
-    _toggleFavOnCubit!.stream.listen((_) {}, onDone: () {
-      _toggleFavOnCubit = null; // Nullify the reference when closed
-    });
-    return _toggleFavOnCubit!;
-  }
+  // ToggleFavCubit get toggleFavOnCubit {
+  //   if (_toggleFavOnCubit == null || _toggleFavOnCubit!.isClosed) {
+  //     _toggleFavOnCubit = ToggleFavCubit();
+  //   }
+  //   _toggleFavOnCubit!.stream.listen((_) {}, onDone: () {
+  //     _toggleFavOnCubit = null; // Nullify the reference when closed
+  //   });
+  //   return _toggleFavOnCubit!;
+  // }
 
   Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -165,9 +168,6 @@ class AppRouter {
               BlocProvider(
                 create: (context) => navBarCubit,
               ),
-              BlocProvider(
-                create: (context) => toggleFavOnCubit,
-              ),
             ],
             child: const PageViewScreen(),
           ),
@@ -175,9 +175,23 @@ class AppRouter {
 
       //! product details route:
       case AppRoutes.productDetailsScreen:
+        log("here");
         return MaterialPageRoute(
           settings: settings,
-          builder: (_) => ProductDetailsScreen(),
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider.value(
+                value: GetProductDetailsCubit.instance,
+              ),
+              BlocProvider.value(
+                value: ToggleFavCubit.instance,
+              ),
+              BlocProvider.value(
+                value: productCubit,
+              ),
+            ],
+            child: ProductDetailsScreen(),
+          ),
         );
 
       //!default route:
