@@ -29,7 +29,7 @@ class ProductRemoteDataSource {
     };
 
     final response = await apiConsumer.get(
-      EndPoints.getAllProducts,
+      "${EndPoints.getAllProducts}/${params.query}",
       queryParameters: params.toJson(),
       headers: headers,
       extra: extra,
