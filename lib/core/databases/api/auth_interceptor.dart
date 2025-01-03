@@ -25,6 +25,7 @@ class AuthInterceptor extends Interceptor {
         options.headers[ApiKey.authorization] = "Bearer $accessToken";
       }
     }
+
     handler.next(options);
   }
 

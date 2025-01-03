@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 // ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 
-import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
+import 'package:e_commerce/features/products/presentation/cubit/product_cubit/product_cubit.dart';
 import 'package:e_commerce/features/stores/presentation/cubit/store_cubit.dart';
 
 part 'home_state.dart';
