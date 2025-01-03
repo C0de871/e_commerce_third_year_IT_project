@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce/features/get_product_details/domain/use_cases/get_product_details_use_case.dart';
 import 'package:e_commerce/features/get_product_details/presentation/cubit/get_product_details_cubit.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ import 'package:rive/rive.dart';
 
 import 'package:e_commerce/core/shared/widgets/skeleton.dart';
 import 'package:e_commerce/features/favorites/presentation/cubit/toggle_fav_cubit.dart';
-import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
+import 'package:e_commerce/features/products/presentation/cubit/product_cubit/product_cubit.dart';
 
 import '../../../../../core/Routes/app_routes.dart';
 import '../../../../../core/theme/app_colors.dart';
@@ -348,18 +349,22 @@ class ProductImage extends StatelessWidget {
   final BoxConstraints constraints;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(
-        padding4 * 4,
+    return AspectRatio(
+      aspectRatio: 1,
+      child: CachedNetworkImage(
+        imageUrl: mainImageUrl,
+        imageBuilder: (context, imageProvider) => Container(
+          padding: const EdgeInsets.all(
+            padding4 * 4,
+          ),
+          decoration: BoxDecoration(
+            color: AppColors.imageBackground,
+            borderRadius: BorderRadius.circular(20),
+            image: DecorationImage(image: imageProvider),
+          ),
+          // child: FlutterImage.Image.asset(AppImages.tShirt),
+        ),
       ),
-      decoration: BoxDecoration(
-        color: AppColors.imageBackground,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: FlutterImage.Image.network(
-        mainImageUrl,
-      ),
-      // child: FlutterImage.Image.asset(AppImages.tShirt),
     );
   }
 }
