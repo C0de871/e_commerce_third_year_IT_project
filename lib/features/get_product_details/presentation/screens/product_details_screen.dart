@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
 
+import 'package:e_commerce/core/helper/app_functions.dart';
 import 'package:e_commerce/features/get_product_details/presentation/screens/widgets/product_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -406,9 +407,8 @@ class _IsFavoriteState extends State<IsFavorite> {
   Widget build(BuildContext context) {
     return BlocBuilder<GetProductDetailsCubit, GetProductDetailsState>(
       builder: (context, state) {
-        final textDirection = Directionality.of(context);
-        final isEng = textDirection == TextDirection.rtl;
-        final alignment = textDirection == TextDirection.rtl ? Alignment.centerLeft : Alignment.centerRight;
+        final rtl = isRtl(context);
+        final alignment = rtl ? Alignment.centerLeft : Alignment.centerRight;
         if (state is GetProductDetailsSuccess) {
           final isFavorite = (state).productDetailsEntity.data!.isFavorite;
           final storeID = (state).productDetailsEntity.data!.storeId;
@@ -425,10 +425,10 @@ class _IsFavoriteState extends State<IsFavorite> {
               decoration: BoxDecoration(
                 color: isFavorite == 1 ? const Color.fromARGB(255, 251, 207, 204) : AppColors.disableFavContainer,
                 borderRadius: BorderRadius.only(
-                  topRight: isEng ? Radius.circular(20) : Radius.circular(0),
-                  bottomRight: isEng ? Radius.circular(20) : Radius.circular(0),
-                  topLeft: isEng ? Radius.circular(0) : Radius.circular(20),
-                  bottomLeft: isEng ? Radius.circular(0) : Radius.circular(20),
+                  topRight: rtl ? Radius.circular(20) : Radius.circular(0),
+                  bottomRight: rtl ? Radius.circular(20) : Radius.circular(0),
+                  topLeft: rtl ? Radius.circular(0) : Radius.circular(20),
+                  bottomLeft: rtl ? Radius.circular(0) : Radius.circular(20),
                 ),
               ),
               child: artboard == null
