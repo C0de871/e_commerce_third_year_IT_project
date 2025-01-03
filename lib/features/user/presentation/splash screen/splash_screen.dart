@@ -8,7 +8,6 @@ import 'package:e_commerce/core/utils/constants/app_images.dart';
 
 import '../../../../core/databases/api/end_points.dart';
 import '../../../../core/databases/cache/shared_prefs_helper.dart';
-import '../../../../core/utils/constants/constant.dart';
 import '../../../../core/utils/services/service_locator.dart';
 
 class SplashScreen extends StatefulWidget {

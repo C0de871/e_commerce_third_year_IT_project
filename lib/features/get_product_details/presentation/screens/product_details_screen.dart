@@ -1,13 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
 
+import 'package:e_commerce/core/helper/app_functions.dart';
 import 'package:e_commerce/features/get_product_details/presentation/screens/widgets/product_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:e_commerce/core/shared/widgets/rounded_icon.dart';
 import 'package:e_commerce/core/utils/constants/app_numbers.dart';
-import 'package:e_commerce/features/products/domain/entities/product_enitty.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rive/rive.dart';
 import 'package:flutter/src/widgets/image.dart' as FlutterImage;
@@ -16,15 +16,16 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/constants/app_images.dart';
 import '../../../../core/utils/constants/app_rive.dart';
 import '../../../favorites/presentation/cubit/toggle_fav_cubit.dart';
+import '../../../products/domain/entities/product_entity.dart';
 import '../cubit/get_product_details_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ProductEntity productDetails =
-        ModalRoute.of(context)!.settings.arguments as ProductEntity;
+    final ProductEntity productDetails = ModalRoute.of(context)!.settings.arguments as ProductEntity;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       // backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
@@ -36,18 +37,16 @@ class ProductDetailsScreen extends StatelessWidget {
         forceMaterialTransparency: true,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Theme.of(context).colorScheme.surface,
-          statusBarIconBrightness:
-              Theme.of(context).brightness == Brightness.light
-                  ? Brightness.dark
-                  : Brightness.light,
+          statusBarIconBrightness: Theme.of(context).brightness == Brightness.light ? Brightness.dark : Brightness.light,
         ),
-        leadingWidth: 60,
+        leadingWidth: 80,
         toolbarHeight: 60,
         backgroundColor: Colors.transparent,
         leading: Padding(
           padding: const EdgeInsets.only(
             left: padding4 * 5,
             top: padding4 * 5,
+            right: padding4 * 5,
           ),
           child: RoundedIconBtn(
             icon: Icons.arrow_back_ios_new,
@@ -219,7 +218,7 @@ class Price extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Price",
+          AppLocalizations.of(context)!.price,
           style: TextStyle(color: AppColors.darkGray),
         ),
         Text(
@@ -295,9 +294,9 @@ class StoreCard extends StatelessWidget {
           color: Theme.of(context).colorScheme.primary,
           fontSize: 16,
         ),
-        title: Text(productDetails.storeName),
+        title: Text(productDetails.storeName!),
         subtitle: Text(
-          "View store",
+          AppLocalizations.of(context)!.viewStore,
           style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
         ),
       ),
@@ -346,7 +345,7 @@ class ProductName extends StatelessWidget {
       child: Align(
         alignment: Alignment.topLeft,
         child: Text(
-          productDetails.productName,
+          productDetails.productName!,
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.w500,
@@ -408,13 +407,15 @@ class _IsFavoriteState extends State<IsFavorite> {
   Widget build(BuildContext context) {
     return BlocBuilder<GetProductDetailsCubit, GetProductDetailsState>(
       builder: (context, state) {
+        final rtl = isRtl(context);
+        final alignment = rtl ? Alignment.centerLeft : Alignment.centerRight;
         if (state is GetProductDetailsSuccess) {
           final isFavorite = (state).productDetailsEntity.data!.isFavorite;
           final storeID = (state).productDetailsEntity.data!.storeId;
           final productID = (state).productDetailsEntity.data!.productId;
           isFavoriteSMI?.value = isFavorite == 1;
           return Align(
-            alignment: Alignment.centerRight,
+            alignment: alignment,
             child: Container(
               padding: EdgeInsets.only(
                 top: padding4 * 1,
@@ -422,12 +423,12 @@ class _IsFavoriteState extends State<IsFavorite> {
               ),
               width: 72,
               decoration: BoxDecoration(
-                color: isFavorite == 1
-                    ? const Color.fromARGB(255, 251, 207, 204)
-                    : AppColors.disableFavContainer,
+                color: isFavorite == 1 ? const Color.fromARGB(255, 251, 207, 204) : AppColors.disableFavContainer,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  bottomLeft: Radius.circular(20),
+                  topRight: rtl ? Radius.circular(20) : Radius.circular(0),
+                  bottomRight: rtl ? Radius.circular(20) : Radius.circular(0),
+                  topLeft: rtl ? Radius.circular(0) : Radius.circular(20),
+                  bottomLeft: rtl ? Radius.circular(0) : Radius.circular(20),
                 ),
               ),
               child: artboard == null
@@ -435,16 +436,12 @@ class _IsFavoriteState extends State<IsFavorite> {
                   : GestureDetector(
                       onTap: () async {
                         if (isFavorite == 0) {
-                          await context
-                              .read<ToggleFavCubit>()
-                              .toggleFavOnTrigger(
+                          await context.read<ToggleFavCubit>().toggleFavOnTrigger(
                                 storeID: storeID!,
                                 productID: productID!,
                               );
                         } else {
-                          await context
-                              .read<ToggleFavCubit>()
-                              .toggleFavOffTrigger(
+                          await context.read<ToggleFavCubit>().toggleFavOffTrigger(
                                 storeID: storeID!,
                                 productID: productID!,
                               );

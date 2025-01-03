@@ -1,7 +1,7 @@
 import '../params/params.dart';
 
 class EndPoints {
-  static const String baserUrl = "http://192.168.192.14:8000/api/";
+  static const String baserUrl = "http://192.168.1.2:8000/api/";
   static const String login = "login";
   static const String signUp = "register";
   static const String toggleFavOn = "favorites/";
@@ -71,6 +71,9 @@ class ApiKey {
   static String currentPage = "currentPage";
   static String totalPages = "totalPages";
   static String hasMorePage = "hasMorePage";
+  static String totalItems = "totalItems";
+
+  static String categoryId = "category_id";
 
   static String subImages = "sub_images";
   static String catagoryID = "category_id";

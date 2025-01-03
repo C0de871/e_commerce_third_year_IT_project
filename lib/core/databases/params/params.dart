@@ -20,7 +20,11 @@ class GetProductDetailsParams {
 
 class ProductParams {
   int page = 1;
-  ProductParams({required this.page});
+  String query;
+  ProductParams({
+    required this.page,
+    required this.query,
+  });
 
   Map<String, dynamic> toJson() {
     return {
