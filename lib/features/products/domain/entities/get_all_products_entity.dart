@@ -1,5 +1,5 @@
+import '../../../../core/shared/domain/entities/pagination_entity.dart';
 import 'data_entity.dart';
-import 'pagination_entity.dart';
 
 class GetAllProductsEntity {
   final DataEntity? data;

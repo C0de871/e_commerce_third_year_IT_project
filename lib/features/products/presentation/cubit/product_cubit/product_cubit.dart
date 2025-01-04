@@ -29,7 +29,7 @@ class ProductCubit extends Cubit<ProductState> {
   }
 
   //! get all products:
-  dynamic getAllProducts({bool isFirstPage = false, int page = 1, String query=""}) async {
+  dynamic getAllProducts({bool isFirstPage = false, int page = 1, String query = ""}) async {
     if (state is! ProductInitial) return;
 
     emit(GetAllProductsLoading());
@@ -50,24 +50,26 @@ class ProductCubit extends Cubit<ProductState> {
 
   //! listen to favorite update:
   void _listenToFavoriteUpdates() {
-    _favoriteSubscription = _favoriteService.favoriteUpdates.listen((update) {
-      log("here is stream ${update.isFavorite}");
-      if (state is GetAllProductsSuccess) {
-        final products = (state as GetAllProductsSuccess).getAllProductsEntity.data!.products!;
-        for (var i = 0; i < products.length; i++) {
-          var product = products[i];
-          if (product.storeId.toString() == update.storeID && product.productId.toString() == update.productId) {
-            log("is product fav: ${product.isFavorite}");
+    _favoriteSubscription = _favoriteService.favoriteUpdatesStream.listen(
+      (update) {
+        log("here is stream ${update.isFavorite}");
+        if (state is GetAllProductsSuccess) {
+          final products = (state as GetAllProductsSuccess).getAllProductsEntity.data!.products!;
+          for (var i = 0; i < products.length; i++) {
+            var product = products[i];
+            if (product.storeId.toString() == update.storeID && product.productId.toString() == update.productId) {
+              log("is product fav: ${product.isFavorite}");
 
-            // Directly update the isFavorite property in the product
-            products[i] = (product as ProductModel).copyWith(isFavorite: update.isFavorite);
+              // Directly update the isFavorite property in the product
+              products[i] = (product as ProductModel).copyWith(isFavorite: update.isFavorite);
 
-            log("Updated is product fav: ${products[i].isFavorite}");
+              log("Updated is product fav: ${products[i].isFavorite}");
+            }
           }
+          emit((state as GetAllProductsSuccess).copyWith());
         }
-        emit((state as GetAllProductsSuccess).copyWith());
-      }
-    });
+      },
+    );
   }
 
   @override

@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../core/databases/api/end_points.dart';
 import 'data_model.dart';
-import 'pagination_model.dart';
+import '../../../../core/shared/data/models/pagination_model.dart';
 
 class GetAllProductsModel extends GetAllProductsEntity with EquatableMixin {
   final bool? successful;

@@ -22,7 +22,7 @@ class GetStoresModel extends GetStoresEntity {
         message: data[ApiKey.message],
         data: StoresDataModel.fromMap(data[ApiKey.data]),
         statusCode: data[ApiKey.statusCode],
-        pagination: PaginationModel.fromJson(data[ApiKey.pagination]),
+        pagination: PaginationModel.fromMap(data[ApiKey.pagination]),
       );
 
   Map<String, dynamic> toMap() => {
