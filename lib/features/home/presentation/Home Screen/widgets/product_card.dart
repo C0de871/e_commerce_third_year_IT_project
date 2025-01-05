@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:e_commerce/features/get_product_details/domain/use_cases/get_product_details_use_case.dart';
 import 'package:e_commerce/features/get_product_details/presentation/cubit/get_product_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -64,24 +63,39 @@ class ProductCard extends StatelessWidget {
                 builder: (context, state) {
                   return state is GetAllProductsLoading
                       ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Stack(
                               children: [
                                 LoadingProductImage(
                                   constraints: constraints,
                                 ),
-                                LoadingFaviourt(
-                                  constraints: constraints,
-                                ),
                               ],
                             ),
-                            const SizedBox(height: padding4 * 3),
+                            const SizedBox(
+                              height: padding4 * 4,
+                            ),
                             LoadingProductName(
                               constraints: constraints,
                             ),
                             const SizedBox(height: padding4 * 1),
-                            LoadingProductPrice(
-                              constraints: constraints,
+                            Skeleton(
+                              width: constraints.maxWidth * 0.40,
+                              height: 10,
+                              radius: 0,
+                            ),
+                            const SizedBox(height: padding4 * 4),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                LoadingProductPrice(
+                                  constraints: constraints,
+                                ),
+                                LoadingFaviourt(
+                                  constraints: constraints,
+                                ),
+                              ],
                             ),
                             const SizedBox(
                               height: padding4 * 1,
@@ -231,7 +245,7 @@ class LoadingProductName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Skeleton(
       width: constraints.maxWidth * 0.75,
-      height: 25,
+      height: 14,
       radius: 0,
       margin: const EdgeInsets.only(top: 5),
     );
@@ -334,8 +348,8 @@ class LoadingFaviourt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Skeleton(
-      width: 42,
-      height: 42,
+      width: 36,
+      height: 36,
       radius: 42,
       margin: EdgeInsets.only(bottom: 5),
     );

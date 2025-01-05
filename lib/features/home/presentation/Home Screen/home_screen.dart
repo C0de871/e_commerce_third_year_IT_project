@@ -49,7 +49,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: padding4 * 7),
                 SectionTitle(
                   text: AppLocalizations.of(context)!.specialForYou,
-                  press: () {},
+                  press: () {
+                    Navigator.of(context).pushNamed(
+                      AppRoutes.seeMoreStoresRoute,
+                    );
+                  },
                 ),
                 const SizedBox(height: padding4 * 5),
                 const PopularStores(),

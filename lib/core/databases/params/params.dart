@@ -35,7 +35,11 @@ class ProductParams {
 
 class StoreParams {
   int page = 1;
-  StoreParams({required this.page});
+  String query;
+  StoreParams({
+    required this.page,
+    required this.query,
+  });
 
   Map<String, dynamic> toJson() {
     return {

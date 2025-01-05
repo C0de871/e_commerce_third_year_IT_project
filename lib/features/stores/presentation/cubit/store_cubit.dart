@@ -18,14 +18,24 @@ class StoreCubit extends Cubit<StoreState> {
       : getAllStoresUseCase = getIt(),
         super(StoreInitial());
 
-  dynamic getAllStores({int page = 1}) async {
+  dynamic getAllStores({int page = 1, String querySearch = ''}) async {
+    if (state is! StoreInitial) return;
+
     emit(GetAllStoresLoading());
-    final response =
-        await getAllStoresUseCase.call(params: StoreParams(page: 1));
+    final response = await getAllStoresUseCase.call(
+      params: StoreParams(
+        page: 1,
+        query: querySearch,
+      ),
+    );
     response.fold(
         (failure) => emit(
               GetAllStoresFailed(errMes: failure.errMessage),
             ),
         (storesList) => emit(GetAllStoresSuccess(storesList: storesList)));
+  }
+
+  void reset() {
+    emit(StoreInitial());
   }
 }

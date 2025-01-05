@@ -44,6 +44,7 @@ class ProductCubit extends Cubit<ProductState> {
     );
   }
 
+
   void reset() {
     emit(ProductInitial());
   }
