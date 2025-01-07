@@ -76,15 +76,17 @@ class _SplashScreenState extends State<SplashScreen> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: padding4 * 5),
                   child: DefaultButton(
-                      text: AppLocalizations.of(context)!.continueSplash,
-                      press: () async {
-                        await getIt<SharedPrefsHelper>()
-                            .saveData(key: CacheKey.isFirstTime, value: false);
-                        if (context.mounted) {
-                          Navigator.of(context)
-                              .pushReplacementNamed(AppRoutes.loginRoute);
-                        }
-                      }),
+                    text: AppLocalizations.of(context)!.continueSplash,
+                    press: () async {
+                      await getIt<SharedPrefsHelper>()
+                          .saveData(key: CacheKey.isFirstTime, value: false);
+                      if (context.mounted) {
+                        Navigator.of(context)
+                            .pushReplacementNamed(AppRoutes.loginRoute);
+                      }
+                    },
+                    width: 200,
+                  ),
                 ),
                 const Spacer(
                   flex: 2,
