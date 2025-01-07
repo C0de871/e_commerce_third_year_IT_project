@@ -1,3 +1,6 @@
+import 'package:collection/collection.dart';
+import 'package:e_commerce/core/databases/api/end_points.dart';
+
 class SubCartEntity {
   int? storeId;
   String? storeName;
@@ -25,7 +28,20 @@ class SubCartEntity {
     this.message,
   });
 
-  SubCartEntity copyWith({
+  factory SubCartEntity.fromJson(Map<String, dynamic> json) => SubCartEntity(
+        storeId: json[ApiKey.storeId] as int?,
+        storeName: json[ApiKey.storeName] as String?,
+        orderQuantity: json[ApiKey.orderQuantity] as int?,
+        storeProductId: json[ApiKey.storeProductId] as int?,
+        price: json[ApiKey.price] as String?,
+        quantity: json[ApiKey.quantity] as int?,
+        description: json[ApiKey.description] as String?,
+        productId: json[ApiKey.productId] as int?,
+        productName: json[ApiKey.productName] as String?,
+        mainImage: json[ApiKey.mainImage] as String?,
+        message: json[ApiKey.message] as String?,
+      );
+SubCartEntity copyWith({
     int? storeId,
     String? storeName,
     int? orderQuantity,
@@ -52,4 +68,5 @@ class SubCartEntity {
       message: message ?? this.message,
     );
   }
+
 }
