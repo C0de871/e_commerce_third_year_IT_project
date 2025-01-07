@@ -3,7 +3,10 @@ import 'dart:developer';
 import 'package:e_commerce/core/Routes/app_routes.dart';
 import 'package:e_commerce/core/shared/screens/page_view_screen.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:e_commerce/features/cart/presentation/cubit/clear_cart_cubit.dart';
+import 'package:e_commerce/features/cart/presentation/cubit/delete_cart_cubit.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/modify_cart_cubit.dart';
+import 'package:e_commerce/features/cart/presentation/cubit/size_cart_cubit.dart';
 import 'package:e_commerce/features/home/presentation/HomeCubit/home_cubit.dart';
 import 'package:e_commerce/core/shared/screens/Navigation_cubit/navigation_bar_cubit.dart';
 import 'package:e_commerce/features/get_product_details/presentation/screens/product_details_screen.dart';
@@ -31,6 +34,9 @@ class AppRouter {
   ToggleFavCubit? _toggleFavOnCubit;
   CartCubit? _cartCubit;
   ModifyCartCubit? _modifyCartCubit;
+  DeleteCartCubit? _deleteCartCubit;
+  SizeCartCubit? _sizeCartCubit;
+  // ClearCartCubit? _clearCartCubit;
 
   UserCubit get userCubit {
     if (_userCubit == null || _userCubit!.isClosed) {
@@ -45,6 +51,7 @@ class AppRouter {
   CartCubit get cartCubit {
     if (_cartCubit == null || _cartCubit!.isClosed) {
       _cartCubit = CartCubit();
+      log("cart created");
     }
     _cartCubit?.stream.listen((_) {}, onDone: () {
       _cartCubit = null; // Nullify the reference when closed
@@ -62,6 +69,34 @@ class AppRouter {
     return _modifyCartCubit!;
   }
 
+  DeleteCartCubit get deleteCartCubit {
+    if (_deleteCartCubit == null || _deleteCartCubit!.isClosed) {
+      _deleteCartCubit = DeleteCartCubit();
+    }
+    _deleteCartCubit?.stream.listen((_) {}, onDone: () {
+      _deleteCartCubit = null; // Nullify the reference when closed
+    });
+    return _deleteCartCubit!;
+  }
+
+SizeCartCubit get sizeCartCubit {
+    if (_sizeCartCubit == null || _sizeCartCubit!.isClosed) {
+      _sizeCartCubit = SizeCartCubit();
+    }
+    _sizeCartCubit?.stream.listen((_) {}, onDone: () {
+      _sizeCartCubit = null; // Nullify the reference when closed
+    });
+    return _sizeCartCubit!;
+  }
+  // ClearCartCubit get clearCartCubit {
+  //   if (_clearCartCubit == null || _clearCartCubit!.isClosed) {
+  //     _clearCartCubit = ClearCartCubit();
+  //   }
+  //   _clearCartCubit?.stream.listen((_) {}, onDone: () {
+  //     _clearCartCubit = null; // Nullify the reference when closed
+  //   });
+  //   return _clearCartCubit!;
+  // }
   NavigationBarCubit get navBarCubit {
     if (_navBarCubit == null || _navBarCubit!.isClosed) {
       _navBarCubit = NavigationBarCubit();
@@ -127,8 +162,14 @@ class AppRouter {
                     create: (context) => modifyCartCubit,
                   ),
                   BlocProvider(
-                    create: (context) => cartCubit,
+                    create: (context) => cartCubit..getCartTrigger(),
                   ),
+                  BlocProvider(
+                    create: (context) => deleteCartCubit,
+                  ),
+                  // BlocProvider(
+                  //   create: (context) => clearCartCubit,
+                  // ),
                 ], child: const CartScreen()));
       //     builder:
       //   create: (context) => userCubit,
@@ -207,6 +248,9 @@ class AppRouter {
               ),
               BlocProvider(
                 create: (context) => cartCubit,
+              ),
+              BlocProvider(
+                create: (context) => sizeCartCubit,
               )
             ],
             child: const PageViewScreen(),
