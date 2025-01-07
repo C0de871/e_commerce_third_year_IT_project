@@ -54,7 +54,7 @@ class AppRouter {
   CartCubit get cartCubit {
     if (_cartCubit == null || _cartCubit!.isClosed) {
       _cartCubit = CartCubit();
-      log("cart created");
+      // log("cart created");
     }
     _cartCubit?.stream.listen((_) {}, onDone: () {
       _cartCubit = null; // Nullify the reference when closed

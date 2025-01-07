@@ -103,11 +103,11 @@ class _CartScreenState extends State<CartScreen> {
                       DefaultButton(
                         text: AppLocalizations.of(context)!.checkOut,
                         press: () {
-                          Navigator.pushNamed(
-                            context,
-                            AppRoutes.checkOutScreen,
-                            arguments: state.cart.data,
-                          );
+                          // Navigator.pushNamed(
+                          //   context,
+                          //   AppRoutes.checkOutScreen,
+                          //   arguments: state.cart.data,
+                          // );
                         },
                         width: 100,
                       ),
