@@ -31,7 +31,6 @@ class AuthInterceptor extends Interceptor {
   @override
   Future<void> onError(
       DioException err, ErrorInterceptorHandler handler) async {
-    log("on error");
     if (err.response!.statusCode == 401 &&
         err.requestOptions.extra[ApiKey.requiredAuth] != null &&
         err.requestOptions.extra[ApiKey.requiredAuth]) {
