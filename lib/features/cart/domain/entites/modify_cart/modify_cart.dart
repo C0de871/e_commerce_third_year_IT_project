@@ -6,6 +6,6 @@ class ModifyCartEntity {
   int? productId;
   int? cartAmount;
 
-  ModifyCartEntity({this.message, this.storeId, this.productId, this.cartAmount});
-
+  ModifyCartEntity(
+      {this.message, this.storeId, this.productId, this.cartAmount});
 }
