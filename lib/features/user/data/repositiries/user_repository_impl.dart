@@ -8,6 +8,7 @@ import 'package:e_commerce/features/user/domain/entites/Sign%20up%20entities/sig
 import 'package:e_commerce/features/user/domain/entites/otp_entities/otp_entity.dart';
 import 'package:e_commerce/features/user/domain/entites/user_entities/user_entities.dart';
 import 'package:e_commerce/features/user/domain/repository/user_repository.dart';
+import 'package:flutter/services.dart';
 
 import '../../domain/entites/refresh_token/refresh_token_entity.dart';
 
@@ -16,10 +17,7 @@ class UserRepositoryImpl extends UserRepository {
   final UserRemoteDataSource remoteDataSource;
   final UserLocalDataSource localDataSource;
 
-  UserRepositoryImpl(
-      {required this.remoteDataSource,
-      required this.localDataSource,
-      required this.networkInfo});
+  UserRepositoryImpl({required this.remoteDataSource, required this.localDataSource, required this.networkInfo});
   @override
   Future<Either<Failure, UserEntity>> loginUser({
     required Map<String, dynamic> bodyjson,
@@ -33,18 +31,19 @@ class UserRepositoryImpl extends UserRepository {
         return Left(Failure(errMessage: e.errorModel.errorMessage));
       }
     } else {
-      try {
-        final localUser = await localDataSource.getLastUser();
-        return Right(localUser);
-      } on CacheExeption catch (e) {
-        return Left(Failure(errMessage: e.errorMessage));
-      }
+      // try {
+      // final localUser = await localDataSource.getLastUser();
+      // if(localUser!=null){
+      // return Right(localUser);
+      // }
+      // } on CacheExeption catch (e) {
+      return Left(Failure(errMessage: "NO Internet connection"));
+      // }
     }
   }
 
   @override
-  Future<Either<Failure, SignUpEntity>> signUpUser(
-      {required Map<String, dynamic> jsonBody}) async {
+  Future<Either<Failure, SignUpEntity>> signUpUser({required Map<String, dynamic> jsonBody}) async {
     if (await networkInfo.isConnected!) {
       try {
         final remoteSignUpModel = await remoteDataSource.signUpUser(jsonBody);
@@ -106,8 +105,7 @@ class UserRepositoryImpl extends UserRepository {
     if (await networkInfo.isConnected!) {
       try {
         final remoteRefreshing = await remoteDataSource.refreshToken();
-        await localDataSource.cacheAccessToken(
-            remoteRefreshing.refreshTokenDataEntity.accessToken);
+        await localDataSource.cacheAccessToken(remoteRefreshing.refreshTokenDataEntity.accessToken);
         return Right(remoteRefreshing);
       } on ServerException catch (e) {
         return Left(Failure(errMessage: e.errorModel.errorMessage));
@@ -117,6 +115,48 @@ class UserRepositoryImpl extends UserRepository {
         Failure(
           errMessage: localDataSource.noInternectConnection(),
         ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity?>> getLastUser() async {
+    try {
+      final user = await localDataSource.getLastUser();
+      return Right(user);
+    } on PlatformException catch (e) {
+      return Left(
+        Failure(
+          errMessage: e.message ?? e.details ?? e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> isFirstLaunch() async {
+    try {
+      final bool isFirstLaunch = await localDataSource.isFirstLaunch();
+      return Right(isFirstLaunch);
+    } on Exception catch (e) {
+      return Left(
+        Failure(errMessage: e.toString()),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> setFirstLaunch() async {
+    try {
+      final bool success = await localDataSource.setFirstLaunch();
+      if (success) {
+        return Right(false);
+      } else {
+        return Left(Failure(errMessage: "Failed To set first launch"));
+      }
+    } on Exception catch (e) {
+      return Left(
+        Failure(errMessage: e.toString()),
       );
     }
   }

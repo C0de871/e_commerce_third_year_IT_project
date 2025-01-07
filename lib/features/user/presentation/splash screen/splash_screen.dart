@@ -1,8 +1,10 @@
 import 'package:e_commerce/core/Routes/app_routes.dart';
 import 'package:e_commerce/core/utils/constants/app_numbers.dart';
 import 'package:e_commerce/core/shared/widgets/defualt_button.dart';
+import 'package:e_commerce/features/user/presentation/cubit/check_first_launch/check_first_launch_cubit.dart';
 import 'package:e_commerce/features/user/presentation/splash%20screen/splash_content.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:e_commerce/core/utils/constants/app_images.dart';
 
@@ -77,11 +79,9 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: DefaultButton(
                       text: AppLocalizations.of(context)!.continueSplash,
                       press: () async {
-                        await getIt<SharedPrefsHelper>()
-                            .saveData(key: CacheKey.isFirstTime, value: false);
+                        context.read<CheckFirstLaunchCubit>().setFirstLaunch();
                         if (context.mounted) {
-                          Navigator.of(context)
-                              .pushReplacementNamed(AppRoutes.loginRoute);
+                          Navigator.of(context).pushReplacementNamed(AppRoutes.loginRoute);
                         }
                       }),
                 ),
@@ -103,9 +103,7 @@ class _SplashScreenState extends State<SplashScreen> {
       height: padding4,
       width: currentPage == index ? padding4 * 5 : padding4,
       decoration: BoxDecoration(
-        color: currentPage == index
-            ? Theme.of(context).colorScheme.inversePrimary
-            : Theme.of(context).colorScheme.surfaceContainer,
+        color: currentPage == index ? Theme.of(context).colorScheme.inversePrimary : Theme.of(context).colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(padding4),
       ),
     );

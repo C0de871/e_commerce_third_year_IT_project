@@ -1,22 +1,26 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:e_commerce/core/databases/api/end_points.dart';
 import 'package:e_commerce/core/databases/cache/secure_storage_helper.dart';
 import 'package:e_commerce/core/databases/errors/expentions.dart';
 import 'package:e_commerce/features/user/data/models/user_model.dart';
 
-class UserLocalDataSource {
-  final SecureStorageHelper cache;
+import '../../../../core/databases/cache/shared_prefs_helper.dart';
 
-  UserLocalDataSource({required this.cache});
+class UserLocalDataSource {
+  final SecureStorageHelper secureCache;
+  final SharedPrefsHelper sharedPrefsCache;
+
+  UserLocalDataSource({
+    required this.secureCache,
+    required this.sharedPrefsCache,
+  });
   cacheUser(UserModel? userToCache) async {
     if (userToCache != null) {
-      await cache.saveData(
-          key: CacheKey.user, value: json.encode(userToCache.toJson()));
-      await cache.saveData(
-          key: CacheKey.accessToken, value: userToCache.accessToken);
-      await cache.saveData(
-          key: CacheKey.refreshToken, value: userToCache.refreshToken);
+      await secureCache.saveData(key: CacheKey.user, value: json.encode(userToCache.toJson()));
+      await secureCache.saveData(key: CacheKey.accessToken, value: userToCache.accessToken);
+      await secureCache.saveData(key: CacheKey.refreshToken, value: userToCache.refreshToken);
     } else {
       throw CacheExeption(errorMessage: "NO internet connection");
     }
@@ -24,18 +28,32 @@ class UserLocalDataSource {
 
   cacheAccessToken(String? accessToken) async {
     if (accessToken != null) {
-      await cache.saveData(key: CacheKey.accessToken, value: accessToken);
+      await secureCache.saveData(key: CacheKey.accessToken, value: accessToken);
     } else {
       throw CacheExeption(errorMessage: "NO internet connection");
     }
   }
 
-  Future<UserModel> getLastUser() async {
-    final jsonString = await cache.getData(key: CacheKey.user);
-    if (jsonString != null) {
-      return Future.value(UserModel.fromJson(json.decode(jsonString)));
+  Future<bool> setFirstLaunch() async {
+    return await sharedPrefsCache.saveData(key: CacheKey.isFirstTime, value: false);
+  }
+
+  Future<bool> isFirstLaunch() async {
+    final bool? isFirstLaunch = await sharedPrefsCache.getData(key: CacheKey.isFirstTime);
+    if (isFirstLaunch == null || isFirstLaunch) {
+      return true;
     } else {
-      throw CacheExeption(errorMessage: "NO Internet connection");
+      return false;
+    }
+  }
+
+  Future<UserModel?> getLastUser() async {
+    final jsonString = await secureCache.getData(key: CacheKey.user);
+    if (jsonString != null) {
+      return UserModel.fromJson(json.decode(jsonString));
+    } else {
+      // throw CacheExeption(errorMessage: "NO Internet connection");
+      return null;
     }
   }
 
@@ -44,7 +62,7 @@ class UserLocalDataSource {
   }
 
   Future<String?> getLastAccessToken() async {
-    final jsonString = await cache.getData(key: CacheKey.accessToken);
+    final jsonString = await secureCache.getData(key: CacheKey.accessToken);
     if (jsonString != null) {
       return Future.value(jsonString);
     } else {
@@ -53,7 +71,7 @@ class UserLocalDataSource {
   }
 
   Future<String> getLastRefreshToken() async {
-    final jsonString = await cache.getData(key: CacheKey.refreshToken);
+    final jsonString = await secureCache.getData(key: CacheKey.refreshToken);
     if (jsonString != null) {
       return Future.value(jsonString);
     } else {
