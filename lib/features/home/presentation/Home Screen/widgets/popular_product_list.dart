@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:e_commerce/core/utils/constants/app_numbers.dart';
 import 'package:e_commerce/features/home/presentation/Home%20Screen/widgets/product_card.dart';
-import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
+import 'package:e_commerce/features/products/presentation/cubit/product_cubit/product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../products/domain/entities/product_entity.dart';
 
 class PopularProductList extends StatelessWidget {
   const PopularProductList({
@@ -30,16 +34,18 @@ class PopularProductList extends StatelessWidget {
               );
             }
             if (state is GetAllProductsSuccess) {
+              List<ProductEntity>? products = state.getAllProductsEntity.data!.products!;
+
+              log("rebuild the whole tree product fav is: ${products[0].isFavorite}");
               return Row(
                 children: [
-                  ...List.generate(state.productsList.length, (index) {
+                  ...List.generate(products.length, (index) {
                     return Row(
                       children: [
                         ProductCard(
-                          product: state.productsList[index],
+                          product: products[index],
                         ),
-                        if (index != (state.productsList.length - 1))
-                          const SizedBox(width: padding4 * 4),
+                        if (index != (products.length - 1)) const SizedBox(width: padding4 * 4),
                       ],
                     );
                   })

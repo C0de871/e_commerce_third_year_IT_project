@@ -22,4 +22,10 @@ abstract class UserRepository {
   });
 
   Future<Either<Failure, RefreshTokenEntity>> refreshToken();
+
+  Future<Either<Failure, UserEntity?>> getLastUser();
+
+  Future<Either<Failure, bool>> setFirstLaunch();
+
+  Future<Either<Failure, bool>> isFirstLaunch();
 }

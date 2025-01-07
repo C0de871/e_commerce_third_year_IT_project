@@ -6,8 +6,7 @@ import 'package:e_commerce/core/databases/errors/expentions.dart';
 import 'package:e_commerce/core/databases/errors/failure.dart';
 import 'package:e_commerce/core/databases/params/params.dart';
 import 'package:e_commerce/features/products/data/dataSources/product_remote_data_source.dart';
-import 'package:e_commerce/features/products/data/model/product_model.dart';
-import 'package:e_commerce/features/products/domain/entities/product_enitty.dart';
+import 'package:e_commerce/features/products/domain/entities/get_all_products_entity.dart';
 import 'package:e_commerce/features/products/domain/repository/product_repository.dart';
 
 class ProductRepositoryImpl extends ProductRepository {
@@ -19,11 +18,11 @@ class ProductRepositoryImpl extends ProductRepository {
   });
 
   @override
-  Future<Either<Failure, List<ProductEntity>>> getAllProducts(
+  Future<Either<Failure, GetAllProductsEntity>> getAllProducts(
       {required ProductParams params}) async {
     if (await networkInfo.isConnected!) {
       try {
-        final List<ProductModel> productsList =
+        final GetAllProductsEntity productsList =
             await productRemoteDataSource.getAllProducts(params: params);
         return Right(productsList);
       } on ServerException catch (e) {

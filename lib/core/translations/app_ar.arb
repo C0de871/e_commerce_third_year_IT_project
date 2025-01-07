@@ -60,6 +60,14 @@
     "backToHome": "العودة الى الرئيسية",
     "yourCart": "السلة الخاصة بك ",
     "numberOfItem": "4 أغراض",
+    "viewStore": "عرض المتجر",
+    "@viewStore": {
+        "description": "Label for the button to view the store"
+    },
+    "price": "السعر",
+    "@price": {
+        "description": "Label for the product price"
+    },
     "confirmDeletion": "تأكيد الحذف",
     "confirmModification" :"تأكيد التعديل",
     "checkOut":"الذهاب للدفع"

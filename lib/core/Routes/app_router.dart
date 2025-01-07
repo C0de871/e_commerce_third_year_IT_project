@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:e_commerce/core/Routes/app_routes.dart';
 import 'package:e_commerce/core/shared/screens/page_view_screen.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/cart_cubit.dart';
@@ -7,7 +5,9 @@ import 'package:e_commerce/features/cart/presentation/cubit/modify_cart_cubit.da
 import 'package:e_commerce/features/home/presentation/HomeCubit/home_cubit.dart';
 import 'package:e_commerce/core/shared/screens/Navigation_cubit/navigation_bar_cubit.dart';
 import 'package:e_commerce/features/get_product_details/presentation/screens/product_details_screen.dart';
-import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
+import 'package:e_commerce/features/products/presentation/all_products/products_list.dart';
+import 'package:e_commerce/features/products/presentation/cubit/product_cubit/product_cubit.dart';
+import 'package:e_commerce/features/stores/presentation/all_stores/stores_list.dart';
 import 'package:e_commerce/features/stores/presentation/cubit/store_cubit.dart';
 import 'package:e_commerce/features/user/presentation/OTP/otp_screen.dart';
 import 'package:e_commerce/features/cart/presentation/cart_screen/cart_screen.dart';
@@ -23,12 +23,15 @@ import '../../features/user/presentation/complete_profile_screen/complete_profil
 import '../../features/user/presentation/sign up auth screen/sign_up_auth_screen.dart';
 
 class AppRouter {
+  //? <======= cubits declration =======>
   UserCubit? _userCubit;
   HomeCubit? _homeCubit;
   StoreCubit? _storeCubit;
   ProductCubit? _productCubit;
   NavigationBarCubit? _navBarCubit;
   ToggleFavCubit? _toggleFavOnCubit;
+
+  //? <<======= cubits getter =======>>
   CartCubit? _cartCubit;
   ModifyCartCubit? _modifyCartCubit;
 
@@ -118,7 +121,7 @@ class AppRouter {
 
   Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      //!cart route
+      //! cart route:
       case AppRoutes.cartScreen:
         return MaterialPageRoute(
             settings: settings,
@@ -215,7 +218,6 @@ class AppRouter {
 
       //! product details route:
       case AppRoutes.productDetailsScreen:
-        log("here");
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => MultiBlocProvider(
@@ -226,11 +228,45 @@ class AppRouter {
               BlocProvider.value(
                 value: ToggleFavCubit.instance,
               ),
-              BlocProvider.value(
-                value: productCubit,
-              ),
+              // BlocProvider.value(
+              //   value: productCubit,
+              // ),
             ],
             child: ProductDetailsScreen(),
+          ),
+        );
+
+      //! all products screen:
+      case AppRoutes.seeMoreProductsRoute:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => ProductCubit()..getAllProducts(),
+              ),
+              BlocProvider.value(
+                value: GetProductDetailsCubit.instance,
+              )
+            ],
+            child: ProductsList(),
+          ),
+        );
+
+      //! all products screen:
+      case AppRoutes.seeMoreStoresRoute:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => StoreCubit()..getAllStores(),
+              ),
+              // BlocProvider.value(
+              //   value: GetProductDetailsCubit.instance,
+              // )
+            ],
+            child: StoreList(),
           ),
         );
 
@@ -240,7 +276,9 @@ class AppRouter {
           settings: settings,
           builder: (_) => Scaffold(
             body: Center(
-              child: Text("No route defined for ${settings.name}"),
+              child: Text(
+                "No route defined for ${settings.name}",
+              ),
             ),
           ),
         );

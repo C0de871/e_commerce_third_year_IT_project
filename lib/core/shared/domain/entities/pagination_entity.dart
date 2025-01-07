@@ -1,11 +1,14 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+
 class PaginationEntity {
-  int currentPage;
-  int totalPage;
-  bool hasMorePage;
+  final int? currentPage;
+  final int? totalPages;
+  final int? totalItems;
+  final bool? hasMorePage;
+
   PaginationEntity({
-    required this.currentPage,
-    required this.totalPage,
-    required this.hasMorePage,
+    this.currentPage,
+    this.totalPages,
+    this.totalItems,
+    this.hasMorePage,
   });
 }

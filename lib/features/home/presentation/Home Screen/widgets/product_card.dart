@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:e_commerce/features/get_product_details/domain/use_cases/get_product_details_use_case.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce/features/get_product_details/presentation/cubit/get_product_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,15 +9,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rive/rive.dart';
 
 import 'package:e_commerce/core/shared/widgets/skeleton.dart';
-import 'package:e_commerce/core/utils/constants/app_images.dart';
 import 'package:e_commerce/features/favorites/presentation/cubit/toggle_fav_cubit.dart';
-import 'package:e_commerce/features/products/domain/entities/product_enitty.dart';
-import 'package:e_commerce/features/products/presentation/cubit/product_cubit.dart';
+import 'package:e_commerce/features/products/presentation/cubit/product_cubit/product_cubit.dart';
 
 import '../../../../../core/Routes/app_routes.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/constants/app_numbers.dart';
 import '../../../../../core/utils/constants/app_rive.dart';
+import '../../../../products/domain/entities/product_entity.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -44,8 +43,7 @@ class ProductCard extends StatelessWidget {
         ],
       ),
       // width: MediaQuery.sizeOf(context).width / 2,
-      child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
+      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
         return Material(
           color: Colors.transparent,
           child: InkWell(
@@ -65,24 +63,39 @@ class ProductCard extends StatelessWidget {
                 builder: (context, state) {
                   return state is GetAllProductsLoading
                       ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Stack(
                               children: [
                                 LoadingProductImage(
                                   constraints: constraints,
                                 ),
-                                LoadingFaviourt(
-                                  constraints: constraints,
-                                ),
                               ],
                             ),
-                            const SizedBox(height: padding4 * 3),
+                            const SizedBox(
+                              height: padding4 * 4,
+                            ),
                             LoadingProductName(
                               constraints: constraints,
                             ),
                             const SizedBox(height: padding4 * 1),
-                            LoadingProductPrice(
-                              constraints: constraints,
+                            Skeleton(
+                              width: constraints.maxWidth * 0.40,
+                              height: 10,
+                              radius: 0,
+                            ),
+                            const SizedBox(height: padding4 * 4),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                LoadingProductPrice(
+                                  constraints: constraints,
+                                ),
+                                LoadingFaviourt(
+                                  constraints: constraints,
+                                ),
+                              ],
                             ),
                             const SizedBox(
                               height: padding4 * 1,
@@ -95,7 +108,7 @@ class ProductCard extends StatelessWidget {
                             Align(
                               alignment: Alignment.topCenter,
                               child: ProductImage(
-                                mainImageUrl: product!.mainImageUrl,
+                                mainImageUrl: product!.mainImageUrl!,
                                 constraints: constraints,
                               ),
                             ),
@@ -103,17 +116,17 @@ class ProductCard extends StatelessWidget {
                               height: padding4 * 4,
                             ),
                             ProductName(
-                              productName: product!.productName,
+                              productName: product!.productName!,
                             ),
                             ProductStore(
-                              storeName: product!.storeName,
+                              storeName: product!.storeName!,
                             ),
                             const SizedBox(height: padding4 * 4),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 ProductPrice(
-                                  productPrice: product!.price,
+                                  productPrice: product!.price!,
                                 ),
                                 Faviourt(
                                   product: product,
@@ -232,7 +245,7 @@ class LoadingProductName extends StatelessWidget {
   Widget build(BuildContext context) {
     return Skeleton(
       width: constraints.maxWidth * 0.75,
-      height: 25,
+      height: 14,
       radius: 0,
       margin: const EdgeInsets.only(top: 5),
     );
@@ -266,18 +279,12 @@ class _FaviourtState extends State<Faviourt> {
       controller = StateMachineController.fromArtboard(art!, "State Machine 1");
       if (controller != null) {
         art.addController(controller!);
-        log("${controller!.inputs}");
         for (var input in controller!.inputs) {
           if (input is SMIBool) {
-            log("is SMI bool");
             isFavoriteSMI = input;
           } else if (input is SMINumber) {
-            log("is SMI Number");
           } else if (input is SMITrigger) {
-            log("is SMI Trigger");
-          } else {
-            log("NO input found!");
-          }
+          } else {}
         }
         setState(() {
           artboard = art;
@@ -290,18 +297,21 @@ class _FaviourtState extends State<Faviourt> {
 
   @override
   Widget build(BuildContext context) {
+    log("build animated  heart  state");
+    log("is fav: ${widget.product!.isFavorite}");
     isFavoriteSMI?.value = widget.product!.isFavorite == 1;
+    log("is fav smi: ${isFavoriteSMI?.value}");
     return GestureDetector(
       onTap: () async {
         if (widget.product?.isFavorite == 0) {
           await context.read<ToggleFavCubit>().toggleFavOnTrigger(
-                storeID: widget.product!.storeId,
-                productID: widget.product!.productId,
+                storeID: widget.product!.storeId!,
+                productID: widget.product!.productId!,
               );
         } else {
           await context.read<ToggleFavCubit>().toggleFavOffTrigger(
-                storeID: widget.product!.storeId,
-                productID: widget.product!.productId,
+                storeID: widget.product!.storeId!,
+                productID: widget.product!.productId!,
               );
         }
       },
@@ -315,9 +325,7 @@ class _FaviourtState extends State<Faviourt> {
         padding: EdgeInsets.only(top: 1),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: widget.product!.isFavorite == 1
-              ? const Color.fromARGB(255, 251, 207, 204)
-              : AppColors.disableFavContainer,
+          color: widget.product!.isFavorite == 1 ? const Color.fromARGB(255, 251, 207, 204) : AppColors.disableFavContainer,
         ),
         child: artboard == null
             ? SizedBox()
@@ -340,8 +348,8 @@ class LoadingFaviourt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Skeleton(
-      width: 42,
-      height: 42,
+      width: 36,
+      height: 36,
       radius: 42,
       margin: EdgeInsets.only(bottom: 5),
     );
@@ -349,25 +357,28 @@ class LoadingFaviourt extends StatelessWidget {
 }
 
 class ProductImage extends StatelessWidget {
-  const ProductImage(
-      {super.key, required this.mainImageUrl, required this.constraints});
+  const ProductImage({super.key, required this.mainImageUrl, required this.constraints});
 
   final String mainImageUrl;
   final BoxConstraints constraints;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(
-        padding4 * 4,
+    return AspectRatio(
+      aspectRatio: 1,
+      child: CachedNetworkImage(
+        imageUrl: mainImageUrl,
+        imageBuilder: (context, imageProvider) => Container(
+          padding: const EdgeInsets.all(
+            padding4 * 4,
+          ),
+          decoration: BoxDecoration(
+            color: AppColors.imageBackground,
+            borderRadius: BorderRadius.circular(20),
+            image: DecorationImage(image: imageProvider),
+          ),
+          // child: FlutterImage.Image.asset(AppImages.tShirt),
+        ),
       ),
-      decoration: BoxDecoration(
-        color: AppColors.imageBackground,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: FlutterImage.Image.network(
-        mainImageUrl,
-      ),
-      // child: FlutterImage.Image.asset(AppImages.tShirt),
     );
   }
 }

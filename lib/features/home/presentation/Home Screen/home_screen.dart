@@ -1,10 +1,10 @@
 import 'dart:developer';
 
 import 'package:e_commerce/core/databases/api/end_points.dart';
-import 'package:e_commerce/core/databases/cache/storage_helper.dart';
 import 'package:e_commerce/features/home/presentation/Home%20Screen/widgets/home_app_bar.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/Routes/app_routes.dart';
 import '../../../../core/databases/cache/secure_storage_helper.dart';
 import '../../../../core/utils/constants/app_numbers.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -24,8 +24,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   void logREfreshtoken() async {
-    final String refresh =
-        (await SecureStorageHelper().getData(key: CacheKey.refreshToken))!;
+    final String refresh = (await SecureStorageHelper().getData(key: CacheKey.refreshToken))!;
     log("refresh token is: {$refresh}");
   }
 
@@ -49,14 +48,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 const DiscountBanner(),
                 const SizedBox(height: padding4 * 7),
                 SectionTitle(
-                    text: AppLocalizations.of(context)!.specialForYou,
-                    press: () {}),
+                  text: AppLocalizations.of(context)!.specialForYou,
+                  press: () {
+                    Navigator.of(context).pushNamed(
+                      AppRoutes.seeMoreStoresRoute,
+                    );
+                  },
+                ),
                 const SizedBox(height: padding4 * 5),
                 const PopularStores(),
                 const SizedBox(height: padding4 * 7),
                 SectionTitle(
-                    text: AppLocalizations.of(context)!.popularProduct,
-                    press: () {}),
+                  text: AppLocalizations.of(context)!.popularProduct,
+                  press: () {
+                    Navigator.of(context).pushNamed(
+                      AppRoutes.seeMoreProductsRoute,
+                    );
+                  },
+                ),
                 const SizedBox(height: padding4 * 5),
                 const PopularProductList(),
                 const SizedBox(height: 100),

@@ -28,9 +28,7 @@ class DataModel extends DataEntity {
         quantity: data[ApiKey.quantity] as int?,
         description: data[ApiKey.description] as String?,
         mainImage: data[ApiKey.mainImageUrl] as String?,
-        subImages: (data[ApiKey.subImages] as List<dynamic>?)
-            ?.map((e) => SubImageModel.fromMap(e as Map<String, dynamic>))
-            .toList(),
+        subImages: (data[ApiKey.subImages] as List<dynamic>?)?.map((e) => SubImageModel.fromMap(e as Map<String, dynamic>)).toList(),
         catagoryID: data[ApiKey.catagoryID] as int?,
         catagoryName: data[ApiKey.catagoryName] as String?,
         isFavorite: data[ApiKey.isFavorite] as int?,
@@ -46,8 +44,7 @@ class DataModel extends DataEntity {
         ApiKey.quantity: quantity,
         ApiKey.description: description,
         ApiKey.mainImageUrl: mainImage,
-        ApiKey.subImages:
-            subImages?.map((e) => (e as SubImageModel).toMap()).toList(),
+        ApiKey.subImages: subImages?.map((e) => (e as SubImageModel).toMap()).toList(),
         ApiKey.catagoryID: catagoryID,
         ApiKey.catagoryName: catagoryName,
         ApiKey.isFavorite: isFavorite,
