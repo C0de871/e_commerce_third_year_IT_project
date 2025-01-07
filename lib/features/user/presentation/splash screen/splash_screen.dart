@@ -83,7 +83,9 @@ class _SplashScreenState extends State<SplashScreen> {
                         if (context.mounted) {
                           Navigator.of(context).pushReplacementNamed(AppRoutes.loginRoute);
                         }
-                      }),
+                      },
+                      width: 200,
+                      ),
                 ),
                 const Spacer(
                   flex: 2,

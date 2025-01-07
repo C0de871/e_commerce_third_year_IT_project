@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:e_commerce/core/Routes/app_router.dart';
 import 'package:e_commerce/core/Routes/app_routes.dart';
 import 'package:e_commerce/core/utils/constants/app_numbers.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:e_commerce/features/cart/presentation/cubit/size_cart_cubit.dart';
+import 'package:e_commerce/features/cart/presentation/cubit/size_cart_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/shared/widgets/icon_btn_with_counter.dart';
@@ -88,13 +92,29 @@ class CartAndNotificationIcons extends StatelessWidget {
         const SizedBox(
           width: padding4 * 4,
         ),
-        IconBtnWithCounter(
-          svgSrc: 'assets/icons/bxs-cart.svg',
-          //todo: make it depend on the list that come from the back
-          numOfItems: 9,
-          press: () {
-            context.read<CartCubit>().getCartTrigger();
-            Navigator.pushNamed(context, AppRoutes.cartScreen);
+        BlocBuilder<SizeCartCubit, SizeCartState>(
+          builder: (context, state) {
+            if (state is SizeSuccess) {
+              print("***************** size:${state.sizeCartEntity.data!}");
+              return IconBtnWithCounter(
+                svgSrc: 'assets/icons/bxs-cart.svg',
+                //todo: make it depend on the list that come from the back
+                numOfItems: state.sizeCartEntity.data!,
+                press: () {
+                  Navigator.pushNamed(context, AppRoutes.cartScreen);
+                },
+              );
+            } else {
+              print("hello this is error***********************");
+              return IconBtnWithCounter(
+                svgSrc: 'assets/icons/bxs-cart.svg',
+                //todo: make it depend on the list that come from the back
+                numOfItems: 0,
+                press: () {
+                  Navigator.pushNamed(context, AppRoutes.cartScreen);
+                },
+              );
+            }
           },
         ),
       ],

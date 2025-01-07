@@ -2,11 +2,9 @@ part of 'cart_cubit.dart';
 
 class CartState {}
 
-
 class CartInitial extends CartState {}
 
 class CartLoading extends CartState {}
-
 class CartSuccess extends CartState {
   final CartEntity cart;
 
@@ -18,23 +16,22 @@ class CartSuccess extends CartState {
     );
   }
 }
-
 class CartFailure extends CartState {
   final String errMessage;
   CartFailure({required this.errMessage});
 }
 
-//! modify cart state:
-class ModifyLoading extends CartState{}
-class ModifySuccess extends CartState{
-final List<ModifyCartEntity> modifiedProducts;
+//! clear:
+class ClearFailure extends CartState {
+  final String errMessage;
 
-  ModifySuccess({required this.modifiedProducts});
+  ClearFailure({required this.errMessage});
 }
 
-class ModifyFailure extends CartState{
-final String errMessage;
+class ClearSuccess extends CartState {
+  final MessageEntity messageEntity;
 
-  ModifyFailure({required this.errMessage});
-
+  ClearSuccess({required this.messageEntity});
 }
+
+class ClearLoading extends CartState {}

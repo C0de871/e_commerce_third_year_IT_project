@@ -146,6 +146,7 @@ class _LoginFormState extends State<LoginForm> {
                     context.read<UserCubit>().loginUserTrigger();
                   }
                 },
+                width: 200,
               );
             },
           ),
