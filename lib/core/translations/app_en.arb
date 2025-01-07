@@ -245,5 +245,9 @@
 "checkOut" :  "Check Out",
   "@checkOut": {
     "description": "title of button that go to check out screen"
-  }
+  },
+"myProducts": "My Products:",
+"@myProducts": {
+  "description": "My products appears in first line of check out screen"
+}
 }
