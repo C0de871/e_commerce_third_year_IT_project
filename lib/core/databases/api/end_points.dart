@@ -1,7 +1,7 @@
 import '../params/params.dart';
 
 class EndPoints {
-  static const String baserUrl = "http://192.168.1.2:8000/api/";
+  static const String baserUrl = "http://192.168.97.32:8000/api/";
   static const String login = "login";
   static const String signUp = "register";
   static const String toggleFavOn = "favorites/";
@@ -20,6 +20,8 @@ class EndPoints {
   static const String modifyCart = "carts/update-quantities";
   static const String deleteCart = "carts/delete-products";
   static const String clearCart = "carts/delete-all";
+  static const String getSizeCart = "carts/getSize";
+
 }
 
 class ApiKey {

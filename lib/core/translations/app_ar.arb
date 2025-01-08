@@ -70,6 +70,7 @@
     },
     "confirmDeletion": "تأكيد الحذف",
     "confirmModification" :"تأكيد التعديل",
-    "checkOut":"الذهاب للدفع"
+    "checkOut":"الذهاب للدفع",
+    "myProducts":": مشترياتي"
 
 }

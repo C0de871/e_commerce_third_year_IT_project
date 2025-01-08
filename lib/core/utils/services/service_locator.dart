@@ -1,5 +1,9 @@
 import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:dio/dio.dart';
+import 'package:e_commerce/features/cart/data/serevice/modify_cart_service.dart';
+import 'package:e_commerce/features/cart/domain/usecases/clear_cart.dart';
+import 'package:e_commerce/features/cart/domain/usecases/delete_cart.dart';
+import 'package:e_commerce/features/cart/domain/usecases/get_size_cart.dart';
 import 'package:e_commerce/features/favorites/data/datasources/favorites_remote_data_source.dart';
 import 'package:e_commerce/features/favorites/data/repositories/favorites_repository_impl.dart';
 import 'package:e_commerce/features/favorites/data/services/product_favorite_service_impl.dart';
@@ -24,6 +28,7 @@ import 'package:e_commerce/features/user/data/datasourses/user_local_data_source
 import 'package:e_commerce/features/user/data/datasourses/user_remote_data_source.dart';
 import 'package:e_commerce/features/user/data/repositiries/user_repository_impl.dart';
 import 'package:e_commerce/features/user/domain/repository/user_repository.dart';
+import 'package:e_commerce/features/user/domain/usecases/get_last_user.dart';
 import 'package:e_commerce/features/user/domain/usecases/login_user.dart';
 import 'package:e_commerce/features/user/domain/usecases/post_otp.dart';
 import 'package:e_commerce/features/user/domain/usecases/refresh_token.dart';
@@ -35,6 +40,8 @@ import '../../../features/favorites/domain/usecases/togge_fav_off.dart';
 import '../../../features/favorites/domain/usecases/toggle_fav_on.dart';
 import '../../../features/get_product_details/domain/use_cases/get_product_details_use_case.dart';
 import '../../../features/stores/data/repository/store_repository_impl.dart';
+import '../../../features/user/domain/usecases/is_first_launch.dart';
+import '../../../features/user/domain/usecases/set_first_launch.dart';
 import '../../databases/cache/secure_storage_helper.dart';
 import '../../databases/connection/network_info.dart';
 import '../../databases/api/api_consumer.dart';
@@ -47,6 +54,7 @@ void setupServicesLocator() {
   //!service:
   getIt.registerLazySingleton<ProductFavoriteService>(
       () => ProductFavoriteServiceImpl());
+  getIt.registerLazySingleton<ModifyCartService>(() => ModifyCartService());
 
   //! Core
   getIt.registerLazySingleton<SharedPrefsHelper>(() => SharedPrefsHelper());
@@ -59,23 +67,19 @@ void setupServicesLocator() {
 
   //! Data Sources
   getIt.registerLazySingleton<UserRemoteDataSource>(
-      
       () => UserRemoteDataSource(api: getIt(), cacheHelper: getIt()));
-  getIt.registerLazySingleton<UserLocalDataSource>(
-      
-      () => UserLocalDataSource(cache: getIt()));
+  getIt.registerLazySingleton<UserLocalDataSource>(() =>
+      UserLocalDataSource(secureCache: getIt(), sharedPrefsCache: getIt()));
   getIt.registerLazySingleton<ProductRemoteDataSource>(() =>
-     
       ProductRemoteDataSource(apiConsumer: getIt(), cacheHelper: getIt()));
   getIt.registerLazySingleton<StoreRemoteDataSource>(
-      
       () => StoreRemoteDataSource(api: getIt(), cacheHelper: getIt()));
   getIt.registerLazySingleton<FavoritesRemoteDataSource>(
       () => FavoritesRemoteDataSource(cacheHelper: getIt(), api: getIt()));
   getIt.registerLazySingleton<GetProductDetailsRemoteDataSource>(() =>
       GetProductDetailsRemoteDataSource(cacheHelper: getIt(), api: getIt()));
   getIt.registerLazySingleton<CartRemoteDataSource>(
-      () => CartRemoteDataSource(api: getIt()));
+      () => CartRemoteDataSource(api: getIt(), cacheHelper: getIt()));
 
   //! Repository
   getIt.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(
@@ -102,7 +106,7 @@ void setupServicesLocator() {
             remoteDataSource: getIt(),
             networkInfo: getIt(),
           ));
-      getIt.registerLazySingleton<CartRepository>(() => CartRepositoryImpl(
+  getIt.registerLazySingleton<CartRepository>(() => CartRepositoryImpl(
         networkInfo: getIt(),
         remoteDataSource: getIt(),
       ));
@@ -115,14 +119,17 @@ void setupServicesLocator() {
   getIt.registerLazySingleton<ResendOtp>(
       () => ResendOtp(userRepository: getIt()));
   getIt.registerLazySingleton<PostOtp>(() => PostOtp(userRepository: getIt()));
+  getIt.registerLazySingleton<DeleteCart>(
+      () => DeleteCart(cartRepository: getIt()));
+  getIt.registerLazySingleton<ClearCart>(
+      () => ClearCart(cartRepository: getIt()));
+  getIt.registerLazySingleton<GetSizeCart>(
+      () => GetSizeCart(cartRepository: getIt()));
   getIt.registerLazySingleton<GetAllProducts>(
-      
       () => GetAllProducts(productRepository: getIt()));
   getIt.registerLazySingleton<GetAllStores>(
-      
       () => GetAllStores(storeRepository: getIt()));
   getIt.registerLazySingleton<RefreshToken>(
-      
       () => RefreshToken(userRepository: getIt()));
   getIt.registerLazySingleton<ToggleFavOn>(
       () => ToggleFavOn(repository: getIt()));
@@ -130,8 +137,13 @@ void setupServicesLocator() {
       () => ToggleFavOff(repository: getIt()));
   getIt.registerLazySingleton<GetProductDetails>(
       () => GetProductDetails(repository: getIt()));
-  getIt.registerLazySingleton<GetCart>(
-      () => GetCart(cartRepository: getIt()));
+  getIt.registerLazySingleton<GetCart>(() => GetCart(cartRepository: getIt()));
   getIt.registerLazySingleton<ModifyCart>(
       () => ModifyCart(cartRepository: getIt()));
+  getIt.registerLazySingleton<GetLastUser>(
+      () => GetLastUser(userRepository: getIt()));
+  getIt.registerLazySingleton<SetFirstLaunch>(
+      () => SetFirstLaunch(userRepository: getIt()));
+  getIt.registerLazySingleton<IsFirstLaunch>(
+      () => IsFirstLaunch(userRepository: getIt()));
 }

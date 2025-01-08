@@ -9,10 +9,8 @@ class ModifyCart {
 
   ModifyCart({required this.cartRepository});
 
-  Future<Either<Failure,List<ModifyCartEntity>>> call({
-    required Map<String,dynamic> bodyJson}){ return cartRepository.modifyCart(bodyJson: bodyJson);
-  }}
-
-  
-    
-  
+  Future<Either<Failure, CartEntity>> call(
+      {required Map<String, dynamic> bodyJson}) {
+    return cartRepository.modifyCart(bodyJson: bodyJson);
+  }
+}

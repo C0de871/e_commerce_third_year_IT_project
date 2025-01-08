@@ -97,6 +97,7 @@ class _CompleteYourProfileFormState extends State<CompleteYourProfileForm> {
                     userCubit.signUpUserTrigger();
                   }
                 },
+                // width: 200,
               );
             },
           )

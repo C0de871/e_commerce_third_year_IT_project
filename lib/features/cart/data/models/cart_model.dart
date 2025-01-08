@@ -8,7 +8,9 @@ class CartModel extends CartEntity {
   factory CartModel.fromJson(Map<String, dynamic> json) {
     return CartModel(
       totalPrice: json[ApiKey.totalPrice],
-      data: (json[ApiKey.data])?.map((item) => SubCartModel.fromJson(item)).toList(),
+      data: (json[ApiKey.data] as List<dynamic>?) 
+          ?.map((item) => SubCartModel.fromJson(item as Map<String, dynamic>))
+          .toList(), 
     );
   }
 }

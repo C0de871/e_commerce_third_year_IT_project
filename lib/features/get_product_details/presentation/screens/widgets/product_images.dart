@@ -38,10 +38,10 @@ class _ProductImagesState extends State<ProductImages> {
             // productImagesUrl = [state.productDetailsEntity.data!.mainImage];
             // productImagesUrl!.addAll(state.productDetailsEntity.data!.subImages!.map((e) => e.image));
             productImagesUrl = [
-              "http://192.168.1.2:8000/storage//products/ps4_console_white_1.png",
-              "http://192.168.1.2:8000/storage//products/ps4_console_white_2.png",
-              "http://192.168.1.2:8000/storage//products/ps4_console_white_3.png",
-              "http://192.168.1.2:8000/storage//products/ps4_console_white_4.png",
+              "http://192.168.97.32:8000/storage//products/ps4_console_white_1.png",
+              "http://192.168.97.32:8000/storage//products/ps4_console_white_2.png",
+              "http://192.168.97.32:8000/storage//products/ps4_console_white_3.png",
+              "http://192.168.97.32:8000/storage//products/ps4_console_white_4.png",
             ];
             return Row(
               mainAxisAlignment: MainAxisAlignment.center,

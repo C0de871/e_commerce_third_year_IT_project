@@ -253,5 +253,9 @@
   "price": "Price",
   "@price": {
     "description": "Label for the product price"
-  }
+  },
+"myProducts": "My Products:",
+"@myProducts": {
+  "description": "My products appears in first line of check out screen"
+}
 }

@@ -31,6 +31,7 @@ class _ProductsListState extends State<ProductsList> {
   Widget build(BuildContext context) {
     List<ProductCubit>? productCubits;
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: Text("Search Products"),
       ),

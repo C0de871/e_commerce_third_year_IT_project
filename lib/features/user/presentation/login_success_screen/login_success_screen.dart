@@ -32,14 +32,16 @@ class LoginSuccessScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: padding4 * 5),
             child: DefaultButton(
-                text: AppLocalizations.of(context)!.backToHome,
-                press: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    AppRoutes.homeRoute,
-                    (route) => false,
-                  );
-                }),
+              text: AppLocalizations.of(context)!.backToHome,
+              press: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  AppRoutes.homeRoute,
+                  (route) => false,
+                );
+              },
+              width: double.infinity,
+            ),
           ),
           const Spacer(
             flex: 2,

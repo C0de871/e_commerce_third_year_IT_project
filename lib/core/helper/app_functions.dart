@@ -66,7 +66,8 @@ class RouteObserverService extends NavigatorObserver {
 }
 
 checkIfLoggedInUser() async {
-  String? userToken = await SecureStorageHelper().getData(key: CacheKey.accessToken);
+  String? userToken =
+      await SecureStorageHelper().getData(key: CacheKey.accessToken);
   if (!userToken.isNullOrEmpty()) {
     isLoggedInUser = true;
     log(userToken!);
