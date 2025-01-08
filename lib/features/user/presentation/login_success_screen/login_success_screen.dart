@@ -40,7 +40,7 @@ class LoginSuccessScreen extends StatelessWidget {
                   (route) => false,
                 );
               },
-              width: 200,
+              width: double.infinity,
             ),
           ),
           const Spacer(
