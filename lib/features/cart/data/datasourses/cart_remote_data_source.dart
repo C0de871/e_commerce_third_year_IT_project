@@ -1,7 +1,9 @@
 import 'package:e_commerce/core/databases/api/api_consumer.dart';
 import 'package:e_commerce/core/databases/api/end_points.dart';
 import 'package:e_commerce/core/databases/cache/secure_storage_helper.dart';
+import 'package:e_commerce/core/databases/params/params.dart';
 import 'package:e_commerce/core/shared/data/models/message_model.dart';
+import 'package:e_commerce/features/cart/data/models/add_to_cart_model.dart';
 import 'package:e_commerce/features/cart/data/models/cart_model.dart';
 import 'package:e_commerce/features/cart/data/models/modify_cart_model.dart';
 import 'package:e_commerce/features/cart/data/models/size_cart_model.dart';
@@ -105,4 +107,20 @@ class CartRemoteDataSource {
         await api.get(EndPoints.getSizeCart, headers: headers, extra: extra);
     return SizeCartModel.fromJson(response);
   }
+  //! add to cart :
+Future<AddToCartModel> addToCart(GetStoredAndProductIdParams params,Map<String,dynamic> bodyJson) async {
+    String? accessToken = await cacheHelper.getData(key: CacheKey.accessToken);
+
+    Map<String, dynamic> headers = {
+      ApiKey.authorization: accessToken,
+    };
+    bool isLoggedIn = (accessToken != null) ? true : false;
+
+    Map<String, dynamic> extra = {
+      ApiKey.requiredAuth: true,
+    };
+    final response =
+        await api.post(EndPoints.getProductStoredId(params),data: bodyJson,headers: headers, extra: extra);
+    return AddToCartModel.fromJson(response);
+  } 
 }
