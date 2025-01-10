@@ -44,7 +44,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
             listener: (context, state) async {
               if (state is UserLoaded) {
                 await Future.delayed(Duration(seconds: 5));
-                Navigator.pushReplacementNamed(context, AppRoutes.homeRoute);
+                Navigator.pushReplacementNamed(context, AppRoutes.pageView);
               } else if (state is NoUserFound) {
                 await Future.delayed(Duration(seconds: 5));
                 Navigator.pushReplacementNamed(context, AppRoutes.loginRoute);

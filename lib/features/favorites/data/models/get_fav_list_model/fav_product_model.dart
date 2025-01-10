@@ -1,14 +1,10 @@
-
-
 import 'package:collection/collection.dart';
 import 'package:e_commerce/core/databases/api/end_points.dart';
 
-import '../../../domain/entities/get_fav_list_entity/data_entity.dart';
+import '../../../domain/entities/get_fav_list_entity/fav_product_entity.dart';
 
-
-class DataModel extends DataEntity{
- 
-  DataModel({
+class FavProductModel extends FavProductEntity {
+  FavProductModel({
     super.storeId,
     super.storeName,
     super.productId,
@@ -22,7 +18,7 @@ class DataModel extends DataEntity{
     super.mainImage,
   });
 
-  factory DataModel.fromMap(Map<String, dynamic> data) => DataModel(
+  factory FavProductModel.fromMap(Map<String, dynamic> data) => FavProductModel(
         storeId: data[ApiKey.storeId] as int?,
         storeName: data[ApiKey.storeName] as String?,
         productId: data[ApiKey.productId] as int?,
@@ -50,7 +46,7 @@ class DataModel extends DataEntity{
         ApiKey.mainImage: mainImage,
       };
 
-  DataModel copyWith({
+  FavProductModel copyWith({
     int? storeId,
     String? storeName,
     int? productId,
@@ -63,7 +59,7 @@ class DataModel extends DataEntity{
     int? isFavorite,
     String? mainImage,
   }) {
-    return DataModel(
+    return FavProductModel(
       storeId: storeId ?? this.storeId,
       storeName: storeName ?? this.storeName,
       productId: productId ?? this.productId,
@@ -81,7 +77,7 @@ class DataModel extends DataEntity{
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    if (other is! DataModel) return false;
+    if (other is! FavProductModel) return false;
     final mapEquals = const DeepCollectionEquality().equals;
     return mapEquals(other.toMap(), toMap());
   }

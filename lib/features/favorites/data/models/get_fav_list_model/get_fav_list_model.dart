@@ -1,11 +1,10 @@
-
 import 'package:collection/collection.dart';
 import 'package:e_commerce/core/databases/api/end_points.dart';
 import 'package:e_commerce/features/favorites/domain/entities/get_fav_list_entity/get_fav_list_entity.dart';
 
-import 'data_model.dart';
+import 'fav_product_model.dart';
 
-class GetFavListModel extends GetFavListEntity{
+class GetFavListModel extends GetFavListEntity {
   bool? successful;
   String? message;
   int? statusCode;
@@ -20,23 +19,21 @@ class GetFavListModel extends GetFavListEntity{
   factory GetFavListModel.fromMap(Map<String, dynamic> map) => GetFavListModel(
         successful: map[ApiKey.successful] as bool?,
         message: map[ApiKey.message] as String?,
-        data: (map[ApiKey.data] as List<dynamic>?)
-            ?.map((e) => DataModel.fromMap(e as Map<String, dynamic>))
-            .toList(),
+        data: (map[ApiKey.data] as List<dynamic>?)?.map((e) => FavProductModel.fromMap(e as Map<String, dynamic>)).toList(),
         statusCode: map[ApiKey.statusCode] as int?,
       );
 
   Map<String, dynamic> toMap() => {
         ApiKey.successful: successful,
         ApiKey.message: message,
-        ApiKey.data: data?.map((e) => (e as DataModel).toMap()).toList(),
+        ApiKey.data: data?.map((e) => (e as FavProductModel).toMap()).toList(),
         ApiKey.statusCode: statusCode,
       };
 
   GetFavListModel copyWith({
     bool? successful,
     String? message,
-    List<DataModel>? data,
+    List<FavProductModel>? data,
     int? statusCode,
   }) {
     return GetFavListModel(
@@ -56,6 +53,5 @@ class GetFavListModel extends GetFavListEntity{
   }
 
   @override
-  int get hashCode =>
-      successful.hashCode ^ message.hashCode ^ data.hashCode ^ statusCode.hashCode;
+  int get hashCode => successful.hashCode ^ message.hashCode ^ data.hashCode ^ statusCode.hashCode;
 }

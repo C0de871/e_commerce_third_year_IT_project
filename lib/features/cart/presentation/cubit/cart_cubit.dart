@@ -2,21 +2,13 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:dartz/dartz_unsafe.dart';
-import 'package:dio/dio.dart';
-import 'package:e_commerce/core/databases/api/end_points.dart';
 import 'package:e_commerce/core/shared/domain/entities/message_entety.dart';
 import 'package:e_commerce/core/utils/services/service_locator.dart';
-import 'package:e_commerce/features/cart/data/models/cart.dart';
-import 'package:e_commerce/features/cart/data/models/cart_model.dart';
 import 'package:e_commerce/features/cart/data/serevice/modify_cart_service.dart';
 import 'package:e_commerce/features/cart/domain/entites/cart_entity.dart';
 import 'package:e_commerce/features/cart/domain/entites/cart_entity/sub_cart_entity.dart';
-import 'package:e_commerce/features/cart/domain/entites/modify_cart/modify_cart.dart';
 import 'package:e_commerce/features/cart/domain/usecases/clear_cart.dart';
 import 'package:e_commerce/features/cart/domain/usecases/get_cart.dart';
-import 'package:e_commerce/features/user/data/models/cart.dart';
-import 'package:meta/meta.dart';
 
 part 'cart_state.dart';
 

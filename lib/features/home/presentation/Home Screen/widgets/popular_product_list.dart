@@ -28,7 +28,7 @@ class PopularProductList extends StatelessWidget {
               return Row(
                 children: [
                   ...List.generate(4, (index) {
-                    return const ProductCard();
+                    return const ProductCardLoading();
                   })
                 ],
               );

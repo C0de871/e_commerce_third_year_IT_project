@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-class DataEntity {
+class FavProductEntity {
   int? storeId;
   String? storeName;
   int? productId;
@@ -11,7 +11,7 @@ class DataEntity {
   String? description;
   int? isFavorite;
   String? mainImage;
-  DataEntity({
+  FavProductEntity({
     required this.storeId,
     required this.storeName,
     required this.productId,
