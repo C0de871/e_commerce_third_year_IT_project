@@ -1,6 +1,7 @@
 import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:dio/dio.dart';
 import 'package:e_commerce/features/cart/data/serevice/modify_cart_service.dart';
+import 'package:e_commerce/features/cart/domain/usecases/add_to_cart.dart';
 import 'package:e_commerce/features/cart/domain/usecases/clear_cart.dart';
 import 'package:e_commerce/features/cart/domain/usecases/delete_cart.dart';
 import 'package:e_commerce/features/cart/domain/usecases/get_size_cart.dart';
@@ -140,6 +141,8 @@ void setupServicesLocator() {
   getIt.registerLazySingleton<GetCart>(() => GetCart(cartRepository: getIt()));
   getIt.registerLazySingleton<ModifyCart>(
       () => ModifyCart(cartRepository: getIt()));
+  getIt.registerLazySingleton<AddToCart>(
+      () => AddToCart(cartRepository: getIt()));    
   getIt.registerLazySingleton<GetLastUser>(
       () => GetLastUser(userRepository: getIt()));
   getIt.registerLazySingleton<SetFirstLaunch>(
