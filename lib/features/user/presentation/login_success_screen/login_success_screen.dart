@@ -36,7 +36,7 @@ class LoginSuccessScreen extends StatelessWidget {
               press: () {
                 Navigator.pushNamedAndRemoveUntil(
                   context,
-                  AppRoutes.homeRoute,
+                  AppRoutes.pageView,
                   (route) => false,
                 );
               },

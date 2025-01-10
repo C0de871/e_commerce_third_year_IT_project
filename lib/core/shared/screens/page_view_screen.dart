@@ -1,5 +1,7 @@
 import 'package:e_commerce/core/helper/app_functions.dart';
+import 'package:e_commerce/features/favorites/presentation/cubit/getFavList/get_fav_list_cubit.dart';
 import 'package:e_commerce/features/favorites/presentation/cubit/toggle_fav_cubit.dart';
+import 'package:e_commerce/features/favorites/presentation/screens/fav_list_screen.dart';
 import 'package:e_commerce/features/get_product_details/presentation/cubit/get_product_details_cubit.dart';
 import 'package:e_commerce/features/home/beta/fav_page.dart';
 import 'package:e_commerce/features/home/beta/notification_page.dart';
@@ -36,7 +38,14 @@ class _PageViewScreenState extends State<PageViewScreen> {
       ],
       child: const HomeScreen(),
     ),
-    FavPage(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => GetProductDetailsCubit.instance),
+        BlocProvider(create: (context) => ToggleFavCubit.instance),
+        BlocProvider(create: (context) => GetFavListCubit.instance..getFavList()),
+      ],
+      child: FavListScreen(),
+    ),
     ProfilePage(),
   ];
 

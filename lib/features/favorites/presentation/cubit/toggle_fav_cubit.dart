@@ -22,8 +22,19 @@ class ToggleFavCubit extends Cubit<ToggleFavOnState> {
         _favoriteService = getIt(),
         super(ToggleFavInitial());
 
-  static final ToggleFavCubit _instance = ToggleFavCubit._();
-  static ToggleFavCubit get instance => _instance;
+  static  ToggleFavCubit? _instance = ToggleFavCubit._();
+  static ToggleFavCubit get instance {
+    if (_instance == null || _instance!.isClosed) {
+      _instance = null;
+      _instance = ToggleFavCubit._();
+      log("inital cubit");
+    }
+    _instance!.stream.listen((_) {}, onDone: () {
+      _instance = null;
+      log("close the cubit");
+    });
+    return _instance!;
+  }
 
   //!toggle fav on trigger:
   toggleFavOnTrigger({required int storeID, required int productID}) async {
@@ -36,8 +47,7 @@ class ToggleFavCubit extends Cubit<ToggleFavOnState> {
     final response = await toggleFavOnUseCase.call(params: params);
     response.fold(
       (failure) {
-        _favoriteService.updateProductFavoriteStatus(
-            isFavorite: 0, params: params);
+        _favoriteService.updateProductFavoriteStatus(isFavorite: 0, params: params);
         log("failed");
         emit(ToggleFavFailure(msg: failure.errMessage));
       },
@@ -58,8 +68,7 @@ class ToggleFavCubit extends Cubit<ToggleFavOnState> {
     final response = await toggleFavOffUseCase.call(params: params);
     response.fold(
       (failure) {
-        _favoriteService.updateProductFavoriteStatus(
-            isFavorite: 1, params: params);
+        _favoriteService.updateProductFavoriteStatus(isFavorite: 1, params: params);
         log("failed");
         emit(ToggleFavFailure(msg: failure.errMessage));
       },

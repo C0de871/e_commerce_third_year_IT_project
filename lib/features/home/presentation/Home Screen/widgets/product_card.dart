@@ -10,7 +10,6 @@ import 'package:rive/rive.dart';
 
 import 'package:e_commerce/core/shared/widgets/skeleton.dart';
 import 'package:e_commerce/features/favorites/presentation/cubit/toggle_fav_cubit.dart';
-import 'package:e_commerce/features/products/presentation/cubit/product_cubit/product_cubit.dart';
 
 import '../../../../../core/Routes/app_routes.dart';
 import '../../../../../core/theme/app_colors.dart';
@@ -21,10 +20,10 @@ import '../../../../products/domain/entities/product_entity.dart';
 class ProductCard extends StatelessWidget {
   const ProductCard({
     super.key,
-    this.product,
+    required this.product,
   });
 
-  final ProductEntity? product;
+  final ProductEntity product;
 
   @override
   Widget build(BuildContext context) {
@@ -59,83 +58,117 @@ class ProductCard extends StatelessWidget {
             },
             child: Padding(
               padding: const EdgeInsets.all(padding4 * 4),
-              child: BlocBuilder<ProductCubit, ProductState>(
-                builder: (context, state) {
-                  return state is GetAllProductsLoading
-                      ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Stack(
-                              children: [
-                                LoadingProductImage(
-                                  constraints: constraints,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: padding4 * 4,
-                            ),
-                            LoadingProductName(
-                              constraints: constraints,
-                            ),
-                            const SizedBox(height: padding4 * 1),
-                            Skeleton(
-                              width: constraints.maxWidth * 0.40,
-                              height: 10,
-                              radius: 0,
-                            ),
-                            const SizedBox(height: padding4 * 4),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                LoadingProductPrice(
-                                  constraints: constraints,
-                                ),
-                                LoadingFaviourt(
-                                  constraints: constraints,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: padding4 * 1,
-                            ),
-                          ],
-                        )
-                      : Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Align(
-                              alignment: Alignment.topCenter,
-                              child: ProductImage(
-                                mainImageUrl: product!.mainImageUrl!,
-                                constraints: constraints,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: padding4 * 4,
-                            ),
-                            ProductName(
-                              productName: product!.productName!,
-                            ),
-                            ProductStore(
-                              storeName: product!.storeName!,
-                            ),
-                            const SizedBox(height: padding4 * 4),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                ProductPrice(
-                                  productPrice: product!.price!,
-                                ),
-                                Faviourt(
-                                  product: product,
-                                ),
-                              ],
-                            ),
-                          ],
-                        );
-                },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: ProductImage(
+                      mainImageUrl: product.mainImageUrl!,
+                      constraints: constraints,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: padding4 * 4,
+                  ),
+                  ProductName(
+                    productName: product.productName!,
+                  ),
+                  ProductStore(
+                    storeName: product.storeName!,
+                  ),
+                  const SizedBox(height: padding4 * 4),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ProductPrice(
+                        productPrice: product!.price!,
+                      ),
+                      Faviourt(
+                        isFav: product.isFavorite!,
+                        productId: product.productId!,
+                        storeId: product.storeId!,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      }),
+    );
+  }
+}
+
+class ProductCardLoading extends StatelessWidget {
+  const ProductCardLoading({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      constraints: BoxConstraints(
+        maxWidth: (MediaQuery.sizeOf(context).width - padding4 * 8) / 2,
+      ),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surfaceContainerLowest,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            offset: const Offset(0, 4),
+            blurRadius: 2,
+          ),
+        ],
+      ),
+      // width: MediaQuery.sizeOf(context).width / 2,
+      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+        return Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () {},
+            child: Padding(
+              padding: const EdgeInsets.all(padding4 * 4),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Stack(
+                    children: [
+                      LoadingProductImage(
+                        constraints: constraints,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: padding4 * 4,
+                  ),
+                  LoadingProductName(
+                    constraints: constraints,
+                  ),
+                  const SizedBox(height: padding4 * 1),
+                  Skeleton(
+                    width: constraints.maxWidth * 0.40,
+                    height: 10,
+                    radius: 0,
+                  ),
+                  const SizedBox(height: padding4 * 4),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      LoadingProductPrice(
+                        constraints: constraints,
+                      ),
+                      LoadingFaviourt(
+                        constraints: constraints,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: padding4 * 1,
+                  ),
+                ],
               ),
             ),
           ),
@@ -255,10 +288,12 @@ class LoadingProductName extends StatelessWidget {
 class Faviourt extends StatefulWidget {
   const Faviourt({
     super.key,
-    required this.product,
+    required this.isFav,
+    required this.productId,
+    required this.storeId,
   });
 
-  final ProductEntity? product;
+  final int isFav, productId, storeId;
 
   @override
   State<Faviourt> createState() => _FaviourtState();
@@ -297,35 +332,26 @@ class _FaviourtState extends State<Faviourt> {
 
   @override
   Widget build(BuildContext context) {
-    log("build animated  heart  state");
-    log("is fav: ${widget.product!.isFavorite}");
-    isFavoriteSMI?.value = widget.product!.isFavorite == 1;
-    log("is fav smi: ${isFavoriteSMI?.value}");
+    isFavoriteSMI?.value = widget.isFav == 1;
     return GestureDetector(
       onTap: () async {
-        if (widget.product?.isFavorite == 0) {
+        if (widget.isFav == 0) {
           await context.read<ToggleFavCubit>().toggleFavOnTrigger(
-                storeID: widget.product!.storeId!,
-                productID: widget.product!.productId!,
+                storeID: widget.storeId,
+                productID: widget.productId,
               );
         } else {
           await context.read<ToggleFavCubit>().toggleFavOffTrigger(
-                storeID: widget.product!.storeId!,
-                productID: widget.product!.productId!,
+                storeID: widget.storeId,
+                productID: widget.productId,
               );
         }
       },
-      // borderRadius: BorderRadius.circular(20),
-      // child: Icon(
-      //   Icons.favorite,
-      //   size: 20,
-      //   color: widget.product?.isFavorite == 1 ? Colors.red : AppColors.disableFav,
-      // ),
       child: Container(
         padding: EdgeInsets.only(top: 1),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: widget.product!.isFavorite == 1 ? const Color.fromARGB(255, 251, 207, 204) : AppColors.disableFavContainer,
+          color: widget.isFav == 1 ? const Color.fromARGB(255, 251, 207, 204) : AppColors.disableFavContainer,
         ),
         child: artboard == null
             ? SizedBox()
