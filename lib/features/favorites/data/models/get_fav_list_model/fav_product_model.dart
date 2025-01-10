@@ -1,38 +1,35 @@
-import '../../../../core/databases/api/end_points.dart';
-import '../../domain/entities/data_entity.dart';
-import 'sub_image_model.dart';
+import 'package:collection/collection.dart';
+import 'package:e_commerce/core/databases/api/end_points.dart';
 
-class DataModel extends DataEntity {
-  DataModel({
+import '../../../domain/entities/get_fav_list_entity/fav_product_entity.dart';
+
+class FavProductModel extends FavProductEntity {
+  FavProductModel({
     super.storeId,
     super.storeName,
     super.productId,
     super.productName,
+    super.categoryId,
+    super.categoryName,
     super.price,
     super.quantity,
     super.description,
-    super.mainImage,
-    super.subImages,
-    super.catagoryID,
-    super.catagoryName,
     super.isFavorite,
-    super.quantityInCart,
+    super.mainImage,
   });
 
-  factory DataModel.fromMap(Map<String, dynamic> data) => DataModel(
+  factory FavProductModel.fromMap(Map<String, dynamic> data) => FavProductModel(
         storeId: data[ApiKey.storeId] as int?,
         storeName: data[ApiKey.storeName] as String?,
         productId: data[ApiKey.productId] as int?,
         productName: data[ApiKey.productName] as String?,
+        categoryId: data[ApiKey.categoryId] as int?,
+        categoryName: data[ApiKey.categoryName] as String?,
         price: data[ApiKey.price] as String?,
         quantity: data[ApiKey.quantity] as int?,
         description: data[ApiKey.description] as String?,
-        mainImage: data[ApiKey.mainImageUrl] as String?,
-        subImages: (data[ApiKey.subImages] as List<dynamic>?)?.map((e) => SubImageModel.fromMap(e as Map<String, dynamic>)).toList(),
-        catagoryID: data[ApiKey.catagoryID] as int?,
-        catagoryName: data[ApiKey.categoryName] as String?,
         isFavorite: data[ApiKey.isFavorite] as int?,
-        quantityInCart: data[ApiKey.quantityInCart] as int?,
+        mainImage: data[ApiKey.mainImage] as String?,
       );
 
   Map<String, dynamic> toMap() => {
@@ -40,46 +37,51 @@ class DataModel extends DataEntity {
         ApiKey.storeName: storeName,
         ApiKey.productId: productId,
         ApiKey.productName: productName,
+        ApiKey.categoryId: categoryId,
+        ApiKey.categoryName: categoryName,
         ApiKey.price: price,
         ApiKey.quantity: quantity,
         ApiKey.description: description,
-        ApiKey.mainImageUrl: mainImage,
-        ApiKey.subImages: subImages?.map((e) => (e as SubImageModel).toMap()).toList(),
-        ApiKey.catagoryID: catagoryID,
-        ApiKey.categoryName: catagoryName,
         ApiKey.isFavorite: isFavorite,
-        ApiKey.quantityInCart: quantityInCart,
+        ApiKey.mainImage: mainImage,
       };
 
-  DataModel copyWith({
+  FavProductModel copyWith({
     int? storeId,
     String? storeName,
     int? productId,
     String? productName,
+    int? categoryId,
+    String? categoryName,
     String? price,
     int? quantity,
     String? description,
-    String? mainImage,
-    List<SubImageModel>? subImages,
-    int? catagoryID,
-    String? catagoryName,
     int? isFavorite,
-    int? quantityInCart,
+    String? mainImage,
   }) {
-    return DataModel(
+    return FavProductModel(
       storeId: storeId ?? this.storeId,
       storeName: storeName ?? this.storeName,
       productId: productId ?? this.productId,
       productName: productName ?? this.productName,
+      categoryId: categoryId ?? this.categoryId,
+      categoryName: categoryName ?? this.categoryName,
       price: price ?? this.price,
       quantity: quantity ?? this.quantity,
       description: description ?? this.description,
-      mainImage: mainImage ?? this.mainImage,
-      subImages: subImages ?? this.subImages,
-      catagoryID: catagoryID ?? this.catagoryID,
-      catagoryName: catagoryName ?? this.catagoryName,
       isFavorite: isFavorite ?? this.isFavorite,
-      quantityInCart: quantityInCart ?? this.quantityInCart,
+      mainImage: mainImage ?? this.mainImage,
     );
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    if (other is! FavProductModel) return false;
+    final mapEquals = const DeepCollectionEquality().equals;
+    return mapEquals(other.toMap(), toMap());
+  }
+
+  @override
+  int get hashCode => storeId.hashCode ^ storeName.hashCode ^ productId.hashCode ^ productName.hashCode ^ categoryId.hashCode ^ categoryName.hashCode ^ price.hashCode ^ quantity.hashCode ^ description.hashCode ^ isFavorite.hashCode ^ mainImage.hashCode;
 }

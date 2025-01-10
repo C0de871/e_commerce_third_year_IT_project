@@ -66,8 +66,7 @@ class RouteObserverService extends NavigatorObserver {
 }
 
 checkIfLoggedInUser() async {
-  String? userToken =
-      await SecureStorageHelper().getData(key: CacheKey.accessToken);
+  String? userToken = await SecureStorageHelper().getData(key: CacheKey.accessToken);
   if (!userToken.isNullOrEmpty()) {
     isLoggedInUser = true;
     log(userToken!);
@@ -88,7 +87,7 @@ String chooseInitialRoute() {
   if (isFristTime!) {
     return AppRoutes.splashRoute;
   } else if (isLoggedInUser) {
-    return AppRoutes.homeRoute;
+    return AppRoutes.pageView;
   } else {
     return AppRoutes.loginRoute;
   }

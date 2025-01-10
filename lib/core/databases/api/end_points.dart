@@ -11,6 +11,7 @@ class EndPoints {
   static const String getAllProducts = "products";
   static const String getAllStores = "stores";
   static const String refreshToken = "refresh";
+  static const String favList = "favorites";
   static String getProductDetails(GetProductDetailsParams params) {
     return "stores/${params.storeID}/${params.productID}/show";
   }
@@ -24,7 +25,6 @@ class EndPoints {
   static const String deleteCart = "carts/delete-products";
   static const String clearCart = "carts/delete-all";
   static const String getSizeCart = "carts/getSize";
-
 }
 
 class ApiKey {
@@ -84,7 +84,7 @@ class ApiKey {
 
   static String subImages = "sub_images";
   static String catagoryID = "category_id";
-  static String catagoryName = "category_name";
+  static String categoryName = "category_name";
   static String quantityInCart = "quantityInCart";
   static String totalPrice = "total_price";
   static String cartAmount = "cart_amount";

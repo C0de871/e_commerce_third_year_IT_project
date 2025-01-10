@@ -36,11 +36,11 @@ class LoginSuccessScreen extends StatelessWidget {
               press: () {
                 Navigator.pushNamedAndRemoveUntil(
                   context,
-                  AppRoutes.homeRoute,
+                  AppRoutes.pageView,
                   (route) => false,
                 );
               },
-              width: 200,
+              width: double.infinity,
             ),
           ),
           const Spacer(

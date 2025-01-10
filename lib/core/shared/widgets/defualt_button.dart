@@ -5,17 +5,17 @@ class DefaultButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.press,
-    required this.width,
+    this.width = double.infinity,
   });
 
   final String text;
   final void Function() press;
-  final int width;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 100,
+      width: width,
       height: 56,
       child: TextButton(
         onPressed: press,

@@ -3,6 +3,7 @@ import '../../../../core/databases/api/api_consumer.dart';
 import '../../../../core/databases/api/end_points.dart';
 import '../../../../core/databases/cache/secure_storage_helper.dart';
 import '../../../../core/databases/params/params.dart';
+import '../models/get_fav_list_model/get_fav_list_model.dart';
 import '../models/toggle_fav_model.dart';
 
 class FavoritesRemoteDataSource {
@@ -14,14 +15,10 @@ class FavoritesRemoteDataSource {
   });
   Future<ToggleFavModel> getToggleFavOn(ToggleFavParams params) async {
     Map<String, dynamic> headers = {
-      ApiKey.authorization:
-          await cacheHelper.getData(key: CacheKey.accessToken),
+      ApiKey.authorization: await cacheHelper.getData(key: CacheKey.accessToken),
     };
 
-    bool isLoggedIn =
-        (await cacheHelper.getData(key: CacheKey.accessToken) != null)
-            ? true
-            : false;
+    bool isLoggedIn = (await cacheHelper.getData(key: CacheKey.accessToken) != null) ? true : false;
 
     Map<String, dynamic> extra = {
       ApiKey.requiredAuth: isLoggedIn,
@@ -36,14 +33,10 @@ class FavoritesRemoteDataSource {
 
   Future<ToggleFavModel> getToggleFavOff(ToggleFavParams params) async {
     Map<String, dynamic> headers = {
-      ApiKey.authorization:
-          await cacheHelper.getData(key: CacheKey.accessToken),
+      ApiKey.authorization: await cacheHelper.getData(key: CacheKey.accessToken),
     };
 
-    bool isLoggedIn =
-        (await cacheHelper.getData(key: CacheKey.accessToken) != null)
-            ? true
-            : false;
+    bool isLoggedIn = (await cacheHelper.getData(key: CacheKey.accessToken) != null) ? true : false;
 
     Map<String, dynamic> extra = {
       ApiKey.requiredAuth: isLoggedIn,
@@ -55,5 +48,22 @@ class FavoritesRemoteDataSource {
       extra: extra,
     );
     return ToggleFavModel.fromMap(response);
+  }
+
+  Future<GetFavListModel> getFavList() async {
+    Map<String, dynamic> headers = {
+      ApiKey.authorization: await cacheHelper.getData(key: CacheKey.accessToken),
+    };
+    Map<String, dynamic> extra = {
+      ApiKey.requiredAuth: true,
+    };
+
+    final response = await api.get(
+      EndPoints.favList,
+      headers: headers,
+      extra: extra,
+    );
+    // return GetFavListModel();
+    return GetFavListModel.fromMap(response);
   }
 }

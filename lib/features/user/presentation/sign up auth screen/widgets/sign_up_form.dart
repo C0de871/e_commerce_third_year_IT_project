@@ -75,7 +75,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 );
               }
             },
-            width: 200,
+            // width: 200,
           )
         ],
       ),

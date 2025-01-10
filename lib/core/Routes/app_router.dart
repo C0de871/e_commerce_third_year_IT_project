@@ -82,7 +82,7 @@ class AppRouter {
     return _deleteCartCubit!;
   }
 
-SizeCartCubit get sizeCartCubit {
+  SizeCartCubit get sizeCartCubit {
     if (_sizeCartCubit == null || _sizeCartCubit!.isClosed) {
       _sizeCartCubit = SizeCartCubit();
     }
@@ -91,6 +91,7 @@ SizeCartCubit get sizeCartCubit {
     });
     return _sizeCartCubit!;
   }
+
   // ClearCartCubit get clearCartCubit {
   //   if (_clearCartCubit == null || _clearCartCubit!.isClosed) {
   //     _clearCartCubit = ClearCartCubit();
@@ -232,7 +233,7 @@ SizeCartCubit get sizeCartCubit {
         );
 
       //! home route:
-      case AppRoutes.homeRoute:
+      case AppRoutes.pageView:
         return MaterialPageRoute(
           settings: settings,
           builder: (_) => MultiBlocProvider(
@@ -272,9 +273,6 @@ SizeCartCubit get sizeCartCubit {
               BlocProvider.value(
                 value: ToggleFavCubit.instance,
               ),
-              // BlocProvider.value(
-              //   value: productCubit,
-              // ),
             ],
             child: ProductDetailsScreen(),
           ),

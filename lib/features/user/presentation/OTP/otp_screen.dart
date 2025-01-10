@@ -90,7 +90,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         press: () {
                           context.read<UserCubit>().postOtpTrigger();
                         },
-                        width: 200,
+                        // width: 200,
                       ),
                       const SizedBox(height: padding4 * 6),
                       GestureDetector(
