@@ -10,7 +10,7 @@ import 'package:e_commerce/core/shared/widgets/rounded_icon.dart';
 import 'package:e_commerce/core/utils/constants/app_numbers.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rive/rive.dart';
-import 'package:flutter/src/widgets/image.dart' as FlutterImage;
+import 'package:flutter/src/widgets/image.dart' as flutter_image;
 import 'package:svg_flutter/svg_flutter.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/constants/app_images.dart';
@@ -254,7 +254,7 @@ class StoreCard extends StatelessWidget {
           aspectRatio: 1,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: FlutterImage.Image.asset(
+            child: flutter_image.Image.asset(
               "assets/images/logo_with_brown_background.png",
               fit: BoxFit.cover,
             ),

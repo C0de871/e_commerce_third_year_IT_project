@@ -7,7 +7,7 @@ import 'package:e_commerce/core/databases/cache/secure_storage_helper.dart';
 import 'package:e_commerce/core/databases/errors/expentions.dart';
 import 'package:e_commerce/core/utils/services/service_locator.dart';
 
-import '../../../features/user/data/models/refresh_token/refresh_token_model.dart';
+import '../../../features/auth/data/models/refresh_token/refresh_token_model.dart';
 
 class AuthInterceptor extends Interceptor {
   final DioConsumer dioConsumer;

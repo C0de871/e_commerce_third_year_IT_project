@@ -3,7 +3,6 @@ import 'package:e_commerce/features/favorites/presentation/cubit/getFavList/get_
 import 'package:e_commerce/features/favorites/presentation/cubit/toggle_fav_cubit.dart';
 import 'package:e_commerce/features/favorites/presentation/screens/fav_list_screen.dart';
 import 'package:e_commerce/features/get_product_details/presentation/cubit/get_product_details_cubit.dart';
-import 'package:e_commerce/features/home/beta/fav_page.dart';
 import 'package:e_commerce/features/home/beta/notification_page.dart';
 import 'package:e_commerce/features/home/beta/profile_page.dart';
 import 'package:e_commerce/features/home/beta/settings_page.dart';

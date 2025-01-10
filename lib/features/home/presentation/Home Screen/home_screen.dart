@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:e_commerce/core/Routes/app_router.dart';
 import 'package:e_commerce/core/databases/api/end_points.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/size_cart_cubit.dart';
 import 'package:e_commerce/features/home/presentation/Home%20Screen/widgets/home_app_bar.dart';

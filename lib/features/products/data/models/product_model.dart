@@ -84,7 +84,7 @@ class ProductModel extends ProductEntity with EquatableMixin {
       quantity: quantity ?? this.quantity,
       description: description ?? this.description,
       isFavorite: isFavorite ?? this.isFavorite,
-      mainImageUrl: mainImage ?? this.mainImageUrl,
+      mainImageUrl: mainImage ?? mainImageUrl,
     );
   }
 

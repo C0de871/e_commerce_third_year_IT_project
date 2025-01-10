@@ -4,7 +4,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce/features/get_product_details/presentation/cubit/get_product_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/image.dart' as FlutterImage;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rive/rive.dart';
 
@@ -48,8 +47,8 @@ class ProductCard extends StatelessWidget {
           child: InkWell(
             onTap: () {
               context.read<GetProductDetailsCubit>().getProductDetailsTrigger(
-                    productID: product!.productId.toString(),
-                    storeID: product!.storeId.toString(),
+                    productID: product.productId.toString(),
+                    storeID: product.storeId.toString(),
                   );
               Navigator.of(context).pushNamed(
                 AppRoutes.productDetailsScreen,
@@ -82,7 +81,7 @@ class ProductCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ProductPrice(
-                        productPrice: product!.price!,
+                        productPrice: product.price!,
                       ),
                       Faviourt(
                         isFav: product.isFavorite!,
