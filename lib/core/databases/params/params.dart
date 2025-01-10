@@ -17,7 +17,15 @@ class GetProductDetailsParams {
     required this.storeID,
   });
 }
+class GetStoredAndProductIdParams{
+String productID, storeID;
+  GetStoredAndProductIdParams({
+    required this.productID,
+    required this.storeID,
+  });
 
+
+}
 class ProductParams {
   int page = 1;
   String query;
