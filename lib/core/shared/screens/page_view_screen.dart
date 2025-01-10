@@ -8,6 +8,7 @@ import 'package:e_commerce/features/home/beta/profile_page.dart';
 import 'package:e_commerce/features/home/beta/settings_page.dart';
 import 'package:e_commerce/features/home/presentation/HomeCubit/home_cubit.dart';
 import 'package:e_commerce/core/shared/screens/Navigation_cubit/navigation_bar_cubit.dart';
+import 'package:e_commerce/features/user/presentation/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +16,6 @@ import '../widgets/bottom_nav_bar.dart';
 import '../../../features/home/presentation/Home Screen/home_screen.dart';
 
 class PageViewScreen extends StatefulWidget {
-  static String routeName = '/home';
   const PageViewScreen({super.key});
 
   @override
@@ -45,7 +45,7 @@ class _PageViewScreenState extends State<PageViewScreen> {
       ],
       child: FavListScreen(),
     ),
-    ProfilePage(),
+    ProfileScreen(),
   ];
 
   @override

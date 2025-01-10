@@ -19,7 +19,9 @@ import 'package:e_commerce/features/auth/presentation/login_success_screen/login
 import 'package:e_commerce/features/auth/presentation/splash%20screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../features/favorites/presentation/cubit/getFavList/get_fav_list_cubit.dart';
 import '../../features/favorites/presentation/cubit/toggle_fav_cubit.dart';
+import '../../features/favorites/presentation/screens/fav_list_screen.dart';
 import '../../features/get_product_details/presentation/cubit/get_product_details_cubit.dart';
 import '../../features/auth/presentation/complete_profile_screen/complete_profile_screen.dart';
 import '../../features/auth/presentation/sign up auth screen/sign_up_auth_screen.dart';
@@ -143,16 +145,6 @@ class AppRouter {
     return _homeCubit!;
   }
 
-  // ToggleFavCubit get toggleFavOnCubit {
-  //   if (_toggleFavOnCubit == null || _toggleFavOnCubit!.isClosed) {
-  //     _toggleFavOnCubit = ToggleFavCubit();
-  //   }
-  //   _toggleFavOnCubit!.stream.listen((_) {}, onDone: () {
-  //     _toggleFavOnCubit = null; // Nullify the reference when closed
-  //   });
-  //   return _toggleFavOnCubit!;
-  // }
-
   Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       //! cart route:
@@ -227,6 +219,19 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (context) => userCubit,
             child: const LoginScreen(),
+          ),
+        );
+
+      case AppRoutes.favoritesRoute:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => GetProductDetailsCubit.instance),
+              BlocProvider(create: (context) => ToggleFavCubit.instance),
+              BlocProvider(create: (context) => GetFavListCubit.instance..getFavList()),
+            ],
+            child: FavListScreen(),
           ),
         );
 

@@ -10,6 +10,7 @@ import 'package:e_commerce/core/theme/app_theme.dart';
 
 import '../../features/auth/presentation/loading_screen/loading_screen.dart';
 import '../Routes/app_router.dart';
+import '../Routes/app_routes.dart';
 import '../helper/app_functions.dart';
 import '../translations/l10n.dart';
 
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
           defaultLightScheme(),
         ),
         home: LoadingScreen(),
+        // initialRoute: AppRoutes.loginRoute,
         onGenerateRoute: AppRouter().generateRoute,
       ),
     );
