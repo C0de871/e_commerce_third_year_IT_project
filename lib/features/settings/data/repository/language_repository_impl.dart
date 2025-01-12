@@ -1,5 +1,3 @@
-import 'dart:developer';
-import 'dart:ui';
 
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce/features/settings/data/data_sources/lang_local_data_source.dart';

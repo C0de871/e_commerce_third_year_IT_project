@@ -82,7 +82,6 @@ import 'package:e_commerce/features/stores/presentation/cubit/store_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../stores/domain/entities/store_entity.dart';
 import 'store_card.dart';
 
 class PopularStores extends StatelessWidget {

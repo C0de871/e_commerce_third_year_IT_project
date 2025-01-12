@@ -1,5 +1,3 @@
-import 'dart:developer';
-import 'dart:ui';
 
 import 'package:e_commerce/core/databases/api/end_points.dart';
 import 'package:e_commerce/core/databases/cache/shared_prefs_helper.dart';

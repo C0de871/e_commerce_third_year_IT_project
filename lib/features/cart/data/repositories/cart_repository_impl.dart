@@ -10,7 +10,6 @@ import 'package:e_commerce/features/cart/domain/entites/add_to_cart_entity.dart'
 import 'package:e_commerce/features/cart/domain/entites/cart_entity.dart';
 import 'package:e_commerce/features/cart/domain/entites/size_cart_entity.dart';
 import 'package:e_commerce/features/cart/domain/repository/cart_repository.dart';
-import 'package:flutter/material.dart';
 
 class CartRepositoryImpl extends CartRepository {
   final NetworkInfo networkInfo;

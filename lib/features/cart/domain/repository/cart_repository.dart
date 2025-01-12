@@ -5,7 +5,6 @@ import 'package:e_commerce/core/shared/domain/entities/message_entety.dart';
 import 'package:e_commerce/features/cart/domain/entites/add_to_cart_entity.dart';
 import 'package:e_commerce/features/cart/domain/entites/cart_entity.dart';
 import 'package:e_commerce/features/cart/domain/entites/size_cart_entity.dart';
-import 'package:e_commerce/features/get_product_details/presentation/screens/product_details_screen.dart';
 
 abstract class CartRepository {
   Future<Either<Failure, CartEntity>> getCart();
