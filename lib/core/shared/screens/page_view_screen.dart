@@ -8,6 +8,7 @@ import 'package:e_commerce/features/home/beta/profile_page.dart';
 import 'package:e_commerce/features/home/beta/settings_page.dart';
 import 'package:e_commerce/features/home/presentation/HomeCubit/home_cubit.dart';
 import 'package:e_commerce/core/shared/screens/Navigation_cubit/navigation_bar_cubit.dart';
+import 'package:e_commerce/features/settings/presentation/settings_screen.dart';
 import 'package:e_commerce/features/user/presentation/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,7 +26,7 @@ class PageViewScreen extends StatefulWidget {
 class _PageViewScreenState extends State<PageViewScreen> {
   List<Widget> screens = [
     HistoryPage(),
-    SettingsPage(),
+    SettingsScreen(),
     MultiBlocProvider(
       providers: [
         BlocProvider(

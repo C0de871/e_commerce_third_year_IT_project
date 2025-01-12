@@ -69,8 +69,27 @@
         "description": "Label for the product price"
     },
     "confirmDeletion": "تأكيد الحذف",
-    "confirmModification" :"تأكيد التعديل",
-    "checkOut":"الذهاب للدفع",
-    "myProducts":": مشترياتي"
-
+    "confirmModification": "تأكيد التعديل",
+    "checkOut": "الذهاب للدفع",
+    "myProducts": ": مشترياتي",
+    "settings": "الإعدادات",
+    "@settings": {
+        "description": "العنوان لواجهة الإعدادات"
+    },
+    "english": "الإنجليزية",
+    "@english": {
+        "description": "الخيار لاختيار اللغة الإنجليزية"
+    },
+    "arabic": "العربية",
+    "@arabic": {
+        "description": "الخيار لاختيار اللغة العربية"
+    },
+    "systemDefault": "افتراضي النظام",
+    "@systemDefault": {
+        "description": "الخيار لاختيار لغة النظام الافتراضية"
+    },
+    "failed": "فشل",
+    "@failed": {
+        "description": "النص المعروض في حالة حدوث خطأ"
+    }
 }

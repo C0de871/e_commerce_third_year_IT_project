@@ -108,4 +108,5 @@ class CacheKey {
   static String productName = "product_name";
   static String mainImage = "main_image";
   static String data = "data";
+  static String userLang = "userLang";
 }
