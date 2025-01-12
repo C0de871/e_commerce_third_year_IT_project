@@ -44,7 +44,9 @@ class _ProductsListState extends State<ProductsList> {
                     ];
                   }
                   return switch (state) {
-                    ProductInitial() || GetAllProductsLoading() => SliverList.separated(
+                    ProductInitial() ||
+                    GetAllProductsLoading() =>
+                      SliverList.separated(
                         key: const Key('loading_listview'),
                         separatorBuilder: (context, index) => const Divider(),
                         itemBuilder: (context, index) {
@@ -62,7 +64,8 @@ class _ProductsListState extends State<ProductsList> {
                           );
                         },
                         separatorBuilder: (context, index) => const Divider(),
-                        itemCount: state.getAllProductsEntity.pagination!.totalItems,
+                        itemCount:
+                            state.getAllProductsEntity.pagination!.totalItems,
                         findChildIndexCallback: (key) {
                           final typedKey = key as ValueKey<int>;
                           return typedKey.value;

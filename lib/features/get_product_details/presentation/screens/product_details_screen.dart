@@ -25,7 +25,8 @@ class ProductDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ProductEntity productDetails = ModalRoute.of(context)!.settings.arguments as ProductEntity;
+    final ProductEntity productDetails =
+        ModalRoute.of(context)!.settings.arguments as ProductEntity;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       // backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
@@ -37,7 +38,10 @@ class ProductDetailsScreen extends StatelessWidget {
         forceMaterialTransparency: true,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Theme.of(context).colorScheme.surface,
-          statusBarIconBrightness: Theme.of(context).brightness == Brightness.light ? Brightness.dark : Brightness.light,
+          statusBarIconBrightness:
+              Theme.of(context).brightness == Brightness.light
+                  ? Brightness.dark
+                  : Brightness.light,
         ),
         leadingWidth: 80,
         toolbarHeight: 60,
@@ -423,7 +427,9 @@ class _IsFavoriteState extends State<IsFavorite> {
               ),
               width: 72,
               decoration: BoxDecoration(
-                color: isFavorite == 1 ? const Color.fromARGB(255, 251, 207, 204) : AppColors.disableFavContainer,
+                color: isFavorite == 1
+                    ? const Color.fromARGB(255, 251, 207, 204)
+                    : AppColors.disableFavContainer,
                 borderRadius: BorderRadius.only(
                   topRight: rtl ? Radius.circular(20) : Radius.circular(0),
                   bottomRight: rtl ? Radius.circular(20) : Radius.circular(0),
@@ -436,12 +442,16 @@ class _IsFavoriteState extends State<IsFavorite> {
                   : GestureDetector(
                       onTap: () async {
                         if (isFavorite == 0) {
-                          await context.read<ToggleFavCubit>().toggleFavOnTrigger(
+                          await context
+                              .read<ToggleFavCubit>()
+                              .toggleFavOnTrigger(
                                 storeID: storeID!,
                                 productID: productID!,
                               );
                         } else {
-                          await context.read<ToggleFavCubit>().toggleFavOffTrigger(
+                          await context
+                              .read<ToggleFavCubit>()
+                              .toggleFavOffTrigger(
                                 storeID: storeID!,
                                 productID: productID!,
                               );

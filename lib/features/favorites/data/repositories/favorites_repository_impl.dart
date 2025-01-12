@@ -12,9 +12,11 @@ import '../datasources/favorites_remote_data_source.dart';
 class FavoritesRepositoryImpl extends FavoritesRepository {
   final NetworkInfo networkInfo;
   final FavoritesRemoteDataSource remoteDataSource;
-  FavoritesRepositoryImpl({required this.remoteDataSource, required this.networkInfo});
+  FavoritesRepositoryImpl(
+      {required this.remoteDataSource, required this.networkInfo});
   @override
-  Future<Either<Failure, ToggleFavEntity>> getToggleFavOn({required ToggleFavParams params}) async {
+  Future<Either<Failure, ToggleFavEntity>> getToggleFavOn(
+      {required ToggleFavParams params}) async {
     if (await networkInfo.isConnected!) {
       try {
         final remoteToggleFavOn = await remoteDataSource.getToggleFavOn(params);
@@ -30,10 +32,12 @@ class FavoritesRepositoryImpl extends FavoritesRepository {
   }
 
   @override
-  Future<Either<Failure, ToggleFavEntity>> getToggleFavOff({required ToggleFavParams params}) async {
+  Future<Either<Failure, ToggleFavEntity>> getToggleFavOff(
+      {required ToggleFavParams params}) async {
     if (await networkInfo.isConnected!) {
       try {
-        final remoteToggleFavOff = await remoteDataSource.getToggleFavOff(params);
+        final remoteToggleFavOff =
+            await remoteDataSource.getToggleFavOff(params);
 
         return Right(remoteToggleFavOff);
       } on ServerException catch (e) {

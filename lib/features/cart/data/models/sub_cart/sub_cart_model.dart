@@ -20,6 +20,5 @@ class SubCartModel extends SubCartEntity {
         mainImage: json[ApiKey.mainImage],
         productName: json[ApiKey.productName],
         orderQuantity: json[ApiKey.orderQuantity],
-
       );
 }

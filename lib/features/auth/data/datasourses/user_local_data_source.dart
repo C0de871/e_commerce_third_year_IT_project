@@ -17,9 +17,12 @@ class UserLocalDataSource {
   });
   cacheUser(UserModel? userToCache) async {
     if (userToCache != null) {
-      await secureCache.saveData(key: CacheKey.user, value: json.encode(userToCache.toJson()));
-      await secureCache.saveData(key: CacheKey.accessToken, value: userToCache.accessToken);
-      await secureCache.saveData(key: CacheKey.refreshToken, value: userToCache.refreshToken);
+      await secureCache.saveData(
+          key: CacheKey.user, value: json.encode(userToCache.toJson()));
+      await secureCache.saveData(
+          key: CacheKey.accessToken, value: userToCache.accessToken);
+      await secureCache.saveData(
+          key: CacheKey.refreshToken, value: userToCache.refreshToken);
     } else {
       throw CacheExeption(errorMessage: "NO internet connection");
     }
@@ -34,11 +37,13 @@ class UserLocalDataSource {
   }
 
   Future<bool> setFirstLaunch() async {
-    return await sharedPrefsCache.saveData(key: CacheKey.isFirstTime, value: false);
+    return await sharedPrefsCache.saveData(
+        key: CacheKey.isFirstTime, value: false);
   }
 
   Future<bool> isFirstLaunch() async {
-    final bool? isFirstLaunch = await sharedPrefsCache.getData(key: CacheKey.isFirstTime);
+    final bool? isFirstLaunch =
+        await sharedPrefsCache.getData(key: CacheKey.isFirstTime);
     if (isFirstLaunch == null || isFirstLaunch) {
       return true;
     } else {

@@ -1,4 +1,3 @@
-
 class MessageEntity {
   String? message;
 

@@ -1,4 +1,3 @@
-
 import 'package:e_commerce/core/utils/services/service_locator.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

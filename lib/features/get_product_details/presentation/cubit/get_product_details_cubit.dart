@@ -5,7 +5,6 @@ import 'package:e_commerce/core/utils/services/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 import '../../../../core/databases/params/params.dart';
 import '../../../favorites/domain/service/product_favorite_service.dart';
 import '../../domain/entities/get_product_details_entity.dart';
@@ -40,7 +39,8 @@ class GetProductDetailsCubit extends Cubit<GetProductDetailsState> {
     return _instance!;
   }
 
-  dynamic getProductDetailsTrigger({required String productID, required String storeID}) async {
+  dynamic getProductDetailsTrigger(
+      {required String productID, required String storeID}) async {
     GetProductDetailsParams params = GetProductDetailsParams(
       productID: productID,
       storeID: storeID,
@@ -58,9 +58,13 @@ class GetProductDetailsCubit extends Cubit<GetProductDetailsState> {
 
   //! listen to favorite update:
   void _listenToFavoriteUpdates() {
-    _favoriteSubscription = _favoriteService.favoriteUpdatesStream.listen((update) {
+    _favoriteSubscription =
+        _favoriteService.favoriteUpdatesStream.listen((update) {
       log("here is stream ${update.isFavorite}");
-      (state as GetProductDetailsSuccess).productDetailsEntity.data!.isFavorite = update.isFavorite;
+      (state as GetProductDetailsSuccess)
+          .productDetailsEntity
+          .data!
+          .isFavorite = update.isFavorite;
       emit((state as GetProductDetailsSuccess).copyWith());
     });
   }

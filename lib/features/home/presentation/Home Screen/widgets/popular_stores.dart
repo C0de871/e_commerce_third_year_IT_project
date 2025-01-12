@@ -74,9 +74,6 @@
 //   }
 // }
 
-
-
-
 import 'package:e_commerce/core/utils/constants/app_numbers.dart';
 import 'package:e_commerce/features/stores/presentation/cubit/store_cubit.dart';
 import 'package:flutter/material.dart';
@@ -127,7 +124,8 @@ class PopularStores extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: EdgeInsets.only(
-                          right: index != (stores.length - 1) ? padding4 * 5 : 0,
+                          right:
+                              index != (stores.length - 1) ? padding4 * 5 : 0,
                         ),
                         child: StoreCard(
                           storeEntity: stores[index],
@@ -147,7 +145,6 @@ class PopularStores extends StatelessWidget {
     );
   }
 }
-
 
 // import 'package:e_commerce/core/utils/constants/app_numbers.dart';
 // import 'package:e_commerce/features/stores/presentation/cubit/store_cubit.dart';

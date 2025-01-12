@@ -1,4 +1,3 @@
-
 import 'package:e_commerce/features/cart/domain/entites/cart_entity/sub_cart_entity.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/modify_cart_cubit.dart';
 import 'package:flutter/material.dart';
@@ -88,10 +87,10 @@ class CartItemCard extends StatelessWidget {
                           },
                           icon: const Icon(Icons.remove),
                           color: Colors.orange,
-                          iconSize: 20, 
+                          iconSize: 20,
                           style: ButtonStyle(
-                            backgroundColor: WidgetStateProperty.all(Colors
-                                .white), 
+                            backgroundColor:
+                                WidgetStateProperty.all(Colors.white),
                             shape: WidgetStateProperty.all(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
@@ -102,7 +101,6 @@ class CartItemCard extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        
                         Text(
                           "${cartItem.orderQuantity ?? 0}",
                           style: TextStyle(
@@ -112,17 +110,16 @@ class CartItemCard extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        
                         IconButton(
                           onPressed: () {
                             context.read<ModifyCartCubit>().increment(cartItem);
                           },
                           icon: const Icon(Icons.add),
                           color: Colors.orange,
-                          iconSize: 20, 
+                          iconSize: 20,
                           style: ButtonStyle(
-                            backgroundColor: WidgetStateProperty.all(Colors
-                                .white), 
+                            backgroundColor:
+                                WidgetStateProperty.all(Colors.white),
                             shape: WidgetStateProperty.all(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),

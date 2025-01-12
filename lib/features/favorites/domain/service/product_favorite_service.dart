@@ -1,7 +1,8 @@
 import 'package:e_commerce/core/databases/params/params.dart';
 
 abstract class ProductFavoriteService {
-  void updateProductFavoriteStatus({required ToggleFavParams params, required int isFavorite});
+  void updateProductFavoriteStatus(
+      {required ToggleFavParams params, required int isFavorite});
   Stream<ProductFavoriteUpdate> get favoriteUpdatesStream;
 }
 

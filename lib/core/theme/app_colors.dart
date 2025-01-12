@@ -18,7 +18,7 @@ class AppColors {
   static const cardFGLightPurple = Color(0xFF9352FF);
   static const cardBGLightPink = Color(0xFFFFE9F9);
   static const cardFGLightPink = Color(0xFFD03CAB);
-    static const cardBGLightBlue = Color.fromARGB(255, 233, 246, 255);
+  static const cardBGLightBlue = Color.fromARGB(255, 233, 246, 255);
   static const cardFGLightBlue = Color.fromARGB(255, 60, 169, 208);
   static const white = Color(0xFFFFFFFF);
   static const white200 = Color(0xFFF9F9F9);

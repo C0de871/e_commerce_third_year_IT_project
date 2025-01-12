@@ -1,6 +1,7 @@
 import 'package:e_commerce/features/cart/domain/entites/size_cart_entity.dart';
 
 class SizeCartState {}
+
 class SizeInitial extends SizeCartState {}
 
 class SizeFailure extends SizeCartState {

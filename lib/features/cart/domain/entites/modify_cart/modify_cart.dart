@@ -1,4 +1,3 @@
-
 class ModifyCartEntity {
   String? message;
   int? storeId;

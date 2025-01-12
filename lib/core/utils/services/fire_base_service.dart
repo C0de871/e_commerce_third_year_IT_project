@@ -42,7 +42,6 @@ class FireBaseService {
     log("Token: $fcmToken");
   }
 
-
   Future<String?> getFCMToken() async {
     if (await cache.getData(key: CacheKey.fcmToken) == null) {
       final fcmToken = await _firebaseMessaging.getToken();

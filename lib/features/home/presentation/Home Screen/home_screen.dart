@@ -26,13 +26,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   void logREfreshtoken() async {
-    final String refresh = (await SecureStorageHelper().getData(key: CacheKey.refreshToken))!;
+    final String refresh =
+        (await SecureStorageHelper().getData(key: CacheKey.refreshToken))!;
     log("refresh token is: {$refresh}");
   }
 
   @override
   void initState() {
-
     context.read<SizeCartCubit>().getSizeCartTrigger();
     logREfreshtoken();
     super.initState();

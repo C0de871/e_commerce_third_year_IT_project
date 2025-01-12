@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:e_commerce/core/utils/constants/app_images.dart';
 
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -74,15 +73,16 @@ class _SplashScreenState extends State<SplashScreen> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: padding4 * 5),
                   child: DefaultButton(
-                      text: AppLocalizations.of(context)!.continueSplash,
-                      press: () async {
-                        context.read<CheckFirstLaunchCubit>().setFirstLaunch();
-                        if (context.mounted) {
-                          Navigator.of(context).pushReplacementNamed(AppRoutes.loginRoute);
-                        }
-                      },
-                      // width: 200,
-                      ),
+                    text: AppLocalizations.of(context)!.continueSplash,
+                    press: () async {
+                      context.read<CheckFirstLaunchCubit>().setFirstLaunch();
+                      if (context.mounted) {
+                        Navigator.of(context)
+                            .pushReplacementNamed(AppRoutes.loginRoute);
+                      }
+                    },
+                    // width: 200,
+                  ),
                 ),
                 const Spacer(
                   flex: 2,
@@ -102,7 +102,9 @@ class _SplashScreenState extends State<SplashScreen> {
       height: padding4,
       width: currentPage == index ? padding4 * 5 : padding4,
       decoration: BoxDecoration(
-        color: currentPage == index ? Theme.of(context).colorScheme.inversePrimary : Theme.of(context).colorScheme.surfaceContainer,
+        color: currentPage == index
+            ? Theme.of(context).colorScheme.inversePrimary
+            : Theme.of(context).colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(padding4),
       ),
     );

@@ -1,4 +1,3 @@
-
 class PaginationEntity {
   final int? currentPage;
   final int? totalPages;

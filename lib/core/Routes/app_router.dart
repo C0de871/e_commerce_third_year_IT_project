@@ -228,9 +228,11 @@ class AppRouter {
           settings: settings,
           builder: (_) => MultiBlocProvider(
             providers: [
-              BlocProvider(create: (context) => GetProductDetailsCubit.instance),
+              BlocProvider(
+                  create: (context) => GetProductDetailsCubit.instance),
               BlocProvider(create: (context) => ToggleFavCubit.instance),
-              BlocProvider(create: (context) => GetFavListCubit.instance..getFavList()),
+              BlocProvider(
+                  create: (context) => GetFavListCubit.instance..getFavList()),
             ],
             child: FavListScreen(),
           ),

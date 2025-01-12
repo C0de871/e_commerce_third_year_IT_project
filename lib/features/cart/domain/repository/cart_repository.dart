@@ -13,7 +13,8 @@ abstract class CartRepository {
   Future<Either<Failure, MessageEntity>> deleteCart(
       {required Map<String, dynamic> bodyJson});
   Future<Either<Failure, MessageEntity>> clearCart();
-  Future<Either<Failure,SizeCartEntity>> getSizeCart();
+  Future<Either<Failure, SizeCartEntity>> getSizeCart();
   Future<Either<Failure, AddToCartEntity>> addToCart(
-      {required GetStoredAndProductIdParams params,required Map<String,dynamic> bodyJson});
+      {required GetStoredAndProductIdParams params,
+      required Map<String, dynamic> bodyJson});
 }

@@ -20,7 +20,7 @@ class UserModel extends UserEntity {
   }
 
   Map<String, dynamic> toJson() => {
-       ApiKey.data: {
+        ApiKey.data: {
           ApiKey.accessToken: accessToken,
           ApiKey.refreshToken: refreshToken,
           ApiKey.user: subUserEntity,

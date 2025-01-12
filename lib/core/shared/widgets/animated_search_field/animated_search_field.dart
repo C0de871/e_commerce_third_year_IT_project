@@ -104,7 +104,8 @@ int toggle = 0;
 /// * use this variable to check current text from OnChange
 String textFieldValue = '';
 
-class _AnimSearchBarState extends State<AnimSearchBar> with SingleTickerProviderStateMixin {
+class _AnimSearchBarState extends State<AnimSearchBar>
+    with SingleTickerProviderStateMixin {
   ///initializing the AnimationController
   late AnimationController _con;
   FocusNode focusNode = FocusNode();
@@ -345,7 +346,9 @@ class _AnimSearchBarState extends State<AnimSearchBar> with SingleTickerProvider
                       : Icon(
                           toggle == 1 ? Icons.arrow_back_ios : Icons.search,
                           // search icon color when closed
-                          color: toggle == 0 ? widget.searchIconColor : widget.textFieldIconColor,
+                          color: toggle == 0
+                              ? widget.searchIconColor
+                              : widget.textFieldIconColor,
                           size: 20.0,
                         ),
                   onPressed: () {

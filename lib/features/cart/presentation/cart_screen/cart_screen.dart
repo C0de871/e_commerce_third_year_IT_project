@@ -59,7 +59,8 @@ class _CartScreenState extends State<CartScreen> {
                                 color: Theme.of(context)
                                     .colorScheme
                                     .primaryContainer,
-                                borderRadius: BorderRadius.circular(padding4 * 3.5),
+                                borderRadius:
+                                    BorderRadius.circular(padding4 * 3.5),
                               ),
                               child: Row(
                                 children: [
@@ -69,7 +70,8 @@ class _CartScreenState extends State<CartScreen> {
                               ),
                             ),
                             onDismissed: (direction) {
-                              final deleteCubit = context.read<DeleteCartCubit>();
+                              final deleteCubit =
+                                  context.read<DeleteCartCubit>();
                               deleteCubit.addDeletedItem(
                                   cartItem.productId ?? 0,
                                   cartItem.storeId ?? 0);

@@ -43,7 +43,9 @@ class _StoreListState extends State<StoreList> {
                     ];
                   }
                   return switch (state) {
-                    StoreInitial() || GetAllStoresLoading() => SliverList.separated(
+                    StoreInitial() ||
+                    GetAllStoresLoading() =>
+                      SliverList.separated(
                         key: const Key('loading_listview'),
                         separatorBuilder: (context, index) => const Divider(),
                         itemBuilder: (context, index) {

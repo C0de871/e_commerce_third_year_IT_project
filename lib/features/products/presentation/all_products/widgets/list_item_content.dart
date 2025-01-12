@@ -30,7 +30,8 @@ class ListItemContent extends StatelessWidget {
           return const ListTileSkeleton();
         }
         final currentState = state;
-        final item = currentState.getAllProductsEntity.data!.products![indexOnPage];
+        final item =
+            currentState.getAllProductsEntity.data!.products![indexOnPage];
         return ListTile(
           key: ValueKey<int>(index),
           onTap: () {

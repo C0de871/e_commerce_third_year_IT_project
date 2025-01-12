@@ -40,7 +40,7 @@ class SubCartEntity {
         mainImage: json[ApiKey.mainImage] as String?,
         message: json[ApiKey.message] as String?,
       );
-SubCartEntity copyWith({
+  SubCartEntity copyWith({
     int? storeId,
     String? storeName,
     int? orderQuantity,
@@ -67,5 +67,4 @@ SubCartEntity copyWith({
       message: message ?? this.message,
     );
   }
-
 }

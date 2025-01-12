@@ -11,7 +11,6 @@
 //       : clearCart = getIt<ClearCart>(),
 //         super(CartInitial());
 
- 
 //   //  //! clear cart:
 //   // void clearDeletedItems() {
 //   //   deletedItems.clear();

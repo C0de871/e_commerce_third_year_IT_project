@@ -10,7 +10,8 @@ class ProductFavoriteServiceImpl implements ProductFavoriteService {
   Stream<ProductFavoriteUpdate> get favoriteUpdatesStream => _controller.stream;
 
   @override
-  void updateProductFavoriteStatus({required ToggleFavParams params, required int isFavorite}) {
+  void updateProductFavoriteStatus(
+      {required ToggleFavParams params, required int isFavorite}) {
     _controller.add(
       ProductFavoriteUpdate(
         params.productID,

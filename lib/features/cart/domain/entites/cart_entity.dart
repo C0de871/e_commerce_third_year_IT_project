@@ -1,4 +1,3 @@
-
 import 'cart_entity/sub_cart_entity.dart';
 
 class CartEntity {

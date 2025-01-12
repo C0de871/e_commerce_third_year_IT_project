@@ -33,8 +33,7 @@ class CartRemoteDataSource {
   }
 
 //! confirm modify products:
-  Future<CartEntity> modifyCart(
-      Map<String, dynamic> bodyJson) async {
+  Future<CartEntity> modifyCart(Map<String, dynamic> bodyJson) async {
     String? accessToken = await cacheHelper.getData(key: CacheKey.accessToken);
 
     Map<String, dynamic> headers = {
@@ -88,6 +87,7 @@ class CartRemoteDataSource {
         await api.delete(EndPoints.clearCart, headers: headers, extra: extra);
     return MessageModel.fromJson(response);
   }
+
   //! get size:
   Future<SizeCartModel> getSizeCart() async {
     String? accessToken = await cacheHelper.getData(key: CacheKey.accessToken);
@@ -103,8 +103,10 @@ class CartRemoteDataSource {
         await api.get(EndPoints.getSizeCart, headers: headers, extra: extra);
     return SizeCartModel.fromJson(response);
   }
+
   //! add to cart :
-Future<AddToCartModel> addToCart(GetStoredAndProductIdParams params,Map<String,dynamic> bodyJson) async {
+  Future<AddToCartModel> addToCart(
+      GetStoredAndProductIdParams params, Map<String, dynamic> bodyJson) async {
     String? accessToken = await cacheHelper.getData(key: CacheKey.accessToken);
 
     Map<String, dynamic> headers = {
@@ -115,8 +117,8 @@ Future<AddToCartModel> addToCart(GetStoredAndProductIdParams params,Map<String,d
     Map<String, dynamic> extra = {
       ApiKey.requiredAuth: true,
     };
-    final response =
-        await api.post(EndPoints.getProductStoredId(params),data: bodyJson,headers: headers, extra: extra);
+    final response = await api.post(EndPoints.getProductStoredId(params),
+        data: bodyJson, headers: headers, extra: extra);
     return AddToCartModel.fromJson(response);
-  } 
+  }
 }

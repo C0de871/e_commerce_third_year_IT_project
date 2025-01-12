@@ -39,7 +39,8 @@ class AccountDetailsScreen extends StatelessWidget {
                         ? Hero(
                             tag: "placeHolder picture",
                             child: const CircleAvatar(
-                              backgroundImage: AssetImage("assets/images/images.png"),
+                              backgroundImage:
+                                  AssetImage("assets/images/images.png"),
                               radius: 100,
                             ),
                           )
@@ -61,7 +62,10 @@ class AccountDetailsScreen extends StatelessWidget {
                           tag: "profile name",
                           child: Text(
                             "${user.subUserEntity!.firstName} ${user.subUserEntity!.lastName}",
-                            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium!
+                                .copyWith(
                                   color: Theme.of(context).colorScheme.primary,
                                 ),
                           ),

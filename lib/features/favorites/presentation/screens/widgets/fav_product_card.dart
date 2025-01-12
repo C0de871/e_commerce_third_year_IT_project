@@ -33,7 +33,8 @@ class FavProductCard extends StatelessWidget {
         ],
       ),
       // width: MediaQuery.sizeOf(context).width / 2,
-      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+      child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
         return Material(
           color: Colors.transparent,
           child: InkWell(

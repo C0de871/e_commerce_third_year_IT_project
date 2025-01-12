@@ -20,7 +20,7 @@ class SettingsScreen extends StatelessWidget {
           builder: (context, state) {
             if (state is CurrentLanguage) {
               return AnimatedToggleSwitch<String>.size(
-                 textDirection: TextDirection.ltr,
+                  textDirection: TextDirection.ltr,
                   current: state.lang,
                   values: const ["en", Constant.deviceLang, 'ar'],
                   iconOpacity: 0.2,
@@ -29,7 +29,8 @@ class SettingsScreen extends StatelessWidget {
                     final languageText = {
                           "en": AppLocalizations.of(context)!.english,
                           "ar": AppLocalizations.of(context)!.arabic,
-                          Constant.deviceLang: AppLocalizations.of(context)!.systemDefault,
+                          Constant.deviceLang:
+                              AppLocalizations.of(context)!.systemDefault,
                         }[local.value] ??
                         AppLocalizations.of(context)!.failed;
                     return Text(
@@ -48,7 +49,8 @@ class SettingsScreen extends StatelessWidget {
                   borderWidth: 5,
                   iconAnimationType: AnimationType.onHover,
                   style: ToggleStyle(
-                    indicatorColor: Theme.of(context).colorScheme.inversePrimary,
+                    indicatorColor:
+                        Theme.of(context).colorScheme.inversePrimary,
                     borderColor: Colors.transparent,
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [

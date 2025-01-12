@@ -23,8 +23,13 @@ class GetAllProductsModel extends GetAllProductsEntity with EquatableMixin {
     return GetAllProductsModel(
       successful: data[ApiKey.successful] as bool?,
       message: data[ApiKey.message] as String?,
-      data: data[ApiKey.data] == null ? null : DataModel.fromMap(data[ApiKey.data] as Map<String, dynamic>),
-      pagination: data[ApiKey.pagination] == null ? null : PaginationModel.fromMap(data[ApiKey.pagination] as Map<String, dynamic>),
+      data: data[ApiKey.data] == null
+          ? null
+          : DataModel.fromMap(data[ApiKey.data] as Map<String, dynamic>),
+      pagination: data[ApiKey.pagination] == null
+          ? null
+          : PaginationModel.fromMap(
+              data[ApiKey.pagination] as Map<String, dynamic>),
       statusCode: data[ApiKey.statusCode] as int?,
     );
   }
@@ -41,7 +46,8 @@ class GetAllProductsModel extends GetAllProductsEntity with EquatableMixin {
   ///
   /// Parses the string and returns the resulting Json object as [GetAllProductsModel].
   factory GetAllProductsModel.fromJson(String data) {
-    return GetAllProductsModel.fromMap(json.decode(data) as Map<String, dynamic>);
+    return GetAllProductsModel.fromMap(
+        json.decode(data) as Map<String, dynamic>);
   }
 
   /// `dart:convert`

@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce/core/databases/connection/network_info.dart';
 import 'package:e_commerce/core/databases/errors/expentions.dart';
@@ -40,8 +39,7 @@ class CartRepositoryImpl extends CartRepository {
 
 //! confirm modify products:
   @override
-  Future<Either<Failure, CartEntity>> modifyCart(
-      {required bodyJson}) async {
+  Future<Either<Failure, CartEntity>> modifyCart({required bodyJson}) async {
     if (await networkInfo.isConnected!) {
       try {
         final CartEntity cartEntity =
@@ -98,6 +96,7 @@ class CartRepositoryImpl extends CartRepository {
       );
     }
   }
+
 //! get size:
   @override
   Future<Either<Failure, SizeCartEntity>> getSizeCart() async {
@@ -116,14 +115,16 @@ class CartRepositoryImpl extends CartRepository {
       );
     }
   }
+
   //!add to cart:
   @override
   Future<Either<Failure, AddToCartEntity>> addToCart(
-      {required GetStoredAndProductIdParams params ,required Map<String,dynamic> bodyJson}) async {
+      {required GetStoredAndProductIdParams params,
+      required Map<String, dynamic> bodyJson}) async {
     if (await networkInfo.isConnected!) {
       try {
         final AddToCartEntity addToCartEntity =
-            await remoteDataSource.addToCart(params,bodyJson);
+            await remoteDataSource.addToCart(params, bodyJson);
 
         return Right(addToCartEntity);
       } on ServerException catch (e) {

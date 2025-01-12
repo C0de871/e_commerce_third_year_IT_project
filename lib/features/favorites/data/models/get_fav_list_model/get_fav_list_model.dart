@@ -19,7 +19,9 @@ class GetFavListModel extends GetFavListEntity {
   factory GetFavListModel.fromMap(Map<String, dynamic> map) => GetFavListModel(
         successful: map[ApiKey.successful] as bool?,
         message: map[ApiKey.message] as String?,
-        data: (map[ApiKey.data] as List<dynamic>?)?.map((e) => FavProductModel.fromMap(e as Map<String, dynamic>)).toList(),
+        data: (map[ApiKey.data] as List<dynamic>?)
+            ?.map((e) => FavProductModel.fromMap(e as Map<String, dynamic>))
+            .toList(),
         statusCode: map[ApiKey.statusCode] as int?,
       );
 
@@ -53,5 +55,9 @@ class GetFavListModel extends GetFavListEntity {
   }
 
   @override
-  int get hashCode => successful.hashCode ^ message.hashCode ^ data.hashCode ^ statusCode.hashCode;
+  int get hashCode =>
+      successful.hashCode ^
+      message.hashCode ^
+      data.hashCode ^
+      statusCode.hashCode;
 }

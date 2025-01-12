@@ -12,11 +12,16 @@ class AddToCartCubit extends Cubit<AddToCartState> {
       : addToCart = getIt<AddToCart>(),
         super(AddtoCartInitial());
 
-  dynamic addToCartTrigger({required String productID, required String storeID,required int orderQuantity}) async {
-    GetStoredAndProductIdParams params=GetStoredAndProductIdParams(productID: productID,storeID: storeID);
-    Map<String,dynamic> bodyJson={ApiKey.quantity:orderQuantity};
+  dynamic addToCartTrigger(
+      {required String productID,
+      required String storeID,
+      required int orderQuantity}) async {
+    GetStoredAndProductIdParams params =
+        GetStoredAndProductIdParams(productID: productID, storeID: storeID);
+    Map<String, dynamic> bodyJson = {ApiKey.quantity: orderQuantity};
     emit(AddToCartLoading());
-    final failureOrAddedEntity = await addToCart.call(params:params ,bodyJson: bodyJson);
+    final failureOrAddedEntity =
+        await addToCart.call(params: params, bodyJson: bodyJson);
     failureOrAddedEntity.fold(
       (failure) => emit(AddToCartFailure(errMessage: failure.errMessage)),
       (addToCartEntity) => emit(

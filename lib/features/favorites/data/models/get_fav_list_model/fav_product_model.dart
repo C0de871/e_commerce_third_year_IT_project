@@ -83,5 +83,16 @@ class FavProductModel extends FavProductEntity {
   }
 
   @override
-  int get hashCode => storeId.hashCode ^ storeName.hashCode ^ productId.hashCode ^ productName.hashCode ^ categoryId.hashCode ^ categoryName.hashCode ^ price.hashCode ^ quantity.hashCode ^ description.hashCode ^ isFavorite.hashCode ^ mainImage.hashCode;
+  int get hashCode =>
+      storeId.hashCode ^
+      storeName.hashCode ^
+      productId.hashCode ^
+      productName.hashCode ^
+      categoryId.hashCode ^
+      categoryName.hashCode ^
+      price.hashCode ^
+      quantity.hashCode ^
+      description.hashCode ^
+      isFavorite.hashCode ^
+      mainImage.hashCode;
 }

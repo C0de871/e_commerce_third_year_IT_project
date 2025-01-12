@@ -63,16 +63,19 @@ class GetFavListCubit extends Cubit<GetFavListState> {
 
           for (var i = 0; i < products.length; i++) {
             var product = products[i];
-            if (product.storeId.toString() == update.storeID && product.productId.toString() == update.productId) {
+            if (product.storeId.toString() == update.storeID &&
+                product.productId.toString() == update.productId) {
               // Directly update the isFavorite property in the product
               log("product found in fav list");
-              products[i] = (product as FavProductModel).copyWith(isFavorite: update.isFavorite);
+              products[i] = (product as FavProductModel)
+                  .copyWith(isFavorite: update.isFavorite);
             }
           }
           products = (state as GetFavListSuccess).getFavListEntity.data!;
           for (var i = 0; i < products.length; i++) {
             var product = products[i];
-            if (product.storeId.toString() == update.storeID && product.productId.toString() == update.productId) {
+            if (product.storeId.toString() == update.storeID &&
+                product.productId.toString() == update.productId) {
               log("product found in fav list ${product.isFavorite}");
             }
           }

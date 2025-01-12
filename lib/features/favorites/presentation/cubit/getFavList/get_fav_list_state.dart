@@ -1,6 +1,6 @@
 part of 'get_fav_list_cubit.dart';
 
-sealed class GetFavListState   {
+sealed class GetFavListState {
   const GetFavListState();
 }
 
@@ -18,6 +18,7 @@ final class GetFavListSuccess extends GetFavListState {
   final GetFavListEntity getFavListEntity;
   const GetFavListSuccess({required this.getFavListEntity});
   GetFavListSuccess copyWith({GetFavListEntity? getFavListEntity}) {
-    return GetFavListSuccess(getFavListEntity: getFavListEntity ?? this.getFavListEntity);
+    return GetFavListSuccess(
+        getFavListEntity: getFavListEntity ?? this.getFavListEntity);
   }
 }

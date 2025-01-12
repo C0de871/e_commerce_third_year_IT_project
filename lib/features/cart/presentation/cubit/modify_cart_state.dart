@@ -3,13 +3,12 @@ import 'package:e_commerce/features/cart/domain/entites/cart_entity.dart';
 class ModifyCartState {}
 
 //! modify cart state:
-class ModifyCartInitial extends ModifyCartState{}
+class ModifyCartInitial extends ModifyCartState {}
 
 class ModifyLoading extends ModifyCartState {}
 
 class ModifySuccess extends ModifyCartState {
-  
-    final CartEntity cart;
+  final CartEntity cart;
 
   ModifySuccess({required this.cart});
 
@@ -18,7 +17,7 @@ class ModifySuccess extends ModifyCartState {
       cart: cart ?? this.cart,
     );
   }
-  }
+}
 
 class ModifyFailure extends ModifyCartState {
   final String errMessage;

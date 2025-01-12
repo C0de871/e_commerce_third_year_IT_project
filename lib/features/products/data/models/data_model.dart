@@ -9,11 +9,14 @@ class DataModel extends DataEntity with EquatableMixin {
   DataModel({super.products});
 
   factory DataModel.fromMap(Map<String, dynamic> data) => DataModel(
-        products: (data[ApiKey.products] as List<dynamic>?)?.map((e) => ProductModel.fromMap(e as Map<String, dynamic>)).toList(),
+        products: (data[ApiKey.products] as List<dynamic>?)
+            ?.map((e) => ProductModel.fromMap(e as Map<String, dynamic>))
+            .toList(),
       );
 
   Map<String, dynamic> toMap() => {
-        ApiKey.products: products?.map((e) => (e as ProductModel).toMap()).toList(),
+        ApiKey.products:
+            products?.map((e) => (e as ProductModel).toMap()).toList(),
       };
 
   /// `dart:convert`

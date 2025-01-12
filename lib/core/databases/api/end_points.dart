@@ -15,9 +15,9 @@ class EndPoints {
   static String getProductDetails(GetProductDetailsParams params) {
     return "stores/${params.storeID}/${params.productID}/show";
   }
+
   static String getProductStoredId(GetStoredAndProductIdParams params) {
     return "carts/${params.storeID}/products/${params.productID}/add";
-  
   }
 
   static const String getCart = "carts/products/0";

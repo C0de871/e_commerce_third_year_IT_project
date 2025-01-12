@@ -1,4 +1,3 @@
-
 import 'product_entity.dart';
 
 class DataEntity {

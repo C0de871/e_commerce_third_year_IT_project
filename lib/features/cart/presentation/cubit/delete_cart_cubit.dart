@@ -13,7 +13,7 @@ class DeleteCartCubit extends Cubit<DeleteCartState> {
 
   dynamic deleteCartTrigger() async {
     emit(DeleteLoading());
-Map<String,dynamic> body=getDeletedItemsMap();
+    Map<String, dynamic> body = getDeletedItemsMap();
     final failureOrDeleteEntity = await deleteCart.call(bodyJson: body);
     failureOrDeleteEntity.fold(
       (failure) => emit(DeleteFailure(errMessage: failure.errMessage)),
@@ -22,6 +22,7 @@ Map<String,dynamic> body=getDeletedItemsMap();
       ),
     );
   }
+
   //!add to delete lit
   void addDeletedItem(int productId, int storeId) {
     deletedItems.add({
@@ -29,8 +30,8 @@ Map<String,dynamic> body=getDeletedItemsMap();
       "store_id": storeId,
     });
   }
+
   Map<String, List<Map<String, dynamic>>> getDeletedItemsMap() {
     return {'data': deletedItems};
   }
- 
 }

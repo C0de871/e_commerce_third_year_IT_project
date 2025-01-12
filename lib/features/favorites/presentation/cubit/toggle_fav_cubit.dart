@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,7 +22,7 @@ class ToggleFavCubit extends Cubit<ToggleFavOnState> {
         _favoriteService = getIt(),
         super(ToggleFavInitial());
 
-  static  ToggleFavCubit? _instance = ToggleFavCubit._();
+  static ToggleFavCubit? _instance = ToggleFavCubit._();
   static ToggleFavCubit get instance {
     if (_instance == null || _instance!.isClosed) {
       _instance = null;
@@ -48,7 +47,8 @@ class ToggleFavCubit extends Cubit<ToggleFavOnState> {
     final response = await toggleFavOnUseCase.call(params: params);
     response.fold(
       (failure) {
-        _favoriteService.updateProductFavoriteStatus(isFavorite: 0, params: params);
+        _favoriteService.updateProductFavoriteStatus(
+            isFavorite: 0, params: params);
         log("failed");
         emit(ToggleFavFailure(msg: failure.errMessage));
       },
@@ -69,7 +69,8 @@ class ToggleFavCubit extends Cubit<ToggleFavOnState> {
     final response = await toggleFavOffUseCase.call(params: params);
     response.fold(
       (failure) {
-        _favoriteService.updateProductFavoriteStatus(isFavorite: 1, params: params);
+        _favoriteService.updateProductFavoriteStatus(
+            isFavorite: 1, params: params);
         log("failed");
         emit(ToggleFavFailure(msg: failure.errMessage));
       },
