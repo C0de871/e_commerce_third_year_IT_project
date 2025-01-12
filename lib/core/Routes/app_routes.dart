@@ -10,4 +10,7 @@ class AppRoutes {
   static const String productDetailsScreen = "/product details screen";
   static const String seeMoreProductsRoute = "/see more products screen";
   static const String seeMoreStoresRoute = "/see more stores screen";
+  static const String favoritesRoute = "/favorites";
+  static const String accountDetails = "/account_details";
+  
 }

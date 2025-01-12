@@ -6,7 +6,6 @@ import 'package:e_commerce/features/products/presentation/cubit/product_cubit/pr
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../products/domain/entities/product_entity.dart';
 
 class PopularProductList extends StatelessWidget {
   const PopularProductList({
@@ -19,41 +18,49 @@ class PopularProductList extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
         horizontal: padding4 * 4,
       ),
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.only(bottom: 20),
-        scrollDirection: Axis.horizontal,
+      child: SizedBox(
+        height: 311, // Adjust height based on your ProductCard dimensions
         child: BlocBuilder<ProductCubit, ProductState>(
           builder: (context, state) {
             if (state is GetAllProductsLoading) {
-              return Row(
-                children: [
-                  ...List.generate(4, (index) {
-                    return const ProductCardLoading();
-                  })
-                ],
+              return ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 4,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.only(
+                      right: index != 3 ? padding4 * 4 : 0,
+                    ),
+                    child: const ProductCardLoading(),
+                  );
+                },
               );
             }
             if (state is GetAllProductsSuccess) {
-              List<ProductEntity>? products = state.getAllProductsEntity.data!.products!;
-
-              log("rebuild the whole tree product fav is: ${products[0].isFavorite}");
-              return Row(
-                children: [
-                  ...List.generate(products.length, (index) {
-                    return Row(
-                      children: [
-                        ProductCard(
-                          product: products[index],
-                        ),
-                        if (index != (products.length - 1)) const SizedBox(width: padding4 * 4),
-                      ],
-                    );
-                  })
-                ],
+              final products = state.getAllProductsEntity.data!.products!;
+              log("Rebuild the whole tree. Product favorite status is: ${products[0].isFavorite}");
+              return ListView.builder(
+                padding: EdgeInsets.symmetric(
+                  horizontal: padding4 * 1,
+                  vertical: padding4 * 1,
+                ),
+                scrollDirection: Axis.horizontal,
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.only(
+                      right: index != (products.length - 1) ? padding4 * 4 : 0,
+                    ),
+                    child: ProductCard(
+                      product: products[index],
+                    ),
+                  );
+                },
               );
-            } else {
-              return const Text("Failed To Load Data");
             }
+            return const Center(
+              child: Text("Failed to load data"),
+            );
           },
         ),
       ),

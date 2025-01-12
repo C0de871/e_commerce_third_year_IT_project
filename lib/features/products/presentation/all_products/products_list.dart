@@ -1,20 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:e_commerce/core/Routes/app_routes.dart';
 import 'package:e_commerce/core/helper/app_functions.dart';
 import 'package:e_commerce/core/utils/constants/app_numbers.dart';
-import 'package:e_commerce/features/products/domain/entities/product_entity.dart';
 import 'package:e_commerce/features/products/presentation/all_products/widgets/contact_list_item.dart';
-import 'package:e_commerce/features/products/presentation/all_products/widgets/list_item_content.dart';
 import 'package:e_commerce/features/products/presentation/all_products/widgets/list_tile_skeleton.dart';
-import 'package:e_commerce/features/products/presentation/all_products/widgets/product_avatar.dart';
-import 'package:e_commerce/features/products/presentation/all_products/widgets/product_card_trailing.dart';
 import 'package:e_commerce/features/products/presentation/cubit/product_cubit/product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/shared/widgets/animated_search_field/animated_search_field.dart';
-import '../../../get_product_details/presentation/cubit/get_product_details_cubit.dart';
 
 class ProductsList extends StatefulWidget {
   const ProductsList({super.key});

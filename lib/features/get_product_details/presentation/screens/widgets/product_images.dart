@@ -47,7 +47,7 @@ class _ProductImagesState extends State<ProductImages> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (state is GetProductDetailsSuccess)
-                  ...List.generate(productImagesUrl!.length, (index) {
+                  ...List.generate(productImagesUrl.length, (index) {
                     return SmallImagePreview(
                       imageUrl: productImagesUrl![index],
                       selectedImage: selectedImage,

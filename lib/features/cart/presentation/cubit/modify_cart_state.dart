@@ -1,5 +1,4 @@
 import 'package:e_commerce/features/cart/domain/entites/cart_entity.dart';
-import 'package:e_commerce/features/cart/domain/entites/modify_cart/modify_cart.dart';
 
 class ModifyCartState {}
 

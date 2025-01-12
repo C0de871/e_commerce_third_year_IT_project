@@ -31,7 +31,7 @@ class BigImagePreview extends StatelessWidget {
             return AspectRatio(
               aspectRatio: 1,
               child: Image.network(
-                productImagesUrl![selectedImage],
+                productImagesUrl[selectedImage],
               ),
             );
           }

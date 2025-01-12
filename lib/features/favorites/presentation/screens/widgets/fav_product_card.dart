@@ -1,7 +1,6 @@
-
 import 'package:e_commerce/features/favorites/domain/entities/get_fav_list_entity/fav_product_entity.dart';
+import 'package:e_commerce/features/products/domain/entities/product_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/Routes/app_routes.dart';
@@ -43,9 +42,22 @@ class FavProductCard extends StatelessWidget {
                     productID: product.productId.toString(),
                     storeID: product.storeId.toString(),
                   );
+              ProductEntity productModel = ProductEntity(
+                storeId: product.storeId,
+                productId: product.productId,
+                storeName: product.storeName,
+                productName: product.productName,
+                mainImageUrl: product.mainImage,
+                price: product.price,
+                isFavorite: product.isFavorite,
+                quantity: product.quantity,
+                description: product.description,
+                categoryId: product.categoryId,
+                categoryName: product.categoryName,
+              );
               Navigator.of(context).pushNamed(
                 AppRoutes.productDetailsScreen,
-                arguments: product,
+                arguments: productModel,
               );
             },
             child: Padding(

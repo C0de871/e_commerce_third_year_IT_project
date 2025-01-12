@@ -1,4 +1,3 @@
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -29,7 +28,7 @@ class AnimSearchBar extends StatefulWidget {
   final Icon? prefixIcon;
   final String helpText;
   final int animationDurationInMilli;
-  final onSuffixTap;
+  final dynamic onSuffixTap;
   final bool rtl;
   final bool autoFocus;
   final TextStyle? style;
@@ -92,8 +91,10 @@ class AnimSearchBar extends StatefulWidget {
     this.inputFormatters,
   });
 
+// State<ProductCard> createState() => _ProductCardState();
   @override
-  _AnimSearchBarState createState() => _AnimSearchBarState();
+  // _AnimSearchBarState createState() => _AnimSearchBarState();
+  State<AnimSearchBar> createState() => _AnimSearchBarState();
 }
 
 ///toggle - 0 => false or closed
@@ -216,7 +217,7 @@ class _AnimSearchBarState extends State<AnimSearchBar> with SingleTickerProvider
                           }
                         } catch (e) {
                           ///print the error if the try block fails
-                          print(e);
+                          // print(e);
                         }
                       },
 
