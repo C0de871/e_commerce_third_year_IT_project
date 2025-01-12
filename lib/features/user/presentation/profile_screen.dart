@@ -28,101 +28,151 @@ class ProfileScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: SizedBox(
-        width: double.infinity,
-        child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(
-            horizontal: padding4 * 4,
-            vertical: padding4 * 4,
-          ),
-          child: user == null
-              ? Text("Failed")
-              : Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    (user.subUserEntity!.imageUrl == null)
-                        ? const CircleAvatar(
-                            backgroundImage: AssetImage("assets/images/images.png"),
-                            radius: 100,
-                          )
-                        : CircleAvatar(
-                            radius: 100,
-                            foregroundImage: CachedNetworkImageProvider(
-                              user.subUserEntity!.imageUrl!,
-                            ),
-                          ),
-                    SizedBox(
-                      height: padding4 * 5,
-                    ),
-                    Column(
-                      children: [
-                        SizedBox(
-                          height: 220,
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: MediaQuery.sizeOf(context).width / 2,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Card1(
-                                      title: "Account",
-                                      description: "View Your Profile",
-                                      icon: Icons.person,
-                                      forgroundGroundColor: AppColors.cardFGLightYellow,
-                                      backGroundColor: AppColors.cardBGLightYellow,
-                                      onTap: () {},
-                                    ),
-                                    SizedBox(
-                                      height: padding4 * 2,
-                                    ),
-                                    Card1(
-                                      title: "Favorites",
-                                      description: "My favorites",
-                                      icon: Icons.favorite,
-                                      backGroundColor: AppColors.cardBGLightPink,
-                                      forgroundGroundColor: AppColors.cardFGLightPink,
-                                      onTap: () {
-                                        Navigator.of(context).pushNamed(
-                                          AppRoutes.favoritesRoute,
-                                        );
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: padding4 * 2,
-                              ),
-                              Expanded(
-                                child: Card1(
-                                  title: "Orders",
-                                  description: "MY orders",
-                                  icon: Icons.restaurant,
-                                  backGroundColor: AppColors.cardBGLightPurple,
-                                  forgroundGroundColor: AppColors.cardFGLightPurple,
-                                  onTap: () {},
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: padding4 * 2,
-                        ),
-                        Card1(
-                          title: "Notification",
-                          description: "View Your Notification",
-                          icon: Icons.notifications,
-                          backGroundColor: AppColors.cardBGLightBlue,
-                          forgroundGroundColor: AppColors.cardFGLightBlue,
-                          onTap: () {},
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+      body: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: padding4 * 4,
+          vertical: padding4 * 4,
         ),
+        width: double.infinity,
+        child: user == null
+            ? Text("Failed")
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      (user.subUserEntity!.imageUrl == null)
+                          ? Hero(
+                              tag: "placeHolder picture",
+                              child: const CircleAvatar(
+                                backgroundImage: AssetImage("assets/images/images.png"),
+                                radius: 100,
+                              ),
+                            )
+                          : Hero(
+                              tag: "profile picture",
+                              child: CircleAvatar(
+                                radius: 40,
+                                foregroundImage: CachedNetworkImageProvider(
+                                  user.subUserEntity!.imageUrl!,
+                                ),
+                              ),
+                            ),
+                      SizedBox(
+                        width: padding4 * 4,
+                      ),
+                      Hero(
+
+                        tag: "profile name",
+                        child: Text(
+                          "${user.subUserEntity!.firstName} ${user.subUserEntity!.lastName}",
+                          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  // (user.subUserEntity!.imageUrl == null)
+                  //     ? Hero(
+                  //         tag: "profile image",
+                  //         child: const CircleAvatar(
+                  //           backgroundImage: AssetImage("assets/images/images.png"),
+                  //           radius: 100,
+                  //         ),
+                  //       )
+                  //     : Hero(
+                  //         tag: "profile image",
+                  //         child: CircleAvatar(
+                  //           radius: 100,
+                  //           foregroundImage: CachedNetworkImageProvider(
+                  //             user.subUserEntity!.imageUrl!,
+                  //           ),
+                  //         ),
+                  //       ),
+                  // SizedBox(
+                  //   height: padding4 * 5,
+                  // ),
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: padding4 * 5,
+                      ),
+                      SizedBox(
+                        height: 220,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: MediaQuery.sizeOf(context).width / 2,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Card1(
+                                    title: "Account",
+                                    description: "View Your Profile",
+                                    icon: Icons.person,
+                                    forgroundGroundColor: AppColors.cardFGLightYellow,
+                                    backGroundColor: AppColors.cardBGLightYellow,
+                                    onTap: () {
+                                      Navigator.of(context).pushNamed(
+                                        AppRoutes.accountDetails,
+                                      );
+                                    },
+                                  ),
+                                  SizedBox(
+                                    height: padding4 * 2,
+                                  ),
+                                  Card1(
+                                    title: "Favorites",
+                                    description: "My favorites",
+                                    icon: Icons.favorite,
+                                    backGroundColor: AppColors.cardBGLightPink,
+                                    forgroundGroundColor: AppColors.cardFGLightPink,
+                                    onTap: () {
+                                      Navigator.of(context).pushNamed(
+                                        AppRoutes.favoritesRoute,
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              width: padding4 * 2,
+                            ),
+                            Expanded(
+                              child: Card1(
+                                title: "Orders",
+                                description: "MY orders",
+                                icon: Icons.restaurant,
+                                backGroundColor: AppColors.cardBGLightPurple,
+                                forgroundGroundColor: AppColors.cardFGLightPurple,
+                                onTap: () {},
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: padding4 * 2,
+                      ),
+                      Card1(
+                        title: "Notification",
+                        description: "View Your Notification",
+                        icon: Icons.notifications,
+                        backGroundColor: AppColors.cardBGLightBlue,
+                        forgroundGroundColor: AppColors.cardFGLightBlue,
+                        onTap: () {},
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 80,
+                  ),
+                ],
+              ),
       ),
     );
   }

@@ -25,6 +25,7 @@ import '../../features/favorites/presentation/screens/fav_list_screen.dart';
 import '../../features/get_product_details/presentation/cubit/get_product_details_cubit.dart';
 import '../../features/auth/presentation/complete_profile_screen/complete_profile_screen.dart';
 import '../../features/auth/presentation/sign up auth screen/sign_up_auth_screen.dart';
+import '../../features/user/presentation/account_details_screen.dart';
 
 class AppRouter {
   //? <======= cubits declration =======>
@@ -233,6 +234,12 @@ class AppRouter {
             ],
             child: FavListScreen(),
           ),
+        );
+
+      case AppRoutes.accountDetails:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const AccountDetailsScreen(),
         );
 
       //! home route:

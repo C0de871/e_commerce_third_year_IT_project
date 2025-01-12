@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: padding4 * 5),
                 const PopularProductList(),
-                const SizedBox(height: 100),
+                const SizedBox(height: 150),
               ],
             ),
           ),
