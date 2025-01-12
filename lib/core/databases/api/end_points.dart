@@ -16,6 +16,10 @@ class EndPoints {
     return "stores/${params.storeID}/${params.productID}/show";
   }
 
+  static String showStore(ShowStoreParams params) {
+    return "stores/${params.storeID}/show";
+  }
+
   static String getProductStoredId(GetStoredAndProductIdParams params) {
     return "carts/${params.storeID}/products/${params.productID}/add";
   }

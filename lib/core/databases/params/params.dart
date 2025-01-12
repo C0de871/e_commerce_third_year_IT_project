@@ -18,6 +18,13 @@ class GetProductDetailsParams {
   });
 }
 
+class ShowStoreParams {
+  String storeID;
+  ShowStoreParams({
+    required this.storeID,
+  });
+}
+
 class GetStoredAndProductIdParams {
   String productID, storeID;
   GetStoredAndProductIdParams({
