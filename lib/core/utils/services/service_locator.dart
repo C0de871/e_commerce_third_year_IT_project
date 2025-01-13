@@ -5,6 +5,10 @@ import 'package:e_commerce/features/cart/domain/usecases/add_to_cart.dart';
 import 'package:e_commerce/features/cart/domain/usecases/clear_cart.dart';
 import 'package:e_commerce/features/cart/domain/usecases/delete_cart.dart';
 import 'package:e_commerce/features/cart/domain/usecases/get_size_cart.dart';
+import 'package:e_commerce/features/check_out/data/datasourses/check_out_remote_data_source.dart';
+import 'package:e_commerce/features/check_out/data/repositories/check_out_repository_impl.dart';
+import 'package:e_commerce/features/check_out/domain/repository/check_out_repository.dart';
+import 'package:e_commerce/features/check_out/domain/usecases/create_order.dart';
 import 'package:e_commerce/features/favorites/data/datasources/favorites_remote_data_source.dart';
 import 'package:e_commerce/features/favorites/data/repositories/favorites_repository_impl.dart';
 import 'package:e_commerce/features/favorites/data/services/product_favorite_service_impl.dart';
@@ -54,7 +58,8 @@ final getIt = GetIt.instance; // Singleton instance of GetIt
 
 void setupServicesLocator() {
   //!service:
-  getIt.registerLazySingleton<ProductFavoriteService>(() => ProductFavoriteServiceImpl());
+  getIt.registerLazySingleton<ProductFavoriteService>(
+      () => ProductFavoriteServiceImpl());
   getIt.registerLazySingleton<ModifyCartService>(() => ModifyCartService());
 
   //! Core
@@ -62,17 +67,27 @@ void setupServicesLocator() {
   getIt.registerLazySingleton<SecureStorageHelper>(() => SecureStorageHelper());
   getIt.registerLazySingleton<Dio>(() => Dio());
   getIt.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: getIt()));
-  getIt.registerLazySingleton<DataConnectionChecker>(() => DataConnectionChecker());
+  getIt.registerLazySingleton<DataConnectionChecker>(
+      () => DataConnectionChecker());
   getIt.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(getIt()));
 
   //! Data Sources
-  getIt.registerLazySingleton<UserRemoteDataSource>(() => UserRemoteDataSource(api: getIt(), cacheHelper: getIt()));
-  getIt.registerLazySingleton<UserLocalDataSource>(() => UserLocalDataSource(secureCache: getIt(), sharedPrefsCache: getIt()));
-  getIt.registerLazySingleton<ProductRemoteDataSource>(() => ProductRemoteDataSource(apiConsumer: getIt(), cacheHelper: getIt()));
-  getIt.registerLazySingleton<StoreRemoteDataSource>(() => StoreRemoteDataSource(api: getIt(), cacheHelper: getIt()));
-  getIt.registerLazySingleton<FavoritesRemoteDataSource>(() => FavoritesRemoteDataSource(cacheHelper: getIt(), api: getIt()));
-  getIt.registerLazySingleton<GetProductDetailsRemoteDataSource>(() => GetProductDetailsRemoteDataSource(cacheHelper: getIt(), api: getIt()));
-  getIt.registerLazySingleton<CartRemoteDataSource>(() => CartRemoteDataSource(api: getIt(), cacheHelper: getIt()));
+  getIt.registerLazySingleton<UserRemoteDataSource>(
+      () => UserRemoteDataSource(api: getIt(), cacheHelper: getIt()));
+  getIt.registerLazySingleton<UserLocalDataSource>(() =>
+      UserLocalDataSource(secureCache: getIt(), sharedPrefsCache: getIt()));
+  getIt.registerLazySingleton<ProductRemoteDataSource>(() =>
+      ProductRemoteDataSource(apiConsumer: getIt(), cacheHelper: getIt()));
+  getIt.registerLazySingleton<StoreRemoteDataSource>(
+      () => StoreRemoteDataSource(api: getIt(), cacheHelper: getIt()));
+  getIt.registerLazySingleton<FavoritesRemoteDataSource>(
+      () => FavoritesRemoteDataSource(cacheHelper: getIt(), api: getIt()));
+  getIt.registerLazySingleton<GetProductDetailsRemoteDataSource>(() =>
+      GetProductDetailsRemoteDataSource(cacheHelper: getIt(), api: getIt()));
+  getIt.registerLazySingleton<CartRemoteDataSource>(
+      () => CartRemoteDataSource(api: getIt(), cacheHelper: getIt()));
+  getIt.registerLazySingleton<CheckOutRemoteDataSource>(
+      () => CheckOutRemoteDataSource(api: getIt(), cacheHelper: getIt()));
 
   //! Repository
   getIt.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(
@@ -89,39 +104,64 @@ void setupServicesLocator() {
         network: getIt(),
         remoteDataSource: getIt(),
       ));
-  getIt.registerLazySingleton<FavoritesRepository>(() => FavoritesRepositoryImpl(
-        remoteDataSource: getIt(),
-        networkInfo: getIt(),
-      ));
-  getIt.registerLazySingleton<GetProductDetailsRepository>(() => GetProductDetailsRepositoryImpl(
-        remoteDataSource: getIt(),
-        networkInfo: getIt(),
-      ));
+  getIt
+      .registerLazySingleton<FavoritesRepository>(() => FavoritesRepositoryImpl(
+            remoteDataSource: getIt(),
+            networkInfo: getIt(),
+          ));
+  getIt.registerLazySingleton<GetProductDetailsRepository>(
+      () => GetProductDetailsRepositoryImpl(
+            remoteDataSource: getIt(),
+            networkInfo: getIt(),
+          ));
   getIt.registerLazySingleton<CartRepository>(() => CartRepositoryImpl(
+        networkInfo: getIt(),
+        remoteDataSource: getIt(),
+      ));
+  getIt.registerLazySingleton<CheckOutRepository>(() => CheckOutRepositoryImpl(
         networkInfo: getIt(),
         remoteDataSource: getIt(),
       ));
 
   //! Use Cases
-  getIt.registerLazySingleton<LoginUser>(() => LoginUser(userRepository: getIt()));
-  getIt.registerLazySingleton<SignUpUser>(() => SignUpUser(userRepository: getIt()));
-  getIt.registerLazySingleton<ResendOtp>(() => ResendOtp(userRepository: getIt()));
+  getIt.registerLazySingleton<LoginUser>(
+      () => LoginUser(userRepository: getIt()));
+  getIt.registerLazySingleton<SignUpUser>(
+      () => SignUpUser(userRepository: getIt()));
+  getIt.registerLazySingleton<ResendOtp>(
+      () => ResendOtp(userRepository: getIt()));
   getIt.registerLazySingleton<PostOtp>(() => PostOtp(userRepository: getIt()));
-  getIt.registerLazySingleton<DeleteCart>(() => DeleteCart(cartRepository: getIt()));
-  getIt.registerLazySingleton<ClearCart>(() => ClearCart(cartRepository: getIt()));
-  getIt.registerLazySingleton<GetSizeCart>(() => GetSizeCart(cartRepository: getIt()));
-  getIt.registerLazySingleton<GetAllProducts>(() => GetAllProducts(productRepository: getIt()));
-  getIt.registerLazySingleton<GetAllStores>(() => GetAllStores(storeRepository: getIt()));
-  getIt.registerLazySingleton<RefreshToken>(() => RefreshToken(userRepository: getIt()));
-  getIt.registerLazySingleton<ToggleFavOn>(() => ToggleFavOn(repository: getIt()));
-  getIt.registerLazySingleton<ToggleFavOff>(() => ToggleFavOff(repository: getIt()));
-  getIt.registerLazySingleton<GetProductDetails>(() => GetProductDetails(repository: getIt()));
+  getIt.registerLazySingleton<DeleteCart>(
+      () => DeleteCart(cartRepository: getIt()));
+  getIt.registerLazySingleton<ClearCart>(
+      () => ClearCart(cartRepository: getIt()));
+  getIt.registerLazySingleton<GetSizeCart>(
+      () => GetSizeCart(cartRepository: getIt()));
+  getIt.registerLazySingleton<GetAllProducts>(
+      () => GetAllProducts(productRepository: getIt()));
+  getIt.registerLazySingleton<GetAllStores>(
+      () => GetAllStores(storeRepository: getIt()));
+  getIt.registerLazySingleton<RefreshToken>(
+      () => RefreshToken(userRepository: getIt()));
+  getIt.registerLazySingleton<ToggleFavOn>(
+      () => ToggleFavOn(repository: getIt()));
+  getIt.registerLazySingleton<ToggleFavOff>(
+      () => ToggleFavOff(repository: getIt()));
+  getIt.registerLazySingleton<GetProductDetails>(
+      () => GetProductDetails(repository: getIt()));
   getIt.registerLazySingleton<GetCart>(() => GetCart(cartRepository: getIt()));
-  getIt.registerLazySingleton<ModifyCart>(() => ModifyCart(cartRepository: getIt()));
+  getIt.registerLazySingleton<ModifyCart>(
+      () => ModifyCart(cartRepository: getIt()));
   getIt.registerLazySingleton<AddToCart>(
-      () => AddToCart(cartRepository: getIt()));    
-  getIt.registerLazySingleton<GetLastUser>(() => GetLastUser(userRepository: getIt()));
-  getIt.registerLazySingleton<SetFirstLaunch>(() => SetFirstLaunch(userRepository: getIt()));
-  getIt.registerLazySingleton<IsFirstLaunch>(() => IsFirstLaunch(userRepository: getIt()));
-  getIt.registerLazySingleton<GetFavList>(() => GetFavList(favoritesRepository: getIt()));
+      () => AddToCart(cartRepository: getIt()));
+  getIt.registerLazySingleton<GetLastUser>(
+      () => GetLastUser(userRepository: getIt()));
+  getIt.registerLazySingleton<SetFirstLaunch>(
+      () => SetFirstLaunch(userRepository: getIt()));
+  getIt.registerLazySingleton<IsFirstLaunch>(
+      () => IsFirstLaunch(userRepository: getIt()));
+  getIt.registerLazySingleton<GetFavList>(
+      () => GetFavList(favoritesRepository: getIt()));
+  getIt.registerLazySingleton<CreateOrder>(
+      () => CreateOrder(checkOutRepository: getIt()));
 }
