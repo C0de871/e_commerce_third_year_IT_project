@@ -5,6 +5,8 @@ import 'package:e_commerce/features/cart/presentation/cubit/clear_cart_cubit.dar
 import 'package:e_commerce/features/cart/presentation/cubit/delete_cart_cubit.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/modify_cart_cubit.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/size_cart_cubit.dart';
+import 'package:e_commerce/features/check_out/presentation/check_cubit/check_out_cubit.dart';
+import 'package:e_commerce/features/check_out/presentation/check_out_screen/check_out_screen.dart';
 import 'package:e_commerce/features/home/presentation/HomeCubit/home_cubit.dart';
 import 'package:e_commerce/core/shared/screens/Navigation_cubit/navigation_bar_cubit.dart';
 import 'package:e_commerce/features/get_product_details/presentation/screens/product_details_screen.dart';
@@ -33,7 +35,7 @@ class AppRouter {
   ProductCubit? _productCubit;
   NavigationBarCubit? _navBarCubit;
   ToggleFavCubit? _toggleFavOnCubit;
-
+  CheckOutCubit? _checkOutCubit;
   //? <<======= cubits getter =======>>
   CartCubit? _cartCubit;
   ModifyCartCubit? _modifyCartCubit;
@@ -92,15 +94,15 @@ class AppRouter {
     return _sizeCartCubit!;
   }
 
-  // ClearCartCubit get clearCartCubit {
-  //   if (_clearCartCubit == null || _clearCartCubit!.isClosed) {
-  //     _clearCartCubit = ClearCartCubit();
-  //   }
-  //   _clearCartCubit?.stream.listen((_) {}, onDone: () {
-  //     _clearCartCubit = null; // Nullify the reference when closed
-  //   });
-  //   return _clearCartCubit!;
-  // }
+  CheckOutCubit get checkOutCubit {
+    if (_checkOutCubit == null || _checkOutCubit!.isClosed) {
+      _checkOutCubit = CheckOutCubit();
+    }
+    _checkOutCubit?.stream.listen((_) {}, onDone: () {
+      _checkOutCubit = null; // Nullify the reference when closed
+    });
+    return _checkOutCubit!;
+  }
   NavigationBarCubit get navBarCubit {
     if (_navBarCubit == null || _navBarCubit!.isClosed) {
       _navBarCubit = NavigationBarCubit();
@@ -183,6 +185,15 @@ class AppRouter {
       //         BlocProvider.value(value: cartCubit),
 
       //       ], child: const CartScreen()));
+//!check out screen :
+      case AppRoutes.checkOutScreen:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => BlocProvider(
+            create: (context) => checkOutCubit,
+            child: const CheckOutScreen(),
+          ),
+        );
 
       //!sign up auth route:
       case AppRoutes.signUpauthRoute:
