@@ -45,6 +45,7 @@ class _CartScreenState extends State<CartScreen> {
           } else if (state is CartSuccess) {
             return Column(
               children: [
+                Text("total: ${state.cart.totalPrice}"),
                 // قائمة المنتجات
                 Expanded(
                   child: Padding(
@@ -65,7 +66,8 @@ class _CartScreenState extends State<CartScreen> {
                                 color: Theme.of(context)
                                     .colorScheme
                                     .primaryContainer,
-                                borderRadius: BorderRadius.circular(padding4 * 3.5),
+                                borderRadius:
+                                    BorderRadius.circular(padding4 * 3.5),
                               ),
                               child: Row(
                                 children: [
@@ -75,7 +77,8 @@ class _CartScreenState extends State<CartScreen> {
                               ),
                             ),
                             onDismissed: (direction) {
-                              final deleteCubit = context.read<DeleteCartCubit>();
+                              final deleteCubit =
+                                  context.read<DeleteCartCubit>();
                               deleteCubit.addDeletedItem(
                                   cartItem.productId ?? 0,
                                   cartItem.storeId ?? 0);
@@ -87,7 +90,7 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ),
                 ),
-                // الأزرار الثلاثة في الأسفل
+
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -103,11 +106,22 @@ class _CartScreenState extends State<CartScreen> {
                       DefaultButton(
                         text: AppLocalizations.of(context)!.checkOut,
                         press: () {
-                          // Navigator.pushNamed(
-                          //   context,
-                          //   AppRoutes.checkOutScreen,
-                          //   arguments: state.cart.data,
-                          // );
+                          if (state is CartSuccess) {
+                            Navigator.pushNamed(
+                              context,
+                              AppRoutes.checkOutScreen,
+                              arguments: {
+                                ApiKey.data: state.cart.data,
+                                ApiKey.totalPrice: state.cart.totalPrice,
+                              },
+                            );
+                            // إنشاء الكائن المطلوب
+                          } else {
+                            // عرض رسالة إذا لم تكن البيانات جاهزة
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("there is any error")),
+                            );
+                          }
                         },
                         width: 100,
                       ),
