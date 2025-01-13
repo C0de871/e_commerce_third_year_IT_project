@@ -65,12 +65,18 @@
         "description": "Label for the button to view the store"
     },
     "price": "السعر",
-    "@price": {
+    "@price": { 
         "description": "Label for the product price"
     },
     "confirmDeletion": "تأكيد الحذف",
     "confirmModification" :"تأكيد التعديل",
-    "checkOut":"الذهاب للدفع",
-    "myProducts":": مشترياتي"
-
+    "checkOut":"الدفع",
+    "myProducts":": مشترياتي",
+    "name":":الاسم",
+    "order":"قم بالطلب",
+    "location":":العنوان",
+    "productsPrice":"سعر المنتجات",
+    "shippingfees":"تكلفة النقل",
+    "total":"السعر الكلي"
+    
 }

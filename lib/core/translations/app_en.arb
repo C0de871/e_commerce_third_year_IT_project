@@ -257,5 +257,30 @@
 "myProducts": "My Products:",
 "@myProducts": {
   "description": "My products appears in first line of check out screen"
+},
+"name": "Name:",
+"@name": {
+  "description": "word name in check out screen"
+},
+"order": "Order",
+"@order": {
+  "description": "word 'order' in default button"
+},
+"location": "Location:",
+"@location": {
+  "description": "word 'location' in check out screen"
+},
+"productsPrice": "Products price",
+"@productsPrice": {
+  "description": "word 'Products price' in default button"
+},
+"shippingfees": "Shipping fees",
+"@shippingfees": {
+  "description": "word 'shipping fees' in default button"
+},
+"total": "Total",
+"@total": {
+  "description": "word 'Total' in default button"
 }
+
 }
