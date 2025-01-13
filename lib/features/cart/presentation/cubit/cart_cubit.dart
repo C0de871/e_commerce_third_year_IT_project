@@ -62,7 +62,8 @@ class CartCubit extends Cubit<CartState> {
             (state as CartSuccess).cart.data!.map((subCartEntity) {
           if (subCartEntity.productId == value.productId &&
               subCartEntity.storeId == value.storeId) {
-            totalPrice += double.parse(subCartEntity.price!) * value.orderQuantity!;
+            totalPrice +=
+                double.parse(subCartEntity.price!) * value.orderQuantity!;
 
             SubCartEntity sub =
                 subCartEntity.copyWith(orderQuantity: value.orderQuantity);
@@ -76,16 +77,15 @@ class CartCubit extends Cubit<CartState> {
 
         CartEntity updatedCartEntity = (state as CartSuccess)
             .cart
-            .copyWith(data: updatedList, totalPrice: totalPrice.round());
+            .copyWith(data: updatedList, totalPrice: totalPrice);
         // log("finally :");
-for (var x in updatedCartEntity.data!) {
-  print("x value:${x.quantity}");
-}
-CartSuccess cart=CartSuccess(cart: updatedCartEntity);
-for (var y in cart.cart.data!) {
-  print("y value:${y.quantity}");
-  
-}
+        for (var x in updatedCartEntity.data!) {
+          print("x value:${x.quantity}");
+        }
+        CartSuccess cart = CartSuccess(cart: updatedCartEntity);
+        for (var y in cart.cart.data!) {
+          print("y value:${y.quantity}");
+        }
         print(updatedCartEntity.data);
         emit(cart);
       }
@@ -103,7 +103,7 @@ for (var y in cart.cart.data!) {
   void onChange(Change<CartState> change) {
     print("current :${change.currentState}");
     print("next :${change.nextState}");
-    print("is equal ${change.currentState==change.nextState}");
+    print("is equal ${change.currentState == change.nextState}");
     super.onChange(change);
   }
 }
