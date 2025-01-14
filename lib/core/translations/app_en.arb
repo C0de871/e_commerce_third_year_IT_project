@@ -234,15 +234,15 @@
   "@numberOfItem": {
     "description": "number of item in cart "
   },
-  "confirmDeletion" :  "Confirm deletion",
+  "confirmDeletion": "Confirm deletion",
   "@confirmDeletion": {
     "description": "title of button that confirm the deletion"
-},
-"confirmModification" :  "Confirm Modification",
+  },
+  "confirmModification": "Confirm Modification",
   "@confirmModification": {
     "description": "title of button that confirm the modifition"
-},
-"checkOut" :  "Check Out",
+  },
+  "checkOut": "Check Out",
   "@checkOut": {
     "description": "title of button that go to check out screen"
   },
@@ -254,10 +254,30 @@
   "@price": {
     "description": "Label for the product price"
   },
-"myProducts": "My Products:",
-"@myProducts": {
-  "description": "My products appears in first line of check out screen"
-},
+  "myProducts": "My Products:",
+  "@myProducts": {
+    "description": "My products appears in first line of check out screen"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Title for the settings screen."
+  },
+  "english": "English",
+  "@english": {
+    "description": "Label for selecting the English language."
+  },
+  "arabic": "Arabic",
+  "@arabic": {
+    "description": "Label for selecting the Arabic language."
+  },
+  "systemDefault": "System Default",
+  "@systemDefault": {
+    "description": "Label for selecting the system default language option."
+  },
+  "failed": "Failed",
+  "@failed": {
+    "description": "Fallback text shown when an error occurs."
+  },
 "name": "Name:",
 "@name": {
   "description": "word name in check out screen"

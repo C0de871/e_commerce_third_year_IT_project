@@ -5,11 +5,8 @@ import 'package:e_commerce/core/databases/params/params.dart';
 import 'package:e_commerce/core/shared/data/models/message_model.dart';
 import 'package:e_commerce/features/cart/data/models/add_to_cart_model.dart';
 import 'package:e_commerce/features/cart/data/models/cart_model.dart';
-import 'package:e_commerce/features/cart/data/models/modify_cart_model.dart';
 import 'package:e_commerce/features/cart/data/models/size_cart_model.dart';
 import 'package:e_commerce/features/cart/domain/entites/cart_entity.dart';
-import 'package:e_commerce/features/cart/domain/entites/modify_cart/modify_cart.dart';
-import 'package:e_commerce/features/cart/domain/usecases/modify_cart.dart';
 
 class CartRemoteDataSource {
   final ApiConsumer api;
@@ -98,7 +95,6 @@ class CartRemoteDataSource {
     Map<String, dynamic> headers = {
       ApiKey.authorization: accessToken,
     };
-    bool isLoggedIn = (accessToken != null) ? true : false;
 
     Map<String, dynamic> extra = {
       ApiKey.requiredAuth: true,

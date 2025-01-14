@@ -1,10 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
 import 'package:e_commerce/features/favorites/data/models/get_fav_list_model/fav_product_model.dart';
-import 'package:e_commerce/features/favorites/domain/entities/get_fav_list_entity/fav_product_entity.dart';
-import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/utils/services/service_locator.dart';
 import '../../../domain/entities/get_fav_list_entity/get_fav_list_entity.dart';

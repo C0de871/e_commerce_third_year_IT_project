@@ -1,21 +1,19 @@
 import 'dart:convert';
 
+import '../../../../core/databases/api/end_points.dart';
 import '../../domain/entities/sub_image_entity.dart';
 
 class SubImageModel extends SubImageEntity {
-  int? id;
-  String? image;
-
-  SubImageModel({this.id, this.image});
+  SubImageModel({super.id, super.image});
 
   factory SubImageModel.fromMap(Map<String, dynamic> data) => SubImageModel(
-        id: data['id'] as int?,
-        image: data['image'] as String?,
+        id: data[ApiKey.id] as int?,
+        image: data[ApiKey.image] as String?,
       );
 
   Map<String, dynamic> toMap() => {
-        'id': id,
-        'image': image,
+        ApiKey.id: id,
+        ApiKey.image: image,
       };
 
   /// `dart:convert`

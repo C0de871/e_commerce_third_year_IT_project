@@ -1,7 +1,6 @@
 import 'package:e_commerce/core/Routes/app_routes.dart';
 import 'package:e_commerce/core/shared/screens/page_view_screen.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/cart_cubit.dart';
-import 'package:e_commerce/features/cart/presentation/cubit/clear_cart_cubit.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/delete_cart_cubit.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/modify_cart_cubit.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/size_cart_cubit.dart';
@@ -14,18 +13,21 @@ import 'package:e_commerce/features/products/presentation/all_products/products_
 import 'package:e_commerce/features/products/presentation/cubit/product_cubit/product_cubit.dart';
 import 'package:e_commerce/features/stores/presentation/all_stores/stores_list.dart';
 import 'package:e_commerce/features/stores/presentation/cubit/store_cubit.dart';
-import 'package:e_commerce/features/user/presentation/OTP/otp_screen.dart';
+import 'package:e_commerce/features/auth/presentation/OTP/otp_screen.dart';
 import 'package:e_commerce/features/cart/presentation/cart_screen/cart_screen.dart';
-import 'package:e_commerce/features/user/presentation/cubit/user_cubit.dart';
-import 'package:e_commerce/features/user/presentation/login_screen/log_in_screen.dart';
-import 'package:e_commerce/features/user/presentation/login_success_screen/login_success_screen.dart';
-import 'package:e_commerce/features/user/presentation/splash%20screen/splash_screen.dart';
+import 'package:e_commerce/features/auth/presentation/cubit/user_cubit.dart';
+import 'package:e_commerce/features/auth/presentation/login_screen/log_in_screen.dart';
+import 'package:e_commerce/features/auth/presentation/login_success_screen/login_success_screen.dart';
+import 'package:e_commerce/features/auth/presentation/splash%20screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../features/favorites/presentation/cubit/getFavList/get_fav_list_cubit.dart';
 import '../../features/favorites/presentation/cubit/toggle_fav_cubit.dart';
+import '../../features/favorites/presentation/screens/fav_list_screen.dart';
 import '../../features/get_product_details/presentation/cubit/get_product_details_cubit.dart';
-import '../../features/user/presentation/complete_profile_screen/complete_profile_screen.dart';
-import '../../features/user/presentation/sign up auth screen/sign_up_auth_screen.dart';
+import '../../features/auth/presentation/complete_profile_screen/complete_profile_screen.dart';
+import '../../features/auth/presentation/sign up auth screen/sign_up_auth_screen.dart';
+import '../../features/user/presentation/account_details_screen.dart';
 
 class AppRouter {
   //? <======= cubits declration =======>
@@ -147,16 +149,6 @@ class AppRouter {
     return _homeCubit!;
   }
 
-  // ToggleFavCubit get toggleFavOnCubit {
-  //   if (_toggleFavOnCubit == null || _toggleFavOnCubit!.isClosed) {
-  //     _toggleFavOnCubit = ToggleFavCubit();
-  //   }
-  //   _toggleFavOnCubit!.stream.listen((_) {}, onDone: () {
-  //     _toggleFavOnCubit = null; // Nullify the reference when closed
-  //   });
-  //   return _toggleFavOnCubit!;
-  // }
-
   Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       //! cart route:
@@ -241,6 +233,25 @@ class AppRouter {
             create: (context) => userCubit,
             child: const LoginScreen(),
           ),
+        );
+
+      case AppRoutes.favoritesRoute:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => GetProductDetailsCubit.instance),
+              BlocProvider(create: (context) => ToggleFavCubit.instance),
+              BlocProvider(create: (context) => GetFavListCubit.instance..getFavList()),
+            ],
+            child: FavListScreen(),
+          ),
+        );
+
+      case AppRoutes.accountDetails:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const AccountDetailsScreen(),
         );
 
       //! home route:

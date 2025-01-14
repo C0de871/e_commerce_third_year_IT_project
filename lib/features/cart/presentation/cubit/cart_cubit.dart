@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
 import 'package:e_commerce/core/shared/domain/entities/message_entety.dart';
 import 'package:e_commerce/core/utils/services/service_locator.dart';
 import 'package:e_commerce/features/cart/data/serevice/modify_cart_service.dart';
@@ -9,6 +8,7 @@ import 'package:e_commerce/features/cart/domain/entites/cart_entity.dart';
 import 'package:e_commerce/features/cart/domain/entites/cart_entity/sub_cart_entity.dart';
 import 'package:e_commerce/features/cart/domain/usecases/clear_cart.dart';
 import 'package:e_commerce/features/cart/domain/usecases/get_cart.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'cart_state.dart';
 

@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
 import 'package:e_commerce/core/utils/services/service_locator.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 import '../../../../core/databases/params/params.dart';
 import '../../../favorites/domain/service/product_favorite_service.dart';

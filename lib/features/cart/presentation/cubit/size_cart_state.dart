@@ -1,5 +1,4 @@
 import 'package:e_commerce/features/cart/domain/entites/size_cart_entity.dart';
-import 'package:e_commerce/features/cart/presentation/cubit/cart_cubit.dart';
 
 class SizeCartState {}
 class SizeInitial extends SizeCartState {}

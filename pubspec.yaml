@@ -8,6 +8,8 @@ environment:
   sdk: ^3.5.3
 dependencies:
   anim_search_bar: ^2.0.3
+  animated_toggle_switch: ^0.8.4
+  bloc: ^8.1.4
   cached_network_image: ^3.4.1
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1

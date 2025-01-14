@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:e_commerce/features/cart/domain/entites/cart_entity/sub_cart_entity.dart';
 

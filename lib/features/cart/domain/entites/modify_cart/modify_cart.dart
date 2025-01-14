@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 
 class ModifyCartEntity {
   String? message;

@@ -1,21 +1,15 @@
-import 'package:e_commerce/core/Routes/app_routes.dart';
 import 'package:e_commerce/core/constants/app_images.dart';
-import 'package:e_commerce/core/databases/api/end_points.dart';
 import 'package:e_commerce/core/shared/widgets/defualt_button.dart';
 
 import 'package:e_commerce/core/utils/constants/app_numbers.dart';
-import 'package:e_commerce/features/cart/data/models/cart_model.dart';
-import 'package:e_commerce/features/cart/domain/entites/cart_entity.dart';
 import 'package:e_commerce/features/cart/presentation/cart_screen/Widgets/cart_item_card.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/cart_cubit.dart';
-import 'package:e_commerce/features/cart/presentation/cubit/clear_cart_cubit.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/delete_cart_cubit.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/modify_cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:svg_flutter/svg.dart';
-import 'package:e_commerce/core/translations/l10n.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});

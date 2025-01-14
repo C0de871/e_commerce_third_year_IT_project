@@ -1,18 +1,11 @@
-import 'dart:developer';
 
-import 'package:e_commerce/core/Routes/app_router.dart';
-import 'package:e_commerce/core/constants/app_images.dart';
-import 'package:e_commerce/core/utils/constants/app_numbers.dart';
-import 'package:e_commerce/features/cart/data/models/cart.dart';
-import 'package:e_commerce/features/cart/data/models/sub_cart/sub_cart_model.dart';
 import 'package:e_commerce/features/cart/domain/entites/cart_entity/sub_cart_entity.dart';
-import 'package:e_commerce/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/modify_cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartItemCard extends StatelessWidget {
-  CartItemCard({super.key, required this.cartItem});
+  const CartItemCard({super.key, required this.cartItem});
   final SubCartEntity cartItem;
   final bool fav = false;
   final message = "not available now";

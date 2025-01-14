@@ -27,27 +27,32 @@ import 'package:e_commerce/features/products/data/dataSources/product_remote_dat
 import 'package:e_commerce/features/products/data/repository/product_repository_impl.dart';
 import 'package:e_commerce/features/products/domain/repository/product_repository.dart';
 import 'package:e_commerce/features/products/domain/use%20cases/get_all_products.dart';
+import 'package:e_commerce/features/settings/data/data_sources/lang_local_data_source.dart';
+import 'package:e_commerce/features/settings/data/repository/language_repository_impl.dart';
+import 'package:e_commerce/features/settings/domain/repository/language_repository.dart';
+import 'package:e_commerce/features/settings/domain/usecases/retrieve_user_lang.dart';
+import 'package:e_commerce/features/settings/domain/usecases/save_lang.dart';
 import 'package:e_commerce/features/stores/data/dataSources/store_remote_data_source.dart';
 import 'package:e_commerce/features/stores/domain/repository/store_repository.dart';
 import 'package:e_commerce/features/stores/domain/use%20cases/get_all_stores.dart';
-import 'package:e_commerce/features/user/data/datasourses/user_local_data_source.dart';
-import 'package:e_commerce/features/user/data/datasourses/user_remote_data_source.dart';
-import 'package:e_commerce/features/user/data/repositiries/user_repository_impl.dart';
-import 'package:e_commerce/features/user/domain/repository/user_repository.dart';
-import 'package:e_commerce/features/user/domain/usecases/get_last_user.dart';
-import 'package:e_commerce/features/user/domain/usecases/login_user.dart';
-import 'package:e_commerce/features/user/domain/usecases/post_otp.dart';
-import 'package:e_commerce/features/user/domain/usecases/refresh_token.dart';
-import 'package:e_commerce/features/user/domain/usecases/resend_otp.dart';
-import 'package:e_commerce/features/user/domain/usecases/sign_up_user.dart';
+import 'package:e_commerce/features/auth/data/datasourses/user_local_data_source.dart';
+import 'package:e_commerce/features/auth/data/datasourses/user_remote_data_source.dart';
+import 'package:e_commerce/features/auth/data/repositiries/user_repository_impl.dart';
+import 'package:e_commerce/features/auth/domain/repository/user_repository.dart';
+import 'package:e_commerce/features/auth/domain/usecases/get_last_user.dart';
+import 'package:e_commerce/features/auth/domain/usecases/login_user.dart';
+import 'package:e_commerce/features/auth/domain/usecases/post_otp.dart';
+import 'package:e_commerce/features/auth/domain/usecases/refresh_token.dart';
+import 'package:e_commerce/features/auth/domain/usecases/resend_otp.dart';
+import 'package:e_commerce/features/auth/domain/usecases/sign_up_user.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../../features/favorites/domain/usecases/togge_fav_off.dart';
 import '../../../features/favorites/domain/usecases/toggle_fav_on.dart';
 import '../../../features/get_product_details/domain/use_cases/get_product_details_use_case.dart';
 import '../../../features/stores/data/repository/store_repository_impl.dart';
-import '../../../features/user/domain/usecases/is_first_launch.dart';
-import '../../../features/user/domain/usecases/set_first_launch.dart';
+import '../../../features/auth/domain/usecases/is_first_launch.dart';
+import '../../../features/auth/domain/usecases/set_first_launch.dart';
 import '../../databases/cache/secure_storage_helper.dart';
 import '../../databases/connection/network_info.dart';
 import '../../databases/api/api_consumer.dart';
@@ -88,6 +93,7 @@ void setupServicesLocator() {
       () => CartRemoteDataSource(api: getIt(), cacheHelper: getIt()));
   getIt.registerLazySingleton<CheckOutRemoteDataSource>(
       () => CheckOutRemoteDataSource(api: getIt(), cacheHelper: getIt()));
+  getIt.registerLazySingleton<LangLocalDataSource>(() => LangLocalDataSource(sharedPrefsHelper: getIt()));
 
   //! Repository
   getIt.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(
@@ -121,6 +127,9 @@ void setupServicesLocator() {
   getIt.registerLazySingleton<CheckOutRepository>(() => CheckOutRepositoryImpl(
         networkInfo: getIt(),
         remoteDataSource: getIt(),
+      ));
+  getIt.registerLazySingleton<LanguageRepository>(() => LanguageRepositoryImpl(
+        localDataSource: getIt(),
       ));
 
   //! Use Cases
@@ -164,4 +173,6 @@ void setupServicesLocator() {
       () => GetFavList(favoritesRepository: getIt()));
   getIt.registerLazySingleton<CreateOrder>(
       () => CreateOrder(checkOutRepository: getIt()));
+      getIt.registerLazySingleton<RetrieveUserLang>(() => RetrieveUserLang(languageRepository: getIt()));
+  getIt.registerLazySingleton<SaveLang>(() => SaveLang(languageRepository: getIt()));
 }
