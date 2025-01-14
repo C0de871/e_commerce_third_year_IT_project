@@ -104,6 +104,7 @@ class _CartScreenState extends State<CartScreen> {
                             Navigator.pushNamed(
                               context,
                               AppRoutes.checkOutScreen,
+
                               arguments: {
                                 ApiKey.data: state.cart.data,
                                 ApiKey.totalPrice: state.cart.totalPrice,
