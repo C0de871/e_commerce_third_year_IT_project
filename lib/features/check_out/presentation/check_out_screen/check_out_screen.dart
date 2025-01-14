@@ -1,15 +1,16 @@
 import 'package:e_commerce/core/databases/api/end_points.dart';
 import 'package:e_commerce/core/shared/widgets/defualt_button.dart';
+import 'package:e_commerce/features/auth/domain/entites/user_entities/user_entities.dart';
+import 'package:e_commerce/features/auth/presentation/cubit/get_last_user_cubit/get_last_user_cubit.dart';
 import 'package:e_commerce/features/cart/domain/entites/cart_entity.dart';
 import 'package:e_commerce/features/cart/domain/entites/cart_entity/sub_cart_entity.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:e_commerce/features/check_out/presentation/check_cubit/check_out_cubit.dart';
 import 'package:e_commerce/features/check_out/presentation/check_out_screen/one_product.dart';
-import 'package:e_commerce/features/user/domain/entites/user_entities/user_entities.dart';
-import 'package:e_commerce/features/user/presentation/cubit/get_last_user_cubit/get_last_user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class CheckOutScreen extends StatelessWidget {
   const CheckOutScreen({super.key});

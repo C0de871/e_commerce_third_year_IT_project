@@ -7,7 +7,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +19,7 @@ class SettingsScreen extends StatelessWidget {
           builder: (context, state) {
             if (state is CurrentLanguage) {
               return AnimatedToggleSwitch<String>.size(
-                 textDirection: TextDirection.ltr,
+                textDirection: TextDirection.ltr,
                   current: state.lang,
                   values: const ["en", Constant.deviceLang, 'ar'],
                   iconOpacity: 0.2,
