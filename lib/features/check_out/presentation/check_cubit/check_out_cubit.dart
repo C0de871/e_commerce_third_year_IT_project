@@ -3,7 +3,6 @@ import 'package:e_commerce/core/utils/services/service_locator.dart';
 import 'package:e_commerce/features/cart/domain/entites/cart_entity/sub_cart_entity.dart';
 import 'package:e_commerce/features/check_out/domain/usecases/create_order.dart';
 import 'package:e_commerce/features/check_out/presentation/check_cubit/check_out_state.dart';
-import 'package:e_commerce/features/user/domain/usecases/sign_up_user.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CheckOutCubit extends Cubit<CheckOutState> {
