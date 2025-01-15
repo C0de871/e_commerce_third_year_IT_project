@@ -75,7 +75,7 @@ checkIfLoggedInUser() async {
       await SecureStorageHelper().getData(key: CacheKey.accessToken);
   if (!userToken!.isNullOrEmpty()) {
     isLoggedInUser = true;
-    log(userToken!);
+    log(userToken);
   } else {
     isLoggedInUser = false;
   }

@@ -57,8 +57,6 @@ import '../../../features/stores/data/dataSources/store_remote_data_source.dart'
 import '../../../features/stores/data/repository/store_repository_impl.dart';
 import '../../../features/auth/domain/usecases/is_first_launch.dart';
 import '../../../features/auth/domain/usecases/set_first_launch.dart';
-import '../../../features/auth/domain/usecases/is_first_launch.dart';
-import '../../../features/auth/domain/usecases/set_first_launch.dart';
 import '../../../features/stores/domain/repository/store_repository.dart';
 import '../../../features/stores/domain/use cases/get_all_stores.dart';
 import '../../databases/cache/secure_storage_helper.dart';
