@@ -26,7 +26,7 @@ class EndPoints {
   static const String clearCart = "carts/delete-all";
   static const String getSizeCart = "carts/getSize";
   static const String createOrder = "orders/create";
-
+  static const String getOrder="orders";
 }
 
 class ApiKey {
@@ -90,7 +90,16 @@ class ApiKey {
   static String quantityInCart = "quantityInCart";
   static String totalPrice = "total_price";
   static String cartAmount = "cart_amount";
-  static String orderCount= "order_count";
+  static String orderCount = "order_count";
+  static String numberOfProducts = "number_of_products";
+  static String orderDate = "order_date";
+  static String orderReference = "order_reference";
+  static String status = "status";
+  static String orders = "orders";
+
+
+
+
 }
 
 class CacheKey {

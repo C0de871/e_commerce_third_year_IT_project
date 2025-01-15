@@ -23,6 +23,10 @@ import 'package:e_commerce/features/cart/data/repositories/cart_repository_impl.
 import 'package:e_commerce/features/cart/domain/repository/cart_repository.dart';
 import 'package:e_commerce/features/cart/domain/usecases/get_cart.dart';
 import 'package:e_commerce/features/cart/domain/usecases/modify_cart.dart';
+import 'package:e_commerce/features/order/data/datasourses/order_remote_data_source.dart';
+import 'package:e_commerce/features/order/data/repositories/order_repository_impl.dart';
+import 'package:e_commerce/features/order/domain/repository/order_repository.dart';
+import 'package:e_commerce/features/order/domain/usecases/get_order.dart';
 import 'package:e_commerce/features/products/data/dataSources/product_remote_data_source.dart';
 import 'package:e_commerce/features/products/data/repository/product_repository_impl.dart';
 import 'package:e_commerce/features/products/domain/repository/product_repository.dart';
@@ -110,7 +114,10 @@ void setupServicesLocator() {
       () => CartRemoteDataSource(api: getIt(), cacheHelper: getIt()));
   getIt.registerLazySingleton<CheckOutRemoteDataSource>(
       () => CheckOutRemoteDataSource(api: getIt(), cacheHelper: getIt()));
-  getIt.registerLazySingleton<LangLocalDataSource>(() => LangLocalDataSource(sharedPrefsHelper: getIt()));
+  getIt.registerLazySingleton<LangLocalDataSource>(
+      () => LangLocalDataSource(sharedPrefsHelper: getIt()));
+  getIt.registerLazySingleton<OrderRemoteDataSource>(
+      () => OrderRemoteDataSource(cacheHelper: getIt(), api: getIt()));      
 
   //! Repository
   getIt.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(
@@ -148,6 +155,11 @@ void setupServicesLocator() {
   getIt.registerLazySingleton<LanguageRepository>(() => LanguageRepositoryImpl(
         localDataSource: getIt(),
       ));
+      getIt.registerLazySingleton<OrderRepository>(() => OrderRepositoryImpl(
+        networkInfo: getIt(),
+        remoteDataSource: getIt(),
+      ));
+
 
   //! Use Cases
   getIt.registerLazySingleton<LoginUser>(
@@ -190,6 +202,10 @@ void setupServicesLocator() {
       () => GetFavList(favoritesRepository: getIt()));
   getIt.registerLazySingleton<CreateOrder>(
       () => CreateOrder(checkOutRepository: getIt()));
-      getIt.registerLazySingleton<RetrieveUserLang>(() => RetrieveUserLang(languageRepository: getIt()));
-  getIt.registerLazySingleton<SaveLang>(() => SaveLang(languageRepository: getIt()));
+  getIt.registerLazySingleton<RetrieveUserLang>(
+      () => RetrieveUserLang(languageRepository: getIt()));
+  getIt.registerLazySingleton<SaveLang>(
+      () => SaveLang(languageRepository: getIt()));
+  getIt.registerLazySingleton<GetOrder>(
+      () => GetOrder(orderRepository: getIt()));
 }

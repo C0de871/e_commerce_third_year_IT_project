@@ -13,5 +13,5 @@ class AppRoutes {
   static const String checkOutScreen = "/check out screen";
   static const String favoritesRoute = "/favorites";
   static const String accountDetails = "/account_details";
-  
+  static const String orderScreen="/order screen";
 }

@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:e_commerce/core/utils/constants/app_numbers.dart';
 import 'package:e_commerce/features/auth/domain/entites/user_entities/user_entities.dart';
 import 'package:e_commerce/features/auth/presentation/cubit/get_last_user_cubit/get_last_user_cubit.dart';
+import 'package:e_commerce/features/order/presentation/check_cubit/get_order_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,7 +48,8 @@ class ProfileScreen extends StatelessWidget {
                           ? Hero(
                               tag: "placeHolder picture",
                               child: const CircleAvatar(
-                                backgroundImage: AssetImage("assets/images/images.png"),
+                                backgroundImage:
+                                    AssetImage("assets/images/images.png"),
                                 radius: 100,
                               ),
                             )
@@ -64,11 +66,13 @@ class ProfileScreen extends StatelessWidget {
                         width: padding4 * 4,
                       ),
                       Hero(
-
                         tag: "profile name",
                         child: Text(
                           "${user.subUserEntity!.firstName} ${user.subUserEntity!.lastName}",
-                          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium!
+                              .copyWith(
                                 color: Theme.of(context).colorScheme.primary,
                               ),
                         ),
@@ -107,14 +111,17 @@ class ProfileScreen extends StatelessWidget {
                             SizedBox(
                               width: MediaQuery.sizeOf(context).width / 2,
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Card1(
                                     title: "Account",
                                     description: "View Your Profile",
                                     icon: Icons.person,
-                                    forgroundGroundColor: AppColors.cardFGLightYellow,
-                                    backGroundColor: AppColors.cardBGLightYellow,
+                                    forgroundGroundColor:
+                                        AppColors.cardFGLightYellow,
+                                    backGroundColor:
+                                        AppColors.cardBGLightYellow,
                                     onTap: () {
                                       Navigator.of(context).pushNamed(
                                         AppRoutes.accountDetails,
@@ -129,7 +136,8 @@ class ProfileScreen extends StatelessWidget {
                                     description: "My favorites",
                                     icon: Icons.favorite,
                                     backGroundColor: AppColors.cardBGLightPink,
-                                    forgroundGroundColor: AppColors.cardFGLightPink,
+                                    forgroundGroundColor:
+                                        AppColors.cardFGLightPink,
                                     onTap: () {
                                       Navigator.of(context).pushNamed(
                                         AppRoutes.favoritesRoute,
@@ -148,8 +156,11 @@ class ProfileScreen extends StatelessWidget {
                                 description: "MY orders",
                                 icon: Icons.restaurant,
                                 backGroundColor: AppColors.cardBGLightPurple,
-                                forgroundGroundColor: AppColors.cardFGLightPurple,
-                                onTap: () {},
+                                forgroundGroundColor:
+                                    AppColors.cardFGLightPurple,
+                                onTap: () {
+                                  Navigator.pushNamed(context, AppRoutes.orderScreen);
+                                },
                               ),
                             ),
                           ],
@@ -226,7 +237,11 @@ class Card1 extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CardTitle(backGroundColor: backGroundColor, icon: icon, forgroundGroundColor: forgroundGroundColor, title: title),
+              CardTitle(
+                  backGroundColor: backGroundColor,
+                  icon: icon,
+                  forgroundGroundColor: forgroundGroundColor,
+                  title: title),
               SizedBox(
                 height: padding4 * 2,
               ),

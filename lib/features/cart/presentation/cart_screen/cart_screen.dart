@@ -4,6 +4,7 @@ import 'package:e_commerce/core/databases/api/end_points.dart';
 import 'package:e_commerce/core/shared/widgets/defualt_button.dart';
 
 import 'package:e_commerce/core/utils/constants/app_numbers.dart';
+import 'package:e_commerce/features/cart/domain/entites/cart_entity.dart';
 import 'package:e_commerce/features/cart/presentation/cart_screen/Widgets/cart_item_card.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/delete_cart_cubit.dart';
@@ -17,6 +18,25 @@ import 'package:svg_flutter/svg.dart';
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
 
+CartEntity _filterCartEntity(CartEntity cart) {
+    final filteredData = cart.data
+        ?.where((item) => item.message == "Available now")
+        .toList();
+
+    double totalPrice = 0.0;
+    if (filteredData != null) {
+      for (var item in filteredData) {
+        final price = double.tryParse(item.price ?? '0') ?? 0.0;
+        final quantity = item.orderQuantity ?? 0;
+        totalPrice += price * quantity;
+      }
+    }
+
+    return cart.copyWith(
+      data: filteredData,
+      totalPrice: totalPrice,
+    );
+  }
   @override
   State<CartScreen> createState() => _CartScreenState();
 }
@@ -104,10 +124,10 @@ class _CartScreenState extends State<CartScreen> {
                         text: AppLocalizations.of(context)!.checkOut,
                         press: () {
                           if (state is CartSuccess) {
+                            // context.read<CartCubit>().filterCart();
                             Navigator.pushNamed(
                               context,
                               AppRoutes.checkOutScreen,
-
                               arguments: {
                                 ApiKey.data: state.cart.data,
                                 ApiKey.totalPrice: state.cart.totalPrice,
@@ -153,8 +173,8 @@ AppBar buildAppBar(BuildContext context) {
         Text(
           AppLocalizations.of(context)!.yourCart,
           style: Theme.of(context).textTheme.displaySmall?.copyWith(
-            fontFamily: GoogleFonts.cairo().fontFamily,
-          ),
+                fontFamily: GoogleFonts.cairo().fontFamily,
+              ),
         ),
       ],
     ),
@@ -168,4 +188,5 @@ AppBar buildAppBar(BuildContext context) {
       ),
     ],
   );
+  
 }
