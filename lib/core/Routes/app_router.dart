@@ -1,9 +1,13 @@
+
+
 import 'package:e_commerce/core/Routes/app_routes.dart';
 import 'package:e_commerce/core/shared/screens/page_view_screen.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/delete_cart_cubit.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/modify_cart_cubit.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/size_cart_cubit.dart';
+import 'package:e_commerce/features/get_store_details/presentation/cubit/show_store_cubit.dart';
+import 'package:e_commerce/features/get_store_details/presentation/screens/store_details_screen.dart';
 import 'package:e_commerce/features/home/presentation/HomeCubit/home_cubit.dart';
 import 'package:e_commerce/core/shared/screens/Navigation_cubit/navigation_bar_cubit.dart';
 import 'package:e_commerce/features/get_product_details/presentation/screens/product_details_screen.dart';
@@ -228,11 +232,9 @@ class AppRouter {
           settings: settings,
           builder: (_) => MultiBlocProvider(
             providers: [
-              BlocProvider(
-                  create: (context) => GetProductDetailsCubit.instance),
+              BlocProvider(create: (context) => GetProductDetailsCubit.instance),
               BlocProvider(create: (context) => ToggleFavCubit.instance),
-              BlocProvider(
-                  create: (context) => GetFavListCubit.instance..getFavList()),
+              BlocProvider(create: (context) => GetFavListCubit.instance..getFavList()),
             ],
             child: FavListScreen(),
           ),
@@ -316,12 +318,25 @@ class AppRouter {
               BlocProvider(
                 create: (context) => StoreCubit()..getAllStores(),
               ),
-              // BlocProvider.value(
-              //   value: GetProductDetailsCubit.instance,
-              // )
             ],
             child: StoreList(),
           ),
+        );
+
+      case AppRoutes.storeDetailsRoute:
+        final storeID = settings.arguments as String;
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) {
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider(create: (context) => GetProductDetailsCubit.instance),
+                BlocProvider(create: (context) => ToggleFavCubit.instance),
+                BlocProvider(create: (context) => ShowStoreCubit()..showStoreTrigger(storeID: storeID)),
+              ],
+              child: const StoreDetailsScreen(),
+            );
+          },
         );
 
       //!default route:

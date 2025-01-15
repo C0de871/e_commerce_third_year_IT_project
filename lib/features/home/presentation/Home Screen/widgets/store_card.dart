@@ -6,6 +6,7 @@ import 'package:e_commerce/features/stores/presentation/cubit/store_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/Routes/app_routes.dart';
 import '../../../../../core/utils/constants/app_numbers.dart';
 
 class StoreCard extends StatelessWidget {
@@ -30,6 +31,7 @@ class StoreCard extends StatelessWidget {
                 image: storeEntity!.imageUrl,
                 storeName: storeEntity!.name,
                 discreption: storeEntity!.description,
+                storeID: storeEntity!.id.toString(),
               );
       },
     );
@@ -42,37 +44,46 @@ class StoreCardLoaded extends StatelessWidget {
     required this.image,
     required this.storeName,
     required this.discreption,
+    required this.storeID,
   });
 
   final String image;
   final String storeName;
-  final String discreption;
+  final String discreption, storeID;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 242,
-      height: 100,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Stack(
-          children: [
-            CachedNetworkImage(
-              imageUrl: image,
-              imageBuilder: (context, imageProvider) => Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).pushNamed(
+          AppRoutes.storeDetailsRoute,
+          arguments: storeID,
+        );
+      },
+      child: SizedBox(
+        width: 242,
+        height: 100,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Stack(
+            children: [
+              CachedNetworkImage(
+                imageUrl: image,
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
-            ),
-            StorePreview(
-              storeName: storeName,
-              discreption: discreption,
-            ),
-          ],
+              StorePreview(
+                storeName: storeName,
+                discreption: discreption,
+              ),
+            ],
+          ),
         ),
       ),
     );
