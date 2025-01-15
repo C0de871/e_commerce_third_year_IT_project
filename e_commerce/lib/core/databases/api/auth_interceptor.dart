@@ -1,13 +1,15 @@
 import 'dart:developer';
 
+
+
 import 'package:dio/dio.dart';
-import 'package:e_commerce/core/databases/api/dio_consumer.dart';
-import 'package:e_commerce/core/databases/api/end_points.dart';
-import 'package:e_commerce/core/databases/cache/secure_storage_helper.dart';
-import 'package:e_commerce/core/databases/errors/expentions.dart';
-import 'package:e_commerce/core/utils/services/service_locator.dart';
 
 import '../../../features/auth/data/models/refresh_token/refresh_token_model.dart';
+import '../../utils/services/service_locator.dart';
+import '../cache/secure_storage_helper.dart';
+import '../errors/expentions.dart';
+import 'dio_consumer.dart';
+import 'end_points.dart';
 
 class AuthInterceptor extends Interceptor {
   final DioConsumer dioConsumer;
@@ -43,6 +45,7 @@ class AuthInterceptor extends Interceptor {
             "Bearer ${success.refreshTokenDataEntity.accessToken}";
         _retryRequest(options, handler, dioConsumer);
       } on DioException catch (e) {
+        
         handleDioException(e);
       }
     } else {

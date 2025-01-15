@@ -1,4 +1,6 @@
-import 'package:e_commerce/core/databases/api/end_points.dart';
+
+
+import '../api/end_points.dart';
 
 class ErrorModel {
   final int status;

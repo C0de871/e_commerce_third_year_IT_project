@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+
+
 import 'package:dio/dio.dart';
 import 'package:e_commerce/core/helper/extensions.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +73,7 @@ class RouteObserverService extends NavigatorObserver {
 checkIfLoggedInUser() async {
   String? userToken =
       await SecureStorageHelper().getData(key: CacheKey.accessToken);
-  if (!userToken.isNullOrEmpty()) {
+  if (!userToken!.isNullOrEmpty()) {
     isLoggedInUser = true;
     log(userToken!);
   } else {

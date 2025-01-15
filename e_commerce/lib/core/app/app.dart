@@ -1,17 +1,18 @@
-import 'package:e_commerce/features/auth/presentation/cubit/check_first_launch/check_first_launch_cubit.dart';
-import 'package:e_commerce/features/auth/presentation/cubit/get_last_user_cubit/get_last_user_cubit.dart';
-import 'package:e_commerce/features/settings/presentation/cubit/language_cubit.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'package:e_commerce/core/theme/app_theme.dart';
-
+import '../../features/auth/presentation/cubit/check_first_launch/check_first_launch_cubit.dart';
+import '../../features/auth/presentation/cubit/get_last_user_cubit/get_last_user_cubit.dart';
 import '../../features/auth/presentation/loading_screen/loading_screen.dart';
+import '../../features/settings/presentation/cubit/language_cubit.dart';
 import '../Routes/app_router.dart';
 import '../helper/app_functions.dart';
+import '../theme/app_theme.dart';
 import '../translations/l10n.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

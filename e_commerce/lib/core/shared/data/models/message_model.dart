@@ -1,5 +1,7 @@
-import 'package:e_commerce/core/databases/api/end_points.dart';
-import 'package:e_commerce/core/shared/domain/entities/message_entety.dart';
+
+
+import '../../../databases/api/end_points.dart';
+import '../../domain/entities/message_entety.dart';
 
 class MessageModel extends MessageEntity {
   MessageModel({required super.message});

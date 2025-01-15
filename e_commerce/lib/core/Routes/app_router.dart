@@ -1,35 +1,21 @@
 
-
-import 'package:e_commerce/core/Routes/app_routes.dart';
-import 'package:e_commerce/core/shared/screens/page_view_screen.dart';
-import 'package:e_commerce/features/cart/presentation/cubit/cart_cubit.dart';
-import 'package:e_commerce/features/cart/presentation/cubit/delete_cart_cubit.dart';
-import 'package:e_commerce/features/cart/presentation/cubit/modify_cart_cubit.dart';
-import 'package:e_commerce/features/cart/presentation/cubit/size_cart_cubit.dart';
 import 'package:e_commerce/features/get_store_details/presentation/cubit/show_store_cubit.dart';
-import 'package:e_commerce/features/get_store_details/presentation/screens/store_details_screen.dart';
-import 'package:e_commerce/features/check_out/presentation/check_cubit/check_out_cubit.dart';
-import 'package:e_commerce/features/check_out/presentation/check_out_screen/check_out_screen.dart';
-import 'package:e_commerce/features/home/presentation/HomeCubit/home_cubit.dart';
-import 'package:e_commerce/core/shared/screens/Navigation_cubit/navigation_bar_cubit.dart';
-import 'package:e_commerce/features/get_product_details/presentation/screens/product_details_screen.dart';
-import 'package:e_commerce/features/products/presentation/all_products/products_list.dart';
-import 'package:e_commerce/features/products/presentation/cubit/product_cubit/product_cubit.dart';
-import 'package:e_commerce/features/stores/presentation/all_stores/stores_list.dart';
-import 'package:e_commerce/features/stores/presentation/cubit/store_cubit.dart';
-import 'package:e_commerce/features/auth/presentation/OTP/otp_screen.dart';
-import 'package:e_commerce/features/auth/presentation/OTP/otp_screen.dart';
-import 'package:e_commerce/features/cart/presentation/cart_screen/cart_screen.dart';
-import 'package:e_commerce/features/auth/presentation/cubit/user_cubit.dart';
-import 'package:e_commerce/features/auth/presentation/login_screen/log_in_screen.dart';
-import 'package:e_commerce/features/auth/presentation/login_success_screen/login_success_screen.dart';
-import 'package:e_commerce/features/auth/presentation/splash%20screen/splash_screen.dart';
-import 'package:e_commerce/features/auth/presentation/cubit/user_cubit.dart';
-import 'package:e_commerce/features/auth/presentation/login_screen/log_in_screen.dart';
-import 'package:e_commerce/features/auth/presentation/login_success_screen/login_success_screen.dart';
-import 'package:e_commerce/features/auth/presentation/splash%20screen/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../features/auth/presentation/OTP/otp_screen.dart';
+import '../../features/auth/presentation/cubit/user_cubit.dart';
+import '../../features/auth/presentation/login_screen/log_in_screen.dart';
+import '../../features/auth/presentation/login_success_screen/login_success_screen.dart';
+import '../../features/auth/presentation/splash screen/splash_screen.dart';
+import '../../features/cart/presentation/cart_screen/cart_screen.dart';
+import '../../features/cart/presentation/cubit/cart_cubit.dart';
+import '../../features/cart/presentation/cubit/delete_cart_cubit.dart';
+import '../../features/cart/presentation/cubit/modify_cart_cubit.dart';
+import '../../features/cart/presentation/cubit/size_cart_cubit.dart';
+import '../../features/check_out/presentation/check_cubit/check_out_cubit.dart';
+import '../../features/check_out/presentation/check_out_screen/check_out_screen.dart';
 import '../../features/favorites/presentation/cubit/getFavList/get_fav_list_cubit.dart';
 import '../../features/favorites/presentation/cubit/getFavList/get_fav_list_cubit.dart';
 import '../../features/favorites/presentation/cubit/toggle_fav_cubit.dart';
@@ -38,11 +24,22 @@ import '../../features/favorites/presentation/screens/fav_list_screen.dart';
 import '../../features/get_product_details/presentation/cubit/get_product_details_cubit.dart';
 import '../../features/auth/presentation/complete_profile_screen/complete_profile_screen.dart';
 import '../../features/auth/presentation/sign up auth screen/sign_up_auth_screen.dart';
+import '../../features/get_product_details/presentation/screens/product_details_screen.dart';
+import '../../features/get_store_details/presentation/screens/store_details_screen.dart';
+import '../../features/home/presentation/HomeCubit/home_cubit.dart';
+import '../../features/order/presentation/check_cubit/get_order_cubit.dart';
+import '../../features/order/presentation/order_screen.dart';
+import '../../features/products/presentation/all_products/products_list.dart';
+import '../../features/products/presentation/cubit/product_cubit/product_cubit.dart';
+import '../../features/stores/presentation/all_stores/stores_list.dart';
+import '../../features/stores/presentation/cubit/store_cubit.dart';
 import '../../features/user/presentation/account_details_screen.dart';
 import '../../features/auth/presentation/complete_profile_screen/complete_profile_screen.dart';
 import '../../features/auth/presentation/sign up auth screen/sign_up_auth_screen.dart';
 import '../../features/user/presentation/account_details_screen.dart';
-
+import '../shared/screens/Navigation_cubit/navigation_bar_cubit.dart';
+import '../shared/screens/page_view_screen.dart';
+import 'app_routes.dart';
 class AppRouter {
   //? <======= cubits declration =======>
   UserCubit? _userCubit;
@@ -57,6 +54,7 @@ class AppRouter {
   ModifyCartCubit? _modifyCartCubit;
   DeleteCartCubit? _deleteCartCubit;
   SizeCartCubit? _sizeCartCubit;
+  GetOrderCubit? _getOrderCubit;
   // ClearCartCubit? _clearCartCubit;
 
   UserCubit get userCubit {
@@ -67,6 +65,16 @@ class AppRouter {
       _userCubit = null; // Nullify the reference when closed
     });
     return _userCubit!;
+  }
+GetOrderCubit get getOrderCubit {
+    if (_getOrderCubit == null || _getOrderCubit!.isClosed) {
+      _getOrderCubit = GetOrderCubit();
+      // log("cart created");
+    }
+    _getOrderCubit?.stream.listen((_) {}, onDone: () {
+      _getOrderCubit = null; // Nullify the reference when closed
+    });
+    return _getOrderCubit!;
   }
 
   CartCubit get cartCubit {
@@ -119,6 +127,7 @@ class AppRouter {
     });
     return _checkOutCubit!;
   }
+
   NavigationBarCubit get navBarCubit {
     if (_navBarCubit == null || _navBarCubit!.isClosed) {
       _navBarCubit = NavigationBarCubit();
@@ -191,6 +200,16 @@ class AppRouter {
       //         BlocProvider.value(value: cartCubit),
 
       //       ], child: const CartScreen()));
+//!order screen:
+case AppRoutes.orderScreen:
+      return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => MultiBlocProvider(providers: [
+                  BlocProvider(
+                    create: (context) => getOrderCubit..getOrderTrigger() ,
+                  ),
+                  
+                ], child: const OrderScreen()));
 //!check out screen :
       case AppRoutes.checkOutScreen:
         return MaterialPageRoute(
@@ -254,9 +273,11 @@ class AppRouter {
           settings: settings,
           builder: (_) => MultiBlocProvider(
             providers: [
-              BlocProvider(create: (context) => GetProductDetailsCubit.instance),
+              BlocProvider(
+                  create: (context) => GetProductDetailsCubit.instance),
               BlocProvider(create: (context) => ToggleFavCubit.instance),
-              BlocProvider(create: (context) => GetFavListCubit.instance..getFavList()),
+              BlocProvider(
+                  create: (context) => GetFavListCubit.instance..getFavList()),
             ],
             child: FavListScreen(),
           ),
@@ -273,9 +294,11 @@ class AppRouter {
           settings: settings,
           builder: (_) => MultiBlocProvider(
             providers: [
-              BlocProvider(create: (context) => GetProductDetailsCubit.instance),
+              BlocProvider(
+                  create: (context) => GetProductDetailsCubit.instance),
               BlocProvider(create: (context) => ToggleFavCubit.instance),
-              BlocProvider(create: (context) => GetFavListCubit.instance..getFavList()),
+              BlocProvider(
+                  create: (context) => GetFavListCubit.instance..getFavList()),
             ],
             child: FavListScreen(),
           ),
@@ -313,6 +336,7 @@ class AppRouter {
               )
             ],
             child: const PageViewScreen(),
+            
           ),
         );
 
