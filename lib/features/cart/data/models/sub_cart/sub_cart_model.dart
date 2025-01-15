@@ -10,7 +10,8 @@ class SubCartModel extends SubCartEntity {
       required super.productId,
       required super.message,
       required super.mainImage,
-      required super.productName});
+      required super.productName,
+      required super.storeProductId});
   factory SubCartModel.fromJson(Map<String, dynamic> json) => SubCartModel(
         storeId: json[ApiKey.storeId],
         price: json[ApiKey.price],
@@ -19,6 +20,7 @@ class SubCartModel extends SubCartEntity {
         message: json[ApiKey.message],
         mainImage: json[ApiKey.mainImage],
         productName: json[ApiKey.productName],
-        orderQuantity: json[ApiKey.orderQuantity],
+        orderQuantity: json[ApiKey.orderQuantity], 
+        storeProductId: json[ApiKey.storeProductId],
       );
 }

@@ -67,4 +67,12 @@ class SubCartEntity {
       message: message ?? this.message,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      ApiKey.storeProductId: storeProductId,
+      ApiKey.storeId: storeId,
+      ApiKey.quantity: orderQuantity,
+    };
+  }
 }

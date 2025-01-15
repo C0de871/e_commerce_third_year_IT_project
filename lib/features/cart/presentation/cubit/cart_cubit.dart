@@ -77,7 +77,7 @@ class CartCubit extends Cubit<CartState> {
 
         CartEntity updatedCartEntity = (state as CartSuccess)
             .cart
-            .copyWith(data: updatedList, totalPrice: totalPrice.round());
+            .copyWith(data: updatedList, totalPrice: totalPrice);
         // log("finally :");
         for (var x in updatedCartEntity.data!) {
           print("x value:${x.quantity}");

@@ -1,4 +1,6 @@
+import 'package:e_commerce/core/Routes/app_routes.dart';
 import 'package:e_commerce/core/constants/app_images.dart';
+import 'package:e_commerce/core/databases/api/end_points.dart';
 import 'package:e_commerce/core/shared/widgets/defualt_button.dart';
 
 import 'package:e_commerce/core/utils/constants/app_numbers.dart';
@@ -9,6 +11,7 @@ import 'package:e_commerce/features/cart/presentation/cubit/modify_cart_cubit.da
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:svg_flutter/svg.dart';
 
 class CartScreen extends StatefulWidget {
@@ -39,6 +42,7 @@ class _CartScreenState extends State<CartScreen> {
           } else if (state is CartSuccess) {
             return Column(
               children: [
+                Text("total: ${state.cart.totalPrice}"),
                 // قائمة المنتجات
                 Expanded(
                   child: Padding(
@@ -83,7 +87,7 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ),
                 ),
-                // الأزرار الثلاثة في الأسفل
+
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -99,11 +103,23 @@ class _CartScreenState extends State<CartScreen> {
                       DefaultButton(
                         text: AppLocalizations.of(context)!.checkOut,
                         press: () {
-                          // Navigator.pushNamed(
-                          //   context,
-                          //   AppRoutes.checkOutScreen,
-                          //   arguments: state.cart.data,
-                          // );
+                          if (state is CartSuccess) {
+                            Navigator.pushNamed(
+                              context,
+                              AppRoutes.checkOutScreen,
+
+                              arguments: {
+                                ApiKey.data: state.cart.data,
+                                ApiKey.totalPrice: state.cart.totalPrice,
+                              },
+                            );
+                            // إنشاء الكائن المطلوب
+                          } else {
+                            // عرض رسالة إذا لم تكن البيانات جاهزة
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("there is any error")),
+                            );
+                          }
                         },
                         width: 100,
                       ),
@@ -136,7 +152,9 @@ AppBar buildAppBar(BuildContext context) {
       children: [
         Text(
           AppLocalizations.of(context)!.yourCart,
-          style: Theme.of(context).textTheme.displaySmall,
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(
+            fontFamily: GoogleFonts.cairo().fontFamily,
+          ),
         ),
       ],
     ),

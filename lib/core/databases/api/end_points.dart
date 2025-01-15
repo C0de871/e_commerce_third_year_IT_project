@@ -20,6 +20,7 @@ class EndPoints {
     return "stores/${params.storeID}/show";
   }
 
+
   static String getProductStoredId(GetStoredAndProductIdParams params) {
     return "carts/${params.storeID}/products/${params.productID}/add";
   }
@@ -29,6 +30,8 @@ class EndPoints {
   static const String deleteCart = "carts/delete-products";
   static const String clearCart = "carts/delete-all";
   static const String getSizeCart = "carts/getSize";
+  static const String createOrder = "orders/create";
+
 }
 
 class ApiKey {
@@ -92,6 +95,7 @@ class ApiKey {
   static String quantityInCart = "quantityInCart";
   static String totalPrice = "total_price";
   static String cartAmount = "cart_amount";
+  static String orderCount= "order_count";
 }
 
 class CacheKey {
