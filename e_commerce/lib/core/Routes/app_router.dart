@@ -1,5 +1,9 @@
-
 import 'package:e_commerce/features/get_store_details/presentation/cubit/show_store_cubit.dart';
+import 'package:e_commerce/features/order/domain/entites/order_entity.dart';
+import 'package:e_commerce/features/order/domain/entites/sub_order_entity.dart';
+import 'package:e_commerce/features/order/presentation/order_cubit/delete_order_cubit.dart';
+import 'package:e_commerce/features/order_details/presentation/order_details_cubit/get_order_details_cubit.dart';
+import 'package:e_commerce/features/order_details/presentation/order_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +31,7 @@ import '../../features/auth/presentation/sign up auth screen/sign_up_auth_screen
 import '../../features/get_product_details/presentation/screens/product_details_screen.dart';
 import '../../features/get_store_details/presentation/screens/store_details_screen.dart';
 import '../../features/home/presentation/HomeCubit/home_cubit.dart';
-import '../../features/order/presentation/check_cubit/get_order_cubit.dart';
+import '../../features/order/presentation/order_cubit/get_order_cubit.dart';
 import '../../features/order/presentation/order_screen.dart';
 import '../../features/products/presentation/all_products/products_list.dart';
 import '../../features/products/presentation/cubit/product_cubit/product_cubit.dart';
@@ -40,6 +44,7 @@ import '../../features/user/presentation/account_details_screen.dart';
 import '../shared/screens/Navigation_cubit/navigation_bar_cubit.dart';
 import '../shared/screens/page_view_screen.dart';
 import 'app_routes.dart';
+
 class AppRouter {
   //? <======= cubits declration =======>
   UserCubit? _userCubit;
@@ -55,6 +60,8 @@ class AppRouter {
   DeleteCartCubit? _deleteCartCubit;
   SizeCartCubit? _sizeCartCubit;
   GetOrderCubit? _getOrderCubit;
+  DeleteOrderCubit? _deleteOrderCubit;
+  GetOrderDetailsCubit? _getOrderDetailsCubit;
   // ClearCartCubit? _clearCartCubit;
 
   UserCubit get userCubit {
@@ -66,7 +73,8 @@ class AppRouter {
     });
     return _userCubit!;
   }
-GetOrderCubit get getOrderCubit {
+
+  GetOrderCubit get getOrderCubit {
     if (_getOrderCubit == null || _getOrderCubit!.isClosed) {
       _getOrderCubit = GetOrderCubit();
       // log("cart created");
@@ -86,6 +94,28 @@ GetOrderCubit get getOrderCubit {
       _cartCubit = null; // Nullify the reference when closed
     });
     return _cartCubit!;
+  }
+
+  DeleteOrderCubit get deleteOrderCubit {
+    if (_deleteOrderCubit == null || _deleteOrderCubit!.isClosed) {
+      _deleteOrderCubit = DeleteOrderCubit();
+      // log("cart created");
+    }
+    _deleteOrderCubit?.stream.listen((_) {}, onDone: () {
+      _deleteOrderCubit = null; // Nullify the reference when closed
+    });
+    return _deleteOrderCubit!;
+  }
+
+  GetOrderDetailsCubit get getOrderDetailsCubit {
+    if (_getOrderDetailsCubit == null || _getOrderDetailsCubit!.isClosed) {
+      _getOrderDetailsCubit = GetOrderDetailsCubit();
+      // log("cart created");
+    }
+    _getOrderDetailsCubit?.stream.listen((_) {}, onDone: () {
+      _getOrderDetailsCubit = null; // Nullify the reference when closed
+    });
+    return _getOrderDetailsCubit!;
   }
 
   ModifyCartCubit get modifyCartCubit {
@@ -188,27 +218,22 @@ GetOrderCubit get getOrderCubit {
                   BlocProvider(
                     create: (context) => deleteCartCubit,
                   ),
-                  // BlocProvider(
-                  //   create: (context) => clearCartCubit,
-                  // ),
                 ], child: const CartScreen()));
-      //     builder:
-      //   create: (context) => userCubit,
-      //   child: const LoginScreen(),
-      // ),
-      //   builder: (_) => MultiBlocProvider(providers: [
-      //         BlocProvider.value(value: cartCubit),
 
-      //       ], child: const CartScreen()));
 //!order screen:
-case AppRoutes.orderScreen:
-      return MaterialPageRoute(
+      case AppRoutes.orderScreen:
+        return MaterialPageRoute(
             settings: settings,
             builder: (_) => MultiBlocProvider(providers: [
                   BlocProvider(
-                    create: (context) => getOrderCubit..getOrderTrigger() ,
+                    create: (context) => getOrderCubit..getOrderTrigger(),
                   ),
-                  
+                  BlocProvider(
+                    create: (context) => deleteOrderCubit,
+                  ),
+                  BlocProvider(
+                    create: (context) => getOrderDetailsCubit,
+                  ),
                 ], child: const OrderScreen()));
 //!check out screen :
       case AppRoutes.checkOutScreen:
@@ -217,6 +242,21 @@ case AppRoutes.orderScreen:
           builder: (_) => BlocProvider(
             create: (context) => checkOutCubit,
             child: const CheckOutScreen(),
+          ),
+        );
+
+      case AppRoutes.orderDetailsRoute:
+        final order = settings.arguments as SubOrderEntity;
+        final id=order.id.toString();
+        debugPrint(
+            "Navigating to ${AppRoutes.orderDetailsRoute} with ID: ${id}");
+        return MaterialPageRoute(
+          
+          settings: settings,
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                getOrderDetailsCubit..getOrderDetailsTrigger(orderID: id),
+            child: const OrderDetailsScreen(),
           ),
         );
 
@@ -336,7 +376,6 @@ case AppRoutes.orderScreen:
               )
             ],
             child: const PageViewScreen(),
-            
           ),
         );
 
@@ -395,9 +434,12 @@ case AppRoutes.orderScreen:
           builder: (_) {
             return MultiBlocProvider(
               providers: [
-                BlocProvider(create: (context) => GetProductDetailsCubit.instance),
+                BlocProvider(
+                    create: (context) => GetProductDetailsCubit.instance),
                 BlocProvider(create: (context) => ToggleFavCubit.instance),
-                BlocProvider(create: (context) => ShowStoreCubit()..showStoreTrigger(storeID: storeID)),
+                BlocProvider(
+                    create: (context) =>
+                        ShowStoreCubit()..showStoreTrigger(storeID: storeID)),
               ],
               child: const StoreDetailsScreen(),
             );
