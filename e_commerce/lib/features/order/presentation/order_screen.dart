@@ -1,6 +1,11 @@
+import 'dart:developer';
+import 'package:e_commerce/core/Routes/app_routes.dart';
 import 'package:e_commerce/features/order/domain/entites/order_entity.dart';
-import 'package:e_commerce/features/order/presentation/check_cubit/get_order_cubit.dart';
-import 'package:e_commerce/features/order/presentation/check_cubit/get_order_state.dart';
+import 'package:e_commerce/features/order/domain/entites/sub_order_entity.dart';
+import 'package:e_commerce/features/order/presentation/order_cubit/delete_order_cubit.dart';
+import 'package:e_commerce/features/order/presentation/order_cubit/get_order_cubit.dart';
+import 'package:e_commerce/features/order/presentation/order_cubit/get_order_state.dart';
+import 'package:e_commerce/features/order_details/presentation/order_details_cubit/get_order_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,8 +14,7 @@ class OrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
+    return Scaffold(
             appBar: AppBar(
               title: const Text('My Orders'),
             ),
@@ -19,24 +23,33 @@ class OrderScreen extends StatelessWidget {
               // TODO: implement listener
             }, builder: (context, state) {
               if (state is GetOrderSuccess) {
+                log("u in right ***");
                 final OrderEntity orders = state.orders;
+                print("Orders: ${orders.data}");
+                int tot = orders.data?.length ?? 0;
+                log("${tot}");
                 return Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: ProductGrid(orders:orders),
+                  child: ProductGrid(orders: orders),
                 );
               } else {
                 return Center(
-                  child: Text("errorrr"),
+                  child: Text("Go to shopping",style: TextStyle(
+                    fontSize: 20
+                  ),),
                 );
               }
-            })));
+            }));
   }
 }
+
+
 
 class ProductGrid extends StatelessWidget {
   final OrderEntity orders;
 
   const ProductGrid({super.key, required this.orders});
+
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -44,130 +57,105 @@ class ProductGrid extends StatelessWidget {
         crossAxisCount: 2,
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
-        childAspectRatio: 0.75,
+        childAspectRatio: 0.55,
       ),
-      itemCount: orders.orders!.length,
+      itemCount: orders.data!.length,
       itemBuilder: (context, index) {
-        return ProductCard(
+        return InkWell(
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ProductDetails(
-                  productName: 'Product $index',
-                ),
-              ),
-            );
+
+            debugPrint("Navigating to ${AppRoutes.orderDetailsRoute} with ID: ${orders.data![index].id}");
+            Navigator.pushNamed(context, AppRoutes.orderDetailsRoute,arguments:orders.data![index]);
+            
+            
+            
           },
+          child: ProductCard(orders.data![index]),
         );
       },
     );
   }
 }
-
 class ProductCard extends StatelessWidget {
-  final VoidCallback onTap;
+  final SubOrderEntity subOrderEntity;
 
-  ProductCard({required this.onTap});
+  const ProductCard(this.subOrderEntity);
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        GestureDetector(
-          onTap: onTap,
-          child: Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(16),
-                topRight: Radius.circular(16),
-                bottomLeft: Radius.circular(30),
-                bottomRight: Radius.circular(30),
+    return GestureDetector(
+      child: Container(
+        width: 200,
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(16),
+            topRight: Radius.circular(16),
+            bottomLeft: Radius.circular(30),
+            bottomRight: Radius.circular(30),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.3),
+              blurRadius: 10,
+              offset: const Offset(0, 5),
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            
+            ClipOval(
+              child: Image.network(
+                subOrderEntity.image ??
+                    '', 
+                height: 100,
+                width: 100,
+                fit: BoxFit.cover,
               ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.3),
-                  blurRadius: 10,
-                  offset: const Offset(0, 5),
-                ),
-              ],
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Placeholder(
-                  fallbackHeight: 80,
-                  fallbackWidth: 80,
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  'x products',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  '12-12-2024',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  'status',
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green,
-                  ),
-                ),
-                const SizedBox(height: 10),
-              ],
+            const SizedBox(height: 10),
+            Text(
+              "${subOrderEntity.numberOfProducts} products",
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
             ),
-          ),
-        ),
-        Positioned(
-          bottom: 0,
-          right: 0,
-          left: 0,
-          child: Center(
-            child: IconButton(
+            const SizedBox(height: 5),
+            Text(
+              "${subOrderEntity.orderDate}",
+              style: const TextStyle(
+                fontSize: 14,
+                color: Colors.grey,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              "${subOrderEntity.status}",
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
+              ),
+            ),
+            const SizedBox(height: 10),
+            
+            const Spacer(),
+            IconButton(
               onPressed: () {
-                // إضافة الوظيفة التي تريدها عند الضغط على الأيقونة
+                context.read<DeleteOrderCubit>().deleteOrderTrigger(
+                      orderID: (subOrderEntity.id).toString(),
+                    );
               },
-              icon: const Icon(Icons.remove_circle_sharp),
-              color: Colors.green,
+              icon: const Icon(Icons.delete),
+              color: Colors.red,
             ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class ProductDetails extends StatelessWidget {
-  final String productName;
-
-  ProductDetails({required this.productName});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(productName),
-        backgroundColor: Colors.green,
-      ),
-      body: Center(
-        child: Text(
-          'Details of $productName',
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ],
         ),
       ),
     );
