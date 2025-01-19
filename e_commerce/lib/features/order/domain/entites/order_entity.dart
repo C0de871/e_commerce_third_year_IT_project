@@ -1,8 +1,9 @@
 import 'package:e_commerce/features/order/domain/entites/sub_order_entity.dart';
 
 class OrderEntity {
-  List<SubOrderEntity>? orders;
+  List<SubOrderEntity>? data;
+
   OrderEntity({
-    List<SubOrderEntity>? orders,
-  }) : orders = orders ?? [];
+    List<SubOrderEntity>? data,
+  }) : data = data ?? [];
 }

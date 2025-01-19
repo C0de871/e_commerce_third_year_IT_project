@@ -2,14 +2,11 @@ import 'package:dartz/dartz.dart';
 import 'package:e_commerce/core/databases/connection/network_info.dart';
 import 'package:e_commerce/core/databases/errors/expentions.dart';
 import 'package:e_commerce/core/databases/errors/failure.dart';
-import 'package:e_commerce/features/cart/data/datasourses/cart_remote_data_source.dart';
-import 'package:e_commerce/features/check_out/data/datasourses/check_out_remote_data_source.dart';
-import 'package:e_commerce/features/check_out/domain/entites/check_out_order/check_out_order_entity.dart';
-import 'package:e_commerce/features/check_out/domain/repository/check_out_repository.dart';
+import 'package:e_commerce/core/databases/params/params.dart';
+import 'package:e_commerce/core/shared/domain/entities/message_entety.dart';
+import 'package:e_commerce/features/order/domain/entites/order_entity.dart';
+import 'package:e_commerce/features/order/domain/repository/order_repository.dart';
 import '../datasourses/order_remote_data_source.dart';
-import '../../domain/entites/order_entity.dart';
-import '../../domain/entites/sub_order_entity.dart';
-import '../../domain/repository/order_repository.dart';
 
 class OrderRepositoryImpl extends OrderRepository {
   final NetworkInfo networkInfo;
@@ -20,12 +17,35 @@ class OrderRepositoryImpl extends OrderRepository {
     required this.remoteDataSource,
   });
 //! get order:
-@override
+  @override
   Future<Either<Failure, OrderEntity>> getOrder() async {
     if (await networkInfo.isConnected!) {
       try {
         final remoteGetOrder = await remoteDataSource.getOrder();
         return Right(remoteGetOrder);
+      } on ServerException catch (e) {
+        return Left(Failure(errMessage: e.errorModel.errorMessage));
+      }
+    } else {
+      return Left(
+        Failure(
+          errMessage: remoteDataSource.noInternectConnection(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, MessageEntity>> deleteOrder({
+    required GetOrderIdParams params,
+  }) async {
+    if (await networkInfo.isConnected!) {
+      try {
+        final MessageEntity messageEntity = await remoteDataSource.deleteOrder(
+          params,
+        );
+
+        return Right(messageEntity);
       } on ServerException catch (e) {
         return Left(Failure(errMessage: e.errorModel.errorMessage));
       }
