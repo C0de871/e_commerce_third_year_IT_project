@@ -1,7 +1,14 @@
-
-
 import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:dio/dio.dart';
+import 'package:e_commerce/features/order/data/datasourses/order_remote_data_source.dart';
+import 'package:e_commerce/features/order/data/repositories/order_repository_impl.dart';
+import 'package:e_commerce/features/order/domain/repository/order_repository.dart';
+import 'package:e_commerce/features/order/domain/usecases/delete_order.dart';
+import 'package:e_commerce/features/order/domain/usecases/get_order.dart';
+import 'package:e_commerce/features/order_details/data/datasourses/order_details_remote_data_source.dart';
+import 'package:e_commerce/features/order_details/data/repositories/order_details_repository_impl.dart';
+import 'package:e_commerce/features/order_details/domain/repository/order_details_repository.dart';
+import 'package:e_commerce/features/order_details/domain/usecases/get_order_details.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../../features/auth/data/datasourses/user_local_data_source.dart';
@@ -101,8 +108,14 @@ void setupServicesLocator() {
       () => CartRemoteDataSource(api: getIt(), cacheHelper: getIt()));
   getIt.registerLazySingleton<CheckOutRemoteDataSource>(
       () => CheckOutRemoteDataSource(api: getIt(), cacheHelper: getIt()));
-  getIt.registerLazySingleton<LangLocalDataSource>(() => LangLocalDataSource(sharedPrefsHelper: getIt()));
-  getIt.registerLazySingleton<GetStoreDetailsDataSource>(() => GetStoreDetailsDataSource(api: getIt(), cacheHelper: getIt()));
+  getIt.registerLazySingleton<LangLocalDataSource>(
+      () => LangLocalDataSource(sharedPrefsHelper: getIt()));
+  getIt.registerLazySingleton<GetStoreDetailsDataSource>(
+      () => GetStoreDetailsDataSource(api: getIt(), cacheHelper: getIt()));
+  getIt.registerLazySingleton<OrderRemoteDataSource>(
+      () => OrderRemoteDataSource(api: getIt(), cacheHelper: getIt()));
+  getIt.registerLazySingleton<OrderDetailsRemoteDataSource>(
+      () => OrderDetailsRemoteDataSource(api: getIt(), cacheHelper: getIt()));
 
   //! Repository
   getIt.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(
@@ -141,7 +154,16 @@ void setupServicesLocator() {
         localDataSource: getIt(),
       ));
 
-  getIt.registerLazySingleton<GetStoreDetailsRepository>(() => GetStoreDetailsRepositoryImpl(
+  getIt.registerLazySingleton<GetStoreDetailsRepository>(
+      () => GetStoreDetailsRepositoryImpl(
+            networkInfo: getIt(),
+            remoteDataSource: getIt(),
+          ));
+  getIt.registerLazySingleton<OrderRepository>(() => OrderRepositoryImpl(
+        networkInfo: getIt(),
+        remoteDataSource: getIt(),
+      ));
+  getIt.registerLazySingleton<OrderDetailsRepository>(() => OrderDetailsRepositoryImpl(
         networkInfo: getIt(),
         remoteDataSource: getIt(),
       ));
@@ -187,7 +209,16 @@ void setupServicesLocator() {
       () => GetFavList(favoritesRepository: getIt()));
   getIt.registerLazySingleton<CreateOrder>(
       () => CreateOrder(checkOutRepository: getIt()));
-      getIt.registerLazySingleton<RetrieveUserLang>(() => RetrieveUserLang(languageRepository: getIt()));
-  getIt.registerLazySingleton<SaveLang>(() => SaveLang(languageRepository: getIt()));
-  getIt.registerLazySingleton<GetStoreDetails>(() => GetStoreDetails(repository: getIt()));
+  getIt.registerLazySingleton<RetrieveUserLang>(
+      () => RetrieveUserLang(languageRepository: getIt()));
+  getIt.registerLazySingleton<SaveLang>(
+      () => SaveLang(languageRepository: getIt()));
+  getIt.registerLazySingleton<GetStoreDetails>(
+      () => GetStoreDetails(repository: getIt()));
+  getIt.registerLazySingleton<GetOrder>(
+      () => GetOrder(orderRepository: getIt()));
+  getIt.registerLazySingleton<DeleteOrder>(
+      () => DeleteOrder(orderRepository: getIt()));
+      getIt.registerLazySingleton<GetOrderDetails>(
+      () => GetOrderDetails(orderDetailsRepository: getIt()));
 }
