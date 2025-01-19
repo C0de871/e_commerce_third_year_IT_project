@@ -5,7 +5,6 @@ import 'package:e_commerce/features/order/presentation/order_cubit/delete_order_
 import 'package:e_commerce/features/order_details/presentation/order_details_cubit/get_order_details_cubit.dart';
 import 'package:e_commerce/features/order_details/presentation/order_details_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../features/auth/presentation/OTP/otp_screen.dart';
@@ -21,9 +20,7 @@ import '../../features/cart/presentation/cubit/size_cart_cubit.dart';
 import '../../features/check_out/presentation/check_cubit/check_out_cubit.dart';
 import '../../features/check_out/presentation/check_out_screen/check_out_screen.dart';
 import '../../features/favorites/presentation/cubit/getFavList/get_fav_list_cubit.dart';
-import '../../features/favorites/presentation/cubit/getFavList/get_fav_list_cubit.dart';
 import '../../features/favorites/presentation/cubit/toggle_fav_cubit.dart';
-import '../../features/favorites/presentation/screens/fav_list_screen.dart';
 import '../../features/favorites/presentation/screens/fav_list_screen.dart';
 import '../../features/get_product_details/presentation/cubit/get_product_details_cubit.dart';
 import '../../features/auth/presentation/complete_profile_screen/complete_profile_screen.dart';
@@ -38,9 +35,6 @@ import '../../features/products/presentation/cubit/product_cubit/product_cubit.d
 import '../../features/stores/presentation/all_stores/stores_list.dart';
 import '../../features/stores/presentation/cubit/store_cubit.dart';
 import '../../features/user/presentation/account_details_screen.dart';
-import '../../features/auth/presentation/complete_profile_screen/complete_profile_screen.dart';
-import '../../features/auth/presentation/sign up auth screen/sign_up_auth_screen.dart';
-import '../../features/user/presentation/account_details_screen.dart';
 import '../shared/screens/Navigation_cubit/navigation_bar_cubit.dart';
 import '../shared/screens/page_view_screen.dart';
 import 'app_routes.dart';
@@ -52,7 +46,7 @@ class AppRouter {
   StoreCubit? _storeCubit;
   ProductCubit? _productCubit;
   NavigationBarCubit? _navBarCubit;
-  ToggleFavCubit? _toggleFavOnCubit;
+  // ToggleFavCubit? _toggleFavOnCubit;
   CheckOutCubit? _checkOutCubit;
   //? <<======= cubits getter =======>>
   CartCubit? _cartCubit;
@@ -329,26 +323,7 @@ class AppRouter {
           builder: (_) => const AccountDetailsScreen(),
         );
 
-      case AppRoutes.favoritesRoute:
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (_) => MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                  create: (context) => GetProductDetailsCubit.instance),
-              BlocProvider(create: (context) => ToggleFavCubit.instance),
-              BlocProvider(
-                  create: (context) => GetFavListCubit.instance..getFavList()),
-            ],
-            child: FavListScreen(),
-          ),
-        );
 
-      case AppRoutes.accountDetails:
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (_) => const AccountDetailsScreen(),
-        );
 
       //! home route:
       case AppRoutes.pageView:
