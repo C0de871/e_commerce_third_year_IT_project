@@ -45,14 +45,17 @@ class ShowStoreCubit extends Cubit<ShowStoreState> {
     _favoriteSubscription = _favoriteService.favoriteUpdatesStream.listen(
       (update) {
         if (state is ShowStoreSuccess) {
-          var products = (state as ShowStoreSuccess).storeDetails.data[0].products;
+          var products =
+              (state as ShowStoreSuccess).storeDetails.data[0].products;
           // log("in  the get fav list cubit: ${update.isFavorite}");
 
           for (var i = 0; i < products.length; i++) {
             var product = products[i];
-            if (product.storeId.toString() == update.storeID && product.productId.toString() == update.productId) {
+            if (product.storeId.toString() == update.storeID &&
+                product.productId.toString() == update.productId) {
               // log("product found in fav list");
-              products[i] = (product as StoreProductModel).copyWith(isFavorite: update.isFavorite);
+              products[i] = (product as StoreProductModel)
+                  .copyWith(isFavorite: update.isFavorite);
             }
           }
           emit(((state as ShowStoreSuccess).copyWith()));
