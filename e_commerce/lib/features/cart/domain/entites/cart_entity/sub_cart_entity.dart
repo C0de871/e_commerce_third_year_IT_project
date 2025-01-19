@@ -75,4 +75,20 @@ class SubCartEntity {
       ApiKey.quantity: orderQuantity,
     };
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      ApiKey.storeId: storeId,
+      ApiKey.storeName: storeName,
+      ApiKey.orderQuantity: orderQuantity,
+      ApiKey.storeProductId: storeProductId,
+      ApiKey.price: price,
+      ApiKey.quantity: quantity,
+      ApiKey.description: description,
+      ApiKey.productId: productId,
+      ApiKey.productName: productName,
+      ApiKey.mainImage: mainImage,
+      ApiKey.message: message,
+    };
+  }
 }

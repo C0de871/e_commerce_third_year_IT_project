@@ -1,3 +1,5 @@
+import 'package:e_commerce/core/databases/api/end_points.dart';
+
 import 'cart_entity/sub_cart_entity.dart';
 
 class CartEntity {
@@ -11,5 +13,12 @@ class CartEntity {
       data: data ?? this.data,
       totalPrice: totalPrice ?? this.totalPrice,
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      ApiKey.totalPrice: totalPrice,
+      ApiKey.data: data?.map((item) => item.toMap()).toList(),
+    };
   }
 }
