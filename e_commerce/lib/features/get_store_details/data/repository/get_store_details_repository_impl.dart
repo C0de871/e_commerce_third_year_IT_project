@@ -11,9 +11,11 @@ import '../../../../core/databases/errors/failure.dart';
 class GetStoreDetailsRepositoryImpl extends GetStoreDetailsRepository {
   final NetworkInfo networkInfo;
   final GetStoreDetailsDataSource remoteDataSource;
-  GetStoreDetailsRepositoryImpl({required this.remoteDataSource, required this.networkInfo});
+  GetStoreDetailsRepositoryImpl(
+      {required this.remoteDataSource, required this.networkInfo});
   @override
-  Future<Either<Failure, ShowStoreEntity>> showStore({required ShowStoreParams params}) async {
+  Future<Either<Failure, ShowStoreEntity>> showStore(
+      {required ShowStoreParams params}) async {
     if (await networkInfo.isConnected!) {
       try {
         final remoteShowStore = await remoteDataSource.showStore(params);

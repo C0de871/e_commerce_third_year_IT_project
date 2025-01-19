@@ -5,8 +5,8 @@ import 'package:e_commerce/features/get_store_details/data/datasources/get_store
 import 'package:e_commerce/features/get_store_details/domain/entities/show_store_entities/show_store_entity.dart';
 
 abstract class GetStoreDetailsRepository {
-
   GetStoreDetailsRepository();
 
-  Future<Either<Failure, ShowStoreEntity>> showStore({required ShowStoreParams params});
+  Future<Either<Failure, ShowStoreEntity>> showStore(
+      {required ShowStoreParams params});
 }

@@ -1,5 +1,3 @@
-
-
 import 'package:e_commerce/core/databases/api/end_points.dart';
 import 'package:e_commerce/features/get_store_details/domain/entities/show_store_entities/show_store_entity.dart';
 
@@ -21,7 +19,9 @@ class ShowStoreModel extends ShowStoreEntity {
     return ShowStoreModel(
       successful: data[ApiKey.successful] as bool,
       message: data[ApiKey.message] as String,
-      data: (data[ApiKey.data] as List<dynamic>).map((e) => StoreDetailsDataModel.fromMap(e as Map<String, dynamic>)).toList(),
+      data: (data[ApiKey.data] as List<dynamic>)
+          .map((e) => StoreDetailsDataModel.fromMap(e as Map<String, dynamic>))
+          .toList(),
       statusCode: data[ApiKey.statusCode] as int,
     );
   }
@@ -29,7 +29,8 @@ class ShowStoreModel extends ShowStoreEntity {
   Map<String, dynamic> toMap() => {
         ApiKey.successful: successful,
         ApiKey.message: message,
-        ApiKey.data: data.map((e) => (e as StoreDetailsDataModel).toMap()).toList(),
+        ApiKey.data:
+            data.map((e) => (e as StoreDetailsDataModel).toMap()).toList(),
         ApiKey.statusCode: statusCode,
       };
 

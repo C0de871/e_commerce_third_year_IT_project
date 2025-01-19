@@ -1,7 +1,5 @@
 import 'dart:developer';
 
-
-
 import 'package:dio/dio.dart';
 
 import '../../../features/auth/data/models/refresh_token/refresh_token_model.dart';
@@ -45,7 +43,6 @@ class AuthInterceptor extends Interceptor {
             "Bearer ${success.refreshTokenDataEntity.accessToken}";
         _retryRequest(options, handler, dioConsumer);
       } on DioException catch (e) {
-        
         handleDioException(e);
       }
     } else {

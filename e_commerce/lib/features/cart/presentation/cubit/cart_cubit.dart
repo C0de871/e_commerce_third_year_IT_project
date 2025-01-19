@@ -26,6 +26,35 @@ class CartCubit extends Cubit<CartState> {
     _listenToFavoriteUpdates();
   }
 
+  CartEntity filterCartByStatus() {
+    if (state is CartSuccess) {
+      final cart = (state as CartSuccess).cart;
+
+      // تصفية المنتجات التي تحقق الشرط: status = "Available now"
+      final filteredProducts = cart.data!.where((product) {
+        return product.message == "Available now";
+      }).toList();
+
+      // حساب السعر الكلي للمنتجات المصفاة
+      final totalPrice = filteredProducts.fold<double>(
+        0,
+        (sum, product) =>
+            sum + (double.parse(product.price!) * product.orderQuantity!),
+      );
+
+      // إنشاء كائن CartEntity جديد يحتوي على المنتجات المصفاة والسعر الكلي
+      final filteredCart = cart.copyWith(
+        data: filteredProducts,
+        totalPrice: totalPrice,
+      );
+
+      return filteredCart;
+    } else {
+      print("Cart is not loaded yet.");
+      return CartEntity(data: [], totalPrice: 0.0);
+    }
+  }
+
 //! get cart:
   dynamic getCartTrigger() async {
     emit(CartLoading());

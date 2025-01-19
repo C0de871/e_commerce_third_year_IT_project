@@ -155,7 +155,10 @@ class ProfileScreen extends StatelessWidget {
                                 backGroundColor: AppColors.cardBGLightPurple,
                                 forgroundGroundColor:
                                     AppColors.cardFGLightPurple,
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                      context, AppRoutes.orderScreen);
+                                },
                               ),
                             ),
                           ],

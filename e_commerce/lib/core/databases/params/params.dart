@@ -19,6 +19,11 @@ class GetProductDetailsParams {
   });
 }
 
+class GetOrderIdParams {
+  String orderID;
+  GetOrderIdParams({required this.orderID});
+}
+
 class ShowStoreParams {
   String storeID;
   ShowStoreParams({

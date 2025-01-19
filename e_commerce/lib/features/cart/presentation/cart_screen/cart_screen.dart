@@ -18,25 +18,6 @@ import 'package:svg_flutter/svg.dart';
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
 
-CartEntity _filterCartEntity(CartEntity cart) {
-    final filteredData = cart.data
-        ?.where((item) => item.message == "Available now")
-        .toList();
-
-    double totalPrice = 0.0;
-    if (filteredData != null) {
-      for (var item in filteredData) {
-        final price = double.tryParse(item.price ?? '0') ?? 0.0;
-        final quantity = item.orderQuantity ?? 0;
-        totalPrice += price * quantity;
-      }
-    }
-
-    return cart.copyWith(
-      data: filteredData,
-      totalPrice: totalPrice,
-    );
-  }
   @override
   State<CartScreen> createState() => _CartScreenState();
 }
@@ -123,23 +104,14 @@ class _CartScreenState extends State<CartScreen> {
                       DefaultButton(
                         text: AppLocalizations.of(context)!.checkOut,
                         press: () {
-                          if (state is CartSuccess) {
-                            // context.read<CartCubit>().filterCart();
-                            Navigator.pushNamed(
-                              context,
-                              AppRoutes.checkOutScreen,
-                              arguments: {
-                                ApiKey.data: state.cart.data,
-                                ApiKey.totalPrice: state.cart.totalPrice,
-                              },
-                            );
-                            // إنشاء الكائن المطلوب
-                          } else {
-                            // عرض رسالة إذا لم تكن البيانات جاهزة
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("there is any error")),
-                            );
-                          }
+                          final CartEntity newCart =
+                              context.read<CartCubit>().filterCartByStatus();
+                          Navigator.pushNamed(
+                            context,
+                            AppRoutes.checkOutScreen,
+                            arguments: newCart.toMap(),
+                          );
+                          // إنشاء الكائن المطلوب
                         },
                         width: 100,
                       ),
@@ -188,5 +160,4 @@ AppBar buildAppBar(BuildContext context) {
       ),
     ],
   );
-  
 }

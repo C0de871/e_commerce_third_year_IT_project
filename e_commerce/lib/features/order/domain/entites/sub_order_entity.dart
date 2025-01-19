@@ -1,11 +1,10 @@
-import 'package:collection/collection.dart';
 import 'package:e_commerce/core/databases/api/end_points.dart';
 
 class SubOrderEntity {
   int? id;
   String? orderDate;
   String? status;
-  double? totalPrice;
+  String? totalPrice;
   String? orderReference;
   int? numberOfProducts;
   String? image;
@@ -19,7 +18,6 @@ class SubOrderEntity {
     this.numberOfProducts,
     this.image,
   });
-
 
   Map<String, dynamic> toJson() => {
         ApiKey.id: id,

@@ -10,7 +10,8 @@ class GetStoreDetails {
 
   GetStoreDetails({required this.repository});
 
-  Future<Either<Failure, ShowStoreEntity>> call({required ShowStoreParams params}) {
+  Future<Either<Failure, ShowStoreEntity>> call(
+      {required ShowStoreParams params}) {
     return repository.showStore(params: params);
   }
 }

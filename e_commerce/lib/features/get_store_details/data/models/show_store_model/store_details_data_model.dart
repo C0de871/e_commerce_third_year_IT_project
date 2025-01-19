@@ -1,4 +1,3 @@
-
 import 'package:e_commerce/features/get_store_details/domain/entities/show_store_entities/store_details_data_entity.dart';
 
 import '../../../../../core/databases/api/end_points.dart';
@@ -15,14 +14,17 @@ class StoreDetailsDataModel extends StoreDetailsDataEntity {
     required super.products,
   });
 
-  factory StoreDetailsDataModel.fromMap(Map<String, dynamic> data) => StoreDetailsDataModel(
+  factory StoreDetailsDataModel.fromMap(Map<String, dynamic> data) =>
+      StoreDetailsDataModel(
         id: data[ApiKey.id] as int,
         manager: data[ApiKey.manager] as String,
         name: data[ApiKey.name] as String,
         imageUrl: data[ApiKey.imageUrl] as String,
         location: data[ApiKey.location] as String,
         description: data[ApiKey.description] as String,
-        products: (data[ApiKey.products] as List<dynamic>).map((e) => StoreProductModel.fromMap(e as Map<String, dynamic>)).toList(),
+        products: (data[ApiKey.products] as List<dynamic>)
+            .map((e) => StoreProductModel.fromMap(e as Map<String, dynamic>))
+            .toList(),
       );
 
   Map<String, dynamic> toMap() => {
@@ -32,7 +34,8 @@ class StoreDetailsDataModel extends StoreDetailsDataEntity {
         ApiKey.imageUrl: imageUrl,
         ApiKey.location: location,
         ApiKey.description: description,
-        ApiKey.products: products.map((e) => (e as StoreProductModel).toMap()).toList(),
+        ApiKey.products:
+            products.map((e) => (e as StoreProductModel).toMap()).toList(),
       };
 
   StoreDetailsDataModel copyWith({

@@ -17,7 +17,8 @@ class StoreProductModel extends StoreProductEntity {
     required super.categoryName,
   });
 
-  factory StoreProductModel.fromMap(Map<String, dynamic> data) => StoreProductModel(
+  factory StoreProductModel.fromMap(Map<String, dynamic> data) =>
+      StoreProductModel(
         storeId: data[ApiKey.storeId] as int,
         storeName: data[ApiKey.storeName] as String,
         productId: data[ApiKey.productId] as int,

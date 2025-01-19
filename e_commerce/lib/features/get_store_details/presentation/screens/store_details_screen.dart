@@ -43,7 +43,10 @@ class StoreDetailsScreen extends StatelessWidget {
                         Text(
                           store.name,
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(
                                 color: Theme.of(context).colorScheme.primary,
                               ),
                         ),
