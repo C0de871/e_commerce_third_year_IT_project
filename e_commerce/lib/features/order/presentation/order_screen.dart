@@ -9,27 +9,25 @@ class OrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-            appBar: AppBar(
-              title: const Text('My Orders'),
-            ),
-            body: BlocConsumer<GetOrderCubit, GetOrderState>(
-                listener: (context, state) {
-              // TODO: implement listener
-            }, builder: (context, state) {
-              if (state is GetOrderSuccess) {
-                final OrderEntity orders = state.orders;
-                return Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: ProductGrid(orders:orders),
-                );
-              } else {
-                return Center(
-                  child: Text("errorrr"),
-                );
-              }
-            })));
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('My Orders'),
+        ),
+        body: BlocConsumer<GetOrderCubit, GetOrderState>(listener: (context, state) {
+          // TODO: implement listener
+        }, builder: (context, state) {
+          if (state is GetOrderSuccess) {
+            final OrderEntity orders = state.orders;
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ProductGrid(orders: orders),
+            );
+          } else {
+            return Center(
+              child: Text("errorrr"),
+            );
+          }
+        }));
   }
 }
 

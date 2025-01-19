@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -20,40 +19,45 @@ class LoginSuccessScreen extends StatelessWidget {
         leading: const SizedBox(),
         title: Text(AppLocalizations.of(context)!.successScreen),
       ),
-      body: Column(
-        children: [
-          Image.asset(
-            AppImages.successImage,
-            height: padding4 * 110,
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 400),
+          child: Column(
+            children: [
+              Image.asset(
+                AppImages.successImage,
+                height: padding4 * 110,
+              ),
+              Text(AppLocalizations.of(context)!.successLogin,
+                  style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                        fontFamily: GoogleFonts.marhey().fontFamily,
+                      )),
+              const Spacer(
+                flex: 3,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: padding4 * 5),
+                child: DefaultButton(
+                  text: AppLocalizations.of(context)!.backToHome,
+                  press: () {
+                    if (context.read<GetLastUserCubit>().state is! UserLoaded) {
+                      context.read<GetLastUserCubit>().getLastUser();
+                    }
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      AppRoutes.templateRoute,
+                      (route) => false,
+                    );
+                  },
+                  width: double.infinity,
+                ),
+              ),
+              const Spacer(
+                flex: 2,
+              )
+            ],
           ),
-          Text(AppLocalizations.of(context)!.successLogin,
-              style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                    fontFamily: GoogleFonts.marhey().fontFamily,
-                  )),
-          const Spacer(
-            flex: 3,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: padding4 * 5),
-            child: DefaultButton(
-              text: AppLocalizations.of(context)!.backToHome,
-              press: () {
-                if (context.read<GetLastUserCubit>().state is! UserLoaded) {
-                  context.read<GetLastUserCubit>().getLastUser();
-                }
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  AppRoutes.pageView,
-                  (route) => false,
-                );
-              },
-              width: 400,
-            ),
-          ),
-          const Spacer(
-            flex: 2,
-          )
-        ],
+        ),
       ),
     );
   }

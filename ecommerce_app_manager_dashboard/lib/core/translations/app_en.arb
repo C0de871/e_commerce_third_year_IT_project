@@ -1,0 +1,316 @@
+{
+  "language": "English",
+  "@language": {
+    "description": "The language currently selected in the application"
+  },
+  "appName": "Grablt",
+  "@appName": {
+    "description": "app Name"
+  },
+  "welcomeBack": "Welcome back",
+  "@welcomeBack": {
+    "description": "Welcome message on the login screen"
+  },
+  "signInMessage": "Sign in with your email and password\nor Continue with social media",
+  "@signInMessage": {
+    "description": "Instruction message for login options"
+  },
+  "dontHaveAccount": "Don't have an account?",
+  "@dontHaveAccount": {
+    "description": "Prompt for users without an account"
+  },
+  "welcome": "welcome to Grablt, let's shop!",
+  "@welcome": {
+    "description": "welcome line"
+  },
+  "splash2word": "we help people conect wiyth store ",
+  "@splash2word": {
+    "description": "second word appear when we swap in splash screen"
+  },
+  "splash3word": "we show the easy way to shop \njust stay at home wuth us ",
+  "@splash3word": {
+    "description": "third word appear when we swap in splash screen"
+  },
+  "signUp": "Sign Up",
+  "@signUp": {
+    "description": "Button text for signing up a new user"
+  },
+  "registerAccount": "Register Account",
+  "@registerAccount": {
+    "description": "Title for the registration screen"
+  },
+  "completeYourdetails": "Complete your details or continue \nwith social media",
+  "@completeYourdetails": {
+    "description": "Instruction text for completing details or using social media login"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Label for the email input field"
+  },
+  "enterYourEmail": "Enter your email",
+  "@enterYourEmail": {
+    "description": "Placeholder text for the email input field"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Label for the password input field"
+  },
+  "enterYourPassword": "Enter Your Password",
+  "@enterYourPassword": {
+    "description": "Placeholder text for the password input field"
+  },
+  "confirmPassword": "Confirm Password",
+  "@confirmPassword": {
+    "description": "Label for the confirm password input field"
+  },
+  "reEnterYourPassword": "Confirm Your Password",
+  "@reEnterYourPassword": {
+    "description": "Placeholder text for the confirm password input field"
+  },
+  "thisFieldCannotBeEmpty": "This field cannot be empty",
+  "@thisFieldCannotBeEmpty": {
+    "description": "Error message shown when a required field is left empty"
+  },
+  "pleaseEnterValidEmail": "Please enter a valid email address",
+  "@pleaseEnterValidEmail": {
+    "description": "Error message shown when the email entered is not in a valid format"
+  },
+  "passwordIsRequired": "Password is required",
+  "@passwordIsRequired": {
+    "description": "Error message shown when the password field is left empty"
+  },
+  "passwordMustBeAtLeast8Characters": "Password must be at least 8 characters",
+  "@passwordMustBeAtLeast8Characters": {
+    "description": "Error message shown when the password is shorter than 8 characters"
+  },
+  "passwordComplexityRequirement": "Password must include at least one of the following:\n- A capital and small letter\n- A number\n- A symbol",
+  "@passwordComplexityRequirement": {
+    "description": "Error message shown when the password does not meet the complexity requirements"
+  },
+  "doesNotMatch": "The two passwords must be identical.",
+  "@doesNotMatch": {
+    "description": "Error message shown when the password and confirm password fields do not match"
+  },
+  "continueSignUp": "Continue",
+  "@continueSignUp": {
+    "description": "Text for the button that continues the signup process"
+  },
+  "byContinuingYouAgreeTo": "By continuing, you confirm that you agree\nwith our Terms of Use and Privacy Policy",
+  "@byContinuingYouAgreeTo": {
+    "description": "Message displayed to inform the user about terms of use and privacy policy agreement"
+  },
+  "completeProfile": "Complete Profile",
+  "@completeProfile": {
+    "description": "Title for the screen to complete user profile"
+  },
+  "completeYourProfileDetails": "Complete your details or continue\nwith social media",
+  "@completeYourProfileDetails": {
+    "description": "Instruction text for completing profile details or using social media login"
+  },
+  "firstName": "First Name",
+  "@firstName": {
+    "description": "Label for the first name input field"
+  },
+  "enterFirstName": "Enter your first name",
+  "@enterFirstName": {
+    "description": "Placeholder text for the first name input field"
+  },
+  "lastName": "Last Name",
+  "@lastName": {
+    "description": "Label for the last name input field"
+  },
+  "enterLastName": "Enter your last name",
+  "@enterLastName": {
+    "description": "Placeholder text for the last name input field"
+  },
+  "address": "Address",
+  "@address": {
+    "description": "Label for the address input field"
+  },
+  "enterAddress": "Enter your address",
+  "@enterAddress": {
+    "description": "Placeholder text for the address input field"
+  },
+  "phoneNumber": "Phone Number",
+  "@phoneNumber": {
+    "description": "Label for the phone number input field"
+  },
+  "enterPhoneNumber": "Enter your phone number",
+  "@enterPhoneNumber": {
+    "description": "Placeholder text for the phone number input field"
+  },
+  "firstNameRequired": "First name is required",
+  "@firstNameRequired": {
+    "description": "Error message shown when the first name field is empty"
+  },
+  "lastNameRequired": "Last name is required",
+  "@lastNameRequired": {
+    "description": "Error message shown when the last name field is empty"
+  },
+  "addressRequired": "Address is required",
+  "@addressRequired": {
+    "description": "Error message shown when the address field is empty"
+  },
+  "phoneNumberRequired": "Phone number is required",
+  "@phoneNumberRequired": {
+    "description": "Error message shown when the phone number field is empty"
+  },
+  "phoneNumberInvalid": "Phone number must have 10 digits and start with 09",
+  "@phoneNumberInvalid": {
+    "description": "Error message shown when the phone number does not start with 09 or is not 10 digits long"
+  },
+  "otpVerification": "OTP Verification",
+  "@otpVerification": {
+    "description": "Title of the OTP verification screen"
+  },
+  "verificationCodeSent": "We sent a verification code to {email}.",
+  "@verificationCodeSent": {
+    "description": "Message showing that a verification code was sent to the user's email.",
+    "placeholders": {
+      "email": {}
+    }
+  },
+  "continueText": "Continue",
+  "@continueText": {
+    "description": "Text for the continue button"
+  },
+  "resendOtp": "Resend OTP Code",
+  "@resendOtp": {
+    "description": "Text for the link to resend the OTP code"
+  },
+  "resendIn": "You can resend code in",
+  "@resendIn": {
+    "description": "Label before the countdown timer showing when the user can resend the code"
+  },
+  "login": "Login",
+  "@login": {
+    "description": "word login to appBar"
+  },
+  "specialForYou": "Stores",
+  "@specialForYou": {
+    "description": "Section title for special offers"
+  },
+  "popularProduct": "Popular Product",
+  "@popularProduct": {
+    "description": "Section title for popular products"
+  },
+  "seeMore": "See More",
+  "@seeMore": {
+    "description": "Text for expanding additional content"
+  },
+  "from": "From: ",
+  "@from": {
+    "description": "Text prefix for showing the origin or source"
+  },
+  "searchProduct": "Search Product",
+  "@searchProduct": {
+    "description": "Placeholder text for the search input field"
+  },
+  "expressShopping": "Express Shopping",
+  "@expressShopping": {
+    "description": "Subtitle text below the app name"
+  },
+  "continueSplash": "Continue",
+  "@continueSplash": {
+    "description": "Text for the button that continues the next splash page process"
+  },
+  "successScreen": "Login Success",
+  "@successScreen": {
+    "description": "the login process is done by right way in  appbar"
+  },
+  "successLogin": "Login successfully",
+  "@successLogin": {
+    "description": "the login process is done by right way"
+  },
+  "backToHome": "Bach to home",
+  "@backToHome": {
+    "description": "button in success login back you to home "
+  },
+  "yourCart": "Your Cart",
+  "@yourCart": {
+    "description": "label in app bar of cart screen "
+  },
+  "numberOfItem": "4 items",
+  "@numberOfItem": {
+    "description": "number of item in cart "
+  },
+  "confirmDeletion": "Confirm deletion",
+  "@confirmDeletion": {
+    "description": "title of button that confirm the deletion"
+  },
+  "confirmModification": "Confirm Modification",
+  "@confirmModification": {
+    "description": "title of button that confirm the modifition"
+  },
+  "checkOut": "Check Out",
+  "@checkOut": {
+    "description": "title of button that go to check out screen"
+  },
+  "viewStore": "View store",
+  "@viewStore": {
+    "description": "Label for the button to view the store"
+  },
+  "price": "Price",
+  "@price": {
+    "description": "Label for the product price"
+  },
+  "myProducts": "My Products:",
+  "@myProducts": {
+    "description": "My products appears in first line of check out screen"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Title for the settings screen."
+  },
+  "english": "English",
+  "@english": {
+    "description": "Label for selecting the English language."
+  },
+  "arabic": "Arabic",
+  "@arabic": {
+    "description": "Label for selecting the Arabic language."
+  },
+  "systemDefault": "System Default",
+  "@systemDefault": {
+    "description": "Label for selecting the system default language option."
+  },
+  "failed": "Failed",
+  "@failed": {
+    "description": "Fallback text shown when an error occurs."
+  },
+"name": "Name:",
+"@name": {
+  "description": "word name in check out screen"
+},
+"order": "Order",
+"@order": {
+  "description": "word 'order' in default button"
+},
+"location": "Location:",
+"@location": {
+  "description": "word 'location' in check out screen"
+},
+"productsPrice": "Products price",
+"@productsPrice": {
+  "description": "word 'Products price' in default button"
+},
+"shippingfees": "Shipping fees",
+"@shippingfees": {
+  "description": "word 'shipping fees' in default button"
+},
+"total": "Total",
+"@total": {
+  "description": "word 'Total' in default button"
+},
+"delivery": "Customer data",
+"@delivery": {
+  "description": "word 'delivery' in check out"
+},"contact": "Contact:",
+"@contact": {
+  "description": "word 'dcontact' in check out"
+},"totalCost": "Total cost:",
+"@totalCost": {
+  "description": "word 'total Cost' in check out"
+}
+
+}

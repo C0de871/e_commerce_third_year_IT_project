@@ -3,6 +3,12 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  connectivity_plus
+  dynamic_color
+  file_selector_windows
+  firebase_core
+  flutter_secure_storage_windows
+  rive_common
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
