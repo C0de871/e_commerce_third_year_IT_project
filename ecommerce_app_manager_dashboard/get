@@ -1,0 +1,226 @@
+{
+    "successful": true,
+    "data": [
+        {
+            "id": 1,
+            "first_name": "Hasan",
+            "last_name": "Zaeter",
+            "email": "hzaeter01@gmail.com",
+            "location": "medain",
+            "phone_number": "0935917557",
+            "image_url": "http://192.168.1.7:8000/storage",
+            "role": "manager"
+        },
+        {
+            "id": 2,
+            "first_name": "Linnie",
+            "last_name": "Grady",
+            "email": "walker.emely@example.net",
+            "location": "94336 Arnulfo Oval\nLizziefurt, AR 29045-9357",
+            "phone_number": "1040169949",
+            "image_url": "http://192.168.1.7:8000/storage//profiles/qen1KLxkd5y8smZUoDt9ErPIUKIavv3xbPgQGDb5.jpg",
+            "role": null
+        },
+        {
+            "id": 3,
+            "first_name": "Sylvan",
+            "last_name": "Kunde",
+            "email": "hills.bethel@example.net",
+            "location": "8452 Alycia Trafficway\nBenberg, SD 87401-1024",
+            "phone_number": "4628949691",
+            "image_url": "http://192.168.1.7:8000/storage//profiles/T1aanqa5shUX1KMJNVLRqTBNa7PDAgTSGUPCVm3i.jpg",
+            "role": null
+        },
+        {
+            "id": 4,
+            "first_name": "Chester",
+            "last_name": "Kemmer",
+            "email": "maegan.cole@example.com",
+            "location": "1289 Shaylee Neck Apt. 022\nHickleton, WI 31777-2900",
+            "phone_number": "4405703933",
+            "image_url": "http://192.168.1.7:8000/storage//profiles/T1aanqa5shUX1KMJNVLRqTBNa7PDAgTSGUPCVm3i.jpg",
+            "role": null
+        },
+        {
+            "id": 5,
+            "first_name": "Desmond",
+            "last_name": "Crooks",
+            "email": "doyle.blanche@example.net",
+            "location": "418 Klocko Ville\nOlsonton, KS 62475-0791",
+            "phone_number": "6097442650",
+            "image_url": "http://192.168.1.7:8000/storage//profiles/uaxfPgcvn2jBikDsvkcuB62NIBAcTi5nJkB5IbPl.jpg",
+            "role": null
+        },
+        {
+            "id": 6,
+            "first_name": "Annamarie",
+            "last_name": "Willms",
+            "email": "hegmann.cullen@example.net",
+            "location": "730 John Squares Suite 567\nBalistrerichester, RI 59266-1549",
+            "phone_number": "5238169946",
+            "image_url": "http://192.168.1.7:8000/storage//profiles/qen1KLxkd5y8smZUoDt9ErPIUKIavv3xbPgQGDb5.jpg",
+            "role": null
+        },
+        {
+            "id": 7,
+            "first_name": "D'angelo",
+            "last_name": "Baumbach",
+            "email": "perry.krajcik@example.org",
+            "location": "214 Crystal Expressway\nWehnerchester, AK 38293",
+            "phone_number": "7704412797",
+            "image_url": "http://192.168.1.7:8000/storage//profiles/3jY0HrLw9tlqm9ppRjBmzYEgjbOgxIccq4oyH1XZ.jpg",
+            "role": null
+        },
+        {
+            "id": 8,
+            "first_name": "Evert",
+            "last_name": "Erdman",
+            "email": "kaitlyn.stamm@example.net",
+            "location": "788 Feil Forges\nRickeyfort, VA 42644",
+            "phone_number": "8156988053",
+            "image_url": "http://192.168.1.7:8000/storage//profiles/7TnDoHP6cUbITWh068cBGvK3v1k4qdBOkTlqoEGn.jpg",
+            "role": null
+        },
+        {
+            "id": 9,
+            "first_name": "Abner",
+            "last_name": "Robel",
+            "email": "oberbrunner.samara@example.org",
+            "location": "34293 Becker Summit Apt. 681\nPort Carlistad, AK 24972",
+            "phone_number": "2305703240",
+            "image_url": "http://192.168.1.7:8000/storage//profiles/7TnDoHP6cUbITWh068cBGvK3v1k4qdBOkTlqoEGn.jpg",
+            "role": null
+        },
+        {
+            "id": 10,
+            "first_name": "Destiney",
+            "last_name": "Douglas",
+            "email": "nikolas30@example.org",
+            "location": "67056 Olson Parks\nNorth Alexamouth, WV 77068-0199",
+            "phone_number": "5442655175",
+            "image_url": "http://192.168.1.7:8000/storage//profiles/GvAIr2jce6bEil52ciKxZORHbhraVKJ64F0Ht7Zp.jpg",
+            "role": null
+        },
+        {
+            "id": 11,
+            "first_name": "Brianne",
+            "last_name": "Harris",
+            "email": "athena.parker@example.org",
+            "location": "1536 Jarrod Island Apt. 910\nSouth Ellsworth, MD 77426",
+            "phone_number": "2158886072",
+            "image_url": "http://192.168.1.7:8000/storage//profiles/3jY0HrLw9tlqm9ppRjBmzYEgjbOgxIccq4oyH1XZ.jpg",
+            "role": null
+        },
+        {
+            "id": 12,
+            "first_name": "Guiseppe",
+            "last_name": "Hintz",
+            "email": "zachary84@example.com",
+            "location": "865 Wilkinson Lodge Apt. 247\nAlbinfurt, IL 00020",
+            "phone_number": "8341618434",
+            "image_url": "http://192.168.1.7:8000/storage//profiles/ChldEc86YgpvmG0qYScOxYxW7FydbcS4hKbX20UT.png",
+            "role": null
+        },
+        {
+            "id": 13,
+            "first_name": "Emiliano",
+            "last_name": "Prosacco",
+            "email": "wturcotte@example.org",
+            "location": "58793 Beatty Plain Suite 868\nNicolasville, WA 33235-1763",
+            "phone_number": "5566560201",
+            "image_url": "http://192.168.1.7:8000/storage//profiles/zdBXsV0T7U0buW3sMZ5Q7lJLuQg2yGdW5F6YFwNP.png",
+            "role": null
+        },
+        {
+            "id": 14,
+            "first_name": "Jennie",
+            "last_name": "Langworth",
+            "email": "derrick.ward@example.org",
+            "location": "33483 Sanford Squares Apt. 945\nKayleighberg, MN 90802-9247",
+            "phone_number": "3193500083",
+            "image_url": "http://192.168.1.7:8000/storage//profiles/yjrmbjeXgBtmWyggMcXJKC6nbdc7NSTnHITnI8If.jpg",
+            "role": null
+        },
+        {
+            "id": 15,
+            "first_name": "Gayle",
+            "last_name": "Stiedemann",
+            "email": "bridgette.farrell@example.org",
+            "location": "77663 Dessie Shores Suite 564\nJeannemouth, NV 92580-4446",
+            "phone_number": "4746112092",
+            "image_url": "http://192.168.1.7:8000/storage//profiles/LngPiaY6yurAtHqAxpig9WDLbRnVen6kU2ZABCmJ.jpg",
+            "role": null
+        },
+        {
+            "id": 16,
+            "first_name": "Mabelle",
+            "last_name": "Rosenbaum",
+            "email": "valerie51@example.com",
+            "location": "671 Rice Harbor\nBartonberg, OH 25310-6363",
+            "phone_number": "6329313181",
+            "image_url": "http://192.168.1.7:8000/storage//profiles/uaxfPgcvn2jBikDsvkcuB62NIBAcTi5nJkB5IbPl.jpg",
+            "role": null
+        },
+        {
+            "id": 17,
+            "first_name": "Mattie",
+            "last_name": "Lind",
+            "email": "vernon.von@example.org",
+            "location": "5711 Murl Fields Suite 523\nLake Josh, DC 69304",
+            "phone_number": "7339594796",
+            "image_url": "http://192.168.1.7:8000/storage//profiles/Ei6PPYos6JIAyLCiDiTMeeZAjhmmuicDlwOaCQLM.jpg",
+            "role": null
+        },
+        {
+            "id": 18,
+            "first_name": "Katarina",
+            "last_name": "Durgan",
+            "email": "nhintz@example.net",
+            "location": "78660 Feeney Fork\nSouth Khalilshire, AL 46663",
+            "phone_number": "0810381233",
+            "image_url": "http://192.168.1.7:8000/storage//profiles/7TnDoHP6cUbITWh068cBGvK3v1k4qdBOkTlqoEGn.jpg",
+            "role": null
+        },
+        {
+            "id": 19,
+            "first_name": "Jaycee",
+            "last_name": "Marquardt",
+            "email": "brennan.kovacek@example.net",
+            "location": "24424 Marjorie Station Suite 114\nLake Zelmaton, RI 57126-6984",
+            "phone_number": "3425358954",
+            "image_url": "http://192.168.1.7:8000/storage//profiles/T1aanqa5shUX1KMJNVLRqTBNa7PDAgTSGUPCVm3i.jpg",
+            "role": null
+        },
+        {
+            "id": 20,
+            "first_name": "Thomas",
+            "last_name": "Bartell",
+            "email": "lori80@example.net",
+            "location": "344 Hazle Crest Suite 340\nSipesville, NC 34445",
+            "phone_number": "0507111945",
+            "image_url": "http://192.168.1.7:8000/storage//profiles/T1aanqa5shUX1KMJNVLRqTBNa7PDAgTSGUPCVm3i.jpg",
+            "role": null
+        },
+        {
+            "id": 21,
+            "first_name": "Annamarie",
+            "last_name": "Smith",
+            "email": "uokeefe@example.com",
+            "location": "8548 Lilyan Crest\nWest Kameron, KS 08082-2137",
+            "phone_number": "1505362829",
+            "image_url": "http://192.168.1.7:8000/storage//profiles/uaxfPgcvn2jBikDsvkcuB62NIBAcTi5nJkB5IbPl.jpg",
+            "role": null
+        },
+        {
+            "id": 22,
+            "first_name": "only one",
+            "last_name": "alkasm",
+            "email": "muhammadaydi7@gmail.com",
+            "location": "12e32",
+            "phone_number": "0969090711",
+            "image_url": "http://192.168.1.7:8000/storage/profiles/Pc4O9XbQTSF6ohSQkdbfGVMijN6p9FQTmUzHz8oC.png",
+            "role": "store_admin"
+        }
+    ],
+    "status_code": 200
+}

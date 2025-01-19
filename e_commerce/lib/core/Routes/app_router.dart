@@ -13,6 +13,7 @@ import '../../features/auth/presentation/login_screen/log_in_screen.dart';
 import '../../features/auth/presentation/login_success_screen/login_success_screen.dart';
 import '../../features/auth/presentation/splash screen/splash_screen.dart';
 import '../../features/cart/presentation/cart_screen/cart_screen.dart';
+import '../../features/cart/presentation/cubit/add_to_cart_cubit.dart';
 import '../../features/cart/presentation/cubit/cart_cubit.dart';
 import '../../features/cart/presentation/cubit/delete_cart_cubit.dart';
 import '../../features/cart/presentation/cubit/modify_cart_cubit.dart';
@@ -56,6 +57,7 @@ class AppRouter {
   GetOrderCubit? _getOrderCubit;
   DeleteOrderCubit? _deleteOrderCubit;
   GetOrderDetailsCubit? _getOrderDetailsCubit;
+  AddToCartCubit? _addToCartCubit;
   // ClearCartCubit? _clearCartCubit;
 
   UserCubit get userCubit {
@@ -68,6 +70,17 @@ class AppRouter {
     return _userCubit!;
   }
 
+  AddToCartCubit get addToCartCubit {
+    if (_addToCartCubit == null || _addToCartCubit!.isClosed) {
+      _addToCartCubit = AddToCartCubit();
+    }
+    _addToCartCubit!.stream.listen((_) {}, onDone: () {
+      _addToCartCubit = null; // Nullify the reference when closed
+    });
+    return _addToCartCubit!;
+  }
+
+  
   GetOrderCubit get getOrderCubit {
     if (_getOrderCubit == null || _getOrderCubit!.isClosed) {
       _getOrderCubit = GetOrderCubit();
@@ -201,22 +214,36 @@ class AppRouter {
       //! cart route:
       case AppRoutes.cartScreen:
         return MaterialPageRoute(
-            settings: settings,
-            builder: (_) => MultiBlocProvider(providers: [
-                  BlocProvider(
-                    create: (context) => modifyCartCubit,
-                  ),
-                  BlocProvider(
-                    create: (context) => cartCubit..getCartTrigger(),
-                  ),
-                  BlocProvider(
-                    create: (context) => deleteCartCubit,
-                  ),
-                ], child: const CartScreen()));
+          settings: settings,
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => modifyCartCubit,
+              ),
+              BlocProvider(
+                create: (context) => cartCubit..getCartTrigger(),
+              ),
+              BlocProvider(
+                create: (context) => deleteCartCubit,
+              ),
+              // BlocProvider(
+              //   create: (context) => clearCartCubit,
+              // ),
+            ],
+            child: const CartScreen(),
+          ),
+        );
+      //     builder:
+      //   create: (context) => userCubit,
+      //   child: const LoginScreen(),
+      // ),
+      //   builder: (_) => MultiBlocProvider(providers: [
+      //         BlocProvider.value(value: cartCubit),
 
+      //       ], child: const CartScreen()));
 //!order screen:
-      case AppRoutes.orderScreen:
-        return MaterialPageRoute(
+            case AppRoutes.orderScreen:
+          return MaterialPageRoute(
             settings: settings,
             builder: (_) => MultiBlocProvider(providers: [
                   BlocProvider(
@@ -307,11 +334,9 @@ class AppRouter {
           settings: settings,
           builder: (_) => MultiBlocProvider(
             providers: [
-              BlocProvider(
-                  create: (context) => GetProductDetailsCubit.instance),
+              BlocProvider(create: (context) => GetProductDetailsCubit.instance),
               BlocProvider(create: (context) => ToggleFavCubit.instance),
-              BlocProvider(
-                  create: (context) => GetFavListCubit.instance..getFavList()),
+              BlocProvider(create: (context) => GetFavListCubit.instance..getFavList()),
             ],
             child: FavListScreen(),
           ),
@@ -322,8 +347,6 @@ class AppRouter {
           settings: settings,
           builder: (_) => const AccountDetailsScreen(),
         );
-
-
 
       //! home route:
       case AppRoutes.pageView:
@@ -365,6 +388,12 @@ class AppRouter {
               ),
               BlocProvider.value(
                 value: ToggleFavCubit.instance,
+              ),
+              BlocProvider.value(
+                value: addToCartCubit,
+              ),
+              BlocProvider(
+                create: (context) => modifyCartCubit,
               ),
             ],
             child: ProductDetailsScreen(),
