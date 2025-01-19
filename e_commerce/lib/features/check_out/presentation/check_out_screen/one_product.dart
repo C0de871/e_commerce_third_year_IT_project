@@ -20,7 +20,7 @@ class OneProduct extends StatelessWidget {
             color: Colors.grey.withOpacity(0.3),
             spreadRadius: 2,
             blurRadius: 5,
-            offset: Offset(0, 3), 
+            offset: Offset(0, 3),
           ),
         ],
       ),

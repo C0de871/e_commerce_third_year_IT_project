@@ -2,10 +2,9 @@ import 'package:e_commerce/core/databases/api/end_points.dart';
 import 'package:e_commerce/core/shared/widgets/defualt_button.dart';
 import 'package:e_commerce/features/auth/domain/entites/user_entities/user_entities.dart';
 import 'package:e_commerce/features/auth/presentation/cubit/get_last_user_cubit/get_last_user_cubit.dart';
-import 'package:e_commerce/features/cart/domain/entites/cart_entity.dart';
 import 'package:e_commerce/features/cart/domain/entites/cart_entity/sub_cart_entity.dart';
-import 'package:e_commerce/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:e_commerce/features/check_out/presentation/check_cubit/check_out_cubit.dart';
+import 'package:e_commerce/features/check_out/presentation/check_cubit/check_out_state.dart';
 import 'package:e_commerce/features/check_out/presentation/check_out_screen/one_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,14 +12,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CheckOutScreen extends StatelessWidget {
   const CheckOutScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     final checkoutData =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
-    final List<SubCartEntity> cartItems = checkoutData[ApiKey.data];
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final List<SubCartEntity> cartItems = (checkoutData[ApiKey.data] as List)
+        .map((item) => SubCartEntity.fromJson(item as Map<String, dynamic>))
+        .toList();
     final double totalPrice = checkoutData[ApiKey.totalPrice]!;
-    final double finalPrice = totalPrice + 500.0;
+    const double shippingFees = 500.0;
+    final double finalPrice = totalPrice + shippingFees;
     UserEntity? user;
     if (context.read<GetLastUserCubit>().state is UserLoaded) {
       user = (context.read<GetLastUserCubit>().state as UserLoaded).user;
@@ -39,7 +40,8 @@ class CheckOutScreen extends StatelessWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surfaceContainerLowest,
+                      color:
+                          Theme.of(context).colorScheme.surfaceContainerLowest,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.2),
@@ -65,7 +67,8 @@ class CheckOutScreen extends StatelessWidget {
                     width: double.infinity,
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surfaceContainerLowest,
+                      color:
+                          Theme.of(context).colorScheme.surfaceContainerLowest,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.2),
@@ -138,7 +141,8 @@ class CheckOutScreen extends StatelessWidget {
                                 ),
                               ),
                               TextSpan(
-                                text: "${user?.subUserEntity?.location ?? 'Unknown'}",
+                                text:
+                                    "${user?.subUserEntity?.location ?? 'Unknown'}",
                                 style: TextStyle(
                                   color: Colors.blue,
                                   fontSize: 14,
@@ -152,7 +156,9 @@ class CheckOutScreen extends StatelessWidget {
                           width: double.infinity,
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.surfaceContainerLowest,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .surfaceContainerLowest,
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey.withOpacity(0.2),
@@ -195,7 +201,8 @@ class CheckOutScreen extends StatelessWidget {
                                 text: TextSpan(
                                   children: [
                                     TextSpan(
-                                      text: AppLocalizations.of(context)!.phoneNumber,
+                                      text: AppLocalizations.of(context)!
+                                          .phoneNumber,
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 16,
@@ -245,7 +252,9 @@ class CheckOutScreen extends StatelessWidget {
                           width: double.infinity,
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.surfaceContainerLowest,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .surfaceContainerLowest,
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey.withOpacity(0.2),
@@ -288,7 +297,8 @@ class CheckOutScreen extends StatelessWidget {
                                 text: TextSpan(
                                   children: [
                                     TextSpan(
-                                      text: AppLocalizations.of(context)!.productsPrice,
+                                      text: AppLocalizations.of(context)!
+                                          .productsPrice,
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 16,
@@ -310,7 +320,8 @@ class CheckOutScreen extends StatelessWidget {
                                 text: TextSpan(
                                   children: [
                                     TextSpan(
-                                      text: AppLocalizations.of(context)!.shippingfees,
+                                      text: AppLocalizations.of(context)!
+                                          .shippingfees,
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 16,
@@ -363,11 +374,46 @@ class CheckOutScreen extends StatelessWidget {
           // الزر الثابت في الأسفل
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: DefaultButton(
-              text: AppLocalizations.of(context)!.order,
-              press: () {
-                print("****************len:${cartItems.length}");
-                context.read<CheckOutCubit>().createOrderTrigger(cartItems: cartItems);
+            child: BlocConsumer<CheckOutCubit, CheckOutState>(
+              listener: (context, state) {
+                if (state is CheckOutSuccess) {
+                  // عرض SnackBar عند نجاح الأوردر
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(" Order Done ..."),
+                      backgroundColor: Colors.green,
+                      duration: Duration(seconds: 3),
+                    ),
+                  );
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text("Order Failed"),
+                        content: Text("Please review your cart screen."),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context); // إغلاق مربع الحوار
+                            },
+                            child: Text("Confirm"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }
+              },
+              builder: (context, state) {
+                return DefaultButton(
+                  text: AppLocalizations.of(context)!.order,
+                  press: () {
+                    context
+                        .read<CheckOutCubit>()
+                        .createOrderTrigger(cartItems: cartItems);
+                  },
+                );
               },
             ),
           ),
