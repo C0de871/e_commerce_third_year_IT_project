@@ -1,7 +1,5 @@
 import 'dart:developer';
 
-
-
 import 'package:dio/dio.dart';
 import 'package:e_commerce/core/helper/extensions.dart';
 import 'package:flutter/material.dart';

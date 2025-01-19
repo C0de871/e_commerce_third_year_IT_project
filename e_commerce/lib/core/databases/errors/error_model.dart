@@ -1,5 +1,3 @@
-
-
 import '../api/end_points.dart';
 
 class ErrorModel {
