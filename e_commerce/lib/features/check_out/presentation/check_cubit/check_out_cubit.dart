@@ -7,30 +7,30 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CheckOutCubit extends Cubit<CheckOutState> {
   CreateOrder createOrder;
-  
+
   CheckOutCubit()
-  : createOrder = getIt<CreateOrder>(),
-  super(CheckOutInitial());
+      : createOrder = getIt<CreateOrder>(),
+        super(CheckOutInitial());
 
-
-  dynamic createOrderTrigger({required List<SubCartEntity> cartItems}) async{
+  dynamic createOrderTrigger({required List<SubCartEntity> cartItems}) async {
     emit(CheckOutLoading());
-    List<Map<String, dynamic>> jsonCartItems = cartItems.map((item) => item.toJson()).toList();
-  
-  // إنشاء هيكل الطلب
-  Map<String, dynamic> bodyJson = {ApiKey.data: jsonCartItems};
-    
+    List<Map<String, dynamic>> jsonCartItems =
+        cartItems.map((item) => item.toJson()).toList();
+
+    // إنشاء هيكل الطلب
+    Map<String, dynamic> bodyJson = {ApiKey.data: jsonCartItems};
 
     // print("********************${cartItems.length}");
     // Map<String,List<SubCartEntity>> bodyJson={'data' : cartItems};
     // print("----------------------------------------------");
     // print(bodyJson["data"][0]['quantity']);
-final failureOrCreateOrderEntity=await createOrder.call(bodyJson: bodyJson);
-failureOrCreateOrderEntity.fold(
-  (failure) => emit(CheckOutFailure()),
+    final failureOrCreateOrderEntity =
+        await createOrder.call(bodyJson: bodyJson);
+    failureOrCreateOrderEntity.fold(
+      (failure) => emit(CheckOutFailure()),
       (checkOutOrderEntity) => emit(
         CheckOutSuccess(checkOutOrderEntity: checkOutOrderEntity),
       ),
-);
+    );
   }
 }
