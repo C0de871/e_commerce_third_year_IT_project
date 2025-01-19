@@ -1,7 +1,7 @@
 import '../params/params.dart';
 
 class EndPoints {
-  static const String baserUrl = "http://192.168.1.2:8000/api/";
+  static const String baserUrl = "http://192.168.1.7:8000/api/";
   static const String login = "login";
   static const String signUp = "register";
   static const String toggleFavOn = "favorites/";
@@ -20,18 +20,25 @@ class EndPoints {
     return "stores/${params.storeID}/show";
   }
 
-
   static String getProductStoredId(GetStoredAndProductIdParams params) {
     return "carts/${params.storeID}/products/${params.productID}/add";
   }
 
-  static const String getCart = "carts/products/0";
+  static String deleteOrder(GetOrderIdParams params) {
+    return "orders/${params.orderID}";
+  }
+
+  static String getOrderDetails(GetOrderIdParams params) {
+    return "orders/show/${params.orderID}";
+  }
+
+  static const String getCart = "carts/products";
   static const String modifyCart = "carts/update-quantities";
   static const String deleteCart = "carts/delete-products";
   static const String clearCart = "carts/delete-all";
   static const String getSizeCart = "carts/getSize";
   static const String createOrder = "orders/create";
-  static const String getOrder="orders";
+  static const String getOrder = "orders";
 }
 
 class ApiKey {
@@ -101,10 +108,6 @@ class ApiKey {
   static String orderReference = "order_reference";
   static String status = "status";
   static String orders = "orders";
-
-
-
-
 }
 
 class CacheKey {
