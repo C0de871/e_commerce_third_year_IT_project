@@ -1,7 +1,9 @@
-import 'package:ecommerce_app_manager_dashboard/features/template/domain/entities/get_users_entity/data_entity.dart';
-import 'package:ecommerce_app_manager_dashboard/features/template/presentation/cubit/get_users_cubit.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../domain/entities/get_users_entity/data_entity.dart';
+import 'cubit/get_users_cubit.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});

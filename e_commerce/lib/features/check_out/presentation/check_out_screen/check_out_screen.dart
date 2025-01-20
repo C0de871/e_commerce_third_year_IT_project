@@ -375,10 +375,11 @@ class CheckOutScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: BlocConsumer<CheckOutCubit, CheckOutState>(
-              listener: (context, state) {
+             listener: (context, state) {
                 if (state is CheckOutSuccess) {
+                  if(state.checkOutOrderEntity.message=="Orders created successfully.")
                   // عرض SnackBar عند نجاح الأوردر
-                  ScaffoldMessenger.of(context).showSnackBar(
+                  {ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(" Order Done ..."),
                       backgroundColor: Colors.green,
@@ -403,8 +404,11 @@ class CheckOutScreen extends StatelessWidget {
                       );
                     },
                   );
+                } 
+                }else{
+                  return;
                 }
-              },
+              }, 
               builder: (context, state) {
                 return DefaultButton(
                   text: AppLocalizations.of(context)!.order,

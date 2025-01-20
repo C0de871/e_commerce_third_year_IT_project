@@ -19,10 +19,10 @@ import '../../../features/settings/data/repository/language_repository_impl.dart
 import '../../../features/settings/domain/repository/language_repository.dart';
 import '../../../features/settings/domain/usecases/retrieve_user_lang.dart';
 import '../../../features/settings/domain/usecases/save_lang.dart';
-import '../../../features/template/data/data sources/get_users_remote_data_source.dart';
-import '../../../features/template/data/repository/get_users_repository_imple.dart';
-import '../../../features/template/domain/repository/get_users_repository.dart';
-import '../../../features/template/domain/use_cases/get_users_use_case.dart';
+import '../../../features/users/data/data sources/get_users_remote_data_source.dart';
+import '../../../features/users/data/repository/get_users_repository_imple.dart';
+import '../../../features/users/domain/repository/get_users_repository.dart';
+import '../../../features/users/domain/use_cases/get_users_use_case.dart';
 import '../../databases/api/api_consumer.dart';
 import '../../databases/api/dio_consumer.dart';
 import '../../databases/cache/secure_storage_helper.dart';

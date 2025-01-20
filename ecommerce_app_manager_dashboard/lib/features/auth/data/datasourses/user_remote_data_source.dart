@@ -14,7 +14,7 @@ class UserRemoteDataSource {
 
   Future<UserModel> loginUser(Map<String, dynamic> jsonbody) async {
     Map<String, dynamic> headers = {
-      ApiKey.deviceId: await cacheHelper.getData(key: CacheKey.fcmToken),
+      ApiKey.deviceId: "283sif",
     };
     final response = await api.post(
       EndPoints.login,

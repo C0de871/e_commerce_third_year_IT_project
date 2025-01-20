@@ -1,5 +1,4 @@
-import 'package:ecommerce_app_manager_dashboard/features/template/presentation/cubit/get_users_cubit.dart';
-import 'package:ecommerce_app_manager_dashboard/features/template/presentation/dashboard_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,7 +7,8 @@ import '../../features/auth/presentation/login_screen/log_in_screen.dart';
 import '../../features/auth/presentation/login_success_screen/login_success_screen.dart';
 import '../../features/auth/presentation/splash screen/splash_screen.dart';
 
-import '../../features/template/presentation/dashboard.dart';
+import '../../features/users/presentation/cubit/get_users_cubit.dart';
+import '../../features/users/presentation/dashboard.dart';
 import 'app_routes.dart';
 
 class AppRouter {

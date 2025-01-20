@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:ecommerce_app_manager_dashboard/features/template/domain/entities/get_users_entity/data_entity.dart';
 
 import '../../../domain/entities/get_users_entity/get_users_entity.dart';
 import 'data_model.dart';
