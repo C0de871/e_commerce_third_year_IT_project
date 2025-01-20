@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/databases/connection/network_info.dart';
 import '../../../../core/databases/errors/expentions.dart';
 import '../../../../core/databases/errors/failure.dart';
-import '../../../../core/databases/params/params.dart';
 import '../../domain/entities/get_users_entity/get_users_entity.dart';
 import '../../domain/repository/get_users_repository.dart';
 import '../data sources/get_users_remote_data_source.dart';

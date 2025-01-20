@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../core/utils/services/service_locator.dart';
 import '../../domain/entities/get_users_entity/get_users_entity.dart';

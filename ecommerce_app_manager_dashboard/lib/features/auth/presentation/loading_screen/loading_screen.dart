@@ -32,7 +32,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
             listener: (context, state) async {
               if (state is CheckFirstLaunchLoaded) {
                 if (state.isFirstLaunch) {
-                  await Future.delayed(Duration(seconds: 2));
+                  await Future.delayed(const Duration(seconds: 2));
                   if (context.mounted) {
                     Navigator.pushReplacementNamed(
                         context, AppRoutes.splashRoute);
@@ -46,12 +46,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
           BlocListener<GetLastUserCubit, GetLastUserState>(
             listener: (context, state) async {
               if (state is UserLoaded) {
-                await Future.delayed(Duration(seconds: 5));
+                await Future.delayed(const Duration(seconds: 5));
                 if (context.mounted) {
                   Navigator.pushReplacementNamed(context, AppRoutes.usersRoute);
                 }
               } else if (state is NoUserFound) {
-                await Future.delayed(Duration(seconds: 5));
+                await Future.delayed(const Duration(seconds: 5));
                 if (context.mounted) {
                   Navigator.pushReplacementNamed(context, AppRoutes.loginRoute);
                 }

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 
 import '../../../domain/entities/get_users_entity/get_users_entity.dart';
 import 'data_model.dart';

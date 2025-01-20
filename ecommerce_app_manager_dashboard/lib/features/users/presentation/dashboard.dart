@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import 'dashboard_screen.dart';
+import 'dashboard_body.dart';
 import 'side_menu.dart';
 
 class MainScreen extends StatefulWidget {
@@ -24,12 +23,9 @@ class _MainScreenState extends State<MainScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
               Expanded(
-                //default flex = 1
-                //it takes 1/6 part of the screen
                 child: SideMenu(),
               ),
             Expanded(
-              //It takes 5/6 part of the screen
               flex: 5,
               child: DashboardScreen(),
             ),

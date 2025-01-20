@@ -77,7 +77,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       flex: 3,
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: padding4 * 5),
+                      padding: const EdgeInsets.symmetric(horizontal: padding4 * 5),
                       child: DefaultButton(
                         text: AppLocalizations.of(context)!.continueSplash,
                         press: () async {
