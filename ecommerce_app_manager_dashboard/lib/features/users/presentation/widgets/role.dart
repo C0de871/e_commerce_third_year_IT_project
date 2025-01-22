@@ -1,6 +1,8 @@
 import 'package:ecommerce_app_manager_dashboard/core/helper/extensions.dart';
 import 'package:ecommerce_app_manager_dashboard/features/users/domain/entities/get_users_entity/data_entity.dart';
+import 'package:ecommerce_app_manager_dashboard/features/users/presentation/update_role_cubit/update_user_role_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Role extends StatelessWidget {
   const Role({
@@ -8,11 +10,13 @@ class Role extends StatelessWidget {
     required this.color,
     required this.role,
     required this.user,
+    required this.parentContext,
   });
 
   final Color color;
   final String role;
   final DataEntity user;
+  final BuildContext parentContext;
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +28,7 @@ class Role extends StatelessWidget {
       title: Text(role.capitalize()),
       selected: user.role?.toLowerCase() == role,
       onTap: () {
-        // context.read<GetUsersCubit>().updateUserRole(
-        //       userId: user.id,
-        //       newRole: role,
-        //     );
-        Navigator.of(context).pop();
+        parentContext.read<UpdateUserRoleCubit>().updateUserRole(userId: user.id, role: role);
       },
     );
   }

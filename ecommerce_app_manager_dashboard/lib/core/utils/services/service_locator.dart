@@ -21,8 +21,10 @@ import '../../../features/settings/domain/usecases/retrieve_user_lang.dart';
 import '../../../features/settings/domain/usecases/save_lang.dart';
 import '../../../features/users/data/data sources/get_users_remote_data_source.dart';
 import '../../../features/users/data/repository/get_users_repository_imple.dart';
+import '../../../features/users/data/services/role_update_service.dart';
 import '../../../features/users/domain/repository/get_users_repository.dart';
 import '../../../features/users/domain/use_cases/get_users_use_case.dart';
+import '../../../features/users/domain/use_cases/update_role_use_case.dart';
 import '../../databases/api/api_consumer.dart';
 import '../../databases/api/dio_consumer.dart';
 import '../../databases/cache/secure_storage_helper.dart';
@@ -33,6 +35,7 @@ final getIt = GetIt.instance; // Singleton instance of GetIt
 
 void setupServicesLocator() {
   //!service:
+  getIt.registerLazySingleton(() => RoleUpdateService());
 
   //! Core
   getIt.registerLazySingleton<SharedPrefsHelper>(() => SharedPrefsHelper());
@@ -79,4 +82,5 @@ void setupServicesLocator() {
   getIt.registerLazySingleton<RetrieveUserLang>(() => RetrieveUserLang(languageRepository: getIt()));
   getIt.registerLazySingleton<SaveLang>(() => SaveLang(languageRepository: getIt()));
   getIt.registerLazySingleton<GetUsers>(() => GetUsers(repository: getIt()));
+  getIt.registerLazySingleton<UpdateUserRole>(() => UpdateUserRole(repository: getIt()));
 }

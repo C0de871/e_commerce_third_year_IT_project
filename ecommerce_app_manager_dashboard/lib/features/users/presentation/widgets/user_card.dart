@@ -15,6 +15,7 @@ class UserCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Theme.of(context).colorScheme.surfaceContainer,
       elevation: 4,
       margin: const EdgeInsets.only(bottom: padding4 * 4),
       child: Padding(

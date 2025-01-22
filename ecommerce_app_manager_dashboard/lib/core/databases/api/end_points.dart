@@ -13,6 +13,7 @@ class EndPoints {
   static const String refreshToken = "refresh";
   static const String favList = "favorites";
   static const String getUsers = "users";
+  static const String assignRole = "users/assign-role";
   static String getProductDetails(GetProductDetailsParams params) {
     return "stores/${params.storeID}/${params.productID}/show";
   }
@@ -35,6 +36,7 @@ class EndPoints {
 }
 
 class ApiKey {
+  static String userId = "user_id";
   static String success = "success";
   static String refreshTokenHeader = "Refresh-Token";
   static String requiredAuth = "requiresAuth";

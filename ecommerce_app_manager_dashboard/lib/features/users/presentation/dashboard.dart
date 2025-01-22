@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'dashboard_body.dart';
-import 'side_menu.dart';
+import 'widgets/side_menu.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

@@ -14,7 +14,7 @@ class UserRemoteDataSource {
 
   Future<UserModel> loginUser(Map<String, dynamic> jsonbody) async {
     Map<String, dynamic> headers = {
-      ApiKey.deviceId: "283sif",
+      ApiKey.deviceId: null,
     };
     final response = await api.post(
       EndPoints.login,

@@ -1,6 +1,5 @@
 import 'package:ecommerce_app_manager_dashboard/core/utils/constants/app_numbers.dart';
 import 'package:ecommerce_app_manager_dashboard/features/users/domain/entities/get_users_entity/data_entity.dart';
-import 'package:ecommerce_app_manager_dashboard/features/users/presentation/dashboard_body.dart';
 import 'package:ecommerce_app_manager_dashboard/features/users/presentation/widgets/user_current_role.dart';
 import 'package:ecommerce_app_manager_dashboard/features/users/presentation/widgets/user_email.dart';
 import 'package:ecommerce_app_manager_dashboard/features/users/presentation/widgets/user_phone.dart';
