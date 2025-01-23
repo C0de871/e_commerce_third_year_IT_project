@@ -6,13 +6,14 @@ import '../../features/auth/presentation/login_screen/log_in_screen.dart';
 import '../../features/auth/presentation/login_success_screen/login_success_screen.dart';
 import '../../features/auth/presentation/splash screen/splash_screen.dart';
 
-import '../../features/template/presentation/template.dart';
-import '../../features/user/presentation/account_details_screen.dart';
+import '../../features/products/presentation/cubit/add_product_cubit.dart';
+import '../../features/products/presentation/dashboard.dart';
 import 'app_routes.dart';
 
 class AppRouter {
   //? <======= cubits declration =======>
   UserCubit? _userCubit;
+  AddProductCubit? _addProductCubit;
 
   UserCubit get userCubit {
     if (_userCubit == null || _userCubit!.isClosed) {
@@ -22,6 +23,16 @@ class AppRouter {
       _userCubit = null; // Nullify the reference when closed
     });
     return _userCubit!;
+  }
+
+  AddProductCubit get addProductCubit {
+    if (_addProductCubit == null || _addProductCubit!.isClosed) {
+      _addProductCubit = AddProductCubit();
+    }
+    _addProductCubit!.stream.listen((_) {}, onDone: () {
+      _addProductCubit = null; // Nullify the reference when closed
+    });
+    return _addProductCubit!;
   }
 
   Route<dynamic> generateRoute(RouteSettings settings) {
@@ -43,16 +54,13 @@ class AppRouter {
             child: const LoginScreen(),
           ),
         );
-      case AppRoutes.accountDetails:
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (_) => const AccountDetailsScreen(),
-        );
 
-      //!template route:
-      case AppRoutes.templateRoute:
+      case AppRoutes.addProducts:
         return MaterialPageRoute(
-          builder: (_) => const Template(),
+          builder: (_) => BlocProvider(
+            create: (context) => addProductCubit,
+            child: const MainScreen(),
+          ),
         );
 
       //!default route:

@@ -155,7 +155,7 @@ class UserRepositoryImpl extends UserRepository {
     try {
       final bool success = await localDataSource.setFirstLaunch();
       if (success) {
-        return Right(false);
+        return const Right(false);
       } else {
         return Left(Failure(errMessage: "Failed To set first launch"));
       }

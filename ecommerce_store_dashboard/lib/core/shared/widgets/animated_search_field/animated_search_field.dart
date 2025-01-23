@@ -138,7 +138,7 @@ class _AnimSearchBarState extends State<AnimSearchBar>
       // height: 60.0,
 
       ///if the rtl is true, search bar will be from right to left
-      alignment: widget.rtl ? Alignment.centerRight : Alignment(-1.0, 0.0),
+      alignment: widget.rtl ? Alignment.centerRight : const Alignment(-1.0, 0.0),
 
       ///Using Animated container to expand and shrink the widget
       child: AnimatedContainer(
@@ -155,7 +155,7 @@ class _AnimSearchBarState extends State<AnimSearchBar>
           boxShadow: !widget.boxShadow
               ? null
               : [
-                  BoxShadow(
+                  const BoxShadow(
                     color: Colors.black26,
                     spreadRadius: -10.0,
                     blurRadius: 10.0,
@@ -173,9 +173,9 @@ class _AnimSearchBarState extends State<AnimSearchBar>
               curve: Curves.easeOut,
               child: AnimatedOpacity(
                 opacity: (toggle == 0) ? 0.0 : 1.0,
-                duration: Duration(milliseconds: 200),
+                duration: const Duration(milliseconds: 200),
                 child: Container(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
                     /// can add custom color or the color will be white
                     // color: widget.color,
@@ -245,7 +245,7 @@ class _AnimSearchBarState extends State<AnimSearchBar>
               ///Using Animated opacity to change the opacity of th textField while expanding
               child: AnimatedOpacity(
                 opacity: (toggle == 0) ? 0.0 : 1.0,
-                duration: Duration(milliseconds: 200),
+                duration: const Duration(milliseconds: 200),
                 child: Container(
                   padding: const EdgeInsets.only(left: 10),
                   alignment: Alignment.topCenter,
@@ -255,7 +255,7 @@ class _AnimSearchBarState extends State<AnimSearchBar>
                     controller: widget.textController,
                     inputFormatters: widget.inputFormatters,
                     focusNode: focusNode,
-                    cursorRadius: Radius.circular(10.0),
+                    cursorRadius: const Radius.circular(10.0),
                     cursorWidth: 2.0,
                     onChanged: (value) {
                       textFieldValue = value;
@@ -277,14 +277,14 @@ class _AnimSearchBarState extends State<AnimSearchBar>
                     },
 
                     ///style is of type TextStyle, the default is just a color black
-                    style: widget.style ?? TextStyle(color: Colors.black),
+                    style: widget.style ?? const TextStyle(color: Colors.black),
                     cursorColor: Colors.black,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.only(bottom: 5),
                       isDense: true,
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                       labelText: widget.helpText,
-                      labelStyle: TextStyle(
+                      labelStyle: const TextStyle(
                         color: Color(0xff5B5B5B),
                         fontSize: 17.0,
                         fontWeight: FontWeight.w500,

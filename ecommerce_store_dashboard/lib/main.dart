@@ -12,6 +12,5 @@ void main() async {
   await getIt<SharedPrefsHelper>().init();
   await FireBaseService.initializeApp();
   await FireBaseService().initNotifications();
-
   runApp(const MyApp());
 }

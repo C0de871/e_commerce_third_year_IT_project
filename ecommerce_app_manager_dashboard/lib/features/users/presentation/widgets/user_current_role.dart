@@ -1,6 +1,5 @@
 import 'package:ecommerce_app_manager_dashboard/core/utils/constants/app_numbers.dart';
 import 'package:ecommerce_app_manager_dashboard/features/users/domain/entities/get_users_entity/data_entity.dart';
-import 'package:ecommerce_app_manager_dashboard/features/users/domain/use_cases/update_role_use_case.dart';
 import 'package:ecommerce_app_manager_dashboard/features/users/presentation/cubit/get_users_cubit.dart';
 import 'package:ecommerce_app_manager_dashboard/features/users/presentation/update_role_cubit/update_user_role_cubit.dart';
 import 'package:ecommerce_app_manager_dashboard/features/users/presentation/widgets/role.dart';
