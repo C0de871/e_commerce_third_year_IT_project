@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -7,10 +6,12 @@ import '../../features/auth/presentation/cubit/get_last_user_cubit/get_last_user
 import '../../features/auth/presentation/loading_screen/loading_screen.dart';
 import '../../features/settings/presentation/cubit/language_cubit.dart';
 import '../Routes/app_router.dart';
+import '../Routes/app_routes.dart';
 import '../helper/app_functions.dart';
 import '../theme/app_theme.dart';
 import '../translations/l10n.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
                 defaultLightScheme(),
               ),
               home: const LoadingScreen(),
-              // initialRoute: AppRoutes.loginRoute,
+              // initialRoute: AppRoutes.addProducts,
               onGenerateRoute: AppRouter().generateRoute,
             );
           } else {

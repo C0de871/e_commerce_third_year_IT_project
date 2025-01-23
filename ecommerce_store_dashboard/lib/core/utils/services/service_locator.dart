@@ -1,5 +1,6 @@
-
 import 'package:dio/dio.dart';
+import 'package:ecommerce_store_dashboard/features/products/presentation/data/data%20sources/add_product_remote_data_source.dart';
+import 'package:ecommerce_store_dashboard/features/products/presentation/domain/repository/add_product_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -15,6 +16,8 @@ import '../../../features/auth/domain/usecases/refresh_token.dart';
 import '../../../features/auth/domain/usecases/resend_otp.dart';
 import '../../../features/auth/domain/usecases/set_first_launch.dart';
 import '../../../features/auth/domain/usecases/sign_up_user.dart';
+import '../../../features/products/presentation/data/repository/add_product_repository_imple.dart';
+import '../../../features/products/presentation/domain/use_cases/add_product_use_case.dart';
 import '../../../features/settings/data/data_sources/lang_local_data_source.dart';
 import '../../../features/settings/data/repository/language_repository_impl.dart';
 import '../../../features/settings/domain/repository/language_repository.dart';
@@ -36,17 +39,15 @@ void setupServicesLocator() {
   getIt.registerLazySingleton<SecureStorageHelper>(() => SecureStorageHelper());
   getIt.registerLazySingleton<Dio>(() => Dio());
   getIt.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: getIt()));
-  getIt.registerLazySingleton<InternetConnectionChecker>(
-      () => InternetConnectionChecker.instance);
+  getIt.registerLazySingleton<InternetConnectionChecker>(() => InternetConnectionChecker.instance);
   getIt.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(getIt()));
 
   //! Data Sources
-  getIt.registerLazySingleton<UserRemoteDataSource>(
-      () => UserRemoteDataSource(api: getIt(), cacheHelper: getIt()));
-  getIt.registerLazySingleton<UserLocalDataSource>(() =>
-      UserLocalDataSource(secureCache: getIt(), sharedPrefsCache: getIt()));
-  getIt.registerLazySingleton<LangLocalDataSource>(
-      () => LangLocalDataSource(sharedPrefsHelper: getIt()));
+  getIt.registerLazySingleton<UserRemoteDataSource>(() => UserRemoteDataSource(api: getIt(), cacheHelper: getIt()));
+  getIt.registerLazySingleton<UserLocalDataSource>(() => UserLocalDataSource(secureCache: getIt(), sharedPrefsCache: getIt()));
+  getIt.registerLazySingleton<LangLocalDataSource>(() => LangLocalDataSource(sharedPrefsHelper: getIt()));
+  getIt.registerLazySingleton<AddProductRemoteDataSource>(() => AddProductRemoteDataSource(api: getIt(), cacheHelper: getIt()));
+
   //! Repository
   getIt.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(
         networkInfo: getIt(),
@@ -54,31 +55,28 @@ void setupServicesLocator() {
         localDataSource: getIt(),
       ));
 
+  getIt.registerLazySingleton<AddProductRepository>(() => AddProductRepositoryImple(
+        networkInfo: getIt(),
+        remoteDataSource: getIt(),
+      ));
+
   getIt.registerLazySingleton<LanguageRepository>(() => LanguageRepositoryImpl(
         localDataSource: getIt(),
       ));
 
   //! Use Cases
-  getIt.registerLazySingleton<LoginUser>(
-      () => LoginUser(userRepository: getIt()));
-  getIt.registerLazySingleton<SignUpUser>(
-      () => SignUpUser(userRepository: getIt()));
-  getIt.registerLazySingleton<ResendOtp>(
-      () => ResendOtp(userRepository: getIt()));
+  getIt.registerLazySingleton<LoginUser>(() => LoginUser(userRepository: getIt()));
+  getIt.registerLazySingleton<SignUpUser>(() => SignUpUser(userRepository: getIt()));
+  getIt.registerLazySingleton<ResendOtp>(() => ResendOtp(userRepository: getIt()));
   getIt.registerLazySingleton<PostOtp>(() => PostOtp(userRepository: getIt()));
 
-  getIt.registerLazySingleton<RefreshToken>(
-      () => RefreshToken(userRepository: getIt()));
+  getIt.registerLazySingleton<RefreshToken>(() => RefreshToken(userRepository: getIt()));
 
-  getIt.registerLazySingleton<GetLastUser>(
-      () => GetLastUser(userRepository: getIt()));
-  getIt.registerLazySingleton<SetFirstLaunch>(
-      () => SetFirstLaunch(userRepository: getIt()));
-  getIt.registerLazySingleton<IsFirstLaunch>(
-      () => IsFirstLaunch(userRepository: getIt()));
+  getIt.registerLazySingleton<GetLastUser>(() => GetLastUser(userRepository: getIt()));
+  getIt.registerLazySingleton<SetFirstLaunch>(() => SetFirstLaunch(userRepository: getIt()));
+  getIt.registerLazySingleton<IsFirstLaunch>(() => IsFirstLaunch(userRepository: getIt()));
 
-  getIt.registerLazySingleton<RetrieveUserLang>(
-      () => RetrieveUserLang(languageRepository: getIt()));
-  getIt.registerLazySingleton<SaveLang>(
-      () => SaveLang(languageRepository: getIt()));
+  getIt.registerLazySingleton<RetrieveUserLang>(() => RetrieveUserLang(languageRepository: getIt()));
+  getIt.registerLazySingleton<SaveLang>(() => SaveLang(languageRepository: getIt()));
+  getIt.registerLazySingleton<AddProduct>(() => AddProduct(repository: getIt()));
 }

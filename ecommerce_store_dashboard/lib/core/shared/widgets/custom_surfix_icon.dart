@@ -54,7 +54,7 @@ class _CustomAnimatedLockIconState extends State<CustomAnimatedLockIcon> {
         bottom: padding4 * 3,
       ),
       child: widget.artboard == null
-          ? CircularProgressIndicator()
+          ? const CircularProgressIndicator()
           : SizedBox(
               width: 100,
               height: 100,

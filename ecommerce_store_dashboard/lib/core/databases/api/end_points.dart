@@ -1,7 +1,7 @@
 import '../params/params.dart';
 
 class EndPoints {
-  static const String baserUrl = "http://192.168.1.7:8000/api/";
+  static const String baserUrl = "http://192.168.11.67:8000/api/";
   static const String login = "login";
   static const String signUp = "register";
   static const String toggleFavOn = "favorites/";
@@ -12,18 +12,6 @@ class EndPoints {
   static const String getAllStores = "stores";
   static const String refreshToken = "refresh";
   static const String favList = "favorites";
-  static String getProductDetails(GetProductDetailsParams params) {
-    return "stores/${params.storeID}/${params.productID}/show";
-  }
-
-  static String showStore(ShowStoreParams params) {
-    return "stores/${params.storeID}/show";
-  }
-
-
-  static String getProductStoredId(GetStoredAndProductIdParams params) {
-    return "carts/${params.storeID}/products/${params.productID}/add";
-  }
 
   static const String getCart = "carts/products/0";
   static const String modifyCart = "carts/update-quantities";
@@ -31,10 +19,27 @@ class EndPoints {
   static const String clearCart = "carts/delete-all";
   static const String getSizeCart = "carts/getSize";
   static const String createOrder = "orders/create";
-  static const String getOrder="orders";
+  static const String getOrder = "orders";
+
+  static String addProduct(int storeID) {
+    return "stores/$storeID/products";
+  }
 }
 
 class ApiKey {
+  static String nameEn = "name_en";
+  static String categoryNameEn = "category_name_en";
+  static String mainImage = "main_image";
+  static String price = "price";
+  static String quantity = "quantity";
+  static String descriptionEn = "description_en";
+  static String nameAr = "name_ar";
+  static String categoryNameAr = "category_name_ar";
+  static String descriptionAr = "description_ar";
+  static String subImages(int id) {
+    return "sub_images[$id]";
+  }
+
   static String success = "success";
   static String refreshTokenHeader = "Refresh-Token";
   static String requiredAuth = "requiresAuth";
@@ -62,14 +67,12 @@ class ApiKey {
   static String updatedAt = "updated_at";
   static String data = "data";
   static String expiresIn = "expires_in";
-  static String mainImage = "main_image";
   static String storeId = "store_id";
   static String stores = "stores";
   static String storeName = "store_name";
   static String productId = "product_id";
   static String productName = "product_name";
-  static String price = "price";
-  static String quantity = "quantity";
+
   static String description = "description";
   static String mainImageUrl = "main_image";
   static String isFavorite = "is_favorite";
@@ -89,7 +92,6 @@ class ApiKey {
 
   static String categoryId = "category_id";
 
-  static String subImages = "sub_images";
   static String catagoryID = "category_id";
   static String categoryName = "category_name";
   static String quantityInCart = "quantityInCart";
@@ -101,10 +103,6 @@ class ApiKey {
   static String orderReference = "order_reference";
   static String status = "status";
   static String orders = "orders";
-
-
-
-
 }
 
 class CacheKey {
