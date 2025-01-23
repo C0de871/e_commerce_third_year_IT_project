@@ -1,0 +1,106 @@
+{
+    "language": "العربية",
+    "welcomeBack": "مرحبًا بعودتك",
+    "signInMessage": "قم بتسجيل الدخول باستخدام بريدك الإلكتروني وكلمة المرور أو تابع باستخدام وسائل التواصل الاجتماعي",
+    "dontHaveAccount": "ليس لديك حساب؟",
+    "signUp": "إنشاء حساب",
+    "appName": "جرابلت",
+    "welcome": "مرحبا قي جرابلت . دعنا نتسوق",
+    "splash2word": "نحن نساعد الناس العالم للتواصل مع المتاجر",
+    "splash3word": "نقدم لكم طريقة سهلة للتسوق\nفقط ابقى في المنزل معنا",
+    "registerAccount": "قم بإنشاء حساب جديد",
+    "completeYourdetails": "اكمل تفاصيلك او استخدم وسائل التواصل الاجتماعي",
+    "email": "البريد الالكتروني",
+    "enterYourEmail": "ادخل بريدك الالكتروني",
+    "password": "كلمة المرور",
+    "confirmPassword": "تاكيد كلمة المرور",
+    "reEnterYourPassword": "أعد كتابة كلمة المرور",
+    "enterYourPassword": "أدخل كلمة المرور",
+    "thisFieldCannotBeEmpty": "هذا الحقل لا يمكن أن يكون فارغًا",
+    "pleaseEnterValidEmail": "يرجى إدخال عنوان بريد إلكتروني صالح",
+    "passwordIsRequired": "كلمة المرور مطلوبة",
+    "passwordMustBeAtLeast8Characters": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
+    "passwordComplexityRequirement": "يجب أن تحتوي كلمة المرور على الأقل على واحد مما يلي:\n- حرف كبير وحرف صغير\n- رقم\n- رمز",
+    "doesNotMatch": "كلمات المرور غير متطابقة",
+    "continueSignUp": "متابعة",
+    "byContinuingYouAgreeTo": "بالمتابعة انت تؤكد انك موافق على\nشروط استخدام التطبيق وسياسة الخصوصية",
+    "completeProfile": "اكمل الملف الشخصي",
+    "completeYourProfileDetails": "اكمل تفاصيل حسابك او استخدم وسائل\nالتواصل الاجتماعي",
+    "firstName": "الاسم الأول",
+    "enterFirstName": "ادخل اسمك الأول",
+    "lastName": "اسم العائلة",
+    "enterLastName": "ادخل اسم عائلتك",
+    "address": "العنوان",
+    "enterAddress": "ادخل عنوانك",
+    "phoneNumber": "رقم الهاتف",
+    "enterPhoneNumber": "ادخل رقم هاتفك",
+    "firstNameRequired": "الاسم الأول مطلوب",
+    "lastNameRequired": "اسم العائلة مطلوب",
+    "addressRequired": "العنوان مطلوب",
+    "phoneNumberRequired": "رقم الهاتف مطلوب",
+    "phoneNumberInvalid": "يجب أن يحتوي رقم الهاتف على 10 أرقام ويبدأ بـ 09",
+    "otpVerification": "التحقق باستخدام الرمز",
+    "verificationCodeSent": "لقد أرسلنا رمز التحقق إلى {email}.",
+    "continueText": "متابعة",
+    "resendOtp": "إعادة إرسال رمز التحقق",
+    "resendIn": "يمكنك إعادة إرسال الرمز في",
+    "login": "تسجيل الدخول",
+    "specialForYou": "المتاجر",
+    "popularProduct": "اشهر المنتجات",
+    "seeMore": "عرض المزيد",
+    "from": "من: ",
+    "searchProduct": "ابحث عن المنتج",
+    "@searchProduct": {
+        "description": "نص العنصر النصي لحقل البحث"
+    },
+    "expressShopping": "تسوق سريع",
+    "continueSplash": "متابعة",
+    "successScreen": "دخول ناجح",
+    "successLogin": "تم الدخول بنجاح ",
+    "backToHome": "العودة الى الرئيسية",
+    "yourCart": "سلتك",
+    "numberOfItem": "4 أغراض",
+    "viewStore": "عرض المتجر",
+    "@viewStore": {
+        "description": "Label for the button to view the store"
+    },
+    "price": "السعر",
+    "@price": { 
+        "description": "Label for the product price"
+    },
+    "confirmDeletion": " الحذف",
+    "confirmModification": " التعديل",
+    "checkOut": "الدفع",
+    "myProducts": ": مشترياتي",
+    "settings": "الإعدادات",
+    "@settings": {
+        "description": "العنوان لواجهة الإعدادات"
+    },
+    "english": "الإنجليزية",
+    "@english": {
+        "description": "الخيار لاختيار اللغة الإنجليزية"
+    },
+    "arabic": "العربية",
+    "@arabic": {
+        "description": "الخيار لاختيار اللغة العربية"
+    },
+    "systemDefault": "افتراضي النظام",
+    "@systemDefault": {
+        "description": "الخيار لاختيار لغة النظام الافتراضية"
+    },
+    "failed": "فشل",
+    "@failed": {
+        "description": "النص المعروض في حالة حدوث خطأ"
+    },
+
+    "name":"الاسم:",
+    "order":"قم بالطلب",
+    "location":"العنوان:",
+    "productsPrice":"سعر المنتجات",
+    "shippingfees":"تكلفة النقل",
+    "total":"السعر الكلي",
+    "delivery":"معلومات الزبون:",
+    "contact":"للتواصل:",
+    "totalCost":"السعر الكلي:"
+    
+}

@@ -35,19 +35,21 @@ class _ProductImagesState extends State<ProductImages> {
           builder: (context, state) {
             List? productImagesUrl;
 
-            // productImagesUrl = [state.productDetailsEntity.data!.mainImage];
-            // productImagesUrl!.addAll(state.productDetailsEntity.data!.subImages!.map((e) => e.image));
-            productImagesUrl = [
-              "http://192.168.1.2:8000/storage//products/ps4_console_white_1.png",
-              "http://192.168.1.2:8000/storage//products/ps4_console_white_2.png",
-              "http://192.168.1.2:8000/storage//products/ps4_console_white_3.png",
-              "http://192.168.1.2:8000/storage//products/ps4_console_white_4.png",
-            ];
+            if (state is GetProductDetailsSuccess) {
+              productImagesUrl = [state.productDetailsEntity.data!.mainImage];
+              productImagesUrl!.addAll(state.productDetailsEntity.data!.subImages!.map((e) => e.image));
+            }
+            // productImagesUrl = [
+            //   "http://192.168.135.32:8000/storage//products/ps4_console_white_1.png",
+            //   "http://192.168.135.32:8000/storage//products/ps4_console_white_2.png",
+            //   "http://192.168.135.32:8000/storage//products/ps4_console_white_3.png",
+            //   "http://192.168.135.32:8000/storage//products/ps4_console_white_4.png",
+            // ];
             return Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (state is GetProductDetailsSuccess)
-                  ...List.generate(productImagesUrl.length, (index) {
+                  ...List.generate(productImagesUrl!.length, (index) {
                     return SmallImagePreview(
                       imageUrl: productImagesUrl![index],
                       selectedImage: selectedImage,

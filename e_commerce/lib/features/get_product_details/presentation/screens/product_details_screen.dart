@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:e_commerce/core/helper/app_functions.dart';
+import 'package:e_commerce/features/cart/presentation/cubit/add_to_cart_cubit.dart';
 import 'package:e_commerce/features/get_product_details/presentation/screens/widgets/product_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,8 +26,7 @@ class ProductDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ProductEntity productDetails =
-        ModalRoute.of(context)!.settings.arguments as ProductEntity;
+    final ProductEntity productDetails = ModalRoute.of(context)!.settings.arguments as ProductEntity;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       // backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
@@ -38,10 +38,7 @@ class ProductDetailsScreen extends StatelessWidget {
         forceMaterialTransparency: true,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Theme.of(context).colorScheme.surface,
-          statusBarIconBrightness:
-              Theme.of(context).brightness == Brightness.light
-                  ? Brightness.dark
-                  : Brightness.light,
+          statusBarIconBrightness: Theme.of(context).brightness == Brightness.light ? Brightness.dark : Brightness.light,
         ),
         leadingWidth: 80,
         toolbarHeight: 60,
@@ -112,7 +109,9 @@ class AddToCardFooter extends StatelessWidget {
           children: [
             Price(productDetails: productDetails),
             CartEditContainer(),
-            AddToCartBtn(),
+            AddToCartBtn(
+              productDetails: productDetails,
+            ),
           ],
         ),
       ),
@@ -123,10 +122,18 @@ class AddToCardFooter extends StatelessWidget {
 class AddToCartBtn extends StatelessWidget {
   const AddToCartBtn({
     super.key,
+    required this.productDetails,
   });
+
+  final ProductEntity productDetails;
 
   @override
   Widget build(BuildContext context) {
+    int productquantity=0;
+    if (context.read<GetProductDetailsCubit>().state is GetProductDetailsSuccess) {
+      productquantity = (context.read<GetProductDetailsCubit>().state as GetProductDetailsSuccess).productDetailsEntity.data!.quantityInCart!;
+    }
+
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -134,7 +141,13 @@ class AddToCartBtn extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
       ),
-      onPressed: () {},
+      onPressed: () {
+        context.read<AddToCartCubit>().addToCartTrigger(
+              productID: productDetails.productId!.toString(),
+              storeID: productDetails.storeId!.toString(),
+              orderQuantity: productquantity!,
+            );
+      },
       child: SvgPicture.asset(
         AppImages.cartIcon,
         color: Theme.of(context).colorScheme.surfaceContainerLowest,
@@ -164,14 +177,24 @@ class CartEditContainer extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Icon(
-            Icons.remove,
-            color: Theme.of(context).colorScheme.outlineVariant,
+          InkWell(
+            onTap: () {
+              context.read<GetProductDetailsCubit>().decrease();
+            },
+            child: Icon(
+              Icons.remove,
+              color: Theme.of(context).colorScheme.outlineVariant,
+            ),
           ),
           CartQuantity(),
-          Icon(
-            Icons.add,
-            color: Theme.of(context).colorScheme.outlineVariant,
+          InkWell(
+            onTap: () {
+              context.read<GetProductDetailsCubit>().increase();
+            },
+            child: Icon(
+              Icons.add,
+              color: Theme.of(context).colorScheme.outlineVariant,
+            ),
           ),
         ],
       ),
@@ -189,6 +212,7 @@ class CartQuantity extends StatelessWidget {
     return BlocBuilder<GetProductDetailsCubit, GetProductDetailsState>(
       builder: (context, state) {
         if (state is GetProductDetailsSuccess) {
+          log("rebuild the cart ");
           return Text(
             "${state.productDetailsEntity.data!.quantityInCart!}",
             style: TextStyle(
@@ -427,9 +451,7 @@ class _IsFavoriteState extends State<IsFavorite> {
               ),
               width: 72,
               decoration: BoxDecoration(
-                color: isFavorite == 1
-                    ? const Color.fromARGB(255, 251, 207, 204)
-                    : AppColors.disableFavContainer,
+                color: isFavorite == 1 ? const Color.fromARGB(255, 251, 207, 204) : AppColors.disableFavContainer,
                 borderRadius: BorderRadius.only(
                   topRight: rtl ? Radius.circular(20) : Radius.circular(0),
                   bottomRight: rtl ? Radius.circular(20) : Radius.circular(0),
@@ -442,16 +464,12 @@ class _IsFavoriteState extends State<IsFavorite> {
                   : GestureDetector(
                       onTap: () async {
                         if (isFavorite == 0) {
-                          await context
-                              .read<ToggleFavCubit>()
-                              .toggleFavOnTrigger(
+                          await context.read<ToggleFavCubit>().toggleFavOnTrigger(
                                 storeID: storeID!,
                                 productID: productID!,
                               );
                         } else {
-                          await context
-                              .read<ToggleFavCubit>()
-                              .toggleFavOffTrigger(
+                          await context.read<ToggleFavCubit>().toggleFavOffTrigger(
                                 storeID: storeID!,
                                 productID: productID!,
                               );

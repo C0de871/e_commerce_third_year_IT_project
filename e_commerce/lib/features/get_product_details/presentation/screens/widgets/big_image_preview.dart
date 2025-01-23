@@ -19,15 +19,15 @@ class BigImagePreview extends StatelessWidget {
         builder: (context, state) {
           List? productImagesUrl;
 
-          // productImagesUrl = [state.productDetailsEntity.data!.mainImage];
-          // productImagesUrl!.addAll(state.productDetailsEntity.data!.subImages!.map((e) => e.image));
-          productImagesUrl = [
-            "http://192.168.1.2:8000/storage//products/ps4_console_white_1.png",
-            "http://192.168.1.2:8000/storage//products/ps4_console_white_2.png",
-            "http://192.168.1.2:8000/storage//products/ps4_console_white_3.png",
-            "http://192.168.1.2:8000/storage//products/ps4_console_white_4.png",
-          ];
+          // productImagesUrl = [
+          //   "http://192.168.135.32:8000/storage//products/ps4_console_white_1.png",
+          //   "http://192.168.135.32:8000/storage//products/ps4_console_white_2.png",
+          //   "http://192.168.135.32:8000/storage//products/ps4_console_white_3.png",
+          //   "http://192.168.135.32:8000/storage//products/ps4_console_white_4.png",
+          // ];
           if (state is GetProductDetailsSuccess) {
+            productImagesUrl = [state.productDetailsEntity.data!.mainImage];
+            productImagesUrl!.addAll(state.productDetailsEntity.data!.subImages!.map((e) => e.image));
             return AspectRatio(
               aspectRatio: 1,
               child: Image.network(
