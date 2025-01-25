@@ -3,7 +3,7 @@ import 'package:ecommerce_store_dashboard/features/products/presentation/screens
 import 'package:flutter/material.dart';
 
 import 'features/products/presentation/screens/add_product_screen/add_product_screen.dart';
-import 'features/products/presentation/screens/add_product_screen/widgets/side_menu.dart';
+import 'side_menu.dart';
 import 'storing.dart';
 
 class MainScreen extends StatefulWidget {
