@@ -5,16 +5,16 @@ import 'dart:html' as html;
 import 'package:ecommerce_store_dashboard/core/helper/app_functions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'cubit/add_product_cubit.dart';
+import '../../cubit/add_product_cubit.dart';
 
-class AddProductPage extends StatefulWidget {
-  const AddProductPage({super.key});
+class AddProductScreen extends StatefulWidget {
+  const AddProductScreen({super.key});
 
   @override
-  State<AddProductPage> createState() => _AddProductPage();
+  State<AddProductScreen> createState() => _AddProductPage();
 }
 
-class _AddProductPage extends State<AddProductPage> {
+class _AddProductPage extends State<AddProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

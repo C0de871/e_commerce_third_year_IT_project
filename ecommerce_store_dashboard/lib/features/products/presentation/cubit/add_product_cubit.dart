@@ -3,14 +3,14 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:ecommerce_store_dashboard/core/databases/params/params.dart';
-import 'package:ecommerce_store_dashboard/features/products/presentation/domain/entities/add_product_entity.dart';
+import 'package:ecommerce_store_dashboard/features/products/domain/entities/add_product_entity.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'dart:html' as html;
 
 import '../../../../core/databases/api/end_points.dart';
 import '../../../../core/utils/services/service_locator.dart';
-import '../domain/use_cases/add_product_use_case.dart';
+import '../../domain/use_cases/add_product_use_case.dart';
 
 part 'add_product_state.dart';
 

@@ -7,7 +7,7 @@ import '../../features/auth/presentation/login_success_screen/login_success_scre
 import '../../features/auth/presentation/splash screen/splash_screen.dart';
 
 import '../../features/products/presentation/cubit/add_product_cubit.dart';
-import '../../features/products/presentation/dashboard.dart';
+import '../../dashboard.dart';
 import 'app_routes.dart';
 
 class AppRouter {

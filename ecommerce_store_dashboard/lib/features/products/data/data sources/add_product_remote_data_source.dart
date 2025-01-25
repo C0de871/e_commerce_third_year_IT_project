@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
 
-import '../../../../../core/databases/api/api_consumer.dart';
-import '../../../../../core/databases/api/end_points.dart';
-import '../../../../../core/databases/cache/secure_storage_helper.dart';
-import '../../../../../core/databases/params/params.dart';
+import '../../../../core/databases/api/api_consumer.dart';
+import '../../../../core/databases/api/end_points.dart';
+import '../../../../core/databases/cache/secure_storage_helper.dart';
+import '../../../../core/databases/params/params.dart';
 import '../model/add_product_model.dart';
 
 class AddProductRemoteDataSource {

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:ecommerce_store_dashboard/features/products/presentation/data/data%20sources/add_product_remote_data_source.dart';
-import 'package:ecommerce_store_dashboard/features/products/presentation/domain/repository/add_product_repository.dart';
+import 'package:ecommerce_store_dashboard/features/products/data/data%20sources/add_product_remote_data_source.dart';
+import 'package:ecommerce_store_dashboard/features/products/domain/repository/add_product_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -16,8 +16,8 @@ import '../../../features/auth/domain/usecases/refresh_token.dart';
 import '../../../features/auth/domain/usecases/resend_otp.dart';
 import '../../../features/auth/domain/usecases/set_first_launch.dart';
 import '../../../features/auth/domain/usecases/sign_up_user.dart';
-import '../../../features/products/presentation/data/repository/add_product_repository_imple.dart';
-import '../../../features/products/presentation/domain/use_cases/add_product_use_case.dart';
+import '../../../features/products/data/repository/add_product_repository_imple.dart';
+import '../../../features/products/domain/use_cases/add_product_use_case.dart';
 import '../../../features/settings/data/data_sources/lang_local_data_source.dart';
 import '../../../features/settings/data/repository/language_repository_impl.dart';
 import '../../../features/settings/domain/repository/language_repository.dart';
