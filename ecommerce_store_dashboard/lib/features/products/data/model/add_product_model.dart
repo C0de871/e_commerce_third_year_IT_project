@@ -1,4 +1,4 @@
-import '../../../../../core/databases/api/end_points.dart';
+import '../../../../core/databases/api/end_points.dart';
 import '../../domain/entities/add_product_entity.dart';
 
 class AddProductModel extends AddProductEntity {

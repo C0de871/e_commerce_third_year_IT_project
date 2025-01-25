@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 
-import '../../../../../core/databases/connection/network_info.dart';
-import '../../../../../core/databases/errors/expentions.dart';
-import '../../../../../core/databases/errors/failure.dart';
-import '../../../../../core/databases/params/params.dart';
+import '../../../../core/databases/connection/network_info.dart';
+import '../../../../core/databases/errors/expentions.dart';
+import '../../../../core/databases/errors/failure.dart';
+import '../../../../core/databases/params/params.dart';
 import '../../domain/entities/add_product_entity.dart';
 import '../../domain/repository/add_product_repository.dart';
 import '../data sources/add_product_remote_data_source.dart';
