@@ -1,4 +1,5 @@
 import 'package:ecommerce_store_dashboard/core/shared/widgets/my_place_holder.dart';
+import 'package:ecommerce_store_dashboard/features/order_dash/presentation/order_screen/order_screen.dart';
 import 'package:ecommerce_store_dashboard/features/products/presentation/screens/show_product_screen/show_product_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -102,6 +103,8 @@ class _MainScreenState extends State<MainScreen> {
         return StoreDetailsView(store: _storeDetails, products: _products);
       case 1:
         return const AddProductScreen();
+      case 2:
+        return const OrderScreen();
       default:
         return const MyPlaceHolder();
     }
