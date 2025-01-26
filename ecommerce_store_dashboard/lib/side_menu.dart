@@ -34,6 +34,12 @@ class SideMenu extends StatelessWidget {
               press: () => onNavItemTapped(1),
               isSelected: selectedIndex == 1,
             ),
+            DrawerListTile(
+              title: 'Order',
+              icon: Icons.restaurant_menu,
+              press: () => onNavItemTapped(2),
+              isSelected: selectedIndex == 2,
+            ),
           ]),
         ),
       ),
