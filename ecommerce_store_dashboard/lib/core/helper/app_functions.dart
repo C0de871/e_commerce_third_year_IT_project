@@ -3,13 +3,13 @@ import 'dart:html' as html;
 
 import 'package:dio/dio.dart';
 import 'package:ecommerce_store_dashboard/core/helper/extensions.dart';
-import 'package:ecommerce_store_dashboard/features/products/presentation/cubit/add_product_cubit.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../features/products/presentation/add_product_cubit/add_product_cubit.dart';
 import '../databases/api/end_points.dart';
 import '../databases/cache/secure_storage_helper.dart';
 import '../databases/cache/shared_prefs_helper.dart';

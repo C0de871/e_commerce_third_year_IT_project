@@ -24,6 +24,10 @@ class EndPoints {
   static String addProduct(int storeID) {
     return "stores/$storeID/products";
   }
+
+    static String showStoreAndProducts(int storeID) {
+    return "stores/$storeID/show";
+  }
 }
 
 class ApiKey {

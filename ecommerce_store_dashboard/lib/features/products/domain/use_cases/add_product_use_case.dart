@@ -2,11 +2,11 @@ import 'package:dartz/dartz.dart';
 
 import '../../../../core/databases/errors/failure.dart';
 import '../../../../core/databases/params/params.dart';
-import '../entities/add_product_entity.dart';
-import '../repository/add_product_repository.dart';
+import '../entities/add_products_entities/add_product_entity.dart';
+import '../repository/products_repository.dart';
 
 class AddProduct {
-  final AddProductRepository repository;
+  final ProductsRepository repository;
 
   AddProduct({required this.repository});
 

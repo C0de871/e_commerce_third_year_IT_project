@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:ecommerce_store_dashboard/core/databases/params/params.dart';
-import 'package:ecommerce_store_dashboard/features/products/domain/entities/add_product_entity.dart';
+import 'package:ecommerce_store_dashboard/features/products/domain/entities/add_products_entities/add_product_entity.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'dart:html' as html;
@@ -91,7 +91,6 @@ class AddProductCubit extends Cubit<AddProductState> {
       ApiKey.quantity: quantityController.text,
       ApiKey.mainImage: await uploadImageToApi(mainImage),
     };
-    print(body);
     for (var i = 0; i < subImages.length; i++) {
       body[ApiKey.subImages(i)] = await uploadImageToApi(subImages[i]);
     }

@@ -5,22 +5,24 @@ import '../../features/auth/presentation/cubit/user_cubit.dart';
 import '../../features/auth/presentation/login_screen/log_in_screen.dart';
 import '../../features/auth/presentation/login_success_screen/login_success_screen.dart';
 import '../../features/auth/presentation/splash screen/splash_screen.dart';
+import '../../features/products/presentation/add_product_cubit/add_product_cubit.dart';
 
-import '../../features/products/presentation/cubit/add_product_cubit.dart';
 import '../../dashboard.dart';
+import '../../features/products/presentation/show_store_cubit/show_store_cubit.dart';
 import 'app_routes.dart';
 
 class AppRouter {
   //? <======= cubits declration =======>
   UserCubit? _userCubit;
   AddProductCubit? _addProductCubit;
+  ShowStoreCubit? _showStoreCubit;
 
   UserCubit get userCubit {
     if (_userCubit == null || _userCubit!.isClosed) {
       _userCubit = UserCubit();
     }
     _userCubit!.stream.listen((_) {}, onDone: () {
-      _userCubit = null; // Nullify the reference when closed
+      _userCubit = null;
     });
     return _userCubit!;
   }
@@ -30,9 +32,19 @@ class AppRouter {
       _addProductCubit = AddProductCubit();
     }
     _addProductCubit!.stream.listen((_) {}, onDone: () {
-      _addProductCubit = null; // Nullify the reference when closed
+      _addProductCubit = null;
     });
     return _addProductCubit!;
+  }
+
+  ShowStoreCubit get showStoreCubit {
+    if (_showStoreCubit == null || _showStoreCubit!.isClosed) {
+      _showStoreCubit = ShowStoreCubit();
+    }
+    _showStoreCubit!.stream.listen((_) {}, onDone: () {
+      _showStoreCubit = null;
+    });
+    return _showStoreCubit!;
   }
 
   Route<dynamic> generateRoute(RouteSettings settings) {
@@ -55,10 +67,17 @@ class AppRouter {
           ),
         );
 
-      case AppRoutes.addProducts:
+      case AppRoutes.mainScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => addProductCubit,
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => addProductCubit,
+              ),
+              BlocProvider(
+                create: (context) => showStoreCubit,
+              ),
+            ],
             child: const MainScreen(),
           ),
         );

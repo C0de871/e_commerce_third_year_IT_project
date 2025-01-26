@@ -11,24 +11,15 @@ import '../../domain/entites/Sign up entities/sign_up_entity.dart';
 import '../../domain/entites/otp_entities/otp_entity.dart';
 import '../../domain/entites/user_entities/user_entities.dart';
 import '../../domain/usecases/login_user.dart';
-import '../../domain/usecases/post_otp.dart';
-import '../../domain/usecases/resend_otp.dart';
-import '../../domain/usecases/sign_up_user.dart';
 
 part 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
   //!iniialize the usecases:
   LoginUser loginUser;
-  SignUpUser signUpUser;
-  ResendOtp resendOtp;
-  PostOtp postOtp;
 
   UserCubit()
       : loginUser = getIt<LoginUser>(),
-        signUpUser = getIt<SignUpUser>(),
-        resendOtp = getIt<ResendOtp>(),
-        postOtp = getIt<PostOtp>(),
         super(UserInitial());
   // maybe this is reason of error
 
@@ -52,79 +43,6 @@ class UserCubit extends Cubit<UserState> {
     );
   }
 
-  //!sign up ui textfields controllers:
-  TextEditingController signUpEmailController = TextEditingController();
-  TextEditingController signUpPasswordController = TextEditingController();
-  TextEditingController signUpFirstNameController = TextEditingController();
-  TextEditingController signUpLastNameController = TextEditingController();
-  TextEditingController signUpPhoneNumberController = TextEditingController();
-  TextEditingController signUpAddressController = TextEditingController();
-  TextEditingController signUpConfirmPasswordController =
-      TextEditingController();
 
-  //!Sign up trigger:
-  dynamic signUpUserTrigger() async {
-    Map<String, dynamic> bodyjson = {
-      ApiKey.email: signUpEmailController.text,
-      ApiKey.password: signUpPasswordController.text,
-      ApiKey.address: signUpAddressController.text,
-      ApiKey.phoneNumber: signUpPhoneNumberController.text,
-      ApiKey.firstName: signUpFirstNameController.text,
-      ApiKey.lastName: signUpLastNameController.text,
-      ApiKey.image: await uploadImageToApi(profilePic),
-    };
-    emit(SignUpUserLoading());
-    final failureOrSignUpEntity = await signUpUser.call(jsonBody: bodyjson);
-    failureOrSignUpEntity.fold(
-      (failure) => emit(SignUpUserFailure(errMessage: failure.errMessage)),
-      (signUpEntity) => emit(
-        SignUpUserSuccessfully(signUpEntity: signUpEntity),
-      ),
-    );
-  }
 
-  XFile? profilePic;
-  uploadProfilePic(XFile? image) {
-    profilePic = image;
-    emit(UploadProfilePic());
-  }
-
-  //! otp textField controller:
-  TextEditingController otpController = TextEditingController();
-
-  //! Otp triger:
-  dynamic resendOtpTrigger() async {
-    Map<String, dynamic> bodyjson = {
-      ApiKey.email: signUpEmailController.text,
-    };
-    emit(OtpUserLoading());
-    final failureOrResendOtpEntity = await resendOtp.call(bodyjson: bodyjson);
-    failureOrResendOtpEntity.fold(
-      (failure) => emit(OtpUserFailure(errMessage: failure.errMessage)),
-      (otpEntity) => emit(
-        OtpUserSuccessfully(otpEntity: otpEntity),
-      ),
-    );
-  }
-
-  dynamic postOtpTrigger() async {
-    Map<String, dynamic> bodyjson = {
-      ApiKey.email: signUpEmailController.text,
-      ApiKey.otp: otpController.text,
-    };
-    emit(OtpUserLoading());
-    final failureOrResendOtpEntity = await postOtp.call(bodyjson: bodyjson);
-    failureOrResendOtpEntity.fold(
-      (failure) => emit(OtpUserFailure(errMessage: failure.errMessage)),
-      (otpEntity) => emit(
-        OtpUserSuccessfully(otpEntity: otpEntity),
-      ),
-    );
-  }
-
-  @override
-  void onChange(Change<UserState> change) {
-    super.onChange(change);
-    log("$change");
-  }
 }

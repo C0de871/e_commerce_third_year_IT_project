@@ -1,80 +1,106 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecommerce_store_dashboard/features/products/domain/entities/show_store_entities/products_entity.dart';
+import 'package:ecommerce_store_dashboard/features/products/domain/entities/show_store_entities/show_store_entity.dart';
+import 'package:ecommerce_store_dashboard/features/products/presentation/show_store_cubit/show_store_cubit.dart';
 import 'package:ecommerce_store_dashboard/storing.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class StoreDetailsView extends StatelessWidget {
-  final StoreDetails store;
-  final List<Product> products;
-
+class StoreDetailsView extends StatefulWidget {
   const StoreDetailsView({
     super.key,
-    required this.store,
-    required this.products,
   });
+
+  @override
+  State<StoreDetailsView> createState() => _StoreDetailsViewState();
+}
+
+class _StoreDetailsViewState extends State<StoreDetailsView> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<ShowStoreCubit>(context).showStoreTrigger(11);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          return CustomScrollView(
-            slivers: [
-              // Responsive App Bar
-              SliverAppBar(
-                expandedHeight: ResponsiveLayout.isMobile(context) ? 200.0 : 250.0,
-                pinned: true,
-                flexibleSpace: _buildFlexibleSpaceBar(context),
-              ),
+      body: BlocBuilder<ShowStoreCubit, ShowStoreState>(
+        builder: (context, state) {
+          if (state is ShowStoreSuccess) {
+            final store = state.showStoreEntity;
+            final products = store.products;
+            return LayoutBuilder(
+              builder: (context, constraints) {
+                return CustomScrollView(
+                  slivers: [
+                    // Responsive App Bar
+                    SliverAppBar(
+                      expandedHeight: ResponsiveLayout.isMobile(context) ? 200.0 : 250.0,
+                      pinned: true,
+                      flexibleSpace: _buildFlexibleSpaceBar(context, store),
+                    ),
 
-              // Store Information Section
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: EdgeInsets.all(
-                    ResponsiveLayout.isMobile(context) ? 8.0 : 16.0,
-                  ),
-                  child: _buildStoreDetailsCard(context),
-                ),
-              ),
-
-              // Products Section Title
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                  child: Text(
-                    'Our Products',
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
+                    // Store Information Section
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: EdgeInsets.all(
+                          ResponsiveLayout.isMobile(context) ? 8.0 : 16.0,
                         ),
-                  ),
-                ),
-              ),
+                        child: _buildStoreDetailsCard(context, store),
+                      ),
+                    ),
 
-              // Responsive Products Grid
-              SliverPadding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                sliver: SliverGrid(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: ResponsiveLayout.getGridColumnCount(context),
-                    childAspectRatio: ResponsiveLayout.getCardAspectRatio(context),
-                    crossAxisSpacing: 12,
-                    mainAxisSpacing: 12,
-                  ),
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                      return ProductDetailCard(product: products[index]);
-                    },
-                    childCount: products.length,
-                  ),
-                ),
-              ),
-            ],
-          );
+                    // Products Section Title
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                        child: Text(
+                          'Our Products',
+                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                        ),
+                      ),
+                    ),
+
+                    // Responsive Products Grid
+                    SliverPadding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      sliver: SliverGrid(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: ResponsiveLayout.getGridColumnCount(context),
+                          childAspectRatio: ResponsiveLayout.getCardAspectRatio(context),
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12,
+                        ),
+                        delegate: SliverChildBuilderDelegate(
+                          (BuildContext context, int index) {
+                            return ProductDetailCard(product: products[index]);
+                          },
+                          childCount: products.length,
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            );
+          } else if (state is ShowStoreFailed) {
+            return Center(
+              child: Text(state.msg),
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
         },
       ),
     );
   }
 
-  Widget _buildFlexibleSpaceBar(BuildContext context) {
+  Widget _buildFlexibleSpaceBar(BuildContext context, ShowStoreEntity store) {
     return FlexibleSpaceBar(
       title: Text(
         store.name,
@@ -91,11 +117,11 @@ class StoreDetailsView extends StatelessWidget {
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
-      background: _buildStoreHeaderBackground(),
+      background: _buildStoreHeaderBackground(store),
     );
   }
 
-  Widget _buildStoreHeaderBackground() {
+  Widget _buildStoreHeaderBackground(ShowStoreEntity store) {
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -128,7 +154,7 @@ class StoreDetailsView extends StatelessWidget {
     );
   }
 
-  Widget _buildStoreDetailsCard(BuildContext context) {
+  Widget _buildStoreDetailsCard(BuildContext context, ShowStoreEntity store) {
     return Card(
       elevation: 4,
       color: Theme.of(context).colorScheme.surface,
@@ -152,19 +178,19 @@ class StoreDetailsView extends StatelessWidget {
               context,
               icon: Icons.location_on,
               label: 'Address',
-              value: store.address,
+              value: store.location,
             ),
             _buildDetailRow(
               context,
               icon: Icons.email,
               label: 'Contact Email',
-              value: store.contactEmail,
+              value: store.email,
             ),
             _buildDetailRow(
               context,
               icon: Icons.phone,
               label: 'Phone',
-              value: store.contactPhone,
+              value: store.phoneNumber,
             ),
             const SizedBox(height: 16),
             Text(
@@ -222,9 +248,12 @@ class StoreDetailsView extends StatelessWidget {
 }
 
 class ProductDetailCard extends StatelessWidget {
-  final Product product;
+  final ProductEntity product;
 
-  const ProductDetailCard({super.key, required this.product});
+  const ProductDetailCard({
+    super.key,
+    required this.product,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -247,7 +276,10 @@ class ProductDetailCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
                   child: CachedNetworkImage(
-                    imageUrl: product.imageUrl,
+                    httpHeaders: const {
+                      'Access-Control-Allow-Origin': '*',
+                    },
+                    imageUrl: product.mainImage,
                     height: _getImageHeight(context),
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -261,11 +293,11 @@ class ProductDetailCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    errorWidget: (context, url, error) => Container(
-                      height: _getImageHeight(context),
-                      color: Colors.grey[200],
-                      child: const Icon(Icons.image_not_supported, size: 30),
-                    ),
+                    // errorWidget: (context, url, error) => Container(
+                    //   height: _getImageHeight(context),
+                    //   color: Colors.grey[200],
+                    //   child: const Icon(Icons.image_not_supported, size: 30),
+                    // ),
                   ),
                 ),
               ),
@@ -282,7 +314,7 @@ class ProductDetailCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          product.name,
+                          product.productName,
                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                 fontWeight: FontWeight.bold,
                                 fontSize: isMobile ? 12 : 14,
@@ -311,7 +343,7 @@ class ProductDetailCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              '\$${product.price.toStringAsFixed(2)}',
+                              '\$${product.price}',
                               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                     color: Theme.of(context).colorScheme.primary,
                                     fontWeight: FontWeight.bold,
@@ -326,13 +358,13 @@ class ProductDetailCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              product.category,
+                              product.categoryName,
                               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                     fontSize: isMobile ? 9 : 10,
                                   ),
                             ),
                             Text(
-                              'SKU: ${product.id}',
+                              'SKU: ${product.productId}',
                               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                     color: Colors.grey[500],
                                     fontSize: isMobile ? 9 : 10,

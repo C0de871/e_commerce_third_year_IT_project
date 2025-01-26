@@ -1,5 +1,5 @@
-import '../../../../core/databases/api/end_points.dart';
-import '../../domain/entities/add_product_entity.dart';
+import '../../../../../core/databases/api/end_points.dart';
+import '../../../domain/entities/add_products_entities/add_product_entity.dart';
 
 class AddProductModel extends AddProductEntity {
   AddProductModel({

@@ -5,7 +5,7 @@ import 'dart:html' as html;
 import 'package:ecommerce_store_dashboard/core/helper/app_functions.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../cubit/add_product_cubit.dart';
+import '../../add_product_cubit/add_product_cubit.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
