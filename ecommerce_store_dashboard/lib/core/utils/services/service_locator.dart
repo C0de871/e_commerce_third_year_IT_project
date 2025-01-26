@@ -1,4 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:ecommerce_store_dashboard/features/order_dash/data/order%20dash%20repository/order_dash_repository_imple.dart';
+import 'package:ecommerce_store_dashboard/features/order_dash/data/order%20data%20sources/order_dash_remote_data_source.dart';
+import 'package:ecommerce_store_dashboard/features/order_dash/domain/order%20repository/order_dash_repository.dart';
+import 'package:ecommerce_store_dashboard/features/order_dash/domain/order%20use_cases/get_order_dash.dart';
 import 'package:ecommerce_store_dashboard/features/products/data/data%20sources/add_product_remote_data_source.dart';
 import 'package:ecommerce_store_dashboard/features/products/domain/repository/add_product_repository.dart';
 import 'package:get_it/get_it.dart';
@@ -47,7 +51,8 @@ void setupServicesLocator() {
   getIt.registerLazySingleton<UserLocalDataSource>(() => UserLocalDataSource(secureCache: getIt(), sharedPrefsCache: getIt()));
   getIt.registerLazySingleton<LangLocalDataSource>(() => LangLocalDataSource(sharedPrefsHelper: getIt()));
   getIt.registerLazySingleton<AddProductRemoteDataSource>(() => AddProductRemoteDataSource(api: getIt(), cacheHelper: getIt()));
-
+  getIt.registerLazySingleton<OrderDashRemoteDataSource>(() => OrderDashRemoteDataSource(api: getIt(), cacheHelper: getIt()));
+  
   //! Repository
   getIt.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(
         networkInfo: getIt(),
@@ -62,6 +67,11 @@ void setupServicesLocator() {
 
   getIt.registerLazySingleton<LanguageRepository>(() => LanguageRepositoryImpl(
         localDataSource: getIt(),
+      ));
+
+  getIt.registerLazySingleton<OrderDashRepository>(() => OrderDashRepositoryImple(
+      networkInfo: getIt(),
+        remoteDataSource: getIt(),
       ));
 
   //! Use Cases
@@ -79,4 +89,6 @@ void setupServicesLocator() {
   getIt.registerLazySingleton<RetrieveUserLang>(() => RetrieveUserLang(languageRepository: getIt()));
   getIt.registerLazySingleton<SaveLang>(() => SaveLang(languageRepository: getIt()));
   getIt.registerLazySingleton<AddProduct>(() => AddProduct(repository: getIt()));
+  getIt.registerLazySingleton<GetOrderDash>(() => GetOrderDash(orderRepository: getIt()));
+
 }
