@@ -1,3 +1,5 @@
+import 'package:ecommerce_store_dashboard/features/order_dash/presentation/cubit/get_order_dash_cubit.dart';
+import 'package:ecommerce_store_dashboard/features/order_dash/presentation/order_screen/order_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,6 +16,7 @@ class AppRouter {
   //? <======= cubits declration =======>
   UserCubit? _userCubit;
   AddProductCubit? _addProductCubit;
+  GetOrderDashCubit? _getOrderDashCubit;
 
   UserCubit get userCubit {
     if (_userCubit == null || _userCubit!.isClosed) {
@@ -35,6 +38,15 @@ class AppRouter {
     return _addProductCubit!;
   }
 
+GetOrderDashCubit get getOrderDashCubit {
+    if (_getOrderDashCubit == null || _getOrderDashCubit!.isClosed) {
+      _getOrderDashCubit = GetOrderDashCubit();
+    }
+    _getOrderDashCubit!.stream.listen((_) {}, onDone: () {
+      _getOrderDashCubit = null; // Nullify the reference when closed
+    });
+    return _getOrderDashCubit!;
+  }
   Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       //!splash route:
@@ -63,6 +75,13 @@ class AppRouter {
           ),
         );
 
+case AppRoutes.order:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => getOrderDashCubit..getOrderDashTrigger(),
+            child: const OrderScreen(),
+          ),
+        );
       //!default route:
       default:
         return MaterialPageRoute(
