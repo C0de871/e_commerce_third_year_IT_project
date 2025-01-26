@@ -36,6 +36,7 @@ class ApiKey {
   static String nameAr = "name_ar";
   static String categoryNameAr = "category_name_ar";
   static String descriptionAr = "description_ar";
+  static String ownerOrder="owner_order";
   static String subImages(int id) {
     return "sub_images[$id]";
   }
@@ -72,7 +73,7 @@ class ApiKey {
   static String storeName = "store_name";
   static String productId = "product_id";
   static String productName = "product_name";
-
+  static String statusOrder="status";
   static String description = "description";
   static String mainImageUrl = "main_image";
   static String isFavorite = "is_favorite";
