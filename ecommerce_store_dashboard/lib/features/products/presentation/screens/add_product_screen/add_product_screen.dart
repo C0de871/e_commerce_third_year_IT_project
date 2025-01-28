@@ -213,14 +213,16 @@ class ProductsdetailsSection extends StatelessWidget {
           controller: context.read<AddProductCubit>().priceController,
           label: 'Price',
           keyboardType: TextInputType.number,
-          validator: (value) => value?.isEmpty ?? true ? 'Required field' : null,
+          validator: (value) =>
+              value?.isEmpty ?? true ? 'Required field' : null,
         ),
         const SizedBox(height: 16),
         buildTextField(
           controller: context.read<AddProductCubit>().quantityController,
           label: 'Quantity',
           keyboardType: TextInputType.number,
-          validator: (value) => value?.isEmpty ?? true ? 'Required field' : null,
+          validator: (value) =>
+              value?.isEmpty ?? true ? 'Required field' : null,
         ),
       ],
     );
@@ -251,7 +253,8 @@ class ArabicInformationSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final arCategories = context.read<AddProductCubit>().arCategories;
-    final selectedArCategory = context.read<AddProductCubit>().selectedArCategory;
+    final selectedArCategory =
+        context.read<AddProductCubit>().selectedArCategory;
     return buildSection(
       title: 'Arabic Information',
       children: [
@@ -259,7 +262,8 @@ class ArabicInformationSection extends StatelessWidget {
           controller: context.read<AddProductCubit>().nameArController,
           label: 'Product Name (Arabic)',
           textDirection: TextDirection.rtl,
-          validator: (value) => value?.isEmpty ?? true ? 'Required field' : null,
+          validator: (value) =>
+              value?.isEmpty ?? true ? 'Required field' : null,
         ),
         const SizedBox(height: 16),
         buildDropdown(
@@ -276,7 +280,8 @@ class ArabicInformationSection extends StatelessWidget {
           label: 'Description (Arabic)',
           maxLines: 4,
           textDirection: TextDirection.rtl,
-          validator: (value) => value?.isEmpty ?? true ? 'Required field' : null,
+          validator: (value) =>
+              value?.isEmpty ?? true ? 'Required field' : null,
         ),
       ],
     );
@@ -289,14 +294,16 @@ class EnglishInformationSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final categories = context.read<AddProductCubit>().enCategories;
-    final selectedEnCategory = context.read<AddProductCubit>().selectedEnCategory;
+    final selectedEnCategory =
+        context.read<AddProductCubit>().selectedEnCategory;
     return buildSection(
       title: 'English Information',
       children: [
         buildTextField(
           controller: context.read<AddProductCubit>().nameEnController,
           label: 'Product Name (English)',
-          validator: (value) => value?.isEmpty ?? true ? 'Required field' : null,
+          validator: (value) =>
+              value?.isEmpty ?? true ? 'Required field' : null,
         ),
         const SizedBox(height: 16),
         buildDropdown(
@@ -312,7 +319,8 @@ class EnglishInformationSection extends StatelessWidget {
           controller: context.read<AddProductCubit>().descEnController,
           label: 'Description (English)',
           maxLines: 4,
-          validator: (value) => value?.isEmpty ?? true ? 'Required field' : null,
+          validator: (value) =>
+              value?.isEmpty ?? true ? 'Required field' : null,
         ),
       ],
     );

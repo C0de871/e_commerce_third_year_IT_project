@@ -42,7 +42,4 @@ class UserCubit extends Cubit<UserState> {
       ),
     );
   }
-
-
-
 }

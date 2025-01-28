@@ -3,7 +3,6 @@ import 'dart:developer';
 import '../../../../../core/databases/api/end_points.dart';
 import '../../../domain/entites/user_entities/sub_user_entity.dart';
 
-
 class SubUserModel extends SubUserEntity {
   SubUserModel({
     required super.id,

@@ -14,9 +14,11 @@ class AuthInterceptor extends Interceptor {
 
   AuthInterceptor({required this.dioConsumer});
   @override
-  Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  Future<void> onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     log("on request");
-    if (options.extra[ApiKey.requiredAuth] != null && options.extra[ApiKey.requiredAuth] == true) {
+    if (options.extra[ApiKey.requiredAuth] != null &&
+        options.extra[ApiKey.requiredAuth] == true) {
       final accessToken = await getLastAccessToken();
       if (accessToken != null) {
         log(accessToken);
@@ -28,13 +30,17 @@ class AuthInterceptor extends Interceptor {
   }
 
   @override
-  Future<void> onError(DioException err, ErrorInterceptorHandler handler) async {
-    if (err.response!.statusCode == 401 && err.requestOptions.extra[ApiKey.requiredAuth] != null && err.requestOptions.extra[ApiKey.requiredAuth]) {
+  Future<void> onError(
+      DioException err, ErrorInterceptorHandler handler) async {
+    if (err.response!.statusCode == 401 &&
+        err.requestOptions.extra[ApiKey.requiredAuth] != null &&
+        err.requestOptions.extra[ApiKey.requiredAuth]) {
       final RequestOptions options = err.requestOptions;
       try {
         final success = await refreshToken(dioConsumer);
         cacheAccessToken(success.refreshTokenDataEntity.accessToken);
-        options.headers[ApiKey.authorization] = "Bearer ${success.refreshTokenDataEntity.accessToken}";
+        options.headers[ApiKey.authorization] =
+            "Bearer ${success.refreshTokenDataEntity.accessToken}";
         _retryRequest(options, handler, dioConsumer);
       } on DioException catch (e) {
         handleDioException(e);
@@ -45,7 +51,8 @@ class AuthInterceptor extends Interceptor {
   }
 
   //! retry the request:
-  void _retryRequest(RequestOptions requestOptions, ErrorInterceptorHandler handler, DioConsumer dioConsumer) async {
+  void _retryRequest(RequestOptions requestOptions,
+      ErrorInterceptorHandler handler, DioConsumer dioConsumer) async {
     log("request retry");
     try {
       if (requestOptions.data is FormData) {
@@ -100,9 +107,11 @@ class AuthInterceptor extends Interceptor {
 
     Map<String, dynamic> headers = {
       ApiKey.deviceId: await cacheHelper.getData(key: CacheKey.fcmToken),
-      ApiKey.refreshTokenHeader: await cacheHelper.getData(key: CacheKey.refreshToken),
+      ApiKey.refreshTokenHeader:
+          await cacheHelper.getData(key: CacheKey.refreshToken),
     };
-    final response = await dioConsumer.post(EndPoints.refreshToken, headers: headers);
+    final response =
+        await dioConsumer.post(EndPoints.refreshToken, headers: headers);
     return RefreshTokenModel.fromMap(response);
   }
 }

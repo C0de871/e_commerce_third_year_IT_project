@@ -161,16 +161,16 @@ class OrderCard extends StatelessWidget {
                       value: value,
                       child: Text(value),
                     );
-                  }).toList(),
-                  buttonDecoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  dropdownDecoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.white,
-                  ),
-                  dropdownElevation: 8,
+                  }).toList(),  
+                  // buttonDecoration: BoxDecoration(
+                  //   color: Colors.transparent,
+                  //   borderRadius: BorderRadius.circular(8),
+                  // ),
+                  // dropdownDecoration: BoxDecoration(
+                  //   borderRadius: BorderRadius.circular(8),
+                  //   color: Colors.white,
+                  // ),
+                  // dropdownElevation: 8,
                 ),
               ),
             ),

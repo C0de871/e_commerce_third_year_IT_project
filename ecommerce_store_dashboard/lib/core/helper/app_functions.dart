@@ -16,7 +16,8 @@ import '../databases/cache/shared_prefs_helper.dart';
 import '../utils/constants/constant.dart';
 import '../utils/services/service_locator.dart';
 
-SystemUiOverlayStyle getSystemUiOverlayStyle(Brightness currentBrightness, BuildContext context) {
+SystemUiOverlayStyle getSystemUiOverlayStyle(
+    Brightness currentBrightness, BuildContext context) {
   return currentBrightness == Brightness.light
       ? SystemUiOverlayStyle.light.copyWith(
           systemNavigationBarColor: Theme.of(context).colorScheme.surface,
@@ -32,13 +33,15 @@ SystemUiOverlayStyle getSystemUiOverlayStyle(Brightness currentBrightness, Build
 
 Future<XFile?> pickImage() async {
   final ImagePicker picker = ImagePicker();
-  final image = await picker.pickImage(source: ImageSource.gallery); // or ImageSource.camera
+  final image = await picker.pickImage(
+      source: ImageSource.gallery); // or ImageSource.camera
   return image;
 }
 
 Future uploadImageToApi(XFile? image) async {
   if (image == null) return null;
-  return MultipartFile.fromFile(image.path, filename: image.path.split('/').last);
+  return MultipartFile.fromFile(image.path,
+      filename: image.path.split('/').last);
 }
 
 class RouteObserverService extends NavigatorObserver {
@@ -69,7 +72,8 @@ class RouteObserverService extends NavigatorObserver {
 }
 
 checkIfLoggedInUser() async {
-  String? userToken = await SecureStorageHelper().getData(key: CacheKey.accessToken);
+  String? userToken =
+      await SecureStorageHelper().getData(key: CacheKey.accessToken);
   if (!userToken!.isNullOrEmpty()) {
     isLoggedInUser = true;
     log(userToken);
@@ -79,10 +83,12 @@ checkIfLoggedInUser() async {
 }
 
 checkIfFirstTime() async {
-  isFristTime = await getIt<SharedPrefsHelper>().getData(key: CacheKey.isFirstTime);
+  isFristTime =
+      await getIt<SharedPrefsHelper>().getData(key: CacheKey.isFirstTime);
   if (isFristTime == null) {
     isFristTime = true;
-    await getIt<SharedPrefsHelper>().saveData(key: CacheKey.isFirstTime, value: isFristTime);
+    await getIt<SharedPrefsHelper>()
+        .saveData(key: CacheKey.isFirstTime, value: isFristTime);
   }
 }
 
@@ -209,7 +215,8 @@ Widget buildImageUpload({
   );
 }
 
-Widget buildMainImagePreview(BuildContext context, PlatformFile? mainImage, Map<String, String> imageUrls) {
+Widget buildMainImagePreview(BuildContext context, PlatformFile? mainImage,
+    Map<String, String> imageUrls) {
   if (mainImage != null && imageUrls.containsKey(mainImage!.name)) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
@@ -256,7 +263,8 @@ Widget buildMainImagePreview(BuildContext context, PlatformFile? mainImage, Map<
   );
 }
 
-Widget buildSubImagesPreview(BuildContext context, List<PlatformFile> subImages, Map<String, String> imageUrls) {
+Widget buildSubImagesPreview(BuildContext context, List<PlatformFile> subImages,
+    Map<String, String> imageUrls) {
   if (subImages.isEmpty) {
     return InkWell(
       onTap: () async {

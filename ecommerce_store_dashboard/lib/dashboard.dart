@@ -2,7 +2,9 @@ import 'package:ecommerce_store_dashboard/core/shared/widgets/my_place_holder.da
 import 'package:ecommerce_store_dashboard/features/order_dash/presentation/order_screen/order_screen.dart';
 import 'package:ecommerce_store_dashboard/features/products/presentation/screens/show_product_screen/show_product_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'features/products/presentation/delete_product_cubit/delete_product_cubit.dart';
 import 'features/products/presentation/screens/add_product_screen/add_product_screen.dart';
 import 'side_menu.dart';
 
@@ -27,7 +29,10 @@ class _MainScreenState extends State<MainScreen> {
   Widget _getCurrentView() {
     switch (_selectedIndex) {
       case 0:
-        return const StoreDetailsView();
+        return BlocProvider(
+          create: (context) => DeleteProductCubit(),
+          child: const StoreDetailsView(),
+        );
       case 1:
         return const AddProductScreen();
       case 2:

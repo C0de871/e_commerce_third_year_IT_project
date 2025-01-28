@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:ecommerce_store_dashboard/features/products/data/data%20sources/products_remote_data_source.dart';
+import 'package:ecommerce_store_dashboard/features/products/data/services/delete_product_service.dart';
 import 'package:ecommerce_store_dashboard/features/products/domain/repository/products_repository.dart';
+import 'package:ecommerce_store_dashboard/features/products/domain/use_cases/delete_product_use_case.dart';
 import 'package:ecommerce_store_dashboard/features/products/domain/use_cases/show_store_use_case.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -31,6 +33,7 @@ final getIt = GetIt.instance; // Singleton instance of GetIt
 
 void setupServicesLocator() {
   //!service:
+  getIt.registerLazySingleton<DeleteProductService>(() => DeleteProductService());
 
   //! Core
   getIt.registerLazySingleton<SharedPrefsHelper>(() => SharedPrefsHelper());
@@ -75,4 +78,6 @@ void setupServicesLocator() {
   getIt.registerLazySingleton<SaveLang>(() => SaveLang(languageRepository: getIt()));
   getIt.registerLazySingleton<AddProduct>(() => AddProduct(repository: getIt()));
   getIt.registerLazySingleton<ShowStoreUseCase>(() => ShowStoreUseCase(repository: getIt()));
+
+  getIt.registerLazySingleton<DeleteProductUseCase>(() => DeleteProductUseCase(repository: getIt()));
 }

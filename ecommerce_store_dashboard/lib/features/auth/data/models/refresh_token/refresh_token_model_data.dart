@@ -3,7 +3,6 @@ import 'dart:convert';
 import '../../../../../core/databases/api/end_points.dart';
 import '../../../domain/entites/refresh_token/refresh_token_data_entity.dart';
 
-
 class RefreshTokenModelData extends RefreshTokenDataEntity {
   RefreshTokenModelData({
     required super.accessToken,

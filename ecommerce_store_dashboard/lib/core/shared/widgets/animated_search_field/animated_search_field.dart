@@ -3,8 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
-
 class AnimSearchBar extends StatefulWidget {
   ///  width - double ,isRequired : Yes
   ///  textController - TextEditingController  ,isRequired : Yes
@@ -138,7 +136,8 @@ class _AnimSearchBarState extends State<AnimSearchBar>
       // height: 60.0,
 
       ///if the rtl is true, search bar will be from right to left
-      alignment: widget.rtl ? Alignment.centerRight : const Alignment(-1.0, 0.0),
+      alignment:
+          widget.rtl ? Alignment.centerRight : const Alignment(-1.0, 0.0),
 
       ///Using Animated container to expand and shrink the widget
       child: AnimatedContainer(

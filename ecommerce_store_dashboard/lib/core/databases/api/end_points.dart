@@ -1,7 +1,7 @@
 import '../params/params.dart';
 
 class EndPoints {
-  static const String baserUrl = "http://192.168.106.14:8000/api/";
+  static const String baserUrl = "http://192.168.1.7:8000/api/";
   static const String login = "login";
   static const String signUp = "register";
   static const String toggleFavOn = "favorites/";
@@ -25,8 +25,12 @@ class EndPoints {
     return "stores/$storeID/products";
   }
 
-    static String showStoreAndProducts(int storeID) {
+  static String showStoreAndProducts(int storeID) {
     return "stores/$storeID/show";
+  }
+
+  static String deleteProduct(int storeID, int productID) {
+    return "stores/$storeID/$productID/delete";
   }
 }
 

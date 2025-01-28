@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class SideMenu extends StatelessWidget {
   const SideMenu({
     super.key,
@@ -69,12 +68,16 @@ class DrawerListTile extends StatelessWidget {
       title: Text(
         title,
         style: TextStyle(
-          color: isSelected ? Theme.of(context).colorScheme.inversePrimary : Theme.of(context).colorScheme.onSurface,
+          color: isSelected
+              ? Theme.of(context).colorScheme.inversePrimary
+              : Theme.of(context).colorScheme.onSurface,
         ),
       ),
       leading: Icon(
         icon,
-        color: isSelected ? Theme.of(context).colorScheme.inversePrimary : Theme.of(context).colorScheme.onSurface,
+        color: isSelected
+            ? Theme.of(context).colorScheme.inversePrimary
+            : Theme.of(context).colorScheme.onSurface,
       ),
     );
   }

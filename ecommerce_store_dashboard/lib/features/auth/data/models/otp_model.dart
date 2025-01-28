@@ -1,5 +1,3 @@
-
-
 import '../../../../core/databases/api/end_points.dart';
 import '../../domain/entites/otp_entities/otp_entity.dart';
 

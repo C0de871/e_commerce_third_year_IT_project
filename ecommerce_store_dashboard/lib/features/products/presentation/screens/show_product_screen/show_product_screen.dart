@@ -1,10 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_store_dashboard/features/products/domain/entities/show_store_entities/products_entity.dart';
 import 'package:ecommerce_store_dashboard/features/products/domain/entities/show_store_entities/show_store_entity.dart';
+import 'package:ecommerce_store_dashboard/features/products/presentation/delete_product_cubit/delete_product_cubit.dart';
 import 'package:ecommerce_store_dashboard/features/products/presentation/show_store_cubit/show_store_cubit.dart';
 import 'package:ecommerce_store_dashboard/storing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../core/shared/widgets/snack_bar.dart';
 
 class StoreDetailsView extends StatefulWidget {
   const StoreDetailsView({
@@ -25,77 +28,173 @@ class _StoreDetailsViewState extends State<StoreDetailsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<ShowStoreCubit, ShowStoreState>(
-        builder: (context, state) {
-          if (state is ShowStoreSuccess) {
-            final store = state.showStoreEntity;
-            final products = store.products;
-            return LayoutBuilder(
-              builder: (context, constraints) {
-                return CustomScrollView(
-                  slivers: [
-                    // Responsive App Bar
-                    SliverAppBar(
-                      expandedHeight: ResponsiveLayout.isMobile(context) ? 200.0 : 250.0,
-                      pinned: true,
-                      flexibleSpace: _buildFlexibleSpaceBar(context, store),
-                    ),
-
-                    // Store Information Section
-                    SliverToBoxAdapter(
-                      child: Padding(
-                        padding: EdgeInsets.all(
-                          ResponsiveLayout.isMobile(context) ? 8.0 : 16.0,
-                        ),
-                        child: _buildStoreDetailsCard(context, store),
+      body: BlocListener<DeleteProductCubit, DeleteProductState>(
+        listener: (context, state) {
+          if (state is DeleteProductFailed) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Container(
+                  decoration: SnackbarStyles.errorDecoration,
+                  padding: SnackbarStyles.padding,
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.error_outline,
+                        color: Colors.red,
+                        size: 24,
                       ),
-                    ),
-
-                    // Products Section Title
-                    SliverToBoxAdapter(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                        child: Text(
-                          'Our Products',
-                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                fontWeight: FontWeight.bold,
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'Delete Failed',
+                              style: SnackbarStyles.titleStyle.copyWith(
+                                color: Colors.red.shade700,
                               ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              state.errMsg,
+                              style: SnackbarStyles.messageStyle,
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-
-                    // Responsive Products Grid
-                    SliverPadding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      sliver: SliverGrid(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: ResponsiveLayout.getGridColumnCount(context),
-                          childAspectRatio: ResponsiveLayout.getCardAspectRatio(context),
-                          crossAxisSpacing: 12,
-                          mainAxisSpacing: 12,
-                        ),
-                        delegate: SliverChildBuilderDelegate(
-                          (BuildContext context, int index) {
-                            return ProductDetailCard(product: products[index]);
-                          },
-                          childCount: products.length,
+                    ],
+                  ),
+                ),
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                duration: SnackbarStyles.duration,
+                margin: SnackbarStyles.margin,
+                behavior: SnackBarBehavior.floating,
+              ),
+            );
+          } else if (state is DeleteProductSuccess) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Container(
+                  decoration: SnackbarStyles.successDecoration,
+                  padding: SnackbarStyles.padding,
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.check_circle_outline,
+                        color: Colors.green,
+                        size: 24,
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'Successfully Deleted',
+                              style: SnackbarStyles.titleStyle.copyWith(
+                                color: Colors.green.shade700,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              'The product has been deleted successfully',
+                              style: SnackbarStyles.messageStyle,
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
-                );
-              },
-            );
-          } else if (state is ShowStoreFailed) {
-            return Center(
-              child: Text(state.msg),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
+                    ],
+                  ),
+                ),
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                duration: SnackbarStyles.duration,
+                margin: SnackbarStyles.margin,
+                behavior: SnackBarBehavior.floating,
+              ),
             );
           }
         },
+        child: BlocBuilder<ShowStoreCubit, ShowStoreState>(
+          builder: (context, state) {
+            if (state is ShowStoreSuccess) {
+              final store = state.showStoreEntity;
+              final products = store.products;
+              return LayoutBuilder(
+                builder: (context, constraints) {
+                  return CustomScrollView(
+                    slivers: [
+                      // Responsive App Bar
+                      SliverAppBar(
+                        expandedHeight: ResponsiveLayout.isMobile(context) ? 200.0 : 250.0,
+                        pinned: true,
+                        flexibleSpace: _buildFlexibleSpaceBar(context, store),
+                      ),
+
+                      // Store Information Section
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: EdgeInsets.all(
+                            ResponsiveLayout.isMobile(context) ? 8.0 : 16.0,
+                          ),
+                          child: _buildStoreDetailsCard(context, store),
+                        ),
+                      ),
+
+                      // Products Section Title
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                          child: Text(
+                            'Our Products',
+                            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
+                        ),
+                      ),
+
+                      // Responsive Products Grid
+                      SliverPadding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        sliver: SliverGrid(
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: ResponsiveLayout.getGridColumnCount(context),
+                            childAspectRatio: ResponsiveLayout.getCardAspectRatio(context),
+                            crossAxisSpacing: 12,
+                            mainAxisSpacing: 12,
+                          ),
+                          delegate: SliverChildBuilderDelegate(
+                            (BuildContext context, int index) {
+                              return ProductDetailCard(product: products[index]);
+                            },
+                            childCount: products.length,
+                          ),
+                        ),
+                      ),
+                      const SliverToBoxAdapter(
+                        child: SizedBox(
+                          height: 32,
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
+            } else if (state is ShowStoreFailed) {
+              return Center(
+                child: Text(state.msg),
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
       ),
     );
   }
@@ -146,7 +245,10 @@ class _StoreDetailsViewState extends State<StoreDetailsView> {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Colors.transparent, Colors.black.withOpacity(0.7)],
+              colors: [
+                Colors.transparent,
+                Colors.black.withOpacity(0.7),
+              ],
             ),
           ),
         ),
@@ -260,125 +362,141 @@ class ProductDetailCard extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final bool isMobile = ResponsiveLayout.isMobile(context);
-        final bool isTablet = ResponsiveLayout.isTablet(context);
         final bool isDesktop = ResponsiveLayout.isDesktop(context);
-        return Card(
-          elevation: 3,
-          color: Theme.of(context).colorScheme.surface,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Responsive Image
-              Expanded(
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
-                  child: CachedNetworkImage(
-                    httpHeaders: const {
-                      'Access-Control-Allow-Origin': '*',
-                    },
-                    imageUrl: product.mainImage,
-                    height: _getImageHeight(context),
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => Container(
-                      height: _getImageHeight(context),
-                      color: Colors.grey[300],
-                      child: const Center(
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+        return Stack(
+          children: [
+            Card(
+              elevation: 3,
+              color: Theme.of(context).colorScheme.surface,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Responsive Image
+                  Expanded(
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
+                      child: CachedNetworkImage(
+                        httpHeaders: const {
+                          'Access-Control-Allow-Origin': '*',
+                        },
+                        imageUrl: product.mainImage,
+                        height: _getImageHeight(context),
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => Container(
+                          height: _getImageHeight(context),
+                          color: Colors.grey[300],
+                          child: const Center(
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                            ),
+                          ),
                         ),
+                        // errorWidget: (context, url, error) => Container(
+                        //   height: _getImageHeight(context),
+                        //   color: Colors.grey[200],
+                        //   child: const Icon(Icons.image_not_supported, size: 30),
+                        // ),
                       ),
                     ),
-                    // errorWidget: (context, url, error) => Container(
-                    //   height: _getImageHeight(context),
-                    //   color: Colors.grey[200],
-                    //   child: const Icon(Icons.image_not_supported, size: 30),
-                    // ),
                   ),
-                ),
-              ),
 
-              // Responsive Product Details
-              Padding(
-                padding: EdgeInsets.all(isMobile ? 6.0 : 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // Product Name and Description
-                    Column(
+                  // Responsive Product Details
+                  Padding(
+                    padding: EdgeInsets.all(isMobile ? 6.0 : 8.0),
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          product.productName,
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                fontSize: isMobile ? 12 : 14,
-                              ),
-                          maxLines: isDesktop ? 2 : 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          product.description,
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: Colors.grey[600],
-                                fontSize: isMobile ? 10 : 12,
-                              ),
-                          maxLines: isDesktop ? 2 : 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    ),
-
-                    // Price and Inventory
-                    Column(
-                      children: [
-                        const SizedBox(height: 8),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // Product Name and Description
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '\$${product.price}',
-                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: Theme.of(context).colorScheme.primary,
+                              product.productName,
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     fontWeight: FontWeight.bold,
                                     fontSize: isMobile ? 12 : 14,
                                   ),
+                              maxLines: isDesktop ? 2 : 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            _buildInventoryChip(),
+                            const SizedBox(height: 4),
+                            Text(
+                              product.description,
+                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: Colors.grey[600],
+                                    fontSize: isMobile ? 10 : 12,
+                                  ),
+                              maxLines: isDesktop ? 2 : 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ],
                         ),
-                        const SizedBox(height: 4),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                        // Price and Inventory
+                        Column(
                           children: [
-                            Text(
-                              product.categoryName,
-                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    fontSize: isMobile ? 9 : 10,
-                                  ),
+                            const SizedBox(height: 8),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  '\$${product.price}',
+                                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                        color: Theme.of(context).colorScheme.primary,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: isMobile ? 12 : 14,
+                                      ),
+                                ),
+                                _buildInventoryChip(),
+                              ],
                             ),
-                            Text(
-                              'SKU: ${product.productId}',
-                              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: Colors.grey[500],
-                                    fontSize: isMobile ? 9 : 10,
-                                  ),
+                            const SizedBox(height: 4),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  product.categoryName,
+                                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                        fontSize: isMobile ? 9 : 10,
+                                      ),
+                                ),
+                                Text(
+                                  'SKU: ${product.productId}',
+                                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                        color: Colors.grey[500],
+                                        fontSize: isMobile ? 9 : 10,
+                                      ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
                       ],
                     ),
-                  ],
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              left: 10,
+              top: 10,
+              child: GestureDetector(
+                onTap: () {
+                  context.read<DeleteProductCubit>().deleteProductTrigger(product.storeId, product.productId);
+                },
+                child: const Icon(
+                  Icons.delete,
+                  color: Colors.red,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );

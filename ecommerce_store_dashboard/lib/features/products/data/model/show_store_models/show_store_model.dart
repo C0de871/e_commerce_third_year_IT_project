@@ -1,5 +1,3 @@
-
-
 import '../../../../../core/databases/api/end_points.dart';
 import '../../../domain/entities/show_store_entities/show_store_entity.dart';
 import 'products_model.dart';
@@ -29,7 +27,8 @@ class ShowStoreModel extends ShowStoreEntity {
       imageUrl: storeData[ApiKey.imageUrl],
       location: storeData[ApiKey.location],
       description: storeData[ApiKey.description],
-      products: List<ProductsModel>.from(storeData[ApiKey.products]?.map((x) => ProductsModel.fromMap(x))),
+      products: List<ProductsModel>.from(
+          storeData[ApiKey.products]?.map((x) => ProductsModel.fromMap(x))),
     );
   }
 

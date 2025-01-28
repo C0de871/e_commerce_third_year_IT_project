@@ -1,5 +1,3 @@
-
-
 import '../../../../core/databases/api/end_points.dart';
 import '../../domain/entites/user_entities/user_entities.dart';
 import 'sub_models/sub_user_model.dart';

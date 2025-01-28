@@ -11,7 +11,8 @@ import '../data sources/add_product_remote_data_source.dart';
 class AddProductRepositoryImple extends AddProductRepository {
   final NetworkInfo networkInfo;
   final AddProductRemoteDataSource remoteDataSource;
-  AddProductRepositoryImple({required this.remoteDataSource, required this.networkInfo});
+  AddProductRepositoryImple(
+      {required this.remoteDataSource, required this.networkInfo});
   @override
   Future<Either<Failure, AddProductEntity>> addProduct({
     required AddProductParams params,

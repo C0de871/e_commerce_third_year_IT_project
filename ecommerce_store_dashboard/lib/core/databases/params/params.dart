@@ -13,3 +13,12 @@ class ShowStoreParams {
     required this.storeID,
   });
 }
+
+class DeleteProductParams {
+  int storeID;
+  int productID;
+  DeleteProductParams({
+    required this.storeID,
+    required this.productID,
+  });
+}

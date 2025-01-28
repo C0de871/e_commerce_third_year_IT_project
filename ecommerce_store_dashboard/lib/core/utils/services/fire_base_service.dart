@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-
 import '../../../firebase_options.dart';
 import '../../databases/api/end_points.dart';
 import '../../databases/cache/secure_storage_helper.dart';

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ecommerce_store_dashboard/features/products/domain/entities/delete_product_entity/delete_product_entity.dart';
 
 import '../../../../core/databases/connection/network_info.dart';
 import '../../../../core/databases/errors/expentions.dart';
@@ -39,6 +40,24 @@ class ProductsRepositoryImpl extends ProductsRepository {
     if (await networkInfo.isConnected!) {
       try {
         final remoteTempleT = await remoteDataSource.showStore(params);
+
+        return Right(remoteTempleT);
+      } on ServerException catch (e) {
+        return Left(Failure(errMessage: e.errorModel.errorMessage));
+      }
+    } else {
+      //TODO make this message adapt to app language:
+      return Left(Failure(errMessage: "There is no internet connnect"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, DeleteProductEntity>> deleteProduct({
+    required DeleteProductParams params,
+  }) async {
+    if (await networkInfo.isConnected!) {
+      try {
+        final remoteTempleT = await remoteDataSource.deleteProduct(params);
 
         return Right(remoteTempleT);
       } on ServerException catch (e) {

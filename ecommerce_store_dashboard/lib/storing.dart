@@ -152,3 +152,4 @@ class ResponsiveLayout {
     return 0.8;
   }
 }
+

@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
 
+import 'package:ecommerce_store_dashboard/features/products/data/model/delete_product_models/delete_product_model.dart';
+
 import '../../../../core/databases/api/api_consumer.dart';
 import '../../../../core/databases/api/end_points.dart';
 import '../../../../core/databases/cache/secure_storage_helper.dart';
@@ -52,5 +54,23 @@ class ProductsRemoteDataSource {
       extra: extra,
     );
     return ShowStoreModel.fromMap(response);
+  }
+
+  Future<DeleteProductModel> deleteProduct(
+    DeleteProductParams params,
+  ) async {
+    Map<String, dynamic> headers = {
+      ApiKey.authorization: await cacheHelper.getData(key: CacheKey.accessToken),
+    };
+
+    Map<String, dynamic> extra = {
+      ApiKey.requiredAuth: true,
+    };
+    final response = await api.delete(
+      EndPoints.deleteProduct(params.storeID, params.productID),
+      headers: headers,
+      extra: extra,
+    );
+    return DeleteProductModel.fromMap(response);
   }
 }

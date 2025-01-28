@@ -19,7 +19,8 @@ class AddProductRemoteDataSource {
     Map<String, dynamic> body,
   ) async {
     Map<String, dynamic> headers = {
-      ApiKey.authorization: await cacheHelper.getData(key: CacheKey.accessToken),
+      ApiKey.authorization:
+          await cacheHelper.getData(key: CacheKey.accessToken),
     };
 
     Map<String, dynamic> extra = {

@@ -14,5 +14,4 @@ class AddProductEntity {
     required this.data,
     required this.statusCode,
   });
-
 }

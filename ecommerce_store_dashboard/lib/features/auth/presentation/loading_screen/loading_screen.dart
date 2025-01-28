@@ -34,7 +34,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
                 if (state.isFirstLaunch) {
                   await Future.delayed(const Duration(seconds: 2));
                   if (context.mounted) {
-                    Navigator.pushReplacementNamed(context, AppRoutes.splashRoute);
+                    Navigator.pushReplacementNamed(
+                        context, AppRoutes.splashRoute);
                   }
                 } else {
                   context.read<GetLastUserCubit>().getLastUser();
