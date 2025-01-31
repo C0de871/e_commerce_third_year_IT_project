@@ -21,10 +21,20 @@ class HomeCubit extends Cubit<HomeState> {
     required this.cartCubit,
   }) : super(HomeInitial());
 
-  dynamic getHomeData({int productPage = 1, int storePage = 1}) async {
+  dynamic getHomeData({
+    int productPage = 1,
+    int storePage = 1,
+    required String langCode,
+  }) async {
     await Future.wait<dynamic>([
-      productCubit.getAllProducts(page: productPage),
-      storeCubit.getAllStores(page: storePage),
+      productCubit.getAllProducts(
+        page: productPage,
+        langCode: langCode,
+      ),
+      storeCubit.getAllStores(
+        page: storePage,
+        langCode: langCode,
+      ),
       //get
     ]);
   }

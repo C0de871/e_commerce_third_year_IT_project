@@ -1,6 +1,7 @@
 import 'package:e_commerce/features/products/presentation/all_products/widgets/list_item_content.dart';
 import 'package:e_commerce/features/products/presentation/all_products/widgets/list_tile_skeleton.dart';
 import 'package:e_commerce/features/products/presentation/cubit/product_cubit/product_cubit.dart';
+import 'package:e_commerce/features/settings/presentation/cubit/language_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,6 +33,7 @@ class ContactListItem extends StatelessWidget {
           ),
           value: productCubits[page - 1]
             ..getAllProducts(
+              langCode: (context.read<LanguageCubit>().state as CurrentLanguage).langCode,
               page: page,
               query: querySearch,
             ),

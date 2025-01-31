@@ -10,8 +10,13 @@ class GetProductDetails {
 
   GetProductDetails({required this.repository});
 
-  Future<Either<Failure, GetProductDetailsEntity>> call(
-      {required GetProductDetailsParams params}) {
-    return repository.getProductDetails(params: params);
+  Future<Either<Failure, GetProductDetailsEntity>> call({
+    required GetProductDetailsParams params,
+    required String langCode,
+  }) {
+    return repository.getProductDetails(
+      params: params,
+      langCode: langCode,
+    );
   }
 }

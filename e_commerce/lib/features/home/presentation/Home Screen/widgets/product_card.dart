@@ -15,6 +15,7 @@ import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/constants/app_numbers.dart';
 import '../../../../../core/utils/constants/app_rive.dart';
 import '../../../../products/domain/entities/product_entity.dart';
+import '../../../../settings/presentation/cubit/language_cubit.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -41,14 +42,14 @@ class ProductCard extends StatelessWidget {
         ],
       ),
       // width: MediaQuery.sizeOf(context).width / 2,
-      child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
+      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
         return Material(
           color: Colors.transparent,
           child: InkWell(
             onTap: () {
               context.read<GetProductDetailsCubit>().getProductDetailsTrigger(
                     productID: product.productId.toString(),
+                    langCode: (context.read<LanguageCubit>().state as CurrentLanguage).langCode,
                     storeID: product.storeId.toString(),
                   );
               Navigator.of(context).pushNamed(
@@ -61,8 +62,7 @@ class ProductCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Align(
-                    alignment: Alignment.topCenter,
+                  Expanded(
                     child: ProductImage(
                       mainImageUrl: product.mainImageUrl!,
                       constraints: constraints,
@@ -123,8 +123,7 @@ class ProductCardLoading extends StatelessWidget {
         ],
       ),
       // width: MediaQuery.sizeOf(context).width / 2,
-      child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
+      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
         return Material(
           color: Colors.transparent,
           child: InkWell(
@@ -352,9 +351,7 @@ class _FaviourtState extends State<Faviourt> {
         padding: EdgeInsets.only(top: 1),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: widget.isFav == 1
-              ? const Color.fromARGB(255, 251, 207, 204)
-              : AppColors.disableFavContainer,
+          color: widget.isFav == 1 ? const Color.fromARGB(255, 251, 207, 204) : AppColors.disableFavContainer,
         ),
         child: artboard == null
             ? SizedBox()
@@ -386,8 +383,7 @@ class LoadingFaviourt extends StatelessWidget {
 }
 
 class ProductImage extends StatelessWidget {
-  const ProductImage(
-      {super.key, required this.mainImageUrl, required this.constraints});
+  const ProductImage({super.key, required this.mainImageUrl, required this.constraints});
 
   final String mainImageUrl;
   final BoxConstraints constraints;
@@ -404,7 +400,10 @@ class ProductImage extends StatelessWidget {
           decoration: BoxDecoration(
             color: AppColors.imageBackground,
             borderRadius: BorderRadius.circular(20),
-            image: DecorationImage(image: imageProvider),
+            image: DecorationImage(
+              image: imageProvider,
+              fit: BoxFit.cover,
+            ),
           ),
           // child: FlutterImage.Image.asset(AppImages.tShirt),
         ),

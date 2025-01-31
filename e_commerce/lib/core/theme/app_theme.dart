@@ -46,11 +46,6 @@ class AppTheme {
         gapPadding: 10,
       );
       return InputDecorationTheme(
-          // labelStyle: const TextStyle(color: Colors.black),
-          // floatingLabelStyle: WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
-          //   if (states.contains(WidgetState.focused)) return TextStyle();
-          //   return const TextStyle();
-          // }),
           errorMaxLines: 5,
           floatingLabelBehavior: FloatingLabelBehavior.always,
           contentPadding: const EdgeInsets.symmetric(
@@ -113,9 +108,7 @@ class AppTheme {
 
     return ThemeData(
       colorScheme: colorScheme,
-      scaffoldBackgroundColor: colorScheme.brightness == Brightness.dark
-          ? defaultDarkScheme().surface
-          : Colors.white,
+      scaffoldBackgroundColor: colorScheme.brightness == Brightness.dark ? defaultDarkScheme().surface : Colors.white,
       // scaffoldBackgroundColor: darkScheme().su,
       textTheme: appTextTheme,
       textButtonTheme: textButtonStyle,
@@ -124,10 +117,6 @@ class AppTheme {
     );
   }
 }
-
-// ColorScheme syriaFreeScheme = ColorScheme.fromSeed(
-//   seedColor: Colors.green,
-// );
 
 ColorScheme defaultLightScheme() {
   return const ColorScheme(
@@ -177,6 +166,57 @@ ColorScheme defaultLightScheme() {
     surfaceContainer: Color(0xfffceae3),
     surfaceContainerHigh: Color(0xfff6e5de),
     surfaceContainerHighest: Color(0xfff0dfd8),
+  );
+}
+
+ColorScheme freeScheme() {
+  return const ColorScheme(
+    brightness: Brightness.light,
+    primary: Color(0xff306a43),
+    surfaceTint: Color(0xff306a43),
+    onPrimary: Color(0xffffffff),
+    primaryContainer: Color(0xffb2f1bf),
+    onPrimaryContainer: Color(0xff14512d),
+    secondary: Color(0xff506353),
+    onSecondary: Color(0xffffffff),
+    secondaryContainer: Color(0xffd2e8d3),
+    onSecondaryContainer: Color(0xff384b3c),
+    tertiary: Color(0xff3a656f),
+    onTertiary: Color(0xffffffff),
+    tertiaryContainer: Color(0xffbeeaf6),
+    onTertiaryContainer: Color(0xff204d56),
+    error: Color(0xffba1a1a),
+    onError: Color(0xffffffff),
+    errorContainer: Color(0xffffdad6),
+    onErrorContainer: Color(0xff93000a),
+    surface: Color(0xfff6fbf3),
+    onSurface: Color(0xff181d18),
+    onSurfaceVariant: Color(0xff414941),
+    outline: Color(0xff717971),
+    outlineVariant: Color(0xffc1c9bf),
+    shadow: Color(0xff000000),
+    scrim: Color(0xff000000),
+    inverseSurface: Color(0xff2d322d),
+    inversePrimary: Color(0xff97d5a5),
+    primaryFixed: Color(0xffb2f1bf),
+    onPrimaryFixed: Color(0xff00210d),
+    primaryFixedDim: Color(0xff97d5a5),
+    onPrimaryFixedVariant: Color(0xff14512d),
+    secondaryFixed: Color(0xffd2e8d3),
+    onSecondaryFixed: Color(0xff0d1f12),
+    secondaryFixedDim: Color(0xffb6ccb8),
+    onSecondaryFixedVariant: Color(0xff384b3c),
+    tertiaryFixed: Color(0xffbeeaf6),
+    onTertiaryFixed: Color(0xff001f25),
+    tertiaryFixedDim: Color(0xffa2ced9),
+    onTertiaryFixedVariant: Color(0xff204d56),
+    surfaceDim: Color(0xffd7dbd4),
+    surfaceBright: Color(0xfff6fbf3),
+    surfaceContainerLowest: Color(0xffffffff),
+    surfaceContainerLow: Color(0xfff0f5ed),
+    surfaceContainer: Color(0xffebefe7),
+    surfaceContainerHigh: Color(0xffe5eae2),
+    surfaceContainerHighest: Color(0xffdfe4dc),
   );
 }
 

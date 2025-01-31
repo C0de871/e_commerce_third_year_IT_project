@@ -15,12 +15,15 @@ class ProductRemoteDataSource {
     required this.cacheHelper,
   });
 
-  Future<GetAllProductsModel> getAllProducts(
-      {required ProductParams params}) async {
+  Future<GetAllProductsModel> getAllProducts({
+    required ProductParams params,
+    required String langCode,
+  }) async {
     String? accessToken = await cacheHelper.getData(key: CacheKey.accessToken);
 
     Map<String, dynamic> headers = {
       ApiKey.authorization: accessToken,
+      ApiKey.acceptLanguage: langCode,
     };
 
     bool isLoggedIn = (accessToken != null) ? true : false;

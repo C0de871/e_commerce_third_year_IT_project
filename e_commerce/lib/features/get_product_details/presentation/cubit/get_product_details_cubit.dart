@@ -39,14 +39,18 @@ class GetProductDetailsCubit extends Cubit<GetProductDetailsState> {
     return _instance!;
   }
 
-  dynamic getProductDetailsTrigger({required String productID, required String storeID}) async {
+  dynamic getProductDetailsTrigger({
+    required String productID,
+    required String storeID,
+    required String langCode,
+  }) async {
     GetProductDetailsParams params = GetProductDetailsParams(
       productID: productID,
       storeID: storeID,
     );
 
     emit(GetProductDetailsLoading());
-    final response = await getProductDetailsUseCase.call(params: params);
+    final response = await getProductDetailsUseCase.call(params: params, langCode: langCode);
     response.fold(
       (failure) => emit(GetProductDetailsFailed(msg: failure.errMessage)),
       (getProductDetails) => emit(
@@ -60,7 +64,7 @@ class GetProductDetailsCubit extends Cubit<GetProductDetailsState> {
     if (state is GetProductDetailsSuccess) {
       log("increase");
       entity = (state as GetProductDetailsSuccess).productDetailsEntity;
-      if (entity.data?.quantityInCart != null) {
+      if (entity.data?.quantityInCart != null && (entity.data?.quantityInCart)! < (entity.data!.quantity)!) {
         entity.data!.quantityInCart = entity.data!.quantityInCart! + 1;
       }
       log("${entity.data!.quantityInCart}");
@@ -75,7 +79,7 @@ class GetProductDetailsCubit extends Cubit<GetProductDetailsState> {
     GetProductDetailsEntity entity;
     if (state is GetProductDetailsSuccess) {
       entity = (state as GetProductDetailsSuccess).productDetailsEntity;
-      if (entity.data?.quantityInCart != null &&( entity.data?.quantityInCart! !=0)) {
+      if (entity.data?.quantityInCart != null && (entity.data?.quantityInCart! != 0)) {
         entity.data!.quantityInCart = entity.data!.quantityInCart! - 1;
       }
       // log(en)

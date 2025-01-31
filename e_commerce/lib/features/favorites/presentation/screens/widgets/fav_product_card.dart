@@ -7,6 +7,7 @@ import '../../../../../core/Routes/app_routes.dart';
 import '../../../../../core/utils/constants/app_numbers.dart';
 import '../../../../get_product_details/presentation/cubit/get_product_details_cubit.dart';
 import '../../../../home/presentation/Home Screen/widgets/product_card.dart';
+import '../../../../settings/presentation/cubit/language_cubit.dart';
 
 class FavProductCard extends StatelessWidget {
   const FavProductCard({
@@ -33,8 +34,7 @@ class FavProductCard extends StatelessWidget {
         ],
       ),
       // width: MediaQuery.sizeOf(context).width / 2,
-      child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
+      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
         return Material(
           color: Colors.transparent,
           child: InkWell(
@@ -42,6 +42,7 @@ class FavProductCard extends StatelessWidget {
               context.read<GetProductDetailsCubit>().getProductDetailsTrigger(
                     productID: product.productId.toString(),
                     storeID: product.storeId.toString(),
+                    langCode: (context.read<LanguageCubit>().state as CurrentLanguage).langCode,
                   );
               ProductEntity productModel = ProductEntity(
                 storeId: product.storeId,

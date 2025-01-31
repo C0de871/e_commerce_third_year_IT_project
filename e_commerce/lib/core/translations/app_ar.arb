@@ -1,4 +1,5 @@
 {
+    "@@locale": "ar",
     "language": "العربية",
     "welcomeBack": "مرحبًا بعودتك",
     "signInMessage": "قم بتسجيل الدخول باستخدام بريدك الإلكتروني وكلمة المرور أو تابع باستخدام وسائل التواصل الاجتماعي",
@@ -65,7 +66,7 @@
         "description": "Label for the button to view the store"
     },
     "price": "السعر",
-    "@price": { 
+    "@price": {
         "description": "Label for the product price"
     },
     "confirmDeletion": " الحذف",
@@ -92,15 +93,69 @@
     "@failed": {
         "description": "النص المعروض في حالة حدوث خطأ"
     },
-
-    "name":"الاسم:",
-    "order":"قم بالطلب",
-    "location":"العنوان:",
-    "productsPrice":"سعر المنتجات",
-    "shippingfees":"تكلفة النقل",
-    "total":"السعر الكلي",
-    "delivery":"معلومات الزبون:",
-    "contact":"للتواصل:",
-    "totalCost":"السعر الكلي:"
-    
+    "name": "الاسم:",
+    "order": "قم بالطلب",
+    "location": "العنوان:",
+    "productsPrice": "سعر المنتجات",
+    "shippingfees": "تكلفة النقل",
+    "total": "السعر الكلي",
+    "delivery": "معلومات الزبون:",
+    "contact": "للتواصل:",
+    "totalCost": "السعر الكلي:",
+    "myFavorite": "مفضلتي:",
+    "profile": "الملف الشخصي",
+    "@profile": {
+        "description": "عنوان شاشة الملف الشخصي"
+    },
+    "account": "الحساب",
+    "@account": {
+        "description": "التسمية لبطاقة الحساب"
+    },
+    "viewYourProfile": "عرض ملفك الشخصي",
+    "@viewYourProfile": {
+        "description": "الوصف لبطاقة الحساب"
+    },
+    "favorites": "المفضلة",
+    "@favorites": {
+        "description": "التسمية لبطاقة المفضلة"
+    },
+    "myFavorites": "مفضلاتي",
+    "@myFavorites": {
+        "description": "الوصف لبطاقة المفضلة"
+    },
+    "orders": "الطلبات",
+    "@orders": {
+        "description": "التسمية لبطاقة الطلبات"
+    },
+    "myOrders": "طلباتي",
+    "@myOrders": {
+        "description": "الوصف لبطاقة الطلبات"
+    },
+    "notification": "الإشعارات",
+    "@notification": {
+        "description": "التسمية لبطاقة الإشعارات"
+    },
+    "viewYourNotification": "عرض الإشعارات الخاصة بك",
+    "@viewYourNotification": {
+        "description": "الوصف لبطاقة الإشعارات"
+    },
+    "orderDetails": "تفاصيل الطلب",
+    "waiting": "بانتظار...",
+    "@goToShopping": {
+        "description": "النص الذي يشجع المستخدم على التسوق في حال عدم وجود طلبات."
+    },
+    "goToShopping": "اذهب للتسوق",
+    "@products": {
+        "description": "النص الذي يعرض عدد المنتجات في الطلب."
+    },
+    "products": "منتجات",
+    "deleteOrder": "حذف الطلب",
+    "freeSyria": "سورية الحرة",
+    "@freeSyria": {
+        "description": "سورية الحرة"
+    },
+    "defaultTheme": "الثيم الافتراضي",
+    "@defaultTheme": {
+        "description": "الثيم الافتراضي للتطبيق"
+    }
 }

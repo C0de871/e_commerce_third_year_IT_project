@@ -22,7 +22,7 @@ class _StoreDetailsViewState extends State<StoreDetailsView> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<ShowStoreCubit>(context).showStoreTrigger(11);
+    BlocProvider.of<ShowStoreCubit>(context).showStoreTrigger(1);
   }
 
   @override

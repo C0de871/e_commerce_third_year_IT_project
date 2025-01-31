@@ -16,19 +16,19 @@ class CartRemoteDataSource {
     required this.cacheHelper,
   });
 //! get cart:
-  Future<CartModel> getCart() async {
+  Future<CartModel> getCart({required String langCode}) async {
     String? accessToken = await cacheHelper.getData(key: CacheKey.accessToken);
 
     Map<String, dynamic> headers = {
       ApiKey.authorization: accessToken,
+      ApiKey.acceptLanguage: langCode,
     };
     bool isLoggedIn = (accessToken != null) ? true : false;
 
     Map<String, dynamic> extra = {
       ApiKey.requiredAuth: isLoggedIn,
     };
-    final response =
-        await api.get(EndPoints.getCart, headers: headers, extra: extra);
+    final response = await api.get(EndPoints.getCart, headers: headers, extra: extra);
     return CartModel.fromJson(response);
   }
 
@@ -44,8 +44,7 @@ class CartRemoteDataSource {
     Map<String, dynamic> extra = {
       ApiKey.requiredAuth: isLoggedIn,
     };
-    final response = await api.put(
-        data: bodyJson, EndPoints.modifyCart, headers: headers, extra: extra);
+    final response = await api.put(data: bodyJson, EndPoints.modifyCart, headers: headers, extra: extra);
     return CartModel.fromJson(response);
   }
 
@@ -61,8 +60,7 @@ class CartRemoteDataSource {
     Map<String, dynamic> extra = {
       ApiKey.requiredAuth: isLoggedIn,
     };
-    final response = await api.delete(
-        data: bodyJson, EndPoints.deleteCart, headers: headers, extra: extra);
+    final response = await api.delete(data: bodyJson, EndPoints.deleteCart, headers: headers, extra: extra);
 
     return MessageModel.fromJson(response);
   }
@@ -83,8 +81,7 @@ class CartRemoteDataSource {
     Map<String, dynamic> extra = {
       ApiKey.requiredAuth: isLoggedIn,
     };
-    final response =
-        await api.delete(EndPoints.clearCart, headers: headers, extra: extra);
+    final response = await api.delete(EndPoints.clearCart, headers: headers, extra: extra);
     return MessageModel.fromJson(response);
   }
 
@@ -99,14 +96,12 @@ class CartRemoteDataSource {
     Map<String, dynamic> extra = {
       ApiKey.requiredAuth: true,
     };
-    final response =
-        await api.get(EndPoints.getSizeCart, headers: headers, extra: extra);
+    final response = await api.get(EndPoints.getSizeCart, headers: headers, extra: extra);
     return SizeCartModel.fromJson(response);
   }
 
   //! add to cart :
-  Future<AddToCartModel> addToCart(
-      GetStoredAndProductIdParams params, Map<String, dynamic> bodyJson) async {
+  Future<AddToCartModel> addToCart(GetStoredAndProductIdParams params, Map<String, dynamic> bodyJson) async {
     String? accessToken = await cacheHelper.getData(key: CacheKey.accessToken);
 
     Map<String, dynamic> headers = {
@@ -117,8 +112,7 @@ class CartRemoteDataSource {
     Map<String, dynamic> extra = {
       ApiKey.requiredAuth: true,
     };
-    final response = await api.post(EndPoints.getProductStoredId(params),
-        data: bodyJson, headers: headers, extra: extra);
+    final response = await api.post(EndPoints.getProductStoredId(params), data: bodyJson, headers: headers, extra: extra);
     return AddToCartModel.fromJson(response);
   }
 }

@@ -4,7 +4,7 @@ import '../../../../core/databases/errors/failure.dart';
 import '../repository/language_repository.dart';
 
 class SaveLang {
-  final LanguageRepository languageRepository;
+  final SettingsRepository languageRepository;
 
   SaveLang({required this.languageRepository});
 

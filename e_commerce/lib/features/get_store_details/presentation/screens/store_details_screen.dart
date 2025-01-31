@@ -95,7 +95,7 @@ class StoreDetailsScreen extends StatelessWidget {
                       // padding: const EdgeInsets.all(8),
                       mainAxisSpacing: 10,
                       crossAxisSpacing: 10,
-                      childAspectRatio: 0.66,
+                      childAspectRatio: 0.60,
                     ),
                     delegate: SliverChildBuilderDelegate(
                       childCount: store.products.length,

@@ -4,6 +4,7 @@ import 'package:e_commerce/features/auth/domain/entites/user_entities/user_entit
 import 'package:e_commerce/features/auth/presentation/cubit/get_last_user_cubit/get_last_user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import localization
 
 import '../../../core/Routes/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
@@ -21,7 +22,7 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         leading: const SizedBox(),
         title: Text(
-          "Profile",
+          AppLocalizations.of(context)!.profile, // Localized string
           style: TextStyle(color: Theme.of(context).colorScheme.secondary),
         ),
         centerTitle: true,
@@ -33,7 +34,7 @@ class ProfileScreen extends StatelessWidget {
         ),
         width: double.infinity,
         child: user == null
-            ? Text("Failed")
+            ? Text(AppLocalizations.of(context)!.failed) // Localized string
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -45,8 +46,7 @@ class ProfileScreen extends StatelessWidget {
                           ? Hero(
                               tag: "placeHolder picture",
                               child: const CircleAvatar(
-                                backgroundImage:
-                                    AssetImage("assets/images/images.png"),
+                                backgroundImage: AssetImage("assets/images/images.png"),
                                 radius: 100,
                               ),
                             )
@@ -66,36 +66,13 @@ class ProfileScreen extends StatelessWidget {
                         tag: "profile name",
                         child: Text(
                           "${user.subUserEntity!.firstName} ${user.subUserEntity!.lastName}",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium!
-                              .copyWith(
+                          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                                 color: Theme.of(context).colorScheme.primary,
                               ),
                         ),
                       ),
                     ],
                   ),
-                  // (user.subUserEntity!.imageUrl == null)
-                  //     ? Hero(
-                  //         tag: "profile image",
-                  //         child: const CircleAvatar(
-                  //           backgroundImage: AssetImage("assets/images/images.png"),
-                  //           radius: 100,
-                  //         ),
-                  //       )
-                  //     : Hero(
-                  //         tag: "profile image",
-                  //         child: CircleAvatar(
-                  //           radius: 100,
-                  //           foregroundImage: CachedNetworkImageProvider(
-                  //             user.subUserEntity!.imageUrl!,
-                  //           ),
-                  //         ),
-                  //       ),
-                  // SizedBox(
-                  //   height: padding4 * 5,
-                  // ),
                   Column(
                     children: [
                       SizedBox(
@@ -108,17 +85,14 @@ class ProfileScreen extends StatelessWidget {
                             SizedBox(
                               width: MediaQuery.sizeOf(context).width / 2,
                               child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Card1(
-                                    title: "Account",
-                                    description: "View Your Profile",
+                                    title: AppLocalizations.of(context)!.account, // Localized string
+                                    description: AppLocalizations.of(context)!.viewYourProfile, // Localized string
                                     icon: Icons.person,
-                                    forgroundGroundColor:
-                                        AppColors.cardFGLightYellow,
-                                    backGroundColor:
-                                        AppColors.cardBGLightYellow,
+                                    forgroundGroundColor: AppColors.cardFGLightYellow,
+                                    backGroundColor: AppColors.cardBGLightYellow,
                                     onTap: () {
                                       Navigator.of(context).pushNamed(
                                         AppRoutes.accountDetails,
@@ -129,12 +103,11 @@ class ProfileScreen extends StatelessWidget {
                                     height: padding4 * 2,
                                   ),
                                   Card1(
-                                    title: "Favorites",
-                                    description: "My favorites",
+                                    title: AppLocalizations.of(context)!.favorites, // Localized string
+                                    description: AppLocalizations.of(context)!.myFavorites, // Localized string
                                     icon: Icons.favorite,
                                     backGroundColor: AppColors.cardBGLightPink,
-                                    forgroundGroundColor:
-                                        AppColors.cardFGLightPink,
+                                    forgroundGroundColor: AppColors.cardFGLightPink,
                                     onTap: () {
                                       Navigator.of(context).pushNamed(
                                         AppRoutes.favoritesRoute,
@@ -149,15 +122,13 @@ class ProfileScreen extends StatelessWidget {
                             ),
                             Expanded(
                               child: Card1(
-                                title: "Orders",
-                                description: "MY orders",
+                                title: AppLocalizations.of(context)!.orders, // Localized string
+                                description: AppLocalizations.of(context)!.myOrders, // Localized string
                                 icon: Icons.restaurant,
                                 backGroundColor: AppColors.cardBGLightPurple,
-                                forgroundGroundColor:
-                                    AppColors.cardFGLightPurple,
+                                forgroundGroundColor: AppColors.cardFGLightPurple,
                                 onTap: () {
-                                  Navigator.pushNamed(
-                                      context, AppRoutes.orderScreen);
+                                  Navigator.pushNamed(context, AppRoutes.orderScreen);
                                 },
                               ),
                             ),
@@ -168,8 +139,8 @@ class ProfileScreen extends StatelessWidget {
                         height: padding4 * 2,
                       ),
                       Card1(
-                        title: "Notification",
-                        description: "View Your Notification",
+                        title: AppLocalizations.of(context)!.notification, // Localized string
+                        description: AppLocalizations.of(context)!.viewYourNotification, // Localized string
                         icon: Icons.notifications,
                         backGroundColor: AppColors.cardBGLightBlue,
                         forgroundGroundColor: AppColors.cardFGLightBlue,
@@ -235,11 +206,7 @@ class Card1 extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CardTitle(
-                  backGroundColor: backGroundColor,
-                  icon: icon,
-                  forgroundGroundColor: forgroundGroundColor,
-                  title: title),
+              CardTitle(backGroundColor: backGroundColor, icon: icon, forgroundGroundColor: forgroundGroundColor, title: title),
               SizedBox(
                 height: padding4 * 2,
               ),

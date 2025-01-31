@@ -5,6 +5,8 @@ import '../../../../core/databases/params/params.dart';
 import '../entities/get_product_details_entity.dart';
 
 abstract class GetProductDetailsRepository {
-  Future<Either<Failure, GetProductDetailsEntity>> getProductDetails(
-      {required GetProductDetailsParams params});
+  Future<Either<Failure, GetProductDetailsEntity>> getProductDetails({
+    required GetProductDetailsParams params,
+    required String langCode,
+  });
 }

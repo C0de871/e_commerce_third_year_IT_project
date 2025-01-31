@@ -5,9 +5,9 @@ import 'package:e_commerce/features/order/domain/entites/sub_order_entity.dart';
 import 'package:e_commerce/features/order/presentation/order_cubit/delete_order_cubit.dart';
 import 'package:e_commerce/features/order/presentation/order_cubit/get_order_cubit.dart';
 import 'package:e_commerce/features/order/presentation/order_cubit/get_order_state.dart';
-import 'package:e_commerce/features/order_details/presentation/order_details_cubit/get_order_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OrderScreen extends StatelessWidget {
   const OrderScreen({super.key});
@@ -15,35 +15,39 @@ class OrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            appBar: AppBar(
-              title: const Text('My Orders'),
-            ),
-            body: BlocConsumer<GetOrderCubit, GetOrderState>(
-                listener: (context, state) {
-              // TODO: implement listener
-            }, builder: (context, state) {
-              if (state is GetOrderSuccess) {
-                log("u in right ***");
-                final OrderEntity orders = state.orders;
-                print("Orders: ${orders.data}");
-                int tot = orders.data?.length ?? 0;
-                log("${tot}");
-                return Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: ProductGrid(orders: orders),
-                );
-              } else {
-                return Center(
-                  child: Text("Go to shopping",style: TextStyle(
-                    fontSize: 20
-                  ),),
-                );
-              }
-            }));
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.myOrders),
+      ),
+      body: BlocConsumer<GetOrderCubit, GetOrderState>(
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          if (state is GetOrderSuccess) {
+            final OrderEntity orders = state.orders;
+            int tot = orders.data?.length ?? 0;
+            if (state.orders.data!.isEmpty) {
+              return Center(
+                child: Text(
+                  AppLocalizations.of(context)!.goToShopping,
+                  style: TextStyle(fontSize: 20),
+                ),
+              );
+            }
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ProductGrid(orders: orders),
+            );
+          } else {
+            return Center(
+              child: Text(AppLocalizations.of(context)!.waiting), // Localized string
+            );
+          }
+        },
+      ),
+    );
   }
 }
-
-
 
 class ProductGrid extends StatelessWidget {
   final OrderEntity orders;
@@ -63,12 +67,7 @@ class ProductGrid extends StatelessWidget {
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () {
-
-            debugPrint("Navigating to ${AppRoutes.orderDetailsRoute} with ID: ${orders.data![index].id}");
-            Navigator.pushNamed(context, AppRoutes.orderDetailsRoute,arguments:orders.data![index]);
-            
-            
-            
+            Navigator.pushNamed(context, AppRoutes.orderDetailsRoute, arguments: orders.data![index]);
           },
           child: ProductCard(orders.data![index]),
         );
@@ -76,10 +75,11 @@ class ProductGrid extends StatelessWidget {
     );
   }
 }
+
 class ProductCard extends StatelessWidget {
   final SubOrderEntity subOrderEntity;
 
-  const ProductCard(this.subOrderEntity);
+  const ProductCard(this.subOrderEntity, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -107,11 +107,15 @@ class ProductCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            
-            ClipOval(
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(16),
+                topRight: Radius.circular(16),
+                bottomLeft: Radius.circular(30),
+                bottomRight: Radius.circular(30),
+              ),
               child: Image.network(
-                subOrderEntity.image ??
-                    '', 
+                subOrderEntity.image ?? '',
                 height: 100,
                 width: 100,
                 fit: BoxFit.cover,
@@ -119,7 +123,7 @@ class ProductCard extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              "${subOrderEntity.numberOfProducts} products",
+              "${subOrderEntity.numberOfProducts} ${AppLocalizations.of(context)!.goToShopping}",
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -144,7 +148,6 @@ class ProductCard extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            
             const Spacer(),
             IconButton(
               onPressed: () {

@@ -18,7 +18,7 @@ class StoreCubit extends Cubit<StoreState> {
       : getAllStoresUseCase = getIt(),
         super(StoreInitial());
 
-  dynamic getAllStores({int page = 1, String querySearch = ''}) async {
+  dynamic getAllStores({int page = 1, String querySearch = '', required String langCode}) async {
     if (state is! StoreInitial) return;
 
     emit(GetAllStoresLoading());
@@ -27,6 +27,7 @@ class StoreCubit extends Cubit<StoreState> {
         page: 1,
         query: querySearch,
       ),
+      langCode: langCode,
     );
     response.fold(
         (failure) => emit(

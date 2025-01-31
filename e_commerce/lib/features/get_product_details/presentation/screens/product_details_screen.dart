@@ -2,7 +2,9 @@
 import 'dart:developer';
 
 import 'package:e_commerce/core/helper/app_functions.dart';
+import 'package:e_commerce/core/shared/widgets/skeleton.dart';
 import 'package:e_commerce/features/cart/presentation/cubit/add_to_cart_cubit.dart';
+import 'package:e_commerce/features/cart/presentation/cubit/add_to_cart_state.dart';
 import 'package:e_commerce/features/get_product_details/presentation/screens/widgets/product_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,6 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rive/rive.dart';
 import 'package:flutter/src/widgets/image.dart' as flutter_image;
 import 'package:svg_flutter/svg_flutter.dart';
+import '../../../../core/shared/widgets/snack_bar_style.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/constants/app_images.dart';
 import '../../../../core/utils/constants/app_rive.dart';
@@ -29,9 +32,6 @@ class ProductDetailsScreen extends StatelessWidget {
     final ProductEntity productDetails = ModalRoute.of(context)!.settings.arguments as ProductEntity;
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      // backgroundColor: Theme.of(context).colorScheme.surfaceContainerLowest,
-      // backgroundColor: AppColors.grayBackGroundColor,
-      // backgroundColor: Color(0xFFF5F6F9),
       appBar: AppBar(
         actions: [],
         automaticallyImplyLeading: false,
@@ -129,28 +129,146 @@ class AddToCartBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int productquantity=0;
-    if (context.read<GetProductDetailsCubit>().state is GetProductDetailsSuccess) {
-      productquantity = (context.read<GetProductDetailsCubit>().state as GetProductDetailsSuccess).productDetailsEntity.data!.quantityInCart!;
-    }
+    int productquantity = 0;
+    if (context.read<GetProductDetailsCubit>().state is GetProductDetailsSuccess) {}
 
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<GetProductDetailsCubit, GetProductDetailsState>(
+          listener: (context, state) {
+            if (state is GetProductDetailsSuccess) productquantity = state.productDetailsEntity.data!.quantityInCart!;
+          },
         ),
-      ),
-      onPressed: () {
-        context.read<AddToCartCubit>().addToCartTrigger(
-              productID: productDetails.productId!.toString(),
-              storeID: productDetails.storeId!.toString(),
-              orderQuantity: productquantity!,
+        BlocListener<AddToCartCubit, AddToCartState>(
+          listener: (context, state) {
+            if (state is AddToCartFailure) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Container(
+                    decoration: SnackbarStyles.errorDecoration,
+                    padding: SnackbarStyles.padding,
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.error_outline,
+                          color: Colors.red,
+                          size: 24,
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'Delete Failed',
+                                style: SnackbarStyles.titleStyle.copyWith(
+                                  color: Colors.red.shade700,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                state.errMessage,
+                                style: SnackbarStyles.messageStyle,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  duration: SnackbarStyles.duration,
+                  // margin: SnackbarStyles.margin,
+                  // behavior: SnackBarBehavior.floating,
+                ),
+              );
+            } else if (state is AddToCartSuccess) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Container(
+                    decoration: SnackbarStyles.successDecoration,
+                    padding: SnackbarStyles.padding,
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.check_circle_outline,
+                          color: Colors.green,
+                          size: 24,
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'Successfully Deleted',
+                                style: SnackbarStyles.titleStyle.copyWith(
+                                  color: Colors.green.shade700,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                'The product has been deleted successfully',
+                                style: SnackbarStyles.messageStyle,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  animation: CurvedAnimation(
+                    parent: AnimationController(
+                      vsync: Scaffold.of(context),
+                      duration: const Duration(milliseconds: 6000),
+                    )..forward(),
+                    curve: Curves.elasticOut,
+                  ),
+                  duration: SnackbarStyles.duration,
+                  // margin: SnackbarStyles.margin,
+                  // behavior: SnackBarBehavior.floating,
+                ),
+              );
+            }
+          },
+          child: Container(),
+        )
+      ],
+      child: BlocBuilder<AddToCartCubit, AddToCartState>(
+        builder: (context, state) {
+          if (state is AddToCartLoading) {
+            return Center(
+              child: CircularProgressIndicator(
+                color: Theme.of(context).colorScheme.inversePrimary,
+              ),
             );
-      },
-      child: SvgPicture.asset(
-        AppImages.cartIcon,
-        color: Theme.of(context).colorScheme.surfaceContainerLowest,
+          } else {
+            return ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              onPressed: () {
+                context.read<AddToCartCubit>().addToCartTrigger(
+                      productID: productDetails.productId!.toString(),
+                      storeID: productDetails.storeId!.toString(),
+                      orderQuantity: productquantity,
+                    );
+              },
+              child: SvgPicture.asset(
+                AppImages.cartIcon,
+                color: Theme.of(context).colorScheme.surfaceContainerLowest,
+              ),
+            );
+          }
+        },
       ),
     );
   }
@@ -221,8 +339,10 @@ class CartQuantity extends StatelessWidget {
             ),
           );
         } else if (state is GetProductDetailsLoading) {
-          return Center(
-            child: CircularProgressIndicator(),
+          return Skeleton(
+            width: 20,
+            height: 20,
+            radius: 0,
           );
         } else {
           return Text("Failed");
@@ -484,7 +604,24 @@ class _IsFavoriteState extends State<IsFavorite> {
             ),
           );
         }
-        return SizedBox();
+        return Align(
+          alignment: alignment,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topRight: rtl ? Radius.circular(20) : Radius.circular(0),
+                bottomRight: rtl ? Radius.circular(20) : Radius.circular(0),
+                topLeft: rtl ? Radius.circular(0) : Radius.circular(20),
+                bottomLeft: rtl ? Radius.circular(0) : Radius.circular(20),
+              ),
+            ),
+            child: Skeleton(
+              width: 72,
+              height: 38,
+              radius: 0,
+            ),
+          ),
+        );
       },
     );
   }

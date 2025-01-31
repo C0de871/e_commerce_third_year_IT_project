@@ -7,6 +7,8 @@ import 'package:e_commerce/features/products/presentation/cubit/product_cubit/pr
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../settings/presentation/cubit/language_cubit.dart';
+
 class ListItemContent extends StatelessWidget {
   const ListItemContent({
     required this.index,
@@ -37,6 +39,7 @@ class ListItemContent extends StatelessWidget {
           onTap: () {
             context.read<GetProductDetailsCubit>().getProductDetailsTrigger(
                   productID: item.productId.toString(),
+                    langCode: (context.read<LanguageCubit>().state as CurrentLanguage).langCode,
                   storeID: item.storeId.toString(),
                 );
             Navigator.of(context).pushNamed(

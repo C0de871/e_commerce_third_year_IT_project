@@ -1,5 +1,4 @@
 import 'package:e_commerce/features/get_store_details/presentation/cubit/show_store_cubit.dart';
-import 'package:e_commerce/features/order/domain/entites/order_entity.dart';
 import 'package:e_commerce/features/order/domain/entites/sub_order_entity.dart';
 import 'package:e_commerce/features/order/presentation/order_cubit/delete_order_cubit.dart';
 import 'package:e_commerce/features/order_details/presentation/order_details_cubit/get_order_details_cubit.dart';
@@ -33,6 +32,7 @@ import '../../features/order/presentation/order_cubit/get_order_cubit.dart';
 import '../../features/order/presentation/order_screen.dart';
 import '../../features/products/presentation/all_products/products_list.dart';
 import '../../features/products/presentation/cubit/product_cubit/product_cubit.dart';
+import '../../features/settings/presentation/cubit/language_cubit.dart';
 import '../../features/stores/presentation/all_stores/stores_list.dart';
 import '../../features/stores/presentation/cubit/store_cubit.dart';
 import '../../features/user/presentation/account_details_screen.dart';
@@ -80,7 +80,6 @@ class AppRouter {
     return _addToCartCubit!;
   }
 
-  
   GetOrderCubit get getOrderCubit {
     if (_getOrderCubit == null || _getOrderCubit!.isClosed) {
       _getOrderCubit = GetOrderCubit();
@@ -221,7 +220,10 @@ class AppRouter {
                 create: (context) => modifyCartCubit,
               ),
               BlocProvider(
-                create: (context) => cartCubit..getCartTrigger(),
+                create: (context) => cartCubit
+                  ..getCartTrigger(
+                    langCode: (context.read<LanguageCubit>().state as CurrentLanguage).langCode,
+                  ),
               ),
               BlocProvider(
                 create: (context) => deleteCartCubit,
@@ -233,17 +235,9 @@ class AppRouter {
             child: const CartScreen(),
           ),
         );
-      //     builder:
-      //   create: (context) => userCubit,
-      //   child: const LoginScreen(),
-      // ),
-      //   builder: (_) => MultiBlocProvider(providers: [
-      //         BlocProvider.value(value: cartCubit),
-
-      //       ], child: const CartScreen()));
 //!order screen:
-            case AppRoutes.orderScreen:
-          return MaterialPageRoute(
+      case AppRoutes.orderScreen:
+        return MaterialPageRoute(
             settings: settings,
             builder: (_) => MultiBlocProvider(providers: [
                   BlocProvider(
@@ -268,15 +262,11 @@ class AppRouter {
 
       case AppRoutes.orderDetailsRoute:
         final order = settings.arguments as SubOrderEntity;
-        final id=order.id.toString();
-        debugPrint(
-            "Navigating to ${AppRoutes.orderDetailsRoute} with ID: ${id}");
+        final id = order.id.toString();
         return MaterialPageRoute(
-          
           settings: settings,
           builder: (_) => BlocProvider(
-            create: (context) =>
-                getOrderDetailsCubit..getOrderDetailsTrigger(orderID: id),
+            create: (context) => getOrderDetailsCubit..getOrderDetailsTrigger(orderID: id),
             child: const OrderDetailsScreen(),
           ),
         );
@@ -407,7 +397,10 @@ class AppRouter {
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (context) => ProductCubit()..getAllProducts(),
+                create: (context) => ProductCubit()
+                  ..getAllProducts(
+                    langCode: (context.read<LanguageCubit>().state as CurrentLanguage).langCode,
+                  ),
               ),
               BlocProvider.value(
                 value: GetProductDetailsCubit.instance,
@@ -424,7 +417,7 @@ class AppRouter {
           builder: (_) => MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (context) => StoreCubit()..getAllStores(),
+                create: (context) => StoreCubit()..getAllStores(langCode: (context.read<LanguageCubit>().state as CurrentLanguage).langCode),
               ),
             ],
             child: StoreList(),
@@ -438,12 +431,9 @@ class AppRouter {
           builder: (_) {
             return MultiBlocProvider(
               providers: [
-                BlocProvider(
-                    create: (context) => GetProductDetailsCubit.instance),
+                BlocProvider(create: (context) => GetProductDetailsCubit.instance),
                 BlocProvider(create: (context) => ToggleFavCubit.instance),
-                BlocProvider(
-                    create: (context) =>
-                        ShowStoreCubit()..showStoreTrigger(storeID: storeID)),
+                BlocProvider(create: (context) => ShowStoreCubit()..showStoreTrigger(storeID: storeID)),
               ],
               child: const StoreDetailsScreen(),
             );

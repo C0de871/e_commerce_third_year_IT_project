@@ -38,8 +38,7 @@ class CartCubit extends Cubit<CartState> {
       // حساب السعر الكلي للمنتجات المصفاة
       final totalPrice = filteredProducts.fold<double>(
         0,
-        (sum, product) =>
-            sum + (double.parse(product.price!) * product.orderQuantity!),
+        (sum, product) => sum + (double.parse(product.price!) * product.orderQuantity!),
       );
 
       // إنشاء كائن CartEntity جديد يحتوي على المنتجات المصفاة والسعر الكلي
@@ -56,10 +55,10 @@ class CartCubit extends Cubit<CartState> {
   }
 
 //! get cart:
-  dynamic getCartTrigger() async {
+  dynamic getCartTrigger({required String langCode}) async {
     emit(CartLoading());
 
-    final failureOrCartEntity = await getCart.call();
+    final failureOrCartEntity = await getCart.call(langCode: langCode);
     failureOrCartEntity.fold(
       (failure) => emit(CartFailure(errMessage: failure.errMessage)),
       (cart) {
@@ -72,11 +71,8 @@ class CartCubit extends Cubit<CartState> {
     emit(ClearLoading());
 
     final failureOrClearEntity = await clearCart.call();
-    failureOrClearEntity
-        .fold((failure) => emit(ClearFailure(errMessage: failure.errMessage)),
-            (messageEntity) {
-      print(
-          "****************************************************************clearSuccess");
+    failureOrClearEntity.fold((failure) => emit(ClearFailure(errMessage: failure.errMessage)), (messageEntity) {
+      print("****************************************************************clearSuccess");
       emit(
         ClearSuccess(messageEntity: messageEntity),
       );
@@ -87,26 +83,19 @@ class CartCubit extends Cubit<CartState> {
     _modifySubscription = modifyCartService.modifyUpdatesStream.listen((value) {
       if (state is CartSuccess) {
         double totalPrice = 0;
-        final List<SubCartEntity> updatedList =
-            (state as CartSuccess).cart.data!.map((subCartEntity) {
-          if (subCartEntity.productId == value.productId &&
-              subCartEntity.storeId == value.storeId) {
-            totalPrice +=
-                double.parse(subCartEntity.price!) * value.orderQuantity!;
+        final List<SubCartEntity> updatedList = (state as CartSuccess).cart.data!.map((subCartEntity) {
+          if (subCartEntity.productId == value.productId && subCartEntity.storeId == value.storeId) {
+            totalPrice += double.parse(subCartEntity.price!) * value.orderQuantity!;
 
-            SubCartEntity sub =
-                subCartEntity.copyWith(orderQuantity: value.orderQuantity);
+            SubCartEntity sub = subCartEntity.copyWith(orderQuantity: value.orderQuantity);
             // print("subcart:${sub.quantity} ");
             return sub;
           }
-          totalPrice +=
-              double.parse(subCartEntity.price!) * subCartEntity.orderQuantity!;
+          totalPrice += double.parse(subCartEntity.price!) * subCartEntity.orderQuantity!;
           return subCartEntity;
         }).toList();
 
-        CartEntity updatedCartEntity = (state as CartSuccess)
-            .cart
-            .copyWith(data: updatedList, totalPrice: totalPrice);
+        CartEntity updatedCartEntity = (state as CartSuccess).cart.copyWith(data: updatedList, totalPrice: totalPrice);
         // log("finally :");
         for (var x in updatedCartEntity.data!) {
           print("x value:${x.quantity}");

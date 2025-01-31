@@ -1,4 +1,5 @@
 {
+  "@@locale": "en",
   "language": "English",
   "@language": {
     "description": "The language currently selected in the application"
@@ -278,39 +279,109 @@
   "@failed": {
     "description": "Fallback text shown when an error occurs."
   },
-"name": "Name:",
-"@name": {
-  "description": "word name in check out screen"
-},
-"order": "Order",
-"@order": {
-  "description": "word 'order' in default button"
-},
-"location": "Location:",
-"@location": {
-  "description": "word 'location' in check out screen"
-},
-"productsPrice": "Products price",
-"@productsPrice": {
-  "description": "word 'Products price' in default button"
-},
-"shippingfees": "Shipping fees",
-"@shippingfees": {
-  "description": "word 'shipping fees' in default button"
-},
-"total": "Total",
-"@total": {
-  "description": "word 'Total' in default button"
-},
-"delivery": "Customer data",
-"@delivery": {
-  "description": "word 'delivery' in check out"
-},"contact": "Contact:",
-"@contact": {
-  "description": "word 'dcontact' in check out"
-},"totalCost": "Total cost:",
-"@totalCost": {
-  "description": "word 'total Cost' in check out"
-}
+  "name": "Name:",
+  "@name": {
+    "description": "word name in check out screen"
+  },
+  "order": "Order",
+  "@order": {
+    "description": "word 'order' in default button"
+  },
+  "location": "Location:",
+  "@location": {
+    "description": "word 'location' in check out screen"
+  },
+  "productsPrice": "Products price",
+  "@productsPrice": {
+    "description": "word 'Products price' in default button"
+  },
+  "shippingfees": "Shipping fees",
+  "@shippingfees": {
+    "description": "word 'shipping fees' in default button"
+  },
+  "total": "Total",
+  "@total": {
+    "description": "word 'Total' in default button"
+  },
+  "delivery": "Customer data",
+  "@delivery": {
+    "description": "word 'delivery' in check out"
+  },
+  "contact": "Contact:",
+  "@contact": {
+    "description": "word 'dcontact' in check out"
+  },
+  "totalCost": "Total cost:",
+  "@totalCost": {
+    "description": "word 'total Cost' in check out"
+  },
+  "myFavorite": "My Favorites:",
+  "@myFavorite": {
+    "description": "favorite screen header"
+  },
+  "profile": "Profile",
+  "@profile": {
+    "description": "Title of the profile screen"
+  },
+  "account": "Account",
+  "@account": {
+    "description": "Label for the Account card"
+  },
+  "viewYourProfile": "View Your Profile",
+  "@viewYourProfile": {
+    "description": "Description for the Account card"
+  },
+  "favorites": "Favorites",
+  "@favorites": {
+    "description": "Label for the Favorites card"
+  },
+  "myFavorites": "My favorites",
+  "@myFavorites": {
+    "description": "Description for the Favorites card"
+  },
+  "orders": "Orders",
+  "@orders": {
+    "description": "Label for the Orders card"
+  },
+  "myOrders": "My orders",
+  "@myOrders": {
+    "description": "Description for the Orders card"
+  },
+  "notification": "Notification",
+  "@notification": {
+    "description": "Label for the Notification card"
+  },
+  "viewYourNotification": "View Your Notification",
+  "@viewYourNotification": {
+    "description": "Description for the Notification card"
+  },
+  "@orderDetails": {
+    "description": "Title for the order details screen."
+  },
+  "orderDetails": "Order Details",
+  "@waiting": {
+    "description": "Text displayed while the app is waiting for data to load."
+  },
+  "waiting": "Waiting...",
+  "@goToShopping": {
+    "description": "Text encouraging the user to go shopping if there are no orders."
+  },
+  "goToShopping": "Go to shopping",
+  "@products": {
+    "description": "Text showing the number of products in an order."
+  },
+  "products": "products",
+  "@deleteOrder": {
+    "description": "Tooltip for the delete order button."
+  },
+  "deleteOrder": "Delete Order",
 
+  "freeSyria": "Free Syria theme",
+  "@freeSyria": {
+    "description": "Free syria theme"
+  },
+  "defaultTheme": "Default theme",
+  "@defaultTheme": {
+    "description": "default theme"
+  }
 }

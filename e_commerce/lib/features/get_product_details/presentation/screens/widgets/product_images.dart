@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'package:e_commerce/core/shared/widgets/skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,14 +38,8 @@ class _ProductImagesState extends State<ProductImages> {
 
             if (state is GetProductDetailsSuccess) {
               productImagesUrl = [state.productDetailsEntity.data!.mainImage];
-              productImagesUrl!.addAll(state.productDetailsEntity.data!.subImages!.map((e) => e.image));
+              productImagesUrl.addAll(state.productDetailsEntity.data!.subImages!.map((e) => e.image));
             }
-            // productImagesUrl = [
-            //   "http://192.168.135.32:8000/storage//products/ps4_console_white_1.png",
-            //   "http://192.168.135.32:8000/storage//products/ps4_console_white_2.png",
-            //   "http://192.168.135.32:8000/storage//products/ps4_console_white_3.png",
-            //   "http://192.168.135.32:8000/storage//products/ps4_console_white_4.png",
-            // ];
             return Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -61,6 +56,20 @@ class _ProductImagesState extends State<ProductImages> {
                       },
                     );
                   })
+                else
+                  ...List.generate(
+                    3,
+                    (index) {
+                      return Padding(
+                        padding: EdgeInsets.only(right: padding4 * 4),
+                        child: Skeleton(
+                          height: 48,
+                          width: 48,
+                          radius: 0,
+                        ),
+                      );
+                    },
+                  ),
               ],
             );
           },

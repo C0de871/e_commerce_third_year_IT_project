@@ -97,7 +97,7 @@ class AddButton extends StatelessWidget {
         ),
         onPressed: () {
           if (formKey.currentState?.validate() ?? false) {
-            context.read<AddProductCubit>().addProductTrigger(11);
+            context.read<AddProductCubit>().addProductTrigger(1);
           }
         },
         child: const Text(

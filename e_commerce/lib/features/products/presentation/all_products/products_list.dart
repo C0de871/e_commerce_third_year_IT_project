@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/shared/widgets/animated_search_field/animated_search_field.dart';
+import '../../../settings/presentation/cubit/language_cubit.dart';
 
 class ProductsList extends StatefulWidget {
   const ProductsList({super.key});
@@ -44,9 +45,7 @@ class _ProductsListState extends State<ProductsList> {
                     ];
                   }
                   return switch (state) {
-                    ProductInitial() ||
-                    GetAllProductsLoading() =>
-                      SliverList.separated(
+                    ProductInitial() || GetAllProductsLoading() => SliverList.separated(
                         key: const Key('loading_listview'),
                         separatorBuilder: (context, index) => const Divider(),
                         itemBuilder: (context, index) {
@@ -64,8 +63,7 @@ class _ProductsListState extends State<ProductsList> {
                           );
                         },
                         separatorBuilder: (context, index) => const Divider(),
-                        itemCount:
-                            state.getAllProductsEntity.pagination!.totalItems,
+                        itemCount: state.getAllProductsEntity.pagination!.totalItems,
                         findChildIndexCallback: (key) {
                           final typedKey = key as ValueKey<int>;
                           return typedKey.value;
@@ -94,13 +92,19 @@ class _ProductsListState extends State<ProductsList> {
                   textEditingController.clear();
                   querySearch = "";
                   context.read<ProductCubit>().reset();
-                  context.read<ProductCubit>().getAllProducts(query: "");
+                  context.read<ProductCubit>().getAllProducts(
+                        query: "",
+                        langCode: (context.read<LanguageCubit>().state as CurrentLanguage).langCode,
+                      );
                 },
                 onSubmitted: (value) {
                   if (value.isEmpty) return;
                   querySearch = value;
                   context.read<ProductCubit>().reset();
-                  context.read<ProductCubit>().getAllProducts(query: value);
+                  context.read<ProductCubit>().getAllProducts(
+                        query: value,
+                        langCode: (context.read<LanguageCubit>().state as CurrentLanguage).langCode,
+                      );
                 },
                 helpText: "Search Products...",
                 closeSearchOnSuffixTap: true,

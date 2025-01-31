@@ -4,18 +4,17 @@ import 'package:e_commerce/features/order_details/domain/entites/order_details_e
 import 'package:flutter/material.dart';
 
 class CardItemOrder extends StatelessWidget {
-  ProductOrderEntity product;
-  String status;
+  final ProductOrderEntity product;
+  final String status;
 
-  CardItemOrder({
+  const CardItemOrder({
     required this.product,
     required this.status,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-  
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -106,7 +105,7 @@ class CardItemOrder extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            '${product.categoryName}' ,
+                            '${product.categoryName}',
                             style: const TextStyle(
                               fontSize: 14,
                               color: Colors.grey,
@@ -133,8 +132,7 @@ class CardItemOrder extends StatelessWidget {
               Expanded(
                 child: Column(
                   children: [
-                          const SizedBox(height: 16),
-
+                    const SizedBox(height: 16),
                     Text(
                       '${product.description}',
                       style: const TextStyle(
@@ -142,15 +140,16 @@ class CardItemOrder extends StatelessWidget {
                         color: Colors.grey,
                       ),
                       overflow: TextOverflow.ellipsis,
-                      maxLines: 3,
+                      maxLines: 2,
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      '${status}',
+                      status,
                       style: const TextStyle(
                         fontSize: 20,
                         color: Colors.green,
-                      ),)
+                      ),
+                    )
                   ],
                 ),
               ),

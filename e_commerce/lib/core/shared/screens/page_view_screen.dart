@@ -9,6 +9,7 @@ import '../../../features/favorites/presentation/screens/fav_list_screen.dart';
 import '../../../features/get_product_details/presentation/cubit/get_product_details_cubit.dart';
 import '../../../features/home/beta/notification_page.dart';
 import '../../../features/home/presentation/HomeCubit/home_cubit.dart';
+import '../../../features/settings/presentation/cubit/language_cubit.dart';
 import '../../../features/settings/presentation/settings_screen.dart';
 import '../../../features/user/presentation/profile_screen.dart';
 import '../../helper/app_functions.dart';
@@ -42,8 +43,7 @@ class _PageViewScreenState extends State<PageViewScreen> {
       providers: [
         BlocProvider(create: (context) => GetProductDetailsCubit.instance),
         BlocProvider(create: (context) => ToggleFavCubit.instance),
-        BlocProvider(
-            create: (context) => GetFavListCubit.instance..getFavList()),
+        BlocProvider(create: (context) => GetFavListCubit.instance..getFavList()),
       ],
       child: FavListScreen(),
     ),
@@ -52,7 +52,9 @@ class _PageViewScreenState extends State<PageViewScreen> {
 
   @override
   void initState() {
-    BlocProvider.of<HomeCubit>(context).getHomeData();
+    BlocProvider.of<HomeCubit>(context).getHomeData(
+      langCode: (context.read<LanguageCubit>().state as CurrentLanguage).langCode,
+    );
     super.initState();
   }
 

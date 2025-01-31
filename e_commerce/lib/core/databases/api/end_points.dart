@@ -1,7 +1,7 @@
 import '../params/params.dart';
 
 class EndPoints {
-  static const String baserUrl = "http://192.168.1.7:8000/api/";
+  static const String baserUrl = "http://192.168.1.2:8000/api/";
   static const String login = "login";
   static const String signUp = "register";
   static const String toggleFavOn = "favorites/";
@@ -42,6 +42,7 @@ class EndPoints {
 }
 
 class ApiKey {
+  static String acceptLanguage = "Accept-Language";
   static String success = "success";
   static String refreshTokenHeader = "Refresh-Token";
   static String requiredAuth = "requiresAuth";
@@ -129,4 +130,5 @@ class CacheKey {
   static String mainImage = "main_image";
   static String data = "data";
   static String userLang = "userLang";
+  static String appTheme = "appTheme";
 }

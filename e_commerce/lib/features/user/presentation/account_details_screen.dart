@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:e_commerce/core/utils/constants/app_numbers.dart';
+import 'package:e_commerce/features/auth/domain/entites/user_entities/user_entities.dart';
+import 'package:e_commerce/features/auth/presentation/cubit/get_last_user_cubit/get_last_user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../core/utils/constants/app_numbers.dart';
-import '../../auth/domain/entites/user_entities/user_entities.dart';
-import '../../auth/presentation/cubit/get_last_user_cubit/get_last_user_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart'; // Import localization
 
 class AccountDetailsScreen extends StatelessWidget {
   const AccountDetailsScreen({super.key});
@@ -18,7 +18,7 @@ class AccountDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Profile",
+          AppLocalizations.of(context)!.profile, // Localized string
           style: TextStyle(color: Theme.of(context).colorScheme.secondary),
         ),
         centerTitle: true,
@@ -31,7 +31,7 @@ class AccountDetailsScreen extends StatelessWidget {
             vertical: padding4 * 4,
           ),
           child: user == null
-              ? Text("Failed")
+              ? Text(AppLocalizations.of(context)!.failed) // Localized string
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -39,8 +39,7 @@ class AccountDetailsScreen extends StatelessWidget {
                         ? Hero(
                             tag: "placeHolder picture",
                             child: const CircleAvatar(
-                              backgroundImage:
-                                  AssetImage("assets/images/images.png"),
+                              backgroundImage: AssetImage("assets/images/images.png"),
                               radius: 100,
                             ),
                           )
@@ -62,10 +61,7 @@ class AccountDetailsScreen extends StatelessWidget {
                           tag: "profile name",
                           child: Text(
                             "${user.subUserEntity!.firstName} ${user.subUserEntity!.lastName}",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineMedium!
-                                .copyWith(
+                            style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                                   color: Theme.of(context).colorScheme.primary,
                                 ),
                           ),
@@ -74,35 +70,35 @@ class AccountDetailsScreen extends StatelessWidget {
                           height: padding4 * 5,
                         ),
                         AccountDetailsCard(
-                          title: "First Name",
+                          title: AppLocalizations.of(context)!.firstName, // Localized string
                           description: user.subUserEntity!.firstName!,
                         ),
-                        Divider(
+                        const Divider(
                           height: 30,
                         ),
                         AccountDetailsCard(
-                          title: "Last Name",
+                          title: AppLocalizations.of(context)!.lastName, // Localized string
                           description: user.subUserEntity!.lastName!,
                         ),
-                        Divider(
+                        const Divider(
                           height: 30,
                         ),
                         AccountDetailsCard(
-                          title: "Address",
+                          title: AppLocalizations.of(context)!.address, // Localized string
                           description: user.subUserEntity!.location!,
                         ),
-                        Divider(
+                        const Divider(
                           height: 30,
                         ),
                         AccountDetailsCard(
-                          title: "Phone Number",
+                          title: AppLocalizations.of(context)!.phoneNumber, // Localized string
                           description: user.subUserEntity!.phoneNumber!,
                         ),
-                        Divider(
+                        const Divider(
                           height: 30,
                         ),
                         AccountDetailsCard(
-                          title: "Email",
+                          title: AppLocalizations.of(context)!.email, // Localized string
                           description: user.subUserEntity!.email!,
                         ),
                       ],

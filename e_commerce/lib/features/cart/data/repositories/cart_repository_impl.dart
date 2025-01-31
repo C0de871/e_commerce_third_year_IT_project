@@ -20,10 +20,10 @@ class CartRepositoryImpl extends CartRepository {
   });
 //! get cart:
   @override
-  Future<Either<Failure, CartEntity>> getCart() async {
+  Future<Either<Failure, CartEntity>> getCart({required String langCode}) async {
     if (await networkInfo.isConnected!) {
       try {
-        final remoteGetCart = await remoteDataSource.getCart();
+        final remoteGetCart = await remoteDataSource.getCart(langCode: langCode);
         return Right(remoteGetCart);
       } on ServerException catch (e) {
         return Left(Failure(errMessage: e.errorModel.errorMessage));
@@ -42,8 +42,7 @@ class CartRepositoryImpl extends CartRepository {
   Future<Either<Failure, CartEntity>> modifyCart({required bodyJson}) async {
     if (await networkInfo.isConnected!) {
       try {
-        final CartEntity cartEntity =
-            await remoteDataSource.modifyCart(bodyJson);
+        final CartEntity cartEntity = await remoteDataSource.modifyCart(bodyJson);
 
         return Right(cartEntity);
       } on ServerException catch (e) {
@@ -60,8 +59,7 @@ class CartRepositoryImpl extends CartRepository {
 
 //! confirm delete products:
   @override
-  Future<Either<Failure, MessageEntity>> deleteCart(
-      {required Map<String, dynamic> bodyJson}) async {
+  Future<Either<Failure, MessageEntity>> deleteCart({required Map<String, dynamic> bodyJson}) async {
     if (await networkInfo.isConnected!) {
       try {
         final remoteDeleteCart = await remoteDataSource.deleteCart(bodyJson);
@@ -118,13 +116,10 @@ class CartRepositoryImpl extends CartRepository {
 
   //!add to cart:
   @override
-  Future<Either<Failure, AddToCartEntity>> addToCart(
-      {required GetStoredAndProductIdParams params,
-      required Map<String, dynamic> bodyJson}) async {
+  Future<Either<Failure, AddToCartEntity>> addToCart({required GetStoredAndProductIdParams params, required Map<String, dynamic> bodyJson}) async {
     if (await networkInfo.isConnected!) {
       try {
-        final AddToCartEntity addToCartEntity =
-            await remoteDataSource.addToCart(params, bodyJson);
+        final AddToCartEntity addToCartEntity = await remoteDataSource.addToCart(params, bodyJson);
 
         return Right(addToCartEntity);
       } on ServerException catch (e) {

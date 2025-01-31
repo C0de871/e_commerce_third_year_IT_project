@@ -2,6 +2,7 @@ import 'package:e_commerce/features/favorites/presentation/cubit/getFavList/get_
 import 'package:e_commerce/features/favorites/presentation/screens/widgets/fav_product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../home/presentation/Home Screen/widgets/product_card.dart';
 
@@ -12,7 +13,7 @@ class FavListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Favorites"),
+        title: Text(AppLocalizations.of(context)!.myFavorite),
       ),
       body: BlocBuilder<GetFavListCubit, GetFavListState>(
         builder: (context, state) {

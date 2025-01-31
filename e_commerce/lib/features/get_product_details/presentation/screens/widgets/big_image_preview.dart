@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'package:e_commerce/core/shared/widgets/skeleton.dart';
 import 'package:e_commerce/features/get_product_details/presentation/cubit/get_product_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,15 +28,20 @@ class BigImagePreview extends StatelessWidget {
           // ];
           if (state is GetProductDetailsSuccess) {
             productImagesUrl = [state.productDetailsEntity.data!.mainImage];
-            productImagesUrl!.addAll(state.productDetailsEntity.data!.subImages!.map((e) => e.image));
+            productImagesUrl.addAll(state.productDetailsEntity.data!.subImages!.map((e) => e.image));
             return AspectRatio(
               aspectRatio: 1,
               child: Image.network(
                 productImagesUrl[selectedImage],
               ),
             );
+          } else {
+            return Skeleton(
+              width: 230,
+              height: 230,
+              radius: 0,
+            );
           }
-          return Center(child: CircularProgressIndicator());
         },
       ),
     );

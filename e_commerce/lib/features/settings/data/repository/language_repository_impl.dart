@@ -4,10 +4,10 @@ import 'package:e_commerce/features/settings/domain/repository/language_reposito
 
 import '../../../../core/databases/errors/failure.dart';
 
-class LanguageRepositoryImpl extends LanguageRepository {
-  final LangLocalDataSource localDataSource;
+class SettingsRepositoryImpl extends SettingsRepository {
+  final SettingsDataSource localDataSource;
 
-  LanguageRepositoryImpl({required this.localDataSource});
+  SettingsRepositoryImpl({required this.localDataSource});
 
   @override
   Either<Failure, String> retrieveUserLang() {
@@ -23,6 +23,26 @@ class LanguageRepositoryImpl extends LanguageRepository {
   Future<Either<Failure, bool>> saveUserLang(String lang) async {
     try {
       final bool result = await localDataSource.saveUserLang(lang);
+      return Right(result);
+    } on Exception catch (e) {
+      return Left(Failure(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Either<Failure, String> retrieveAppTheme() {
+    try {
+      final String appTheme = localDataSource.retrieveAppTheme();
+      return Right(appTheme);
+    } on Exception catch (e) {
+      return Left(Failure(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> saveAppTheme(String appTheme) async {
+    try {
+      final bool result = await localDataSource.saveAppTheme(appTheme);
       return Right(result);
     } on Exception catch (e) {
       return Left(Failure(errMessage: e.toString()));

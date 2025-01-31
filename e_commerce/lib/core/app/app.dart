@@ -1,4 +1,3 @@
-import 'package:e_commerce/core/Routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,12 +6,16 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import '../../features/auth/presentation/cubit/check_first_launch/check_first_launch_cubit.dart';
 import '../../features/auth/presentation/cubit/get_last_user_cubit/get_last_user_cubit.dart';
 import '../../features/auth/presentation/loading_screen/loading_screen.dart';
+import '../../features/settings/presentation/cubit/app_theme_cubit/app_theme_cubit.dart';
 import '../../features/settings/presentation/cubit/language_cubit.dart';
 import '../Routes/app_router.dart';
+import '../Routes/app_routes.dart';
 import '../helper/app_functions.dart';
 import '../theme/app_theme.dart';
 import '../translations/l10n.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../utils/constants/constant.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -29,35 +32,52 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => LanguageCubit()..retrieveUserLang(),
+        ),
+        BlocProvider(
+          create: (context) => AppThemeCubit()..retrieveAppThemeTrigger(),
+          child: Container(),
         )
       ],
-      child: BlocBuilder<LanguageCubit, LanguageState>(
-        builder: (context, state) {
-          if (state is CurrentLanguage) {
-            return MaterialApp(
-              supportedLocales: L10n.all,
-              navigatorObservers: [RouteObserverService()],
-              locale: Locale(state.langCode),
-              localizationsDelegates: const [
-                AppLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              debugShowCheckedModeBanner: false,
-              title: 'E-Commerce',
-              theme: AppTheme().theme(
-                defaultLightScheme(),
-              ),
-              home: LoadingScreen(),
-              // initialRoute: AppRoutes.loginRoute,
-              onGenerateRoute: AppRouter().generateRoute,
-            );
-          } else {
-            return CircularProgressIndicator();
-          }
+      child: BlocBuilder<AppThemeCubit, String>(
+        builder: (context, appThemeState) {
+          return BlocBuilder<LanguageCubit, LanguageState>(
+            builder: (context, state) {
+              if (state is CurrentLanguage) {
+                return MaterialApp(
+                  supportedLocales: L10n.all,
+                  navigatorObservers: [RouteObserverService()],
+                  locale: Locale(state.langCode),
+                  localizationsDelegates: const [
+                    AppLocalizations.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  debugShowCheckedModeBanner: false,
+                  title: 'E-Commerce',
+                  theme: _getThemeForState(appThemeState),
+                  home: LoadingScreen(),
+                  // initialRoute: AppRoutes.splashRoute,
+                  onGenerateRoute: AppRouter().generateRoute,
+                );
+              } else {
+                return CircularProgressIndicator();
+              }
+            },
+          );
         },
       ),
     );
+  }
+
+  ThemeData _getThemeForState(String themeState) {
+    switch (themeState) {
+      case Constant.defaultTheme:
+        return AppTheme().theme(defaultLightScheme());
+      case Constant.freeTheme:
+        return AppTheme().theme(freeScheme());
+      default:
+        return AppTheme().theme(defaultLightScheme());
+    }
   }
 }

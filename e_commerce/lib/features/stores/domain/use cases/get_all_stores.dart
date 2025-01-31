@@ -8,7 +8,7 @@ class GetAllStores {
   final StoreRepository storeRepository;
 
   GetAllStores({required this.storeRepository});
-  Future<Either<Failure, GetStoresEntity>> call({required StoreParams params}) {
-    return storeRepository.getAllStores(params: params);
+  Future<Either<Failure, GetStoresEntity>> call({required StoreParams params , required String langCode}) {
+    return storeRepository.getAllStores(params: params, langCode: langCode);
   }
 }

@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:e_commerce/features/settings/presentation/cubit/language_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -43,9 +46,7 @@ class _StoreListState extends State<StoreList> {
                     ];
                   }
                   return switch (state) {
-                    StoreInitial() ||
-                    GetAllStoresLoading() =>
-                      SliverList.separated(
+                    StoreInitial() || GetAllStoresLoading() => SliverList.separated(
                         key: const Key('loading_listview'),
                         separatorBuilder: (context, index) => const Divider(),
                         itemBuilder: (context, index) {
@@ -55,6 +56,7 @@ class _StoreListState extends State<StoreList> {
                       ),
                     GetAllStoresSuccess() => SliverList.separated(
                         itemBuilder: (context, index) {
+                          log(state.storesList.pagination.totalItems.toString());
                           return StoreListItem(
                             querySearch: querySearch,
                             key: ValueKey<int>(index),
@@ -92,13 +94,16 @@ class _StoreListState extends State<StoreList> {
                   textEditingController.clear();
                   querySearch = "";
                   context.read<StoreCubit>().reset();
-                  context.read<StoreCubit>().getAllStores(querySearch: "");
+                  context.read<StoreCubit>().getAllStores(
+                        querySearch: "",
+                        langCode: (context.read<LanguageCubit>().state as CurrentLanguage).langCode,
+                      );
                 },
                 onSubmitted: (value) {
                   if (value.isEmpty) return;
                   querySearch = value;
                   context.read<StoreCubit>().reset();
-                  context.read<StoreCubit>().getAllStores(querySearch: value);
+                  context.read<StoreCubit>().getAllStores(querySearch: value, langCode: (context.read<LanguageCubit>().state as CurrentLanguage).langCode);
                 },
                 helpText: "Search Stores...",
                 closeSearchOnSuffixTap: true,

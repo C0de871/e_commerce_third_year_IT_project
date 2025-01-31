@@ -7,7 +7,7 @@ class GetCart {
   final CartRepository cartRepository;
 
   GetCart({required this.cartRepository});
-  Future<Either<Failure, CartEntity>> call() {
-    return cartRepository.getCart();
+  Future<Either<Failure, CartEntity>> call({required String langCode}) {
+    return cartRepository.getCart(langCode: langCode);
   }
 }

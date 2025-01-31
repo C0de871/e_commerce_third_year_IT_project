@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:e_commerce/features/stores/presentation/cubit/store_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../settings/presentation/cubit/language_cubit.dart';
 import 'list_item_content.dart';
 import 'list_tile_skeleton.dart';
 
@@ -25,8 +28,9 @@ class StoreListItem extends StatelessWidget {
         if (state is! GetAllStoresSuccess) {
           return const ListTileSkeleton();
         }
-        final page = (index ~/ 20) + 1;
-        final indexOnPage = index % 20;
+        final page = (index ~/ 10) + 1;
+        final indexOnPage = index % 10;
+        log(indexOnPage.toString());
         return BlocProvider.value(
           key: ValueKey<String>(
             'list_item_content_${page}_${indexOnPage}_blocProvider',
@@ -35,6 +39,7 @@ class StoreListItem extends StatelessWidget {
             ..getAllStores(
               page: page,
               querySearch: querySearch,
+              langCode: (context.read<LanguageCubit>().state as CurrentLanguage).langCode,
             ),
           child: ListItemContent(
             key: ValueKey<String>('list_item_content_${page}_$indexOnPage'),
